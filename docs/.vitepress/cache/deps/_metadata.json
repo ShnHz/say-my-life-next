@@ -1,0 +1,19 @@
+{
+  "hash": "9baafb22",
+  "browserHash": "0df4a820",
+  "optimized": {
+    "vue": {
+      "src": "../../../../node_modules/.pnpm/vue@3.2.47/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "72974cf9",
+      "needsInterop": false
+    },
+    "easy-typer-js": {
+      "src": "../../../../node_modules/.pnpm/easy-typer-js@2.1.0/node_modules/easy-typer-js/src/lib/index.js",
+      "file": "easy-typer-js.js",
+      "fileHash": "186be775",
+      "needsInterop": false
+    }
+  },
+  "chunks": {}
+}
