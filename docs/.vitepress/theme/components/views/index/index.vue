@@ -20,7 +20,39 @@
         </div>
       </div>
     </div>
-    <div class="other-wrap"></div>
+    <div class="other-wrap">
+      <div class="container">
+        <div class="banner-wrap">
+          <ul>
+            <li
+              v-for="(item, index) in carouselList"
+              :key="`carousel-item-img-${index}`"
+              :class="{ 'is-active': carouselIndex === index }"
+              :style="{
+                'background-image': `url(${item.img}) `,
+              }"
+              @click="toCarouse(index)"
+            ></li>
+          </ul>
+
+          <NCarousel
+            autoplay
+            effect="fade"
+            :show-dots="false"
+            @update:current-index="handleCarouseChange"
+            ref="nCarousel"
+          >
+            <NCarouselItem
+              v-for="(item, index) in carouselList"
+              :key="`carousel-item-${index}`"
+            >
+              <div class="carousel-title">{{ item.title }}</div>
+              <div class="carousel-desc">{{ item.desc }}</div>
+            </NCarouselItem>
+          </NCarousel>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -32,6 +64,7 @@
     onUnmounted,
     ref,
   } from 'vue'
+  import { NCarousel, NCarouselItem } from 'naive-ui'
   import EasyTyper from 'easy-typer-js'
   import Background from './components/Background.vue'
 
@@ -82,6 +115,38 @@
         desc.value = easyTyper.output
       }
     )
+  }
+
+  const carouselList = ref<any[]>([
+    {
+      title: '记得写日记',
+      desc: '做一个热爱生活的人，把生活记录下来。',
+      img: 'https://cdn.chenyingshuang.cn/index/carousel1.jpg',
+    },
+    {
+      title: '常常去旅行',
+      desc: '我认为旅行是从大自然学习的最佳方式。走遍世界，这是我最大的梦想。',
+      img: 'https://cdn.chenyingshuang.cn/index/carousel2.jpg',
+    },
+    {
+      title: '好好打代码',
+      desc: '每天都要学习！争取Github全绿。',
+      img: 'https://cdn.chenyingshuang.cn/index/carousel3.jpg',
+    },
+    {
+      title: '天天学习呀',
+      desc: '阶段性学习，能有成果展示出来。',
+      img: 'https://cdn.chenyingshuang.cn/index/carousel4.jpg',
+    },
+  ])
+  const nCarousel = ref()
+  const carouselIndex = ref<number>(0)
+
+  const handleCarouseChange = (currentIndex) => {
+    carouselIndex.value = currentIndex
+  }
+  const toCarouse = (index) => {
+    nCarousel.value.to(index)
   }
 </script>
 
@@ -164,10 +229,47 @@
         }
       }
     }
-    .other-wrap{
+    .other-wrap {
       width: 100%;
-      height: 300px;
       background: var(--bg-2);
+
+      .banner-wrap {
+        padding: 24px 0;
+        ul {
+          display: flex;
+          gap: 12px;
+          li {
+            cursor: pointer;
+            width: 200px;
+            height: 120px;
+            background-position: center center;
+            background-size: cover;
+            border-radius: 16px;
+            border: 4px solid var(--vp-c-bg);
+            transition: all 0.3s linear;
+            &:hover {
+              border-color: var(--vp-c-brand-lightest);
+            }
+            &.is-active {
+              border-color: var(--vp-c-brand);
+            }
+          }
+        }
+
+        :deep(.n-carousel) {
+          height: 100px;
+          .n-carousel__slides {
+            padding: 24px 12px;
+            .carousel-title {
+              font-size: 26px;
+            }
+            .carousel-desc {
+              margin-top: 12px;
+              font-size: 18px;
+            }
+          }
+        }
+      }
     }
   }
 
