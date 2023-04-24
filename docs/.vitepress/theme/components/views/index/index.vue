@@ -22,6 +22,7 @@
     </div>
     <div class="other-wrap">
       <div class="container">
+        <!-- banner -->
         <div class="banner-wrap">
           <ul>
             <li
@@ -51,12 +52,25 @@
             </NCarouselItem>
           </NCarousel>
         </div>
+
+        <!-- blog -->
+        <div>
+          <ul>
+            <BlogItem
+              v-for="(item, index) in blogList"
+              :key="`blog-item-${index}`"
+              :data="item"
+            />
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { data } from '@docs/.vitepress/utils/loaders/blog.data.ts'
+
   import {
     computed,
     getCurrentInstance,
@@ -64,9 +78,11 @@
     onUnmounted,
     ref,
   } from 'vue'
+
   import { NCarousel, NCarouselItem } from 'naive-ui'
   import EasyTyper from 'easy-typer-js'
   import Background from './components/Background.vue'
+  import BlogItem from './components/BlogItem.vue'
 
   // --------------------------------------common
   const proxy: any = getCurrentInstance()
@@ -148,6 +164,10 @@
   const toCarouse = (index) => {
     nCarousel.value.to(index)
   }
+
+  const blogList = computed<[]>(() => {
+    return data
+  })
 </script>
 
 <style scoped lang="less">

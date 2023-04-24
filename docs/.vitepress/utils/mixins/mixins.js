@@ -1,13 +1,12 @@
 /*
- * @Author: sanghangning 
- * @Date: 2019-12-11 10:46:35 
+ * @Author: sanghangning
+ * @Date: 2019-12-11 10:46:35
  * @Last Modified by: sanghangning
- * @Last Modified time: 2020-04-23 14:06:32
+ * @Last Modified time: 2023-04-24 21:48:18
  */
 
 // directives
 import directives from './directives/directives.js'
-
 
 // filters
 import numberFilters from './filters/numberFilters.js'
@@ -22,20 +21,20 @@ import numberMethods from './methods/numberMethods.js'
 import proMethods from './methods/proMethods.js'
 
 const mixins = {
-    directives: {
-        ...directives
-    },
-    filters: {
-        ...numberFilters,
-        ...arrayFilters
-    },
-    methods: {
-        ...dateMethods,
-        ...otherMethods,
-        ...typeMethods,
-        ...stringMethods,
-        ...numberMethods,
-        ...proMethods
-    }
+  directives: {
+    ...directives,
+  },
+  filters: {
+    ...numberFilters,
+    ...arrayFilters,
+  },
+  methods: {
+    ...dateMethods,
+    ...otherMethods,
+    ...typeMethods,
+    ...stringMethods,
+    ...numberMethods,
+    ...proMethods,
+  },
 }
 export default mixins

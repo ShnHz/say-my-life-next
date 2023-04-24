@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "easy-typer-js": "^2.1.0",
+    "gray-matter": "^4.0.3",
     "vue": "^3.2.47"
   }
 }
