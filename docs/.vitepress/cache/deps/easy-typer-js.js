@@ -1,4 +1,4 @@
-import "./chunk-OZI5HTJH.js";
+import "./chunk-4EOJPDL2.js";
 
 // node_modules/.pnpm/easy-typer-js@2.1.0/node_modules/easy-typer-js/src/lib/index.js
 var __awaiter = function(thisArg, _arguments, P, generator) {

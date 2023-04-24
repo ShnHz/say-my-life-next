@@ -1,29 +1,23 @@
 {
-  "hash": "4e33adb8",
-  "browserHash": "02c9123c",
+  "hash": "b11ea50c",
+  "browserHash": "f09e72fc",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/.pnpm/vue@3.2.47/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "6bd9b0ab",
-      "needsInterop": false
-    },
-    "shiki": {
-      "src": "../../../../node_modules/.pnpm/shiki@0.14.1/node_modules/shiki/dist/index.esm.js",
-      "file": "shiki.js",
-      "fileHash": "d7720e3f",
+      "fileHash": "b296574a",
       "needsInterop": false
     },
     "naive-ui": {
       "src": "../../../../node_modules/.pnpm/naive-ui@2.34.3_vue@3.2.47/node_modules/naive-ui/es/index.js",
       "file": "naive-ui.js",
-      "fileHash": "8a81b77d",
+      "fileHash": "eeb94c1f",
       "needsInterop": false
     },
     "easy-typer-js": {
       "src": "../../../../node_modules/.pnpm/easy-typer-js@2.1.0/node_modules/easy-typer-js/src/lib/index.js",
       "file": "easy-typer-js.js",
-      "fileHash": "58866f6d",
+      "fileHash": "d1cdd387",
       "needsInterop": false
     }
   },
@@ -31,8 +25,8 @@
     "chunk-LZPJ5JBW": {
       "file": "chunk-LZPJ5JBW.js"
     },
-    "chunk-OZI5HTJH": {
-      "file": "chunk-OZI5HTJH.js"
+    "chunk-4EOJPDL2": {
+      "file": "chunk-4EOJPDL2.js"
     }
   }
 }
