@@ -17,7 +17,15 @@
       {{ data.summary }}
     </p>
 
-    <p>
+    <p class="tag-list">
+      <ShnTag
+        v-if="data?.config?.top"
+        type="top"
+      />
+      <ShnTag
+        v-if="data?.config?.tag.includes('info')"
+        type="reprinted"
+      />
       <!-- <Tag
         v-if="
           data.frontmatter &&
@@ -43,6 +51,7 @@
 </template>
 
 <script setup lang="ts">
+  import ShnTag from '../../../common/Tag.vue'
   import useCurrentInstance from '../../../../../utils/hooks/useCurrentInstance'
 
   const currentInstanc: any = useCurrentInstance()
@@ -54,37 +63,56 @@
       title: string
       summary: string
       date: string
+      config: {
+        top: boolean
+        tag: string[]
+      }
     }
   }>()
 </script>
 
 <style scoped lang="less">
   .blog-item-wrap {
+    cursor: pointer;
     width: 100%;
+    position: relative;
     padding: 1rem 1.2rem;
     border-radius: 8px;
-    background: #fff;
 
+    background: var(--bg-3);
+    transition: all 0.3s;
     &:not(:first-child) {
       margin-top: 20px;
     }
+
+    &:hover {
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 0 6px rgba(0, 0, 0, 0.04);
+      transform: translateY(-4px);
+    }
     .article-title {
       font-size: 18px;
-      color: rgba(0, 0, 0, 0.87);
+      color: var(--vp-c-text-1);
       line-height: 1.5;
+      letter-spacing: 2px;
     }
 
     .article-date {
-      font-size: 14px;
-      color: rgba(0, 0, 0, 0.6);
+      font-size: 12px;
+      color: var(--vp-c-text-2);
+      letter-spacing: 1px;
     }
 
     .article-summary {
       padding: 16px 0 10px;
-      color: rgba(0, 0, 0, 0.87);
+      color: var(--vp-c-text-2);
       font-size: 14px;
       line-height: 1.375rem;
       font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    .tag-list {
+      margin-top: 10px;
     }
   }
 </style>

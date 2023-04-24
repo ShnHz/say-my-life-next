@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-  import { data } from '@docs/.vitepress/utils/loaders/blog.data.ts'
+  import { data } from '@docs/.vitepress/utils/loaders/blog.data.js'
 
   import {
     computed,
