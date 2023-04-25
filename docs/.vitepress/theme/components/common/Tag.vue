@@ -15,7 +15,7 @@
   </NTag>
   <NTooltip
     trigger="hover"
-    v-if="type === 'reprinted'"
+    v-else-if="type === 'reprinted'"
   >
     <template #trigger>
       <NTag
@@ -34,6 +34,15 @@
     </template>
     <span>转发文章</span>
   </NTooltip>
+  <NTag
+    :bordered="false"
+    :class="{ 'is-checkable': checkable }"
+    size="small"
+    type="info"
+    v-else
+  >
+    <slot> </slot>
+  </NTag>
 </template>
 
 <script setup lang="ts">
@@ -42,7 +51,7 @@
 
   const props = withDefaults(
     defineProps<{
-      type: string
+      type?: string
       checkable?: boolean
     }>(),
     { checkable: true }

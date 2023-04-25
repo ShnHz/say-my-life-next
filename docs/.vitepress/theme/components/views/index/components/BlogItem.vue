@@ -26,31 +26,20 @@
         v-if="data?.config?.tag.includes('info')"
         type="reprinted"
       />
-      <!-- <Tag
-        v-if="
-          data.frontmatter &&
-          data.frontmatter.config &&
-          data.frontmatter.config.top
-        "
-        type="top"
-        icon="gnas-i gnas-i-pushpin-fill"
+      <ShnTag
+        v-for="(item, index) in tagList"
+        :key="`blog-tag-item-${index}-${data.path}`"
       >
-        置顶
-      </Tag>
-      <Tag
-        :key="`tag-${index}-${item.type}`"
-        v-for="(item, index) in $tagFormat(
-          (data.config && data.config.tag) || []
-        )"
-        :type="item.type"
-      >
-        {{ item.name }}
-      </Tag> -->
+        {{ item.title }}
+      </ShnTag>
     </p>
   </li>
 </template>
 
 <script setup lang="ts">
+  import { computed } from 'vue'
+  import tagConfig from '@docs/.vitepress/configs/tags.js'
+
   import ShnTag from '../../../common/Tag.vue'
   import useCurrentInstance from '../../../../../utils/hooks/useCurrentInstance'
 
@@ -69,6 +58,15 @@
       }
     }
   }>()
+
+  const tagList = computed(() => {
+    const list = props.data.config.tag
+      .filter((item) => item && item != 'info')
+      .map((item) => {
+        return tagConfig[item]
+      })
+    return list
+  })
 </script>
 
 <style scoped lang="less">
@@ -112,6 +110,10 @@
     }
 
     .tag-list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
       margin-top: 10px;
     }
   }
