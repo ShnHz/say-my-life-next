@@ -100,7 +100,7 @@
     width: 100%;
     position: relative;
     padding: 1rem 1.2rem;
-    border-radius: 8px;
+    border-radius: 16px;
 
     background: var(--bg-3);
     transition: all 0.3s;
@@ -109,7 +109,7 @@
     }
 
     &:hover {
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 0 6px rgba(0, 0, 0, 0.04);
+      box-shadow: var(--box-shadow);
       transform: translateY(-4px);
     }
     .article-title {

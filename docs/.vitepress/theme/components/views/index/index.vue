@@ -20,6 +20,7 @@
         </div>
       </div>
     </div>
+    <MusicPlayer />
     <div class="other-wrap">
       <div class="container">
         <!-- banner -->
@@ -83,6 +84,7 @@
   import EasyTyper from 'easy-typer-js'
   import Background from './components/Background.vue'
   import BlogItem from './components/BlogItem.vue'
+  import MusicPlayer from './components/MusicPlayer.vue'
 
   // --------------------------------------common
   const proxy: any = getCurrentInstance()

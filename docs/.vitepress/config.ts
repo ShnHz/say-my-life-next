@@ -3,6 +3,7 @@ const path = require('path')
 import { defineConfig } from 'vitepress'
 import nav from './configs/nav'
 import sidebar from './configs/sidebar'
+import socialLinks from './configs/socialLinks'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -12,7 +13,16 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav,
     sidebar,
-    socialLinks: [{ icon: 'github', link: 'https://github.com/ShnHz' }],
+    socialLinks,
+    search: {
+      provider: 'local',
+    },
+    lastUpdated: true,
+    docFooter: {
+      prev: 'Previous page',
+      next: 'Next page',
+    },
+    returnToTopLabel: 'Return to top',
   },
   vite: {
     plugins: [],
