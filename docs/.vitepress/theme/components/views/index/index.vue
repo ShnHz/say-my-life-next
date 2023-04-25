@@ -193,7 +193,7 @@
           font-size: 80px;
           font-weight: 700;
           white-space: pre-wrap;
-          letter-spacing: -0.4px;
+          letter-spacing: 4px;
           background: var(--vp-home-hero-name-background);
           -webkit-background-clip: text;
           background-clip: text;

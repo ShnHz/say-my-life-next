@@ -38,9 +38,10 @@
     :bordered="false"
     :class="{ 'is-checkable': checkable }"
     size="small"
-    type="info"
+    :type="type ? type : 'info'"
     v-else
   >
+    <template #icon> <slot name="icon"> </slot> </template>
     <slot> </slot>
   </NTag>
 </template>
@@ -51,7 +52,16 @@
 
   const props = withDefaults(
     defineProps<{
-      type?: string
+      type?:
+        | 'reprinted'
+        | 'top'
+        | 'default'
+        | 'success'
+        | 'error'
+        | 'primary'
+        | 'info'
+        | 'warning'
+        | undefined
       checkable?: boolean
     }>(),
     { checkable: true }

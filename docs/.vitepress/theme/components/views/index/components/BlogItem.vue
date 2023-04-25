@@ -29,8 +29,26 @@
       <ShnTag
         v-for="(item, index) in tagList"
         :key="`blog-tag-item-${index}-${data.path}`"
+        :type="item?.type"
       >
-        {{ item.title }}
+        <template #icon>
+          <NIcon
+            :component="BuildFilled"
+            :size="14"
+            v-if="item?.icon && item?.icon === 'BuildFilled'"
+          />
+          <NIcon
+            :component="MovieCreationFilled"
+            :size="14"
+            v-if="item?.icon && item?.icon === 'MovieCreationFilled'"
+          />
+          <NIcon
+            :component="MusicNoteFilled"
+            :size="14"
+            v-if="item?.icon && item?.icon === 'MusicNoteFilled'"
+          />
+        </template>
+        {{ item?.title }}
       </ShnTag>
     </p>
   </li>
@@ -40,6 +58,12 @@
   import { computed } from 'vue'
   import tagConfig from '@docs/.vitepress/configs/tags.js'
 
+  import { NIcon } from 'naive-ui'
+  import {
+    BuildFilled,
+    MusicNoteFilled,
+    MovieCreationFilled,
+  } from '@vicons/material'
   import ShnTag from '../../../common/Tag.vue'
   import useCurrentInstance from '../../../../../utils/hooks/useCurrentInstance'
 
@@ -65,6 +89,7 @@
       .map((item) => {
         return tagConfig[item]
       })
+
     return list
   })
 </script>
