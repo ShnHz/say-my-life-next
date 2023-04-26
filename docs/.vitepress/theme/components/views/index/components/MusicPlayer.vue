@@ -3,16 +3,21 @@
     <div class="music-bar">
       <audio
         id="globalAudio"
-        :src="active && active.href"
+        :src="active?.href"
         type="audio/mp3"
         preload="meta"
-        controls
       ></audio>
       <canvas id="musicBar"></canvas>
     </div>
     <div class="container">
-      <div class="music-cd-wrap">
-        <div class="music-cd">
+      <div
+        class="music-cd-wrap"
+        :class="{ 'is-playing': active?.status === 'playing' }"
+      >
+        <div
+          class="music-cd"
+          :style="{ 'background-image': `url(${active?.cover})` }"
+        >
           <div class="center-wrap">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -26,24 +31,51 @@
             </svg>
           </div>
         </div>
+
+        <div class="music-player-control">
+          <div
+            class="play-btn"
+            @click="active?.status === 'paused' ? playMusic() : pausedMusic()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 512 512"
+              v-show="active?.status === 'paused'"
+            >
+              <path
+                d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208s208-93.31 208-208S370.69 48 256 48zm-56 296V168l144 88z"
+                fill="currentColor"
+              ></path>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 512 512"
+              v-show="active?.status === 'playing'"
+            >
+              <path
+                d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208s208-93.31 208-208S370.69 48 256 48zm-32 272a16 16 0 0 1-32 0V192a16 16 0 0 1 32 0zm96 0a16 16 0 0 1-32 0V192a16 16 0 0 1 32 0z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { init } from 'vitepress'
   import { onMounted, ref } from 'vue'
+
+  import musicList from '@docs/.vitepress/configs/music.js'
+
   let canvas: HTMLCanvasElement | null
   let audio: HTMLAudioElement | null
   let ctx, dataArray, analyser
-  const active = ref<{
-    name: string
-    href: string
-  }>({
-    name: '兜圈',
-    href: 'https://cdn.chenyingshuang.cn/index/music/%E6%9E%97%E5%AE%A5%E5%98%89_%E5%85%9C%E5%9C%88.mp3',
-  })
+  const active = ref()
+  let activeIndex: number = 0
 
   onMounted(() => {
     canvas = document.getElementById('musicBar') as HTMLCanvasElement
@@ -52,6 +84,7 @@
 
     initCanvas()
     initAudio()
+    initMusic()
   })
 
   const initCanvas = () => {
@@ -87,40 +120,54 @@
 
   const draw = () => {
     requestAnimationFrame(draw)
-
     const { width, height } = canvas!
 
-    ctx.clearRect(0, 0, width, height)
-    //分析器节点分析出的数据到数组中
-    ctx.fillStyle = '#78C5F7'
-    ctx.lineWidth = 2
-    ctx.beginPath()
-    //getByteFrequencyData，分析当前音频源的数据 装到dataArray数组中去
-    //获取实时数据
-    analyser.getByteFrequencyData(dataArray)
-    console.log(dataArray)
-    const len = dataArray.length
-    const barWidth = width / len
-    let x = 0
-    for (let i = 0; i < len; i++) {
-      const data = dataArray[i]
-      const barHeight = (data / 255) * height
+    let backgroundColor = '#131313'
+    let gradient = ctx.createLinearGradient(0, 0, 0, height)
+    gradient.addColorStop(0, '#ff4446')
+    gradient.addColorStop(1, 'rgb(103, 175, 187)')
 
-      // ctx.fillRect(x,y,barWidth,height)
-
-      let v = dataArray[i] / 128.0
-      let y = (v * height) / 2
-
-      if (i === 0) {
-        ctx.moveTo(x, y)
-      } else {
-        ctx.lineTo(x, y)
-      }
-
-      x += barWidth
+    analyser.fftSize = 256
+    var data = new Uint8Array(analyser.frequencyBinCount)
+    analyser.getByteFrequencyData(data)
+    var el = ctx.canvas
+    var count = data.length
+    ctx.save()
+    ctx.fillStyle = backgroundColor
+    ctx.fillRect(0, 0, el.width, el.height)
+    ctx.transform(1, 0, 0, -1, 0, el.height)
+    ctx.fillStyle = gradient
+    var w = el.width / count
+    var x = 0,
+      h = 0,
+      v = 0
+    for (var i = 0; i < data.length; i++) {
+      v = data[i] / 0xff
+      h = v * el.height
+      ctx.fillRect(x + 1, 0, w - 2, h)
+      x += w
     }
-    // ctx.lineTo(canvas.width, canvas.height/2);
-    ctx.stroke()
+    ctx.restore()
+  }
+
+  const initMusic = () => {
+    changeMusic(activeIndex)
+  }
+
+  const changeMusic = (index, status = 'paused') => {
+    active.value = {
+      ...musicList[index],
+      status: status,
+    }
+  }
+
+  const playMusic = () => {
+    audio?.play()
+    active.value.status = 'playing'
+  }
+  const pausedMusic = () => {
+    audio?.pause()
+    active.value.status = 'paused'
   }
 </script>
 
@@ -138,8 +185,12 @@
       position: absolute;
       top: 0;
       left: 0;
+      audio {
+        opacity: 0;
+      }
     }
     .container {
+      z-index: 2;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -154,6 +205,41 @@
       transition: all 0.3s ease;
       &:hover {
         transform: scale(1.1);
+        .music-player-control {
+          .play-btn {
+            opacity: 1;
+          }
+        }
+      }
+      &.is-playing {
+        .music-cd {
+          -webkit-animation: rotate360 16s infinite linear;
+          -webkit-transform-origin: center center;
+          -ms-transform-origin: center center;
+          transform-origin: center center;
+        }
+      }
+      .music-player-control {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .play-btn {
+          cursor: pointer;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: #fff;
+          opacity: 0;
+          transition: all 0.3s ease;
+          svg {
+            width: 40px;
+            height: 40px;
+          }
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
       }
     }
     .music-cd {
@@ -168,12 +254,8 @@
       border: 12px solid #fff;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
       background-size: cover;
-      background-image: url('https://cdn.chenyingshuang.cn/index/music/jay.jpg');
+      background-image: url('https://cdn.chenyingshuang.cn/index/music_cd.png');
       background-position: 50% 50%;
-      -webkit-animation: rotate360 16s infinite linear;
-      -webkit-transform-origin: center center;
-      -ms-transform-origin: center center;
-      transform-origin: center center;
 
       .center-wrap {
         display: flex;
