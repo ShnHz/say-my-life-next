@@ -37,28 +37,18 @@
             class="play-btn"
             @click="active?.status === 'paused' ? playMusic() : pausedMusic()"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              viewBox="0 0 512 512"
+            <NIcon
+              :component="PlayCircleSharp"
+              :size="40"
+              color="#000"
               v-show="active?.status === 'paused'"
-            >
-              <path
-                d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208s208-93.31 208-208S370.69 48 256 48zm-56 296V168l144 88z"
-                fill="currentColor"
-              ></path>
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              viewBox="0 0 512 512"
+            />
+            <NIcon
+              :component="PauseCircle"
+              :size="40"
+              color="#000"
               v-show="active?.status === 'playing'"
-            >
-              <path
-                d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208s208-93.31 208-208S370.69 48 256 48zm-32 272a16 16 0 0 1-32 0V192a16 16 0 0 1 32 0zm96 0a16 16 0 0 1-32 0V192a16 16 0 0 1 32 0z"
-                fill="currentColor"
-              ></path>
-            </svg>
+            />
           </div>
         </div>
       </div>
@@ -70,6 +60,9 @@
   import { onMounted, ref } from 'vue'
 
   import musicList from '@docs/.vitepress/configs/music.js'
+
+  import { NIcon } from 'naive-ui'
+  import { PlayCircleSharp, PauseCircle } from '@vicons/ionicons5'
 
   let canvas: HTMLCanvasElement | null
   let audio: HTMLAudioElement | null
@@ -213,10 +206,7 @@
       }
       &.is-playing {
         .music-cd {
-          -webkit-animation: rotate360 16s infinite linear;
-          -webkit-transform-origin: center center;
-          -ms-transform-origin: center center;
-          transform-origin: center center;
+          animation-play-state: running;
         }
       }
       .music-player-control {
@@ -232,10 +222,6 @@
           background: #fff;
           opacity: 0;
           transition: all 0.3s ease;
-          svg {
-            width: 40px;
-            height: 40px;
-          }
           &:hover {
             transform: scale(1.1);
           }
@@ -256,7 +242,11 @@
       background-size: cover;
       background-image: url('https://cdn.chenyingshuang.cn/index/music_cd.png');
       background-position: 50% 50%;
-
+      -webkit-animation: rotate360 16s infinite linear;
+      -webkit-transform-origin: center center;
+      -ms-transform-origin: center center;
+      transform-origin: center center;
+      animation-play-state:paused;
       .center-wrap {
         display: flex;
         align-items: center;
