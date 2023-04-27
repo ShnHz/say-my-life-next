@@ -1,35 +1,41 @@
 {
-  "hash": "b9269135",
-  "browserHash": "3a4bae6c",
+  "hash": "7829f334",
+  "browserHash": "9257d521",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/.pnpm/vue@3.2.47/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "9b9a4749",
+      "fileHash": "d130b544",
       "needsInterop": false
     },
     "naive-ui": {
       "src": "../../../../node_modules/.pnpm/naive-ui@2.34.3_vue@3.2.47/node_modules/naive-ui/es/index.js",
       "file": "naive-ui.js",
-      "fileHash": "663ce806",
+      "fileHash": "d066e001",
       "needsInterop": false
     },
     "easy-typer-js": {
       "src": "../../../../node_modules/.pnpm/easy-typer-js@2.1.0/node_modules/easy-typer-js/src/lib/index.js",
       "file": "easy-typer-js.js",
-      "fileHash": "e19e32fa",
+      "fileHash": "99b85ba4",
       "needsInterop": false
     },
-    "@vicons/material": {
-      "src": "../../../../node_modules/.pnpm/@vicons+material@0.12.0/node_modules/@vicons/material/es/index.js",
-      "file": "@vicons_material.js",
-      "fileHash": "90082b49",
+    "@vueuse/core": {
+      "src": "../../../../node_modules/.pnpm/@vueuse+core@10.1.0_vue@3.2.47/node_modules/@vueuse/core/index.mjs",
+      "file": "@vueuse_core.js",
+      "fileHash": "9ff7f980",
       "needsInterop": false
     },
     "@vicons/ionicons5": {
       "src": "../../../../node_modules/.pnpm/@vicons+ionicons5@0.12.0/node_modules/@vicons/ionicons5/es/index.js",
       "file": "@vicons_ionicons5.js",
-      "fileHash": "a760daad",
+      "fileHash": "ba0cc4b2",
+      "needsInterop": false
+    },
+    "@vicons/material": {
+      "src": "../../../../node_modules/.pnpm/@vicons+material@0.12.0/node_modules/@vicons/material/es/index.js",
+      "file": "@vicons_material.js",
+      "fileHash": "566aca2d",
       "needsInterop": false
     }
   },
