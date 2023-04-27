@@ -115,7 +115,6 @@
     requestAnimationFrame(draw)
     const { width, height } = canvas!
 
-    let backgroundColor = '#131313'
     let gradient = ctx.createLinearGradient(0, 0, 0, height)
     gradient.addColorStop(0, '#ff4446')
     gradient.addColorStop(1, 'rgb(103, 175, 187)')
@@ -126,7 +125,8 @@
     var el = ctx.canvas
     var count = data.length
     ctx.save()
-    ctx.fillStyle = backgroundColor
+    ctx.fillStyle = 'rgba(255, 255, 255, 0)'
+    ctx.clearRect(0, 0, width, height)
     ctx.fillRect(0, 0, el.width, el.height)
     ctx.transform(1, 0, 0, -1, 0, el.height)
     ctx.fillStyle = gradient
@@ -170,7 +170,18 @@
     height: 200px;
 
     position: relative;
-    background: #131313;
+    &::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: url(https://cdn.chenyingshuang.cn/index/music/title_bg.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
     .music-bar {
       z-index: 1;
       width: 100%;
@@ -180,6 +191,9 @@
       left: 0;
       audio {
         opacity: 0;
+      }
+      canvas {
+        // background: rgba(255, 255, 255, 0); /*关键点*/
       }
     }
     .container {
@@ -246,7 +260,7 @@
       -webkit-transform-origin: center center;
       -ms-transform-origin: center center;
       transform-origin: center center;
-      animation-play-state:paused;
+      animation-play-state: paused;
       .center-wrap {
         display: flex;
         align-items: center;
