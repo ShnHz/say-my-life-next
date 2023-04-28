@@ -68,7 +68,13 @@
             class="more-wrap"
             @click="more"
           >
-            查看更多
+            <p>
+              查看更多
+              <NIcon
+                :component="ArrowForward"
+                :size="14"
+              />
+            </p>
           </div>
         </div>
       </div>
@@ -81,11 +87,12 @@
 
   import { computed, onMounted, onUnmounted, ref } from 'vue'
 
-  import { NCarousel, NCarouselItem } from 'naive-ui'
+  import { NCarousel, NCarouselItem, NIcon } from 'naive-ui'
   import EasyTyper from 'easy-typer-js'
   import Background from './components/Background.vue'
   import BlogItem from './components/BlogItem.vue'
   import MusicPlayer from './components/MusicPlayer.vue'
+  import { ArrowForward } from '@vicons/ionicons5'
 
   import { useRouter, useRoute } from 'vitepress'
 
@@ -171,14 +178,14 @@
     nCarousel.value.to(index)
   }
 
-  const activeBlogNum = ref<number>(20)
+  const maxBlogNum = ref<number>(20)
   const more = () => {
-    activeBlogNum.value += 20
+    maxBlogNum.value += 20
   }
 
   const blogList = computed<[]>(() => {
     return data.filter((item, index) => {
-      return index < activeBlogNum.value
+      return index < maxBlogNum.value
     })
   })
 </script>
@@ -305,17 +312,38 @@
       }
 
       .more-wrap {
+        cursor: pointer;
         width: 100%;
         position: relative;
         margin: 20px 0 0;
-        padding: 24px 0;
+        padding: 12px 0;
         text-align: center;
         background-image: linear-gradient(
           to top,
-          #d8d9db 0%,
-          #fff 80%,
-          #fdfdfd 100%
+          #fff 40%,
+          rgba(255, 255, 255, 0) 80%,
+          rgba(255, 255, 255, 0) 100%
         );
+        border-radius: 16px 16px 0 0;
+        p {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--vp-c-text-1);
+          transition: all 0.3s;
+          transform: translateY(0);
+          opacity: 0.2;
+          :deep(.n-icon) {
+            margin-left: 8px;
+          }
+        }
+        &:hover {
+          p {
+            color: var(--vp-c-brand);
+            transform: translateY(-6px);
+            opacity: 1;
+          }
+        }
       }
     }
   }
