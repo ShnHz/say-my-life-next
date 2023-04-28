@@ -63,6 +63,13 @@
               :data="item"
             />
           </ul>
+
+          <div
+            class="more-wrap"
+            @click="more"
+          >
+            查看更多
+          </div>
         </div>
       </div>
     </div>
@@ -72,13 +79,7 @@
 <script setup lang="ts">
   import { data } from '@docs/.vitepress/utils/loaders/blog.data.js'
 
-  import {
-    computed,
-    getCurrentInstance,
-    onMounted,
-    onUnmounted,
-    ref,
-  } from 'vue'
+  import { computed, onMounted, onUnmounted, ref } from 'vue'
 
   import { NCarousel, NCarouselItem } from 'naive-ui'
   import EasyTyper from 'easy-typer-js'
@@ -86,9 +87,12 @@
   import BlogItem from './components/BlogItem.vue'
   import MusicPlayer from './components/MusicPlayer.vue'
 
+  import { useRouter, useRoute } from 'vitepress'
+
   // --------------------------------------common
-  const proxy: any = getCurrentInstance()
-  const frontmatter: any = proxy?.proxy?.$frontmatter
+  const router = useRouter()
+  const route = useRoute()
+  const frontmatter: any = route.data.frontmatter
   const desc = ref<string>('')
   let easyTyper: any = {
     output: '',
@@ -167,8 +171,15 @@
     nCarousel.value.to(index)
   }
 
+  const activeBlogNum = ref<number>(20)
+  const more = () => {
+    activeBlogNum.value += 20
+  }
+
   const blogList = computed<[]>(() => {
-    return data
+    return data.filter((item, index) => {
+      return index < activeBlogNum.value
+    })
   })
 </script>
 
@@ -291,6 +302,20 @@
             }
           }
         }
+      }
+
+      .more-wrap {
+        width: 100%;
+        position: relative;
+        margin: 20px 0 0;
+        padding: 24px 0;
+        text-align: center;
+        background-image: linear-gradient(
+          to top,
+          #d8d9db 0%,
+          #fff 80%,
+          #fdfdfd 100%
+        );
       }
     }
   }

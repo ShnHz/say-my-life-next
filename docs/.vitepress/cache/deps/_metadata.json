@@ -1,41 +1,41 @@
 {
-  "hash": "7829f334",
-  "browserHash": "9257d521",
+  "hash": "bc2a3d74",
+  "browserHash": "b81d7372",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/.pnpm/vue@3.2.47/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "d130b544",
+      "fileHash": "883d3183",
       "needsInterop": false
     },
     "naive-ui": {
       "src": "../../../../node_modules/.pnpm/naive-ui@2.34.3_vue@3.2.47/node_modules/naive-ui/es/index.js",
       "file": "naive-ui.js",
-      "fileHash": "d066e001",
+      "fileHash": "1e3fd4c7",
       "needsInterop": false
     },
     "easy-typer-js": {
       "src": "../../../../node_modules/.pnpm/easy-typer-js@2.1.0/node_modules/easy-typer-js/src/lib/index.js",
       "file": "easy-typer-js.js",
-      "fileHash": "99b85ba4",
-      "needsInterop": false
-    },
-    "@vueuse/core": {
-      "src": "../../../../node_modules/.pnpm/@vueuse+core@10.1.0_vue@3.2.47/node_modules/@vueuse/core/index.mjs",
-      "file": "@vueuse_core.js",
-      "fileHash": "9ff7f980",
-      "needsInterop": false
-    },
-    "@vicons/ionicons5": {
-      "src": "../../../../node_modules/.pnpm/@vicons+ionicons5@0.12.0/node_modules/@vicons/ionicons5/es/index.js",
-      "file": "@vicons_ionicons5.js",
-      "fileHash": "ba0cc4b2",
+      "fileHash": "3b1ca5bc",
       "needsInterop": false
     },
     "@vicons/material": {
       "src": "../../../../node_modules/.pnpm/@vicons+material@0.12.0/node_modules/@vicons/material/es/index.js",
       "file": "@vicons_material.js",
-      "fileHash": "566aca2d",
+      "fileHash": "26fdde9c",
+      "needsInterop": false
+    },
+    "@vicons/ionicons5": {
+      "src": "../../../../node_modules/.pnpm/@vicons+ionicons5@0.12.0/node_modules/@vicons/ionicons5/es/index.js",
+      "file": "@vicons_ionicons5.js",
+      "fileHash": "db4e0c36",
+      "needsInterop": false
+    },
+    "@vueuse/core": {
+      "src": "../../../../node_modules/.pnpm/@vueuse+core@10.1.0_vue@3.2.47/node_modules/@vueuse/core/index.mjs",
+      "file": "@vueuse_core.js",
+      "fileHash": "e188a546",
       "needsInterop": false
     }
   },

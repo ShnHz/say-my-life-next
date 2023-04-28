@@ -1,9 +1,9 @@
 <template>
-  <li class="blog-item-wrap">
-    <div
-      :to="data.path"
-      class="article-title"
-    >
+  <li
+    class="blog-item-wrap"
+    @click="toPath(data.path)"
+  >
+    <div class="article-title">
       {{ data.title }}
     </div>
     <p class="article-date">
@@ -57,6 +57,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import tagConfig from '@docs/.vitepress/configs/tags.js'
+  import { useRouter } from 'vitepress'
 
   import { NIcon } from 'naive-ui'
   import {
@@ -66,6 +67,11 @@
   } from '@vicons/material'
   import ShnTag from '../../../common/Tag.vue'
   import useCurrentInstance from '../../../../../utils/hooks/useCurrentInstance'
+
+  const router = useRouter()
+  router.onAfterRouteChanged = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  }
 
   const currentInstanc: any = useCurrentInstance()
   const proxy = currentInstanc.proxy
@@ -92,6 +98,10 @@
 
     return list
   })
+
+  const toPath = (path) => {
+    router.go(path)
+  }
 </script>
 
 <style scoped lang="less">
