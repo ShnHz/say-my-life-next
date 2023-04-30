@@ -71,7 +71,7 @@
             <p>
               查看更多
               <NIcon
-                :component="ArrowForward"
+                :component="ReadMoreSharp"
                 :size="14"
               />
             </p>
@@ -92,7 +92,7 @@
   import Background from './components/Background.vue'
   import BlogItem from './components/BlogItem.vue'
   import MusicPlayer from './components/MusicPlayer.vue'
-  import { ArrowForward } from '@vicons/ionicons5'
+  import { ReadMoreSharp } from '@vicons/material'
 
   import { useRouter, useRoute } from 'vitepress'
 
@@ -316,7 +316,7 @@
         width: 100%;
         position: relative;
         margin: 20px 0 0;
-        padding: 12px 0;
+        padding: 24px 0 36px;
         text-align: center;
         background-image: linear-gradient(
           to top,
@@ -333,6 +333,7 @@
           transition: all 0.3s;
           transform: translateY(0);
           opacity: 0.2;
+          font-size: 12px;
           :deep(.n-icon) {
             margin-left: 8px;
           }
