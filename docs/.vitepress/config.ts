@@ -23,6 +23,14 @@ export default defineConfig({
       next: 'Next page',
     },
     returnToTopLabel: 'Return to top',
+
+    // 备案号
+    record: '浙ICP备00000000号-0',
+    recordLink: 'http://beian.miit.gov.cn/',
+    // 作者
+    author: '野宁新之助',
+    // 项目开始时间
+    startYear: '2022',
   },
   vite: {
     plugins: [],

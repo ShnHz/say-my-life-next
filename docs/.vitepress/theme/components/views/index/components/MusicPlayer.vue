@@ -1,5 +1,8 @@
 <template>
-  <div class="music-wrap">
+  <div
+    class="music-wrap"
+    :class="{ 'is-loading': !audioInfo.canPlay || true }"
+  >
     <div class="music-bar">
       <audio
         id="globalAudio"

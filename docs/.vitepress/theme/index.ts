@@ -4,6 +4,7 @@ import { h } from 'vue'
 import Theme from 'vitepress/theme'
 import '../styles/style.less'
 import Mixins from '../utils/mixins/mixins'
+import MyLayout from './components/layout/Layout.vue'
 
 // ------------------------------views
 import index from '@theme/components/views/index/index.vue'
@@ -18,11 +19,7 @@ import Shadow from './components/views/note/components/Shadow.vue'
 
 export default {
   ...Theme,
-  Layout: () => {
-    return h(Theme.Layout, null, {
-      // https://vitepress.dev/guide/extending-default-theme#layout-slots
-    })
-  },
+  Layout: MyLayout,
   enhanceApp({ app, router, siteData }) {
     app.component('index', index)
 
