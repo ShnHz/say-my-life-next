@@ -23,19 +23,32 @@
       <div
         :style="{ height: code_height + 'px' }"
         class="code"
+        v-html="output"
+        ref="codeView"
       ></div>
       <div
         @click="showCode()"
         class="demo-block-control"
+        :class="{ 'is-loading': loading }"
       >
-        <!-- <i
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 512 512"
           :class="{
-            hovering_i: hover_animation || !arrowAnimation,
-            'el-icon-caret-bottom': code_height === 0,
-            'el-icon-caret-top': code_height !== 0,
+            hovering_span: hover_animation || !arrowAnimation,
+            'is-reverse': code_height !== 0,
           }"
-          class="shni"
-        ></i> -->
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="48"
+            d="M112 184l144 144l144-144"
+          ></path>
+        </svg>
         <span :class="{ hovering_span: hover_animation || !arrowAnimation }">
           {{ code_height === 0 ? '显示代码' : '隐藏代码' }}
         </span>
@@ -44,6 +57,8 @@
   </div>
 </template>
 <script>
+  import { setCDN, setWasm, getHighlighter } from 'shiki'
+
   export default {
     name: 'code-demo',
     props: {
@@ -54,10 +69,6 @@
       introduction: {
         type: String,
         default: '',
-      },
-      height: {
-        type: Number,
-        default: 100,
       },
       arrowAnimation: {
         type: Boolean,
@@ -70,21 +81,40 @@
     },
     data() {
       return {
+        loading: true,
         highlighter: null,
-        data: '',
         hover_animation: false,
         code_height: 0,
+        output: '',
+        height: 0,
       }
     },
-    mounted() {
+    async mounted() {
+      const response = await fetch(
+        'https://cdn.chenyingshuang.cn/other/shiki/onig.wasm'
+      )
+      const buffer = await response.arrayBuffer()
+      setWasm(buffer)
+      setCDN('https://cdn.chenyingshuang.cn/other/shiki/')
       let _this = this
-      // getHighlighter({
-      //   theme: 'nord',
-      // }).then((highlighter) => {
-      //   _this.highlighter = highlighter
-      //   console.log(highlighter)
-      //   // const output = highlighter.codeToHtml(code, { lang: _this.type })
-      // })
+      const highlighter = await getHighlighter({ theme: 'dark-plus' })
+
+      const code = this.$slots.code().map((item) => {
+        return highlighter.codeToHtml(item.children, {
+          lang: item.props['data-type'] || 'js',
+        })
+      })
+
+      this.output = code.join(``)
+
+      this.$nextTick(() => {
+        const dom = _this.$refs.codeView.querySelectorAll('.shiki')
+        for (let i = 0; i < dom.length; i++) {
+          _this.height += dom[i].clientHeight
+        }
+        _this.height += 32 + (dom.length - 1) * 16
+        _this.loading = false
+      })
     },
     methods: {
       showCode() {
@@ -125,12 +155,17 @@
       }
       .code {
         height: 0;
-        background: #282c34;
-        border-top: 1px solid #eaeefb;
+        background: #1e1e1e;
         transition: height 0.2s;
         overflow: hidden;
+        :deep(.shiki) {
+          padding: 0 24px;
+        }
       }
       .demo-block-control {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
         position: relative;
         margin-top: -1px;
@@ -140,34 +175,41 @@
         border-top: 1px solid #eaeefb;
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
-        text-align: center;
         color: #d3dce6;
+        &.is-loading {
+          cursor: not-allowed;
+          pointer-events: none;
+        }
         &:hover {
           color: var(--vp-c-brand);
           background-color: #f9fafc;
         }
-        i {
-          display: inline-block;
+        svg {
+          height: 16px;
+          width: 16px;
           position: relative;
           font-size: 16px;
           line-height: 44px;
           transition: 0.3s;
+          transform: translateX(34px);
+          &.is-reverse {
+            transform: translateX(34px) rotate(180deg);
+          }
         }
         span {
-          display: inline-block;
-          position: absolute;
-          transform: translateX(10px);
+          margin-left: 10px;
+          transform: translateX(30px);
           font-size: 14px;
           line-height: 44px;
           transition: 0.3s;
           opacity: 0;
         }
-        .hovering_i {
-          transform: translateX(-40px);
-        }
         .hovering_span {
-          transform: translateX(-30px);
+          transform: translateX(-10px);
           opacity: 1;
+          &.is-reverse {
+            transform: translateX(-10px) rotate(180deg);
+          }
         }
       }
     }

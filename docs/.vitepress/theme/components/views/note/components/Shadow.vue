@@ -21,11 +21,10 @@
         <div class="box box-curve"></div>
       </template>
       <template v-slot:code>
-        <code class="html">{{ fCode(curve.code.html) }}</code>
-        <code class="css">{{ fCode(curve.code.css) }}</code>
+        <code data-type="html">{{ fCode(curve.code.html) }}</code>
+        <code data-type="css">{{ fCode(curve.code.css) }}</code>
       </template>
     </CodeDemo>
-
     <!-- 翘边投影DEMO -->
     <CodeDemo
       :height="816"
@@ -36,8 +35,8 @@
         <div class="box box-sharp-edge"></div>
       </template>
       <template v-slot:code>
-        <code class="html">{{ fCode(sharpEdge.code.html) }}</code>
-        <code class="css">{{ fCode(sharpEdge.code.css) }}</code>
+        <code data-type="html">{{ fCode(sharpEdge.code.html) }}</code>
+        <code data-type="css">{{ fCode(sharpEdge.code.css) }}</code>
       </template>
     </CodeDemo>
 
@@ -51,11 +50,20 @@
         <div class="box box-5"></div>
       </template>
       <template v-slot:code>
-        <code class="css">
-          .box{ border: 1px solid #8f9092; box-shadow: 0 4px 3px 1px #fcfcfc, 0
-          6px 8px #d6d7d9, 0 -4px 4px #cecfd1, 0 -6px 4px #fefefe, inset 0 0 3px
-          0 #cecfd1; background-image: linear-gradient( to top, #d8d9db 0%, #fff
-          80%, #fdfdfd 100% ); }
+        <code data-type="css">
+          {{
+            fCode(`.box {
+    border: 1px solid #8f9092;
+    box-shadow: 0 4px 3px 1px #fcfcfc, 0 6px 8px #d6d7d9, 0 -4px 4px #cecfd1,
+      0 -6px 4px #fefefe, inset 0 0 3px 0 #cecfd1;
+    background-image: linear-gradient(
+      to top,
+      #d8d9db 0%,
+      #fff 80%,
+      #fdfdfd 100%
+    );
+  }`)
+          }}
         </code>
       </template>
     </CodeDemo>
@@ -159,7 +167,32 @@
         },
       }
     },
-    methods: {},
+    methods: {
+      fCode(code) {
+        let code_list = []
+        code
+          .trim()
+          .split('\n')
+          .forEach(function (v) {
+            code_list.push(v)
+          })
+
+        let fcode = ''
+        if (code_list.length > 1) {
+          let length = code_list[code_list.length - 1].match(/(^(?:\s|\t)+)/)
+          length = length[0].length
+          for (let i = 1; i < code_list.length; i++) {
+            code_list[i] = code_list[i].slice(length)
+          }
+          for (let i = 0; i < code_list.length; i++) {
+            fcode = fcode + code_list[i] + '\n'
+          }
+        } else {
+          fcode = code_list[0]
+        }
+        return fcode
+      },
+    },
   }
 </script>
 <style lang="less" scoped>
