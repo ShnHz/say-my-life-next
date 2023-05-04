@@ -318,12 +318,7 @@
         margin: 20px 0 0;
         padding: 24px 0 36px;
         text-align: center;
-        background-image: linear-gradient(
-          to top,
-          #fff 40%,
-          rgba(255, 255, 255, 0) 80%,
-          rgba(255, 255, 255, 0) 100%
-        );
+        background-image: var(--bg-more);
         border-radius: 16px 16px 0 0;
         p {
           display: flex;

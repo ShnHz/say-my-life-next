@@ -92,6 +92,7 @@
           }
           .leancloud-visitors-count{
             font-style: normal;
+            font-size: 12px;
           }
         }
       }
