@@ -1,4 +1,5 @@
 export default {
+  info: { title: '转发' },
   test: { title: 'Text' },
   vue: { title: 'Vue' },
   css: { title: 'Css' },

@@ -19,6 +19,7 @@
     "easy-typer-js": "^2.1.0",
     "gray-matter": "^4.0.3",
     "shiki": "^0.14.1",
+    "valine-gnas": "^1.0.2",
     "vue": "^3.2.47"
   }
 }

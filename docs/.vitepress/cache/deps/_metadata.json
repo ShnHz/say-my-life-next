@@ -1,48 +1,54 @@
 {
-  "hash": "e7673b45",
-  "browserHash": "c7e7bb39",
+  "hash": "9d04e90c",
+  "browserHash": "db4fcac6",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/.pnpm/vue@3.2.47/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "94c3f6fc",
+      "fileHash": "4d946485",
       "needsInterop": false
     },
     "shiki": {
       "src": "../../../../node_modules/.pnpm/shiki@0.14.1/node_modules/shiki/dist/index.esm.js",
       "file": "shiki.js",
-      "fileHash": "fb4677a7",
+      "fileHash": "4edff1d7",
       "needsInterop": false
     },
     "naive-ui": {
       "src": "../../../../node_modules/.pnpm/naive-ui@2.34.3_vue@3.2.47/node_modules/naive-ui/es/index.js",
       "file": "naive-ui.js",
-      "fileHash": "5f45503a",
+      "fileHash": "2c92a393",
       "needsInterop": false
     },
     "easy-typer-js": {
       "src": "../../../../node_modules/.pnpm/easy-typer-js@2.1.0/node_modules/easy-typer-js/src/lib/index.js",
       "file": "easy-typer-js.js",
-      "fileHash": "ad5ab657",
-      "needsInterop": false
-    },
-    "@vicons/ionicons5": {
-      "src": "../../../../node_modules/.pnpm/@vicons+ionicons5@0.12.0/node_modules/@vicons/ionicons5/es/index.js",
-      "file": "@vicons_ionicons5.js",
-      "fileHash": "04d5c632",
+      "fileHash": "2f20d6f2",
       "needsInterop": false
     },
     "@vicons/material": {
       "src": "../../../../node_modules/.pnpm/@vicons+material@0.12.0/node_modules/@vicons/material/es/index.js",
       "file": "@vicons_material.js",
-      "fileHash": "77785aa6",
+      "fileHash": "fb32523f",
       "needsInterop": false
     },
     "@vueuse/core": {
       "src": "../../../../node_modules/.pnpm/@vueuse+core@10.1.0_vue@3.2.47/node_modules/@vueuse/core/index.mjs",
       "file": "@vueuse_core.js",
-      "fileHash": "47256a47",
+      "fileHash": "2a73835a",
       "needsInterop": false
+    },
+    "@vicons/ionicons5": {
+      "src": "../../../../node_modules/.pnpm/@vicons+ionicons5@0.12.0/node_modules/@vicons/ionicons5/es/index.js",
+      "file": "@vicons_ionicons5.js",
+      "fileHash": "804e1951",
+      "needsInterop": false
+    },
+    "valine-gnas": {
+      "src": "../../../../node_modules/.pnpm/valine-gnas@1.0.2/node_modules/valine-gnas/dist/Valine.min.js",
+      "file": "valine-gnas.js",
+      "fileHash": "6f5fd1da",
+      "needsInterop": true
     }
   },
   "chunks": {

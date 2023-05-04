@@ -21,7 +21,11 @@
         </span>
       </div>
       <div class="right-info">
-        <span class="view-wrap">
+        <span
+          class="view-wrap leancloud_visitors"
+          id="/"
+          v-if="themeConfig.globalAccess"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -32,7 +36,7 @@
               fill="currentColor"
             ></path>
           </svg>
-          1234
+          <i class="leancloud-visitors-count"></i>
         </span>
       </div>
     </div>
@@ -81,10 +85,13 @@
         span {
           display: flex;
           align-items: center;
-          svg{
+          svg {
             height: 14px;
             width: 14px;
             margin-right: 6px;
+          }
+          .leancloud-visitors-count{
+            font-style: normal;
           }
         }
       }

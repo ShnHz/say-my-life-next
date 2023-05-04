@@ -30,7 +30,15 @@ export default defineConfig({
     // 作者
     author: '野宁新之助',
     // 项目开始时间
-    startYear: '2022',
+    startYear: '2019',
+    // 全站访问量
+    globalAccess: true,
+    // 评论系统 文档：https://valine.js.org/，支持valine所有配置
+    valine: {
+      enable: true,
+      appId: '2MgoJb7PsBdDJavPcPPU3oO2-gzGzoHsz',
+      appKey: 'mF1z8VJ3jMiohj3Q2S4b7yB6',
+    },
   },
   vite: {
     plugins: [],
