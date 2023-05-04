@@ -11,6 +11,7 @@ config: {
     valineId: 
 }
 password: false
+outline: [3, 5]
 ---
 
 css属性其实并不是你开发者写了哪些属性就有哪些属性的

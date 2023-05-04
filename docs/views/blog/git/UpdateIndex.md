@@ -8,6 +8,7 @@ config: {
     valineId: /blog/git/UpdateIndex.html
 }
 title : git 忽略已提交文件的修改
+outline: [3, 5]
 ---
 
 我们在使用git中，经常会遇到这样的情况：

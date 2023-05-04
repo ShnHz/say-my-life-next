@@ -12,6 +12,7 @@ config: {
     valineId: 
 }
 password: false
+outline: [3, 5]
 ---
 
 ###### 原文 [掘金](https://juejin.cn/post/7140193310966022175)

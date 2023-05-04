@@ -12,6 +12,7 @@ config: {
     valineId: 
 }
 password: false
+outline: [3, 5]
 ---
 
 ### pyodide 是什么？

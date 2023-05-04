@@ -11,6 +11,7 @@ config: {
     valineId: 
 }
 password: false
+outline: [3, 5]
 ---
 
 ### 防抖

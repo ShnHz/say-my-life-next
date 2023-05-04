@@ -12,6 +12,7 @@ config: {
     valineId: 
 }
 password: false
+outline: [3, 5]
 ---
 
 首先我们来看看这两段代码

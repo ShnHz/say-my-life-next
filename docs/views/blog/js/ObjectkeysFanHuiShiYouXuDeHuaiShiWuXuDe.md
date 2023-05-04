@@ -12,20 +12,21 @@ config: {
     valineId: 
 }
 password: false
+outline: [3, 5]
 ---
 
 ###### 原文 [掘金](https://juejin.cn/post/7223995981234700348)
 
 <div class="markdown-body cache">
 
-# 前言
+### 前言
 
             
 <p>最近在负责Quill的项目，产品提出有个需求，需要在编辑器按<strong>enter键</strong>换行的时候发起请求，同时还要记录当前光标所在的行。</p>
 <p>但是Quill一旦按<strong>enter键</strong>换行，光标就变了，就找不到换行前的那行。所以就得要求我们发请求必须在换行之前，然后把该行记录下来，后面就可以处理了。</p>
 
 
-# 问题出现
+### 问题出现
 
             
 <p>Quill可以添加键盘的处理函数，通过<code>quill.addBinding</code>函数或者在quill的<code>keyboard</code>配置中，比如监听<strong>enter</strong>键</p>
@@ -94,7 +95,7 @@ class Keyboard extends Module {
 <p>能不能改变顺序以实现我的需求？</p>
 
 
-# Object.keys
+### Object.keys
 
             
 <p><a href="https://link.juejin.cn?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FObject%2Fkeys" target="_blank" title="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/keys" ref="nofollow noopener noreferrer">mdn</a>上面的描述：</p>
@@ -192,7 +193,7 @@ Object.keys({name: '答案cp3', 13:18, 6.1: 'boy'})  // ['13', 'name', '6.1']
 <p>13仍然排在前面，但是name和6.1是按照定义的顺序返回，这里要注意一下。</p>
 
 
-# 问题解决
+### 问题解决
 
             
 <p>所以我们想要自己定义的<code>enter</code>键函数在默认的键盘事件前面执行，把key改成<strong>正整数</strong>即可。</p>
@@ -219,7 +220,7 @@ new Quill('#editor', {
 
 
 
-# 总结
+### 总结
 
             
 <p>我之前一直认为<code>Object.keys</code>的返回是无序的，这次通过看Quill源码学到<code>Object.keys</code>返回的顺序，然后解决了需求问题，过程还行，继续加油。</p>

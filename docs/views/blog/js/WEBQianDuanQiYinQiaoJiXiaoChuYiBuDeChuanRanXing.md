@@ -12,6 +12,7 @@ config: {
     valineId: 
 }
 password: false
+outline: [3, 5]
 ---
 
 ###### 原文 [掘金](https://juejin.cn/post/7223937161707716669)
@@ -19,7 +20,7 @@ password: false
 <div class="markdown-body cache"><p><a name="user-content-b0KzU" title="" ref="nofollow noopener noreferrer" href="https://link.juejin.cn?target="></a></p>
 
 
-## 简介
+### 简介
 
             
 <p>大家好<br>今天给大家介绍一个关于异步的比较恶心的东西<br>也许大家在开发中也曾遇到过<br>只不过解决起来比较棘手<br>废话不多说直接上代码</p>
@@ -90,7 +91,7 @@ main()
 <a name="user-content-f05fH" title="" ref="nofollow noopener noreferrer" href="https://link.juejin.cn?target="></a></p>
 
 
-## 解决问题
+### 解决问题
 
             
 <p>不难发现通过以上直接去掉async await是无法得到原来的结果的<br>因为它会返回一个promise 对象，无法使res得到真实的数据<br>这里我先说一下大概思路<br>首先fetch会返回一个promise，但是在请求时就想对结果进行操作，显然是不可能的<br>这时候我们需要在fetch没返回我们想要的数据前先终止函数运行，等拿到正确的数据后我们再运行函数<br>是不是听到这个过程也是一头雾水呀<br>先别着急<br>继续往下看<br>如果想要函数终止运行有个办法那就是抛出异常 throw error<br>然后等fetch返回数据data后，对数据进行缓存<br>缓存后开始函数的运行，<br>最后交付data<br>看一下流程图<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c3f87d04cf4488f879f6f91fdf56154~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.image" alt="image.png" loading="lazy"><br>整体流程大概就是这样<br>为了方便理解，我化简一下上述代码</p>
@@ -259,7 +260,7 @@ run(main)
 <p><a name="user-content-Pda2O" title="" ref="nofollow noopener noreferrer" href="https://link.juejin.cn?target="></a></p>
 
 
-## 在框架中的应用
+### 在框架中的应用
 
             
 <p>其实在react这个应用很常见<br>我们先来看一段代码</p>
