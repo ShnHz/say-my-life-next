@@ -2,6 +2,7 @@
   <Layout
     :class="{
       'is-blog': isBlog,
+      'not-blog': !isBlog,
       'blog-no-aside': isBlog && !pageConfig.frontmatter.config.dir,
     }"
   >
@@ -63,6 +64,13 @@
       .aside {
         display: none;
       }
+    }
+  }
+
+  .not-blog{
+    .content-container{
+      max-width: none !important;
+      margin: 0;
     }
   }
 </style>

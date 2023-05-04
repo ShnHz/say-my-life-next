@@ -1,5 +1,6 @@
 ---
 title: CSS 特殊属性值
+outline: [3, 5]
 ---
 
 ### inherit

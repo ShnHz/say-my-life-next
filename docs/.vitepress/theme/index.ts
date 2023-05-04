@@ -11,6 +11,8 @@ import '../styles/article.less'
 // ------------------------------views
 import index from '@theme/components/views/index/index.vue'
 
+import fancyBorderRadius from './components/views/note/fancyBorderRadius.vue'
+
 // ------------------------------components
 // common
 import CodeDemo from '@theme/components/common/CodeDemo.vue'
@@ -23,7 +25,8 @@ export default {
   ...Theme,
   Layout: MyLayout,
   enhanceApp({ app, router, siteData }) {
-    app.component('index', index)
+    app.component('ViewIndex', index)
+    app.component('ViewFancyBorderRadius', fancyBorderRadius)
 
     app.component('CodeDemo', CodeDemo)
 

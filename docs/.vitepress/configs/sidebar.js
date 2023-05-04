@@ -12,74 +12,74 @@ export default {
       text: 'VsCode',
       link: '/views/notes/VsCode',
     },
-    // {
-    //   text: '小工具',
-    //   collapsable: false,
-    //   items: [
-    //     {
-    //       text: '边框圆角生成器',
-    //       link: '/views/notes/tools/Fancyborderradius.md',
-    //     },
-    //     {
-    //       text: '三角形生成器',
-    //       link: '/views/notes/tools/SanJiaoXingXiaoGongJu.md',
-    //     },
-    //     {
-    //       text: '小于12px的文字生成器',
-    //       link: '/views/notes/tools/XiaoYu12pxDeWenZiShengChengQi.md',
-    //     },
-    //     {
-    //       text: '常用正则表达式工具',
-    //       link: '/views/notes/tools/ChangYongZhengZeBiaoDaShiGongJu.md',
-    //     },
-    //     process.env.NODE_ENV == 'development'
-    //       ? {
-    //           text: '大文件上传和断点续存',
-    //           link: '/views/notes/tools/BigFileUploadAndResume.md',
-    //         }
-    //       : null,
-    //     process.env.NODE_ENV == 'development'
-    //       ? {
-    //           text: '长安幻想答题搜索器',
-    //           link: '/views/notes/tools/CAHXQuestion.md',
-    //         }
-    //       : null,
-    //   ],
-    // },
-    // {
-    //   text: 'JavaScript',
-    //   collapsable: false,
-    //   items: [
-    //     {
-    //       text: 'Object 对象',
-    //       link: '/views/notes/js/Object',
-    //     },
-    //     {
-    //       text: 'Array 数组',
-    //       link: '/views/notes/js/Array',
-    //     },
-    //     {
-    //       text: 'Date 日期处理',
-    //       link: '/views/notes/js/Date',
-    //     },
-    //     {
-    //       text: 'String 字符串',
-    //       link: '/views/notes/js/String',
-    //     },
-    //     {
-    //       text: 'BinaryTree 二叉树',
-    //       link: '/views/notes/js/BinaryTree',
-    //     },
-    //     {
-    //       text: 'Promise 同步',
-    //       link: '/views/notes/js/Promise',
-    //     },
-    //     {
-    //       text: 'Sort 排序',
-    //       link: '/views/notes/js/Sort',
-    //     },
-    //   ],
-    // },
+    {
+      text: '小工具',
+      collapsable: false,
+      items: [
+        {
+          text: '边框圆角生成器',
+          link: '/views/notes/tools/Fancyborderradius.md',
+        },
+        // {
+        //   text: '三角形生成器',
+        //   link: '/views/notes/tools/SanJiaoXingXiaoGongJu.md',
+        // },
+        // {
+        //   text: '小于12px的文字生成器',
+        //   link: '/views/notes/tools/XiaoYu12pxDeWenZiShengChengQi.md',
+        // },
+        // {
+        //   text: '常用正则表达式工具',
+        //   link: '/views/notes/tools/ChangYongZhengZeBiaoDaShiGongJu.md',
+        // },
+        // process.env.NODE_ENV == 'development'
+        //   ? {
+        //       text: '大文件上传和断点续存',
+        //       link: '/views/notes/tools/BigFileUploadAndResume.md',
+        //     }
+        //   : null,
+        // process.env.NODE_ENV == 'development'
+        //   ? {
+        //       text: '长安幻想答题搜索器',
+        //       link: '/views/notes/tools/CAHXQuestion.md',
+        //     }
+        //   : null,
+      ],
+    },
+    {
+      text: 'JavaScript',
+      collapsable: false,
+      items: [
+        {
+          text: 'Object 对象',
+          link: '/views/notes/js/Object',
+        },
+        {
+          text: 'Array 数组',
+          link: '/views/notes/js/Array',
+        },
+        {
+          text: 'Date 日期处理',
+          link: '/views/notes/js/Date',
+        },
+        {
+          text: 'String 字符串',
+          link: '/views/notes/js/String',
+        },
+        {
+          text: 'BinaryTree 二叉树',
+          link: '/views/notes/js/BinaryTree',
+        },
+        {
+          text: 'Promise 同步',
+          link: '/views/notes/js/Promise',
+        },
+        {
+          text: 'Sort 排序',
+          link: '/views/notes/js/Sort',
+        },
+      ],
+    },
     {
       text: 'CSS',
       collapsable: false,

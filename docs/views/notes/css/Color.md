@@ -1,9 +1,11 @@
 ---
 title: Color 常用色彩
+outline: [3, 5]
 ---
 
 ### 主色
-<Color value="409EFF"/>
+
+<color value="409EFF"/>
 <color value="030852"/>
 <color value="2CBFBE"/>
 

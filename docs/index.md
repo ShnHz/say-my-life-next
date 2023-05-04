@@ -24,4 +24,4 @@ hero:
 #     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
-<index></index>
+<ViewIndex></ViewIndex>

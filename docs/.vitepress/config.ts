@@ -23,6 +23,7 @@ export default defineConfig({
       next: 'Next page',
     },
     returnToTopLabel: 'Return to top',
+    outline: [3, 5],
 
     // 备案号
     record: '浙ICP备00000000号-0',

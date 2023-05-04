@@ -1,5 +1,6 @@
 ---
 title: Class 常用Class
+outline: [3, 5]
 ---
 ### 清除浮动
 ``` css

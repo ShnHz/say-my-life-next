@@ -15,4 +15,4 @@ password: false
 
 原网站 [FANCY-BORDER-RADIUS](https://9elements.github.io/fancy-border-radius)
 
-<views-tools-FancyBorderRadius />
+<ViewFancyBorderRadius />

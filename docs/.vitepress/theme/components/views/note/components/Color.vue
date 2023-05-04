@@ -51,6 +51,7 @@
     display: inline-block;
     position: relative;
     margin: 0 10px 10px 2px;
+    font-size: 0px;
     .demo-color-box {
       width: 350px;
       height: 114px;

@@ -1,5 +1,6 @@
 ---
 title: Scss css预编译器
+outline: [3, 5]
 ---
 ### 常用参数
 ``` scss
@@ -7,7 +8,7 @@ title: Scss css预编译器
  * @Author: sanghangning 
  * @Date: 2019-12-11 10:48:23 
  * @Last Modified by: sanghangning
- * @Last Modified time: 2022-11-21 16:23:20
+ * @Last Modified time: 2023-05-04 18:25:36
  */
  $--color-white:#fff;
  $--color-black:#000;
