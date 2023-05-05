@@ -11,6 +11,11 @@ export default [
       'https://cdn.chenyingshuang.cn/index/music/%E6%9E%97%E5%AE%A5%E5%98%89.jpg',
   },
   {
+    name: '林俊杰 - 她说',
+    href: 'https://cdn.chenyingshuang.cn/index/music/林俊杰_她说.mp3',
+    cover: 'https://cdn.chenyingshuang.cn/index/music/林俊杰.jpg',
+  },
+  {
     name: 'Fine乐团 - 呼吸决定',
     href: 'https://cdn.chenyingshuang.cn/index/music/Fine乐团_呼吸决定.mp3',
     cover: 'https://cdn.chenyingshuang.cn/index/music/Fine乐团.jpg',

@@ -40,54 +40,45 @@
 
     <NForm
       ref="formRef"
-      inline
+      label-placement="left"
+      label-align="left"
       :label-width="140"
     >
       <NFormItem label="border-radius：">
-        <NInput v-model:value="borderRadius" />
+        <NInput
+          v-model:value="borderRadius"
+          disabled
+        />
+      </NFormItem>
+      <NFormItem label="width：">
+        <NInputNumber
+          v-model:value="warpStyle.width"
+          :min="100"
+          :max="1000"
+        />
+        <code>px</code>
+      </NFormItem>
+      <NFormItem label="height：">
+        <NInputNumber
+          v-model:value="warpStyle.height"
+          :min="100"
+          :max="1000"
+        />
+        <code>px</code>
       </NFormItem>
     </NForm>
-
-    <!-- <el-form
-      label-width="140px"
-      label-position="left"
-    >
-      <el-form-item label="border-radius：">
-        <el-input
-          :value="borderRadius"
-          disabled
-        ></el-input>
-      </el-form-item>
-      <el-form-item label="width：">
-        <el-input-number
-          v-model="warpStyle.width"
-          :min="100"
-          :max="1000"
-          label="width"
-        ></el-input-number>
-        <code>px</code>
-      </el-form-item>
-      <el-form-item label="height：">
-        <el-input-number
-          v-model="warpStyle.height"
-          :min="100"
-          :max="1000"
-          label="height"
-        ></el-input-number>
-        <code>px</code>
-      </el-form-item>
-    </el-form> -->
   </div>
 </template>
 <script>
   import { defineComponent } from 'vue'
-  import { NForm, NFormItem, NInput } from 'naive-ui'
+  import { NForm, NFormItem, NInput, NInputNumber } from 'naive-ui'
 
   export default defineComponent({
     components: {
       NForm,
       NFormItem,
       NInput,
+      NInputNumber,
     },
     data() {
       return {
@@ -232,6 +223,7 @@
 
     .shape-wrap {
       position: relative;
+      margin-bottom: 20px;
       background-image: url('https://cdn.chenyingshuang.cn/notes/transparent_bg.png');
 
       .shape {
@@ -294,39 +286,40 @@
       }
     }
 
-    ::v-deep {
-      .el-form {
-        width: 600px;
-        position: relative;
-        margin-top: 2rem;
+    :deep(.n-form) {
+      width: 600px;
+      position: relative;
+      margin-top: 2rem;
 
-        .el-form-item__content {
+      .n-form-item-blank {
+        display: flex;
+
+        code {
           display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 50px;
+          height: 40px;
+          position: relative;
+          margin-left: 10px;
+          font-size: 16px;
+        }
 
-          code {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 40px;
-            position: relative;
-            margin-left: 10px;
+        > .n-input {
+          .n-input-wrapper {
+            color: #002 !important;
             font-size: 16px;
-          }
-
-          > .el-input {
-            .el-input__inner {
-              color: #002;
-              font-size: 16px;
-              font-family: Ubuntu Mono, monospace;
-              font-weight: 600;
-              background-color: rgba(27, 31, 35, 0.05);
+            font-family: Ubuntu Mono, monospace;
+            font-weight: 600;
+            background-color: rgba(27, 31, 35, 0.05);
+            input{
+              color: #002 !important;
             }
           }
+        }
 
-          .el-input-number {
-            flex: 1;
-          }
+        .n-input-number {
+          flex: 1;
         }
       }
     }

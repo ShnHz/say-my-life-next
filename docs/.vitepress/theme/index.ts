@@ -12,6 +12,7 @@ import '../styles/article.less'
 import index from '@theme/components/views/index/index.vue'
 
 import fancyBorderRadius from './components/views/note/fancyBorderRadius.vue'
+import sanJiaoXingXiaoGongJu from './components/views/note/sanJiaoXingXiaoGongJu.vue'
 
 // ------------------------------components
 // common
@@ -27,6 +28,7 @@ export default {
   enhanceApp({ app, router, siteData }) {
     app.component('ViewIndex', index)
     app.component('ViewFancyBorderRadius', fancyBorderRadius)
+    app.component('ViewSanJiaoXingXiaoGongJu', sanJiaoXingXiaoGongJu)
 
     app.component('CodeDemo', CodeDemo)
 

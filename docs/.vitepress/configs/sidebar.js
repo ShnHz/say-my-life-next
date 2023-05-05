@@ -20,10 +20,10 @@ export default {
           text: '边框圆角生成器',
           link: '/views/notes/tools/Fancyborderradius.md',
         },
-        // {
-        //   text: '三角形生成器',
-        //   link: '/views/notes/tools/SanJiaoXingXiaoGongJu.md',
-        // },
+        {
+          text: '三角形生成器',
+          link: '/views/notes/tools/SanJiaoXingXiaoGongJu.md',
+        },
         // {
         //   text: '小于12px的文字生成器',
         //   link: '/views/notes/tools/XiaoYu12pxDeWenZiShengChengQi.md',

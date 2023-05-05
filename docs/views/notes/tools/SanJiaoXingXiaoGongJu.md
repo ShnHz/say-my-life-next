@@ -13,4 +13,4 @@ config: {
 password: false
 ---
 
-<views-tools-SanJiaoXingXiaoGongJu />
+<ViewSanJiaoXingXiaoGongJu />
