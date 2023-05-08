@@ -8,6 +8,7 @@
 // tag 标签列表
 // summary 文章简介
 // password 文章自定义密码
+// outline 目录标题监听
 // content 文章内容
 module.exports = `---
 title: {{title}}
@@ -23,6 +24,7 @@ config: {
     valineId: {{valineId}}
 }
 password: {{password}}
+outline: {{outline}}
 ---
 
 {{content}}

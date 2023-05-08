@@ -8,8 +8,11 @@ import MyLayout from './components/layout/Layout.vue'
 import '../styles/style.less'
 import '../styles/article.less'
 
+import '../plugins/axios.js'
+
 // ------------------------------views
 import index from '@theme/components/views/index/index.vue'
+import create from '@theme/components/views/create/create.vue'
 
 import fancyBorderRadius from './components/views/note/fancyBorderRadius.vue'
 import sanJiaoXingXiaoGongJu from './components/views/note/sanJiaoXingXiaoGongJu.vue'
@@ -27,6 +30,7 @@ export default {
   Layout: MyLayout,
   enhanceApp({ app, router, siteData }) {
     app.component('ViewIndex', index)
+    app.component('ViewCreate', create)
     app.component('ViewFancyBorderRadius', fancyBorderRadius)
     app.component('ViewSanJiaoXingXiaoGongJu', sanJiaoXingXiaoGongJu)
 
