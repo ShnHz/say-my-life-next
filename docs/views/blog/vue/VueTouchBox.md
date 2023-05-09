@@ -20,15 +20,6 @@ PC touch to elements was never this easy!
 
 This is for `vue 2.x`
 
-## DEMO
-<div style="width: 100%;height: 500px;overflow: scroll;margin-top:20px" v-touch-box>
-    <ul>
-    <li :key="index" v-for="index in 100">
-        <span v-for="index in 100" :key="index">touch{{index}}!</span>
-    </li>
-    </ul>
-</div>
-
 ## 安装
 
 该插件可以通过npm安装。
