@@ -60,17 +60,23 @@
   import Valine from '../common/Valine.vue'
 
   const vitePressData = useData()
-  const themeConfig = vitePressData.site.value.themeConfig
-  const pageConfig = vitePressData.page.value
+  const themeConfig = computed(() => {
+    return vitePressData.site.value.themeConfig
+  })
+  const pageConfig = computed(() => {
+    return vitePressData.page.value
+  })
+
+  console.log(pageConfig.value.frontmatter)
 
   const isBlog = computed<boolean>(() => {
-    return pageConfig.relativePath.includes('views/blog')
+    return pageConfig.value.relativePath.includes('views/blog')
   })
 
   const { Layout } = DefaultTheme
 
   onMounted(() => {
-    if (themeConfig.globalAccess) {
+    if (themeConfig.value.globalAccess) {
       addGlobalAccess()
     }
   })
@@ -78,8 +84,8 @@
   // 记录全局访问量
   const addGlobalAccess = () => {
     new ValineGnas({
-      appId: themeConfig.valine.appId,
-      appKey: themeConfig.valine.appKey,
+      appId: themeConfig.value.valine.appId,
+      appKey: themeConfig.value.valine.appKey,
       globalAccess: true,
     })
   }
