@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as s}from"./chunks/framework.f518e559.js";const m=JSON.parse('{"title":"江苏苏州 SuZhou","description":"","frontmatter":{"title":"江苏苏州 SuZhou"},"headers":[],"relativePath":"views/travel/domestic/JsSz.md"}'),a={name:"views/travel/domestic/JsSz.md"};function o(r,c,n,i,d,p){return s(),t("div")}const l=e(a,[["render",o]]);export{m as __pageData,l as default};

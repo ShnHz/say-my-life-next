@@ -12,19 +12,17 @@
       </template>
       <template #layout-bottom>
         <Footer />
-        <ClientOnly v-if="themeConfig.globalAccess">
-          <ValineGlobal />
-        </ClientOnly>
+        <ValineGlobal v-if="themeConfig.globalAccess" />
       </template>
       <template #doc-after>
-        <ClientOnly
-          v-if="
-            themeConfig.valine.enable &&
-            pageConfig.frontmatter.config &&
-            pageConfig.frontmatter.config.valine
-          "
-        >
-          <Valine />
+        <ClientOnly>
+          <Valine
+            v-if="
+              themeConfig.valine.enable &&
+              pageConfig.frontmatter.config &&
+              pageConfig.frontmatter.config.valine
+            "
+          />
         </ClientOnly>
       </template>
     </Layout>

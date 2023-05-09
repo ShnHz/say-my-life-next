@@ -1,1 +1,0 @@
-import{_ as t,c as o,I as a,o as s,J as n}from"./chunks/framework.f518e559.js";const f=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"views/Guide.md"}'),r={name:"views/Guide.md"};function c(i,d,p,_,m,u){const e=n("ViewGuide");return s(),o("div",null,[a(e)])}const v=t(r,[["render",c]]);export{f as __pageData,v as default};

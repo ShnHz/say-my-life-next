@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./chunks/framework.f518e559.js";const m=JSON.parse('{"title":"浙江宁波 NingBo","description":"","frontmatter":{"title":"浙江宁波 NingBo"},"headers":[],"relativePath":"views/travel/domestic/ZjNb.md"}'),o={name:"views/travel/domestic/ZjNb.md"};function r(s,c,n,i,d,p){return a(),t("div")}const l=e(o,[["render",r]]);export{m as __pageData,l as default};

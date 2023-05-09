@@ -86,7 +86,6 @@
 
   import { computed, onMounted, onUnmounted, ref } from 'vue'
 
-  import EasyTyper from 'easy-typer-js'
   import Background from './components/Background.vue'
   import BlogItem from './components/BlogItem.vue'
   import MusicPlayer from './components/MusicPlayer.vue'
@@ -111,8 +110,10 @@
   }
   let timer
 
-  onMounted(() => {
-    startEasyTyper()
+  onMounted(async () => {
+    const EasyTyper = await import('easy-typer-js')
+
+    startEasyTyper(EasyTyper.default)
     timer = setInterval(() => {
       easyTyper = {
         output: '',
@@ -124,7 +125,7 @@
         backSpeed: 150,
         sentencePause: false,
       }
-      startEasyTyper()
+      startEasyTyper(EasyTyper.default)
     }, 10000)
   })
 
@@ -133,7 +134,7 @@
     timer = null
   })
 
-  const startEasyTyper = () => {
+  const startEasyTyper = (EasyTyper) => {
     new EasyTyper(
       easyTyper,
       frontmatter.hero.text,

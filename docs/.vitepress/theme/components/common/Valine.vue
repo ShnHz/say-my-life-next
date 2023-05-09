@@ -10,7 +10,6 @@
 <script setup lang="ts">
   import { onMounted, computed } from 'vue'
   import { useData } from 'vitepress'
-  import ValineGnas from 'valine-gnas'
 
   const vitePressData = useData()
   const themeConfig = computed(() => {
@@ -32,17 +31,21 @@
   const uuid = new Date().getTime() + Math.round(Math.random() * 10000)
 
   onMounted(() => {
-    new ValineGnas({
-      el: `#valine-wrap-${uuid}`,
-      notify: false,
-      verify: false,
-      avatar: 'robohash',
-      placeholder: '',
-      visitor: true,
-      recordIP: true,
-      meta: ['nick', 'mail'],
-      path: valineId.value,
-      ...themeConfig.value.valine,
+    import('valine-gnas').then((module) => {
+      const ValineGnas = module.default
+
+      new ValineGnas({
+        el: `#valine-wrap-${uuid}`,
+        notify: false,
+        verify: false,
+        avatar: 'robohash',
+        placeholder: '',
+        visitor: true,
+        recordIP: true,
+        meta: ['nick', 'mail'],
+        path: valineId.value,
+        ...themeConfig.value.valine,
+      })
     })
   })
 </script>

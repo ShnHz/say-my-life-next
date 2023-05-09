@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./chunks/framework.f518e559.js";const m=JSON.parse('{"title":"海南文昌 WenChang","description":"","frontmatter":{"title":"海南文昌 WenChang"},"headers":[],"relativePath":"views/travel/domestic/HnWc.md"}'),n={name:"views/travel/domestic/HnWc.md"};function c(r,s,o,i,d,p){return a(),t("div")}const l=e(n,[["render",c]]);export{m as __pageData,l as default};

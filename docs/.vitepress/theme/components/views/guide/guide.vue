@@ -13,9 +13,9 @@
           :key="`archives-blog-item-${key}-${index}`"
         >
           <span class="date-wrap"
-            >{{ moment(item.date).format('DD') }}
+            >{{ moment(new Date(item.date)).format('DD') }}
             <span class="time-wrap">{{
-              moment(item.date).format('hh:mm:ss')
+              moment(new Date(item.date)).format('hh:mm:ss')
             }}</span>
           </span>
           <span
@@ -46,7 +46,7 @@
 
     list.forEach((item) => {
       let timeFrom = item.date
-        ? moment(item.date).format('YYYY年MM月')
+        ? moment(new Date(item.date)).format('YYYY年MM月')
         : 'Other'
       if (!map.has(timeFrom)) {
         map.set(timeFrom, [item])

@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./chunks/framework.f518e559.js";const m=JSON.parse('{"title":"上海 ShangHai","description":"","frontmatter":{"title":"上海 ShangHai"},"headers":[],"relativePath":"views/travel/domestic/Sh.md"}'),r={name:"views/travel/domestic/Sh.md"};function s(o,c,n,i,d,p){return a(),t("div")}const l=e(r,[["render",s]]);export{m as __pageData,l as default};
