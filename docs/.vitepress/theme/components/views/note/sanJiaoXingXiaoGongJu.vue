@@ -84,57 +84,57 @@
       </div>
     </div>
 
-    <NForm
+    <ElForm
       :label-width="140"
       label-placement="left"
-      label-align="left"
+      label-position="left"
     >
-      <NFormItem label="type：">
-        <NRadioGroup
-          v-model:value="shapeType"
+      <ElFormItem label="type：">
+        <ElRadioGroup
+          v-model="shapeType"
           @change="typeChange"
         >
-          <NRadio value="svg">svg</NRadio>
-          <NRadio value="border">border</NRadio>
-        </NRadioGroup>
-      </NFormItem>
-      <NFormItem label="color：">
-        <NColorPicker
-          v-model:value="shapeStyle.borderColor"
+          <ElRadio label="svg">svg</ElRadio>
+          <ElRadio label="border">border</ElRadio>
+        </ElRadioGroup>
+      </ElFormItem>
+      <ElFormItem label="color：">
+        <ElColorPicker
+          v-model="shapeStyle.borderColor"
           show-alpha
-        ></NColorPicker>
-      </NFormItem>
+        ></ElColorPicker>
+      </ElFormItem>
       <template v-if="shapeType == 'svg'">
-        <NFormItem label="拐点形状：">
-          <NRadioGroup v-model:value="shapeSvg.strokeLinejoin">
-            <NRadio value="miter">尖点</NRadio>
-            <NRadio value="round">圆点</NRadio>
-            <NRadio value="bevel">平点</NRadio>
-          </NRadioGroup>
-        </NFormItem>
-        <NFormItem
+        <ElFormItem label="拐点形状：">
+          <ElRadioGroup v-model="shapeSvg.strokeLinejoin">
+            <ElRadio label="miter">尖点</ElRadio>
+            <ElRadio label="round">圆点</ElRadio>
+            <ElRadio label="bevel">平点</ElRadio>
+          </ElRadioGroup>
+        </ElFormItem>
+        <ElFormItem
           label="拐点直径："
           v-if="shapeSvg.strokeLinejoin != 'miter'"
         >
-          <NInputNumber
-            v-model:value="shapeSvg.strokeWidth"
+          <ElInputNumber
+            v-model="shapeSvg.strokeWidth"
             :min="0"
             :max="warpStyle.height / 2"
             label="top"
           >
-          </NInputNumber>
+          </ElInputNumber>
           <code>px</code>
-        </NFormItem>
+        </ElFormItem>
         <div v-html="code"></div>
       </template>
       <template v-if="shapeType == 'border'">
-        <NFormItem label="direction：">
-          <NRadioGroup
-            v-model:value="shapeDirection"
+        <ElFormItem label="direction：">
+          <ElRadioGroup
+            v-model="shapeDirection"
             @change="shapeDirectionChange"
-            class="NRadioGroup_multiline"
+            class="ElRadioGroup_multiline"
           >
-            <NRadio value="bottom">
+            <ElRadio label="bottom">
               bottom
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -146,8 +146,8 @@
                   fill="currentColor"
                 ></path>
               </svg>
-            </NRadio>
-            <NRadio value="top">
+            </ElRadio>
+            <ElRadio label="top">
               top
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -160,8 +160,8 @@
                   fill="currentColor"
                 ></path>
               </svg>
-            </NRadio>
-            <NRadio value="left">
+            </ElRadio>
+            <ElRadio label="left">
               left
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -174,8 +174,8 @@
                   fill="currentColor"
                 ></path>
               </svg>
-            </NRadio>
-            <NRadio value="right">
+            </ElRadio>
+            <ElRadio label="right">
               right
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -188,8 +188,8 @@
                   fill="currentColor"
                 ></path>
               </svg>
-            </NRadio>
-            <NRadio value="top-left">
+            </ElRadio>
+            <ElRadio label="top-left">
               top-left
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -202,8 +202,8 @@
                   fill="currentColor"
                 ></path>
               </svg>
-            </NRadio>
-            <NRadio value="top-right">
+            </ElRadio>
+            <ElRadio label="top-right">
               top-right
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -216,8 +216,8 @@
                   fill="currentColor"
                 ></path>
               </svg>
-            </NRadio>
-            <NRadio value="bottom-left">
+            </ElRadio>
+            <ElRadio label="bottom-left">
               bottom-left
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -230,8 +230,8 @@
                   fill="currentColor"
                 ></path>
               </svg>
-            </NRadio>
-            <NRadio value="bottom-right">
+            </ElRadio>
+            <ElRadio label="bottom-right">
               bottom-right
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -244,12 +244,12 @@
                   fill="currentColor"
                 ></path>
               </svg>
-            </NRadio>
-          </NRadioGroup>
-        </NFormItem>
-        <NFormItem label="top：">
-          <NInputNumber
-            v-model:value="shapeStyle.borderTopWidth"
+            </ElRadio>
+          </ElRadioGroup>
+        </ElFormItem>
+        <ElFormItem label="top：">
+          <ElInputNumber
+            v-model="shapeStyle.borderTopWidth"
             :min="0"
             :max="warpStyle.height"
             label="top"
@@ -259,12 +259,12 @@
               shapeDirection == 'bottom-right'
             "
           >
-          </NInputNumber>
+          </ElInputNumber>
           <code>px</code>
-        </NFormItem>
-        <NFormItem label="right：">
-          <NInputNumber
-            v-model:value="shapeStyle.borderRightWidth"
+        </ElFormItem>
+        <ElFormItem label="right：">
+          <ElInputNumber
+            v-model="shapeStyle.borderRightWidth"
             :min="0"
             :max="warpStyle.width"
             label="right"
@@ -274,12 +274,12 @@
               shapeDirection == 'bottom-right'
             "
           >
-          </NInputNumber>
+          </ElInputNumber>
           <code>px</code>
-        </NFormItem>
-        <NFormItem label="bottom：">
-          <NInputNumber
-            v-model:value="shapeStyle.borderBottomWidth"
+        </ElFormItem>
+        <ElFormItem label="bottom：">
+          <ElInputNumber
+            v-model="shapeStyle.borderBottomWidth"
             :min="0"
             :max="warpStyle.height"
             label="bottom"
@@ -289,12 +289,12 @@
               shapeDirection == 'bottom-left'
             "
           >
-          </NInputNumber>
+          </ElInputNumber>
           <code>px</code>
-        </NFormItem>
-        <NFormItem label="left：">
-          <NInputNumber
-            v-model:value="shapeStyle.borderLeftWidth"
+        </ElFormItem>
+        <ElFormItem label="left：">
+          <ElInputNumber
+            v-model="shapeStyle.borderLeftWidth"
             :min="0"
             :max="warpStyle.width"
             label="left"
@@ -304,16 +304,16 @@
               shapeDirection == 'top-left'
             "
           >
-          </NInputNumber>
+          </ElInputNumber>
           <code>px</code>
-        </NFormItem>
+        </ElFormItem>
         <div class="language-css">
           <pre
             class="shiki material-theme-palenight"
           ><code v-html="code"></code></pre>
         </div>
       </template>
-    </NForm>
+    </ElForm>
   </div>
 </template>
 <script>
@@ -326,7 +326,7 @@
         },
         shapeType: 'svg',
         shapeStyle: {
-          borderColor: '#3eaf7c',
+          borderColor: 'rgb(103, 175, 187)',
           borderTopWidth: 400,
           borderLeftWidth: 200,
           borderBottomWidth: 0,
@@ -621,12 +621,12 @@
       }
     }
 
-    :deep(.n-form) {
+    :deep(.el-form) {
       width: 800px;
       position: relative;
       margin-top: 2rem;
 
-      .n-form-item-blank {
+      .el-form-item__content {
         display: flex;
 
         code {
@@ -640,7 +640,7 @@
           font-size: 16px;
         }
 
-        > .n-input {
+        > .el-input {
           input {
             color: #002;
             font-size: 16px;
@@ -650,14 +650,13 @@
           }
         }
 
-        .n-input-number {
+        .el-input-number {
           flex: 1;
         }
 
-        .n-radio-group {
-          .n-radio {
-            margin-top: 13px;
-            .n-radio__label {
+        .el-radio-group {
+          .el-radio {
+            .el-radio__label {
               display: flex;
               align-items: center;
             }
@@ -667,8 +666,8 @@
             }
           }
 
-          &.NRadioGroup_multiline {
-            .n-radio {
+          &.ElRadioGroup_multiline {
+            .el-radio {
               line-height: 1.8;
               margin-top: 0;
             }

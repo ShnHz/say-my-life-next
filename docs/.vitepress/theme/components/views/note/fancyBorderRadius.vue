@@ -38,35 +38,35 @@
       ></span>
     </div>
 
-    <NForm
+    <ElForm
       ref="formRef"
       label-placement="left"
-      label-align="left"
+      label-position="left"
       :label-width="140"
     >
-      <NFormItem label="border-radius：">
-        <NInput
-          v-model:value="borderRadius"
+      <ElFormItem label="border-radius：">
+        <ElInput
+          v-model="borderRadius"
           disabled
         />
-      </NFormItem>
-      <NFormItem label="width：">
-        <NInputNumber
-          v-model:value="warpStyle.width"
+      </ElFormItem>
+      <ElFormItem label="width：">
+        <ElInputNumber
+          v-model="warpStyle.width"
           :min="100"
           :max="1000"
         />
         <code>px</code>
-      </NFormItem>
-      <NFormItem label="height：">
-        <NInputNumber
-          v-model:value="warpStyle.height"
+      </ElFormItem>
+      <ElFormItem label="height：">
+        <ElInputNumber
+          v-model="warpStyle.height"
           :min="100"
           :max="1000"
         />
         <code>px</code>
-      </NFormItem>
-    </NForm>
+      </ElFormItem>
+    </ElForm>
   </div>
 </template>
 <script>
@@ -279,12 +279,12 @@
       }
     }
 
-    :deep(.n-form) {
+    :deep(.el-form) {
       width: 600px;
       position: relative;
       margin-top: 2rem;
 
-      .n-form-item-blank {
+      .el-form-item__content {
         display: flex;
 
         code {
@@ -298,8 +298,8 @@
           font-size: 16px;
         }
 
-        > .n-input {
-          .n-input-wrapper {
+        > .el-input {
+          .el-input__wrapper {
             color: #002 !important;
             font-size: 16px;
             font-family: Ubuntu Mono, monospace;
@@ -311,7 +311,7 @@
           }
         }
 
-        .n-input-number {
+        .el-input-number {
           flex: 1;
         }
       }

@@ -37,21 +37,23 @@
             ></li>
           </ul>
 
-          <NCarousel
+          <ElCarousel
             autoplay
             effect="fade"
-            :show-dots="false"
-            @update:current-index="handleCarouseChange"
+            indicator-position="none"
+            arrow="never"
+            :interval="10000"
+            @change="handleCarouseChange"
             ref="nCarousel"
           >
-            <NCarouselItem
+            <ElCarouselItem
               v-for="(item, index) in carouselList"
               :key="`carousel-item-${index}`"
             >
               <div class="carousel-title">{{ item.title }}</div>
               <div class="carousel-desc">{{ item.desc }}</div>
-            </NCarouselItem>
-          </NCarousel>
+            </ElCarouselItem>
+          </ElCarousel>
         </div>
 
         <!-- blog -->
@@ -70,10 +72,7 @@
           >
             <p>
               查看更多
-              <NIcon
-                :component="ReadMoreSharp"
-                :size="14"
-              />
+              <ReadMoreSharp style="height: 14px; width: 14px" />
             </p>
           </div>
         </div>
@@ -174,12 +173,12 @@
     carouselIndex.value = currentIndex
   }
   const toCarouse = (index) => {
-    nCarousel.value.to(index)
+    nCarousel.value.setActiveItem(index)
   }
 
   const maxBlogNum = ref<number>(20)
   const more = () => {
-    maxBlogNum.value += 20
+    router.go('/views/Guide')
   }
 
   const blogList = computed<[]>(() => {
@@ -295,9 +294,12 @@
           }
         }
 
-        :deep(.n-carousel) {
+        :deep(.el-carousel) {
           height: 100px;
-          .n-carousel__slides {
+          .el-carousel__container {
+            height: 100px;
+          }
+          .el-carousel__item {
             padding: 24px 12px;
             .carousel-title {
               font-size: 26px;

@@ -1,49 +1,41 @@
 <template>
-  <NTag
+  <ElTag
     v-if="type === 'top'"
-    :bordered="false"
+    effect="dark"
     :class="{ 'is-checkable': checkable }"
     size="small"
+    disable-transitions
   >
-    <template #icon>
-      <NIcon
-        :component="PushPinRound"
-        :size="14"
-      />
-    </template>
+    <PushPinRound style="width: 14px; height: 14px" />
     <span style="padding-right: 4px"> 置顶 </span>
-  </NTag>
-  <NTooltip
+  </ElTag>
+  <ElTooltip
     trigger="hover"
     v-else-if="type === 'reprinted'"
   >
-    <template #trigger>
-      <NTag
-        :bordered="false"
-        :class="{ 'is-checkable': checkable }"
-        size="small"
-        type="success"
-      >
-        <template #icon>
-          <NIcon
-            :component="ShareRound"
-            :size="14"
-          />
-        </template>
-      </NTag>
+    <template #content>
+      <span>转发文章</span>
     </template>
-    <span>转发文章</span>
-  </NTooltip>
-  <NTag
-    :bordered="false"
+    <ElTag
+      effect="dark"
+      :class="{ 'is-checkable': checkable }"
+      size="small"
+      type="success"
+      disable-transitions
+    >
+      <ShareRound style="width: 14px; height: 14px" />
+    </ElTag>
+  </ElTooltip>
+  <ElTag
+    v-else
+    effect="dark"
     :class="{ 'is-checkable': checkable }"
     size="small"
     :type="type ? type : 'info'"
-    v-else
+    disable-transitions
   >
-    <template #icon> <slot name="icon"> </slot> </template>
     <slot> </slot>
-  </NTag>
+  </ElTag>
 </template>
 
 <script setup lang="ts">
@@ -67,8 +59,15 @@
   )
 </script>
 
-<style scoped lang="less">
+<style lang="less">
   .is-checkable {
     cursor: pointer;
+  }
+  .el-tag {
+    .el-tag__content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 </style>

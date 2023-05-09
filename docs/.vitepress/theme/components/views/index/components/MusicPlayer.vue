@@ -54,16 +54,12 @@
             @click="active?.status === 'paused' ? playMusic() : pausedMusic()"
             :title="active?.status === 'paused' ? '播放' : '暂停'"
           >
-            <NIcon
-              :component="PlayCircleSharp"
-              :size="40"
-              color="#000"
+            <PlayCircleSharp
+              style="height: 40px; width: 40px; color: #000"
               v-show="active?.status === 'paused'"
             />
-            <NIcon
-              :component="PauseCircle"
-              :size="40"
-              color="#000"
+            <PauseCircle
+              style="height: 40px; width: 40px; color: #000"
               v-show="active?.status === 'playing'"
             />
           </div>
@@ -73,10 +69,8 @@
             title="上一首"
             @click="prev"
           >
-            <NIcon
-              :component="PlaySkipBackCircle"
-              :size="36"
-              color="#000"
+            <PlaySkipBackCircle
+              style="height: 36px; width: 36px; color: #000"
             />
           </div>
           <div
@@ -84,21 +78,19 @@
             title="下一首"
             @click="next"
           >
-            <NIcon
-              :component="PlaySkipForwardCircle"
-              :size="36"
-              color="#000"
+            <PlaySkipForwardCircle
+              style="height: 36px; width: 36px; color: #000"
             />
           </div>
         </div>
       </div>
-      <NSlider
-        :tooltip="false"
+      <ElSlider
+        :show-tooltip="false"
         :min="0"
         :max="audioInfo.duration"
         :step="1"
-        v-model:value="audioInfo.currentTime"
-        @update:value="changeTime"
+        v-model="audioInfo.currentTime"
+        @change="changeTime"
       />
     </div>
   </div>
@@ -468,16 +460,18 @@
         box-sizing: border-box;
       }
 
-      :deep(.n-slider) {
+      :deep(.el-slider) {
+        --el-slider-height: 4px;
         max-width: 200px;
         position: absolute;
         bottom: 12px;
-        .n-slider-rail__fill {
+        .el-slider__bar {
           background-color: #ff3543;
         }
-        .n-slider-handles {
-          --n-handle-size: 12px;
-          .n-slider-handle {
+        .el-slider__button-wrapper {
+          --el-slider-button-size: 12px;
+          .el-slider__button {
+            border: none;
             &::after {
               content: '';
               display: block;

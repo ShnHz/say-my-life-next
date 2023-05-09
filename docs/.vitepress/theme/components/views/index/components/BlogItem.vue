@@ -31,23 +31,18 @@
         :key="`blog-tag-item-${index}-${data.path}`"
         :type="item?.type"
       >
-        <template #icon>
-          <NIcon
-            :component="BuildFilled"
-            :size="14"
-            v-if="item?.icon && item?.icon === 'BuildFilled'"
-          />
-          <NIcon
-            :component="MovieCreationFilled"
-            :size="14"
-            v-if="item?.icon && item?.icon === 'MovieCreationFilled'"
-          />
-          <NIcon
-            :component="MusicNoteFilled"
-            :size="14"
-            v-if="item?.icon && item?.icon === 'MusicNoteFilled'"
-          />
-        </template>
+        <BuildFilled
+          style="height: 14px; width: 14px"
+          v-if="item?.icon && item?.icon === 'BuildFilled'"
+        />
+        <MovieCreationFilled
+          style="height: 14px; width: 14px"
+          v-if="item?.icon && item?.icon === 'MovieCreationFilled'"
+        />
+        <MusicNoteFilled
+          style="height: 14px; width: 14px"
+          v-if="item?.icon && item?.icon === 'MusicNoteFilled'"
+        />
         {{ item?.title }}
       </ShnTag>
     </p>
