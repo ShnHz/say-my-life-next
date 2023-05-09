@@ -17,10 +17,6 @@ outline: [3, 5]
 
 ###### 原文 [掘金](https://juejin.cn/post/7023271065392513038)
 
-<div class="markdown-body cache"><p>小知识，大挑战！本文正在参与「<a href="https://juejin.cn/post/7008476801634680869" title="https://juejin.cn/post/7008476801634680869" target="_blank">程序员必备小知识</a>」创作活动</p>
-<p>本文已参与「<a href="https://juejin.cn/post/7012210233804079141/" title="https://juejin.cn/post/7012210233804079141/" target="_blank">掘力星计划</a>」，赢取创作大礼包，挑战创作激励金。</p>
-
-
 ## 前言
 
             

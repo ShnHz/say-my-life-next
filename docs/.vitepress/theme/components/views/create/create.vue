@@ -1,41 +1,41 @@
 <template>
   <div class="create-wrap">
     <h2>创建文章</h2>
-    <NForm
+    <ElForm
       ref="formRef"
       label-placement="left"
-      label-align="left"
+      label-position="left"
       :label-width="140"
     >
-      <NFormItem label="转发文章">
-        <NSwitch v-model:value="form.forward" />
-      </NFormItem>
-      <NFormItem
+      <ElFormItem label="转发文章">
+        <ElSwitch v-model="form.forward" />
+      </ElFormItem>
+      <ElFormItem
         label="文章名称"
         v-if="!form.forward"
       >
-        <NInput v-model:value="form.title" />
-      </NFormItem>
-      <NFormItem
+        <ElInput v-model="form.title" />
+      </ElFormItem>
+      <ElFormItem
         label="转发文章路径"
         v-if="form.forward"
       >
-        <NInput v-model:value="form.articLink" />
-      </NFormItem>
-      <NFormItem label="文章简介">
-        <NInput v-model:value="form.summary" />
-      </NFormItem>
-      <NFormItem label="创建时间">
-        <NDatePicker
-          v-model:formatted-value="form.date"
+        <ElInput v-model="form.articLink" />
+      </ElFormItem>
+      <ElFormItem label="文章简介">
+        <ElInput v-model="form.summary" />
+      </ElFormItem>
+      <ElFormItem label="创建时间">
+        <ElDatePicker
+          v-model="form.date"
           value-format="yyyy/MM/dd hh:mm:ss"
           type="datetime"
           clearable
         />
-      </NFormItem>
-      <NFormItem label="文章路径">
-        <NCascader
-          v-model:value="form.link"
+      </ElFormItem>
+      <ElFormItem label="文章路径">
+        <ElCascader
+          v-model="form.link"
           show-path
           filterable
           expand-trigger="hover"
@@ -44,50 +44,55 @@
           check-strategy="all"
           ref="linkCascaderRef"
         />
-      </NFormItem>
-      <NFormItem label="文章标签">
-        <NSelect
-          v-model:value="form.tag"
+      </ElFormItem>
+      <ElFormItem label="文章标签">
+        <ElSelect
+          v-model="form.tag"
           multiple
-          :options="tagOptions"
-        />
-      </NFormItem>
-      <NFormItem label="评论系统">
-        <NSwitch v-model:value="form.valine" />
-      </NFormItem>
-      <NFormItem label="评论自定义ID">
-        <NInput v-model:value="form.valineId" />
-      </NFormItem>
-      <NFormItem label="是否目录">
-        <NSwitch v-model:value="form.dir" />
-      </NFormItem>
-      <NFormItem label="目录监听标题">
-        <NSelect
-          v-model:value="form.dirTag"
+        >
+          <ElOption
+            v-for="item in tagOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+        /></ElSelect>
+      </ElFormItem>
+      <ElFormItem label="评论系统">
+        <ElSwitch v-model="form.valine" />
+      </ElFormItem>
+      <ElFormItem label="评论自定义ID">
+        <ElInput v-model="form.valineId" />
+      </ElFormItem>
+      <ElFormItem label="是否目录">
+        <ElSwitch v-model="form.dir" />
+      </ElFormItem>
+      <ElFormItem label="目录监听标题">
+        <ElSelect
+          v-model="form.dirTag"
           multiple
           :options="dirOptions"
         />
-      </NFormItem>
-      <NFormItem label="开启密码">
-        <NSwitch v-model:value="form.password" />
-      </NFormItem>
-      <NFormItem label="自定义密码">
-        <NInput
-          v-model:value="form.passwordCus"
+      </ElFormItem>
+      <ElFormItem label="开启密码">
+        <ElSwitch v-model="form.password" />
+      </ElFormItem>
+      <ElFormItem label="自定义密码">
+        <ElInput
+          v-model="form.passwordCus"
           maxlength="4"
           placeholder="输入四位数密码/默认为全局默认密码"
         />
-      </NFormItem>
-      <NFormItem>
-        <NButton @click="reset">重置</NButton>
-        <NButton
+      </ElFormItem>
+      <ElFormItem>
+        <ElButton @click="reset">重置</ElButton>
+        <ElButton
           type="primary"
           @click="submit"
         >
           提交
-        </NButton>
-      </NFormItem>
-    </NForm>
+        </ElButton>
+      </ElFormItem>
+    </ElForm>
   </div>
 </template>
 
@@ -96,24 +101,13 @@
   import md5 from 'js-md5'
 
   import { ref, onMounted, computed, inject } from 'vue'
-  import {
-    NForm,
-    NFormItem,
-    NInput,
-    NSwitch,
-    NDatePicker,
-    NCascader,
-    NSelect,
-    NButton,
-    useMessage,
-  } from 'naive-ui'
   import moment from 'moment'
 
   import { data } from '@docs/.vitepress/utils/loaders/blog.data.js'
   import tagConfig from '@docs/.vitepress/configs/tags.js'
   import { createArtic, forwardArtic } from '@docs/.vitepress/service/create'
+  import { ElMessage } from 'element-plus'
 
-  const message = useMessage()
   const linkCascaderRef = ref()
 
   const linkOptions = ref<any[]>([])
@@ -233,7 +227,7 @@
   const submit = () => {
     const link = form.value.linkCus
       ? form.value.linkCus
-      : `/${linkCascaderRef.value.selectedOption.label}`.replace(/ /g, '')
+      : `/${form.value.link.join('/')}`
     const fn = form.value.forward ? forwardArtic : createArtic
 
     fn({
@@ -241,8 +235,10 @@
       link: link,
       passwordCus: form.value.passwordCus ? md5(form.value.password) : '',
     }).then((res) => {
-      message.info(`成功创建文件，文件路径：${link}/${res.data.fileName}`, {
+      ElMessage.info({
+        message: `成功创建文件，文件路径：${link}/${res.data.fileName}`,
         duration: 0,
+        showClose: true,
       })
     })
   }
@@ -270,10 +266,12 @@
       border: none;
     }
 
-    :deep(.n-form) {
+    :deep(.el-form) {
       width: 100%;
-      .n-button {
-        margin-right: 12px;
+      .el-input,
+      .el-select,
+      .el-cascader {
+        width: 100%;
       }
     }
   }

@@ -47,7 +47,6 @@
 </template>
 
 <script setup lang="ts">
-  import { NTag, NIcon, NTooltip } from 'naive-ui'
   import { PushPinRound, ShareRound } from '@vicons/material'
 
   const props = withDefaults(

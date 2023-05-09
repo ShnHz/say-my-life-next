@@ -110,7 +110,6 @@
 
   import musicList from '@docs/.vitepress/configs/music.js'
 
-  import { NIcon, NSlider } from 'naive-ui'
   import {
     PlayCircleSharp,
     PauseCircle,

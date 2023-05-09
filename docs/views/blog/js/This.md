@@ -100,7 +100,7 @@ foo2();
 
 那么<code class="default">foo2()</code>输出的是什么呢？
 
-答案是<code class="default">2</code>，因为虽然foo2</code>指向的是<code class="default">obj.foo</code>函数，不过调用它的却是<code class="default">window</code>对象，所以它里面<code class="default">this</code>的指向是为<code class="default">window</code>。
+答案是<code class="default">2</code>，因为虽然<code>foo2</code>指向的是<code class="default">obj.foo</code>函数，不过调用它的却是<code class="default">window</code>对象，所以它里面<code class="default">this</code>的指向是为<code class="default">window</code>。
 
 ##### 隐式绑定的隐式丢失问题2
 

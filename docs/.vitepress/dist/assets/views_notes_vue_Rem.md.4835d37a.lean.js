@@ -1,0 +1,1 @@
+import{_ as s,c as a,o as n,V as l}from"./chunks/framework.79590ae5.js";const F=JSON.parse('{"title":"Rem 适配","description":"","frontmatter":{"title":"Rem 适配"},"headers":[],"relativePath":"views/notes/vue/Rem.md"}'),o={name:"views/notes/vue/Rem.md"},p=l("",4),e=[p];function t(c,r,D,i,C,y){return n(),a("div",null,e)}const d=s(o,[["render",t]]);export{F as __pageData,d as default};

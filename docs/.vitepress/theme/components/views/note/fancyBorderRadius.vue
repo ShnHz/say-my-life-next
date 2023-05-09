@@ -71,15 +71,8 @@
 </template>
 <script>
   import { defineComponent } from 'vue'
-  import { NForm, NFormItem, NInput, NInputNumber } from 'naive-ui'
 
   export default defineComponent({
-    components: {
-      NForm,
-      NFormItem,
-      NInput,
-      NInputNumber,
-    },
     data() {
       return {
         warpStyle: {
@@ -312,7 +305,7 @@
             font-family: Ubuntu Mono, monospace;
             font-weight: 600;
             background-color: rgba(27, 31, 35, 0.05);
-            input{
+            input {
               color: #002 !important;
             }
           }

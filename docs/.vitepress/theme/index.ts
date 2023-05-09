@@ -7,6 +7,7 @@ import MyLayout from './components/layout/Layout.vue'
 
 import '../styles/style.less'
 import '../styles/article.less'
+import 'element-plus/dist/index.css'
 
 import '../plugins/axios.js'
 
@@ -19,6 +20,7 @@ import fancyBorderRadius from './components/views/note/fancyBorderRadius.vue'
 import sanJiaoXingXiaoGongJu from './components/views/note/sanJiaoXingXiaoGongJu.vue'
 
 // ------------------------------components
+import ElementPlus from 'element-plus'
 // common
 import CodeDemo from '@theme/components/common/CodeDemo.vue'
 
@@ -40,6 +42,8 @@ export default {
 
     app.component('Color', Color)
     app.component('Shadow', Shadow)
+
+    app.use(ElementPlus)
 
     app.mixin(Mixins)
   },

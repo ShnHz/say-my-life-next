@@ -59,7 +59,6 @@
   import tagConfig from '@docs/.vitepress/configs/tags.js'
   import { useRouter } from 'vitepress'
 
-  import { NIcon } from 'naive-ui'
   import {
     BuildFilled,
     MusicNoteFilled,

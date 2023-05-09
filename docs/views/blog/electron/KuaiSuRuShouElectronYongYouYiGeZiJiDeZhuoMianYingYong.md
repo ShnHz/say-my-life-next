@@ -1445,7 +1445,6 @@ npm run electron:build
 <p>打包好的东西放在我们之前配置的<code>build</code> <code>output: "./dist"</code> //输出文件路径</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ac1db1992be43e2982b9ef0292e8189~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.image" alt="image-20211005144321420" loading="lazy"></p>
 <p>可以看出图标变了</p>
-<p><img src="%E5%B0%8F%E6%B5%AA%E5%AD%A6%E4%B9%A0Electron.assets/image-20211005144400797.png" alt="image-20211005144400797" loading="lazy"></p>
 <p>我们可以自定义安装文件夹了</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b7e48cb6089941d4931870360c333b94~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.image" alt="image-20211005144559596" loading="lazy"></p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f4e56d80bc164586b8379113709c42cd~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.image" alt="image-20211005144749686" loading="lazy"></p>

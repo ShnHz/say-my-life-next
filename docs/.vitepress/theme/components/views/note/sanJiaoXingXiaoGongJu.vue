@@ -317,26 +317,7 @@
   </div>
 </template>
 <script>
-  import {
-    NForm,
-    NFormItem,
-    NInput,
-    NInputNumber,
-    NRadioGroup,
-    NRadio,
-    NColorPicker,
-  } from 'naive-ui'
-
   export default {
-    components: {
-      NForm,
-      NFormItem,
-      NInput,
-      NInputNumber,
-      NRadioGroup,
-      NRadio,
-      NColorPicker,
-    },
     data() {
       return {
         warpStyle: {

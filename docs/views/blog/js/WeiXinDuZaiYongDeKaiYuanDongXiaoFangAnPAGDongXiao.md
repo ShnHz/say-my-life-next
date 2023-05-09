@@ -232,7 +232,7 @@ pagFile.replaceText(0, textData);
 <p>如果使用了特定字体而又没有注册或字体文件中没有包含该字符，PAG 内部有一个默认字体列表（同时支持外部设置字体回退列表，外部设置时会覆盖默认设置），会回退到 PAG 的默认字体列表中，此时使用那种字体对于业务方而言是不确定的。</p>
 
 
-```arduino
+```
 class PAGFont {
     /**
      * Register fallback font names from pag.
@@ -252,7 +252,7 @@ class PAGFont {
 <p>PAGSurface 可以通过 Canvas 或纹理创建，方便快捷的与视频后编辑中的 Canvas 或 纹理进行整合。同时 PAGImage 也支持通过 Canvas 或 纹理创建，通过 PAGPlayer 控制播放进度，将视频内容填充进图片图层的占位图。</p>
 
 
-```arduino
+```
 // PAGSurface interface
 class PAGSurface {
     /**

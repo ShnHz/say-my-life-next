@@ -87,7 +87,6 @@
 
   import { computed, onMounted, onUnmounted, ref } from 'vue'
 
-  import { NCarousel, NCarouselItem, NIcon } from 'naive-ui'
   import EasyTyper from 'easy-typer-js'
   import Background from './components/Background.vue'
   import BlogItem from './components/BlogItem.vue'

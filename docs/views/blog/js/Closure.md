@@ -250,7 +250,7 @@ let count = 0;
 })();
 ```
 
-因为在全局变量声明了<code>count = 0</code>，然后在<code>immediaye</code>函数是一个闭包，因为它的<code>count</code>能访问到全局变量的<code>count</code>，所以此时<code>count</code>是0</code>
+因为在全局变量声明了<code>count = 0</code>，然后在<code>immediaye</code>函数是一个闭包，因为它的<code>count</code>能访问到全局变量的<code>count</code>，所以此时<code>count</code>是<code>0</code>
 
 因为满足<code>count === 0</code>的条件，所以进入条件块，然后声明一个块级作用域<code>count=1</code>，所以第一个<code>console.log(count）</code>打印出1
 

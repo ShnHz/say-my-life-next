@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.79590ae5.js";const m=JSON.parse('{"title":"陕西华山 HuaShan","description":"","frontmatter":{"title":"陕西华山 HuaShan"},"headers":[],"relativePath":"views/travel/domestic/SxHs.md"}'),s={name:"views/travel/domestic/SxHs.md"};function r(o,c,n,i,d,p){return a(),t("div")}const l=e(s,[["render",r]]);export{m as __pageData,l as default};
