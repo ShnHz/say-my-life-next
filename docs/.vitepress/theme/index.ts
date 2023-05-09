@@ -12,6 +12,7 @@ import '../plugins/axios.js'
 
 // ------------------------------views
 import index from '@theme/components/views/index/index.vue'
+import guide from '@theme/components/views/guide/guide.vue'
 import create from '@theme/components/views/create/create.vue'
 
 import fancyBorderRadius from './components/views/note/fancyBorderRadius.vue'
@@ -30,6 +31,7 @@ export default {
   Layout: MyLayout,
   enhanceApp({ app, router, siteData }) {
     app.component('ViewIndex', index)
+    app.component('ViewGuide', guide)
     app.component('ViewCreate', create)
     app.component('ViewFancyBorderRadius', fancyBorderRadius)
     app.component('ViewSanJiaoXingXiaoGongJu', sanJiaoXingXiaoGongJu)

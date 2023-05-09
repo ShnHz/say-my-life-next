@@ -67,8 +67,6 @@
     return vitePressData.page.value
   })
 
-  console.log(pageConfig.value.frontmatter)
-
   const isBlog = computed<boolean>(() => {
     return pageConfig.value.relativePath.includes('views/blog')
   })
