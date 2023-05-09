@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.f518e559.js";const m=JSON.parse('{"title":"江苏常州 ChangZhou","description":"","frontmatter":{"title":"江苏常州 ChangZhou"},"headers":[],"relativePath":"views/travel/domestic/JsCz.md"}'),s={name:"views/travel/domestic/JsCz.md"};function o(r,c,n,i,d,p){return a(),t("div")}const l=e(s,[["render",o]]);export{m as __pageData,l as default};

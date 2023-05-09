@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./chunks/framework.79590ae5.js";const m=JSON.parse('{"title":"浙江金华 JinHua","description":"","frontmatter":{"title":"浙江金华 JinHua"},"headers":[],"relativePath":"views/travel/domestic/ZjJh.md"}'),r={name:"views/travel/domestic/ZjJh.md"};function s(o,c,n,i,d,p){return a(),t("div")}const l=e(r,[["render",s]]);export{m as __pageData,l as default};

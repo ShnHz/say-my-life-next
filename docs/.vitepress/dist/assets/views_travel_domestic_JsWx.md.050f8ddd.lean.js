@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as s}from"./chunks/framework.79590ae5.js";const m=JSON.parse('{"title":"江苏无锡 WuXi","description":"","frontmatter":{"title":"江苏无锡 WuXi"},"headers":[],"relativePath":"views/travel/domestic/JsWx.md"}'),a={name:"views/travel/domestic/JsWx.md"};function r(o,c,i,n,d,p){return s(),t("div")}const l=e(a,[["render",r]]);export{m as __pageData,l as default};

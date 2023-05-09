@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.f518e559.js";const m=JSON.parse('{"title":"天津 TianJin","description":"","frontmatter":{"title":"天津 TianJin"},"headers":[],"relativePath":"views/travel/domestic/Tj.md"}'),r={name:"views/travel/domestic/Tj.md"};function s(n,o,i,c,d,p){return a(),t("div")}const l=e(r,[["render",s]]);export{m as __pageData,l as default};

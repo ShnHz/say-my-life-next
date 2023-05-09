@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.f518e559.js";const m=JSON.parse('{"title":"海南三亚 SanYa","description":"","frontmatter":{"title":"海南三亚 SanYa"},"headers":[],"relativePath":"views/travel/domestic/HnSy.md"}'),n={name:"views/travel/domestic/HnSy.md"};function r(s,o,c,i,d,p){return a(),t("div")}const l=e(n,[["render",r]]);export{m as __pageData,l as default};

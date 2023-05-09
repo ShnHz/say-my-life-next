@@ -32,9 +32,11 @@ export default {
   ...Theme,
   Layout: MyLayout,
   enhanceApp({ app, router, siteData }) {
+    if (process.env.NODE_ENV === 'development') {
+      app.component('ViewCreate', create)
+    }
     app.component('ViewIndex', index)
     app.component('ViewGuide', guide)
-    app.component('ViewCreate', create)
     app.component('ViewFancyBorderRadius', fancyBorderRadius)
     app.component('ViewSanJiaoXingXiaoGongJu', sanJiaoXingXiaoGongJu)
 

@@ -1,0 +1,1 @@
+import{_ as s,c as a,o as e,V as n}from"./chunks/framework.f518e559.js";const A=JSON.parse('{"title":"Chrome","description":"","frontmatter":{"title":"Chrome"},"headers":[],"relativePath":"views/notes/Chrome.md"}'),l={name:"views/notes/Chrome.md"},o=n("",10),t=[o];function p(c,r,i,d,h,C){return e(),a("div",null,t)}const b=s(l,[["render",p]]);export{A as __pageData,b as default};

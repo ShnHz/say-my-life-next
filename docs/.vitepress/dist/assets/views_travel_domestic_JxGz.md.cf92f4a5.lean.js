@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./chunks/framework.79590ae5.js";const m=JSON.parse('{"title":"江西赣州 GanZhou","description":"","frontmatter":{"title":"江西赣州 GanZhou"},"headers":[],"relativePath":"views/travel/domestic/JxGz.md"}'),o={name:"views/travel/domestic/JxGz.md"};function r(s,c,n,i,d,p){return a(),t("div")}const l=e(o,[["render",r]]);export{m as __pageData,l as default};

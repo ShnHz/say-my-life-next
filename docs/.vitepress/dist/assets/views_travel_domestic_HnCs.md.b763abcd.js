@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.f518e559.js";const m=JSON.parse('{"title":"湖南长沙 ChangSha","description":"","frontmatter":{"title":"湖南长沙 ChangSha"},"headers":[],"relativePath":"views/travel/domestic/HnCs.md"}'),s={name:"views/travel/domestic/HnCs.md"};function n(r,o,c,i,d,p){return a(),t("div")}const l=e(s,[["render",n]]);export{m as __pageData,l as default};

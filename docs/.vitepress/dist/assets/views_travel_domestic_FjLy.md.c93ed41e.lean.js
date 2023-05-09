@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.f518e559.js";const m=JSON.parse('{"title":"福建龙岩 LongYan","description":"","frontmatter":{"title":"福建龙岩 LongYan"},"headers":[],"relativePath":"views/travel/domestic/FjLy.md"}'),o={name:"views/travel/domestic/FjLy.md"};function r(s,n,c,i,d,p){return a(),t("div")}const l=e(o,[["render",r]]);export{m as __pageData,l as default};
