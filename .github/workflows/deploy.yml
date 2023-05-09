@@ -40,6 +40,8 @@ jobs:
         run: npm run docs:build
 
       - name: Deploy to GitHub Pages
+        permissions: 
+          contents: write
         uses:
           crazy-max/ghaction-github-pages@v2
           # 环境变量
