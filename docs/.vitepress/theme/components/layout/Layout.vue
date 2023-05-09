@@ -12,15 +12,20 @@
       </template>
       <template #layout-bottom>
         <Footer />
+        <ClientOnly v-if="themeConfig.globalAccess">
+          <ValineGlobal />
+        </ClientOnly>
       </template>
       <template #doc-after>
-        <Valine
+        <ClientOnly
           v-if="
             themeConfig.valine.enable &&
             pageConfig.frontmatter.config &&
             pageConfig.frontmatter.config.valine
           "
-        />
+        >
+          <Valine />
+        </ClientOnly>
       </template>
     </Layout>
   </el-config-provider>
@@ -30,17 +35,18 @@
 
   import { onMounted, computed } from 'vue'
   import { useData } from 'vitepress'
-  import ValineGnas from 'valine-gnas'
 
   import DefaultTheme from 'vitepress/theme'
   import Footer from './Footer.vue'
   import BlogTitle from './BlogTitle.vue'
   import Valine from '../common/Valine.vue'
+  import ValineGlobal from '../common/ValineGlobal.vue'
 
   const vitePressData = useData()
   const themeConfig = computed(() => {
     return vitePressData.site.value.themeConfig
   })
+
   const pageConfig = computed(() => {
     return vitePressData.page.value
   })
@@ -50,21 +56,6 @@
   })
 
   const { Layout } = DefaultTheme
-
-  onMounted(() => {
-    if (themeConfig.value.globalAccess) {
-      addGlobalAccess()
-    }
-  })
-
-  // 记录全局访问量
-  const addGlobalAccess = () => {
-    new ValineGnas({
-      appId: themeConfig.value.valine.appId,
-      appKey: themeConfig.value.valine.appKey,
-      globalAccess: true,
-    })
-  }
 </script>
 <style lang="less">
   .blog-no-aside {
