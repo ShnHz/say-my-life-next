@@ -28,7 +28,7 @@
       <ElFormItem label="创建时间">
         <ElDatePicker
           v-model="form.date"
-          value-format="yyyy/MM/dd hh:mm:ss"
+          value-format="YYYY/MM/DD HH:mm:ss"
           type="datetime"
           clearable
         />
@@ -115,7 +115,7 @@
     articLink: '',
     title: '文章标题',
     summary: '',
-    date: moment(new Date()).format('YYYY/MM/DD hh:mm:ss'),
+    date: moment(new Date()).format('YYYY/MM/DD HH:mm:ss'),
     valine: true,
     valineId: '',
     link: [],

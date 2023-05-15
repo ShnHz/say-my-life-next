@@ -17,7 +17,7 @@ app.all('*', function (req, res, next) {
 
 app.listen(3000, () => {
     console.log('本地服务启动成功,端口号3000')
-    console.log('快速创建新文章：http://localhost:6200/views/tools/Create.html')
+    console.log('快速创建新文章：http://localhost:5174/views/tools/Create.html')
 })
 
 require('./create/createPageMethods.js')(app)

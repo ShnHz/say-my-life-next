@@ -32,10 +32,12 @@
 
 <script setup lang="ts">
   import { computed } from 'vue'
-  import { useRouter } from 'vitepress'
+  import { useRouter, useData } from 'vitepress'
   import moment from 'moment'
 
   import { data } from '@docs/.vitepress/utils/loaders/blog.data.js'
+
+  const vitePressData = useData()
 
   const blogList = computed<any[]>(() => {
     let list = data.sort((a, b) => {
@@ -70,7 +72,7 @@
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }
   const toPath = (path) => {
-    router.go(path)
+    router.go(`${vitePressData.site.value.base}${path}`)
   }
 </script>
 

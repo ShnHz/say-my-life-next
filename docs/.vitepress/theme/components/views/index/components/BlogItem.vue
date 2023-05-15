@@ -52,7 +52,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import tagConfig from '@docs/.vitepress/configs/tags.js'
-  import { useRouter } from 'vitepress'
+  import { useRouter, useData } from 'vitepress'
 
   import {
     BuildFilled,
@@ -61,6 +61,8 @@
   } from '@vicons/material'
   import ShnTag from '../../../common/Tag.vue'
   import useCurrentInstance from '../../../../../utils/hooks/useCurrentInstance'
+
+  const vitePressData = useData()
 
   const router = useRouter()
   router.onAfterRouteChanged = () => {
@@ -94,7 +96,7 @@
   })
 
   const toPath = (path) => {
-    router.go(path)
+    router.go(`${vitePressData.site.value.base}${path}`)
   }
 </script>
 

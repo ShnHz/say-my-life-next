@@ -21,7 +21,7 @@ function replaceCode(dom) {
   for (let i = 0; i < doms.length; i++) {
     let classs = doms[i].querySelector('code').getAttribute('class')
     let theClass = classs.split(' ').filter((item) => item.includes('language'))
-    let type = theClass[0].match(/\-(.*)/)[1]
+    let type = theClass.length > 0 ? theClass[0].match(/\-(.*)/)[1] : ''
     doms[i].before(`
 
 \`\`\`${type}
