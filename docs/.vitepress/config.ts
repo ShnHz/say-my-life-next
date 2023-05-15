@@ -7,7 +7,6 @@ import socialLinks from './configs/socialLinks'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  ssr: false,
   base: '/say-my-life-next/',
   ignoreDeadLinks: true,
   title: '野宁新之助',
@@ -45,6 +44,7 @@ export default defineConfig({
     },
   },
   vite: {
+    ssr: false,
     plugins: [],
     server: {
       host: '0.0.0.0',
