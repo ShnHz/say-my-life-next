@@ -91,7 +91,8 @@
   import MusicPlayer from './components/MusicPlayer.vue'
   import { ReadMoreSharp } from '@vicons/material'
 
-  import { useRouter, useRoute } from 'vitepress'
+  import { useRouter, useRoute, useData } from 'vitepress'
+  const vitePressData = useData()
 
   // --------------------------------------common
   const router = useRouter()
@@ -179,7 +180,7 @@
 
   const maxBlogNum = ref<number>(20)
   const more = () => {
-    router.go('/views/Guide')
+    router.go(`${vitePressData.site.value.base}views/Guide`)
   }
 
   const blogList = computed<[]>(() => {
