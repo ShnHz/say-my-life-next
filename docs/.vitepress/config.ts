@@ -44,7 +44,6 @@ export default defineConfig({
     },
   },
   vite: {
-    ssr: false,
     plugins: [],
     server: {
       host: '0.0.0.0',
@@ -53,6 +52,32 @@ export default defineConfig({
       alias: {
         '@': path.resolve(__dirname, '../../'),
         '@docs': path.resolve(__dirname, '../'),
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks(id: any, { getModuleInfo }) {
+          const cssLangs = `\\.(css|less|sass|scss|styl|stylus|pcss|postcss)($|\\?)`
+          const cssLangRE = new RegExp(cssLangs)
+          const isCSSRequest = (request: string): boolean =>
+            cssLangRE.test(request)
+          // 分vendor包
+          if (
+            id.includes('node_modules') &&
+            !isCSSRequest(id) &&
+            staticImportedByEntry(id, getModuleInfo, cache.cache)
+          ) {
+            return 'vendor'
+          } else if (
+            // 分manifest包，解决chunk碎片问题
+            getModuleInfo(id).importers.length +
+              getModuleInfo(id).dynamicImporters.length >
+              1 &&
+            id.includes('src')
+          ) {
+            return 'manifest'
+          }
+        },
       },
     },
   },
