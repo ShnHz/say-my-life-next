@@ -106,22 +106,52 @@ export default {
         },
       ],
     },
-    // {
-    //   text: 'Vue',
-    //   collapsable: false,
-    //   items: [
-    //     '/views/notes/vue/Axios',
-    //     '/views/notes/vue/Nprogress',
-    //     '/views/notes/vue/Interval',
-    //     '/views/notes/vue/Rem',
-    //     '/views/notes/vue/Router',
-    //     '/views/notes/vue/Sass',
-    //     '/views/notes/vue/Title',
-    //     '/views/notes/vue/GlobalComponents', //vue 全局组件
-    //     '/views/notes/vue/VueLazyload',
-    //     '/views/notes/vue/vueProgressiveImage',
-    //   ],
-    // },
+    {
+      text: 'Vue2',
+      collapsable: false,
+      items: [
+        {
+          text: 'Axios 常用配置',
+          link: '/views/notes/vue/Axios',
+        },
+        {
+          text: 'Nprogress 页面顶部加载条',
+          link: '/views/notes/vue/Nprogress',
+        },
+        {
+          text: 'Interval 定时器',
+          link: '/views/notes/vue/Interval',
+        },
+        {
+          text: 'Rem 适配',
+          link: '/views/notes/vue/Rem',
+        },
+        {
+          text: 'Router 路由',
+          link: '/views/notes/vue/Router',
+        },
+        {
+          text: 'Sass 在vue中使用',
+          link: '/views/notes/vue/Sass',
+        },
+        {
+          text: 'Title 动态title',
+          link: '/views/notes/vue/Title',
+        },
+        {
+          text: 'Vue 全局组件',
+          link: '/views/notes/vue/GlobalComponents',
+        },
+        {
+          text: 'VueLazyload 使用方法',
+          link: '/views/notes/vue/VueLazyload',
+        },
+        {
+          text: 'vueProgressiveImage 使用方法',
+          link: '/views/notes/vue/vueProgressiveImage',
+        }
+      ],
+    },
     // {
     //   text: '动画',
     //   collapsable: false,
