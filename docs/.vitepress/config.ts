@@ -1,4 +1,5 @@
 import path from 'path'
+import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vitepress'
 import nav from './configs/nav'
@@ -42,6 +43,8 @@ export default defineConfig({
       appId: '2MgoJb7PsBdDJavPcPPU3oO2-gzGzoHsz',
       appKey: 'mF1z8VJ3jMiohj3Q2S4b7yB6',
     },
+    // 锁定页面默认密码，请使用MD5，4位数MD5加密后的密码
+    password: '81dc9bdb52d04dc20036dbd8313ed055',
   },
   vite: {
     plugins: [],
@@ -49,10 +52,22 @@ export default defineConfig({
       host: '0.0.0.0',
     },
     resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '../../'),
-        '@docs': path.resolve(__dirname, '../'),
-      },
+      alias: [
+        {
+          find: '@',
+          replacement: path.resolve(__dirname, '../../'),
+        },
+        {
+          find: '@docs',
+          replacement: path.resolve(__dirname, '../'),
+        },
+        {
+          find: /^.*\/VPDoc\.vue$/,
+          replacement: fileURLToPath(
+            new URL('./theme/components/layout/VPDoc.vue', import.meta.url)
+          ),
+        },
+      ],
     },
     rollupOptions: {
       output: {

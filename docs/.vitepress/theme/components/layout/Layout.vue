@@ -11,8 +11,10 @@
         <BlogTitle v-if="isBlog" />
       </template>
       <template #layout-bottom>
-        <Footer />
-        <ValineGlobal v-if="themeConfig.globalAccess" />
+        <ClientOnly>
+          <Footer />
+          <ValineGlobal v-if="themeConfig.globalAccess" />
+        </ClientOnly>
       </template>
       <template #doc-after>
         <ClientOnly>
