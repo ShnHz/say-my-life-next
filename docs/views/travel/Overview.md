@@ -1,5 +1,6 @@
 ---
-title : 总览
+title: 总览
+aside: false
 ---
 
-<travel-TravelWall />
+<ViewTravelOverview />

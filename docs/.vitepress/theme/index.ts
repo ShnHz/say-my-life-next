@@ -28,6 +28,9 @@ import CodeDemo from '@theme/components/common/CodeDemo.vue'
 import Color from './components/views/note/components/Color.vue'
 import Shadow from './components/views/note/components/Shadow.vue'
 
+// travel
+import travelOverview from './components/views/travel/travelOverview.vue'
+
 export default {
   ...Theme,
   Layout: MyLayout,
@@ -39,6 +42,7 @@ export default {
     app.component('ViewGuide', guide)
     app.component('ViewFancyBorderRadius', fancyBorderRadius)
     app.component('ViewSanJiaoXingXiaoGongJu', sanJiaoXingXiaoGongJu)
+    app.component('ViewTravelOverview', travelOverview)
 
     app.component('CodeDemo', CodeDemo)
 

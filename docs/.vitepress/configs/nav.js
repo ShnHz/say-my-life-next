@@ -5,6 +5,6 @@ export default [
   { text: '笔记', link: '/views/notes/Web' },
   // { text: '面试', link: '/views/interview/Question' },
   // { text: '生活', link: '/views/life/game/GTA5' },
-  // { text: '旅程', link: '/views/travel/Map' },
+  { text: '旅程', link: '/views/travel/Overview' },
   // { text: '友链', link: '/views/Friend' },
 ]

@@ -149,7 +149,7 @@ export default {
         {
           text: 'vueProgressiveImage 使用方法',
           link: '/views/notes/vue/vueProgressiveImage',
-        }
+        },
       ],
     },
     // {
@@ -169,5 +169,11 @@ export default {
     //     // '/views/notes/animation/PokemonCards',
     //   ],
     // },
+  ],
+  '/views/travel/': [
+    {
+      text: '总览',
+      link: '/views/travel/Overview',
+    },
   ],
 }

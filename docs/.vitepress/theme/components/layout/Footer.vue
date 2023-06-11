@@ -1,5 +1,8 @@
 <template>
-  <div class="footer-wrap">
+  <div
+    class="footer-wrap"
+    :class="{ 'has-sidebar': hasSidebar }"
+  >
     <div class="container">
       <div class="left-info">
         <span class="record-wrap">
@@ -45,10 +48,14 @@
 
 <script setup lang="ts">
   import { useData } from 'vitepress'
+  import { useSidebar } from 'vitepress/dist/client/theme-default/composables/sidebar'
+
   const vitePressData = useData()
   const themeConfig = vitePressData.site.value.themeConfig
 
   const thisYear = new Date().getFullYear()
+
+  const { hasSidebar, hasAside, leftAside } = useSidebar()
 </script>
 
 <style scoped lang="less">
@@ -58,6 +65,14 @@
     height: var(--vp-nav-height);
     border-top: 1px solid;
     border-color: var(--vp-c-gutter);
+    &.has-sidebar {
+      .container {
+        padding-left: calc(
+          (100% - (var(--vp-layout-max-width) - 64px)) / 2 +
+            var(--vp-sidebar-width) - 32px
+        );
+      }
+    }
     .container {
       display: flex;
       align-items: center;
@@ -90,10 +105,21 @@
             width: 14px;
             margin-right: 6px;
           }
-          .leancloud-visitors-count{
+          .leancloud-visitors-count {
             font-style: normal;
             font-size: 12px;
           }
+        }
+      }
+    }
+  }
+
+  @media (min-width: 960px) {
+    .footer-wrap {
+      &.has-sidebar {
+        .container {
+          padding-left: calc(var(--vp-sidebar-width) + 32px);
+          padding-right: 32px;
         }
       }
     }
