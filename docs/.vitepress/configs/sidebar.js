@@ -175,5 +175,9 @@ export default {
       text: '总览',
       link: '/views/travel/Overview',
     },
+    {
+      text: '地图',
+      link: '/views/travel/Map',
+    },
   ],
 }

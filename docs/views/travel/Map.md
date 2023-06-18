@@ -1,6 +1,7 @@
 ---
-pageClass: full-page
 title: 地图
+aside: false
+full: true
 ---
 
-<travel-TravelMap/>
+<ViewTravelMap />

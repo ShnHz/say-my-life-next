@@ -36,12 +36,20 @@
   const pageName = computed(() =>
     route.path.replace(/[./]+/g, '_').replace(/_html$/, '')
   )
+
+  const hasFull = computed(() => {
+    return pageConfig.value.frontmatter.full === true
+  })
 </script>
 
 <template>
   <div
     class="VPDoc"
-    :class="{ 'has-sidebar': hasSidebar, 'has-aside': hasAside }"
+    :class="{
+      'has-sidebar': hasSidebar,
+      'has-aside': hasAside,
+      'has-full': hasFull,
+    }"
   >
     <slot name="doc-top" />
     <div
@@ -106,10 +114,23 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="less">
   .VPDoc {
     padding: 32px 24px 96px;
     width: 100%;
+    &.has-full {
+      padding: 0;
+      .container{
+        max-width: none;
+      }
+      .content {
+        padding: 0;
+      }
+
+      .VPDocFooter {
+        display: none;
+      }
+    }
   }
 
   .VPDoc .VPDocOutlineDropdown {

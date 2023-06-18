@@ -30,6 +30,7 @@ import Shadow from './components/views/note/components/Shadow.vue'
 
 // travel
 import travelOverview from './components/views/travel/travelOverview.vue'
+import travelMap from './components/views/travel/travelMap.vue'
 
 export default {
   ...Theme,
@@ -43,6 +44,7 @@ export default {
     app.component('ViewFancyBorderRadius', fancyBorderRadius)
     app.component('ViewSanJiaoXingXiaoGongJu', sanJiaoXingXiaoGongJu)
     app.component('ViewTravelOverview', travelOverview)
+    app.component('ViewTravelMap', travelMap)
 
     app.component('CodeDemo', CodeDemo)
 

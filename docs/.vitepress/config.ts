@@ -67,6 +67,18 @@ export default defineConfig({
             new URL('./theme/components/layout/VPDoc.vue', import.meta.url)
           ),
         },
+        {
+          find: /^.*\/VPContent\.vue$/,
+          replacement: fileURLToPath(
+            new URL('./theme/components/layout/VPContent.vue', import.meta.url)
+          ),
+        },
+        {
+          find: /^.*\/VPNavBar\.vue$/,
+          replacement: fileURLToPath(
+            new URL('./theme/components/layout/VPNavBar.vue', import.meta.url)
+          ),
+        },
       ],
     },
     rollupOptions: {
@@ -96,4 +108,13 @@ export default defineConfig({
       },
     },
   },
+  head: [
+    [
+      'script',
+      { id: 'map-security' },
+      `window._AMapSecurityConfig = {
+        securityJsCode:'3782aa0ef41dd1a9d6a146b9d1163b31',
+      }`,
+    ],
+  ],
 })
