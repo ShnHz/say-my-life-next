@@ -31,6 +31,7 @@ import Shadow from './components/views/note/components/Shadow.vue'
 // travel
 import travelOverview from './components/views/travel/travelOverview.vue'
 import travelMap from './components/views/travel/travelMap.vue'
+import TravelPlan from './components/views/travel/components/TravelPlan.vue'
 
 export default {
   ...Theme,
@@ -50,6 +51,8 @@ export default {
 
     app.component('Color', Color)
     app.component('Shadow', Shadow)
+
+    app.component('TravelPlan', TravelPlan)
 
     app.use(ElementPlus)
 
