@@ -119,34 +119,34 @@
   }
 
   const polygonInit = async (AMap) => {
-    const cityPolygons = cityPolygon
-      .map((item) => {
-        const polygon = item.polygon
+    const cityPolygons = cityPolygon.map((item) => {
+      const polygonGroup = item.polygon.split('|')
+      const polygon = polygonGroup.map((item) =>
+        item
           .split(';')
           .map((_item) => _item.split(',').map((__item) => parseFloat(__item)))
-        return {
-          ...item,
-          polygon: polygon,
-        }
-      })
-      .map((item) => {
-        return [item.polygon]
-      })
-
-    console.log(cityPolygon, cityPolygons)
-
-    const polygon = new AMap.Polygon({
-      path: cityPolygons,
-      fillColor: '#ccebc5', // 多边形填充颜色
-      strokeOpacity: 1, // 线条透明度
-      fillOpacity: 0.5, //填充透明度
-      strokeColor: '#2b8cbe', // 线条颜色
-      strokeWeight: 1, //线条宽度
-      strokeStyle: 'dashed', // 线样式
-      strokeDasharray: [5, 5], //轮廓的虚线和间隙的样式
+      )
+      return {
+        ...item,
+        polygon: polygon,
+      }
     })
 
-    map.add(polygon)
+    for (let i = 0, len = cityPolygons.length; i < len; i++) {
+      for (let j = 0, _len = cityPolygons[i].polygon.length; j < _len; j++) {
+        const polygon = new AMap.Polygon({
+          path: [cityPolygons[i].polygon[j]],
+          fillColor: '#ccebc5', // 多边形填充颜色
+          strokeOpacity: 1, // 线条透明度
+          fillOpacity: 0.5, //填充透明度
+          strokeColor: '#2b8cbe', // 线条颜色
+          strokeWeight: 1, //线条宽度
+          strokeStyle: 'dashed', // 线样式
+          strokeDasharray: [5, 5], //轮廓的虚线和间隙的样式
+        })
+        map.add(polygon)
+      }
+    }
   }
 </script>
 
