@@ -7,6 +7,7 @@
 <script setup lang="ts">
   import { computed, onMounted } from 'vue'
   import AMapLoader from '@amap/amap-jsapi-loader'
+  import { cityPolygon } from '../../../../dist/js/cityPolygon'
 
   let map: any = null
 
@@ -24,6 +25,7 @@
         })
 
         markerInit(AMap)
+        polygonInit(AMap)
       })
       .catch((e) => {
         console.log(e)
@@ -41,7 +43,7 @@
       ['浙江省宁波市', 121.62452, 29.865818],
       ['江西省玉山', 118.251563, 28.691045],
       ['重庆市', 106.549155, 29.571212],
-      ['四川省成都市', 104.072745,30.663277],
+      ['四川省成都市', 104.072745, 30.663277],
       ['浙江省淳安县', 119.05357, 29.609172],
       ['安徽省黄山市', 118.345436, 29.724649],
       ['浙江省宁海市', 121.433558, 29.294065],
@@ -114,6 +116,37 @@
 
       map.add(marker)
     }
+  }
+
+  const polygonInit = async (AMap) => {
+    const cityPolygons = cityPolygon
+      .map((item) => {
+        const polygon = item.polygon
+          .split(';')
+          .map((_item) => _item.split(',').map((__item) => parseFloat(__item)))
+        return {
+          ...item,
+          polygon: polygon,
+        }
+      })
+      .map((item) => {
+        return [item.polygon]
+      })
+
+    console.log(cityPolygon, cityPolygons)
+
+    const polygon = new AMap.Polygon({
+      path: cityPolygons,
+      fillColor: '#ccebc5', // 多边形填充颜色
+      strokeOpacity: 1, // 线条透明度
+      fillOpacity: 0.5, //填充透明度
+      strokeColor: '#2b8cbe', // 线条颜色
+      strokeWeight: 1, //线条宽度
+      strokeStyle: 'dashed', // 线样式
+      strokeDasharray: [5, 5], //轮廓的虚线和间隙的样式
+    })
+
+    map.add(polygon)
   }
 </script>
 
