@@ -7,7 +7,7 @@
 <script setup lang="ts">
   import { computed, onMounted } from 'vue'
   import AMapLoader from '@amap/amap-jsapi-loader'
-  import { cityPolygon } from '../../../../dist/js/cityPolygon'
+  import { cityPolygon } from '../../../../public/js/cityPolygon'
 
   let map: any = null
 
