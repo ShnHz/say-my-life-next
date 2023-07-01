@@ -179,15 +179,15 @@ export default {
       text: '地图',
       link: '/views/travel/Map',
     },
-    {
-      text: '计划',
-      collapsable: false,
-      items: [
-        {
-          text: '广州-佛山-潮汕',
-          link: '/views/travel/plan/20230201.20230206',
-        },
-      ],
-    },
+    // {
+    //   text: '计划',
+    //   collapsable: false,
+    //   items: [
+    //     {
+    //       text: '广州-佛山-潮汕',
+    //       link: '/views/travel/plan/20230201.20230206',
+    //     },
+    //   ],
+    // },
   ],
 }
