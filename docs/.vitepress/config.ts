@@ -107,6 +107,9 @@ export default defineConfig({
         },
       },
     },
+    define: {
+      window: '{}',
+    },
   },
   head: [
     [
