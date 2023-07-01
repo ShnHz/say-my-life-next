@@ -6,30 +6,35 @@
 
 <script setup lang="ts">
   import { computed, onMounted } from 'vue'
-  import AMapLoader from '@amap/amap-jsapi-loader'
   import { cityPolygon } from '../../../../public/js/cityPolygon'
 
   let map: any = null
 
   onMounted(() => {
-    // @ts-ignore
-    AMapLoader.load({
-      key: 'f18a896571b2702b0ef2c949da4ed7da', // 申请好的Web端开发者Key，首次调用 load 时必填
-      version: '2.0', // 指定要加载的 JS API 的版本，缺省时默认为 1.4.15
-      plugins: [], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
-    })
-      .then((AMap) => {
-        map = new AMap.Map('mapContainer', {
-          zoom: 5, //初始化地图层级
-          center: [120.19, 30.26], //初始化地图中心点
-        })
+    const script = document.createElement('script')
+    script.src = 'https://webapi.amap.com/loader.js'
+    script.onload = (e) => {
+      console.log('map loader loaded')
+      // @ts-ignore
+      AMapLoader.load({
+        key: 'f18a896571b2702b0ef2c949da4ed7da', // 申请好的Web端开发者Key，首次调用 load 时必填
+        version: '2.0', // 指定要加载的 JS API 的版本，缺省时默认为 1.4.15
+        plugins: [], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+      })
+        .then((AMap) => {
+          map = new AMap.Map('mapContainer', {
+            zoom: 5, //初始化地图层级
+            center: [120.19, 30.26], //初始化地图中心点
+          })
 
-        markerInit(AMap)
-        polygonInit(AMap)
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+          markerInit(AMap)
+          polygonInit(AMap)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    }
+    document.head.appendChild(script)
   })
 
   const markerInit = async (AMap) => {
