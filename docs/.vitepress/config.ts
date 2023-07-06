@@ -96,4 +96,10 @@ export default defineConfig({
       },
     },
   },
+  markdown: {
+    config: (md) => {
+      // use more markdown-it plugins!
+      md.use(require('./plugins/extends-markdown/markdown-it-code-default'))
+    },
+  },
 })

@@ -1,7 +1,6 @@
 // -> len <-
 // <code class="default">len</code>
 module.exports = function code_default_plugin(md) {
-
     function tokenize(state, silent) {
         var token,
             max = state.posMax,
