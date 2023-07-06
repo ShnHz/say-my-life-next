@@ -11,31 +11,42 @@
   let map: any = null
 
   onMounted(() => {
-    const script = document.createElement('script')
-    script.src = 'https://webapi.amap.com/loader.js'
-    script.onload = (e) => {
-      console.log('map loader loaded')
-      // @ts-ignore
-      AMapLoader.load({
-        key: 'f18a896571b2702b0ef2c949da4ed7da', // 申请好的Web端开发者Key，首次调用 load 时必填
-        version: '2.0', // 指定要加载的 JS API 的版本，缺省时默认为 1.4.15
-        plugins: [], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
-      })
-        .then((AMap) => {
-          map = new AMap.Map('mapContainer', {
-            zoom: 5, //初始化地图层级
-            center: [120.19, 30.26], //初始化地图中心点
-          })
-
-          markerInit(AMap)
-          polygonInit(AMap)
-        })
-        .catch((e) => {
-          console.log(e)
-        })
+    const hasScript = document.getElementById('amapLoader')
+    if (!hasScript) {
+      const script = document.createElement('script')
+      script.id = 'amapLoader'
+      script.src = 'https://webapi.amap.com/loader.js'
+      script.onload = (e) => {
+        console.log('map loader loaded')
+        // @ts-ignore
+        init()
+      }
+      document.head.appendChild(script)
+    } else {
+      init()
     }
-    document.head.appendChild(script)
   })
+
+  const init = async () => {
+    // @ts-ignore
+    AMapLoader.load({
+      key: 'f18a896571b2702b0ef2c949da4ed7da', // 申请好的Web端开发者Key，首次调用 load 时必填
+      version: '2.0', // 指定要加载的 JS API 的版本，缺省时默认为 1.4.15
+      plugins: [], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+    })
+      .then((AMap) => {
+        map = new AMap.Map('mapContainer', {
+          zoom: 5, //初始化地图层级
+          center: [120.19, 30.26], //初始化地图中心点
+        })
+
+        markerInit(AMap)
+        polygonInit(AMap)
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
 
   const markerInit = async (AMap) => {
     const address = [
@@ -97,14 +108,6 @@
       '<div class="custom-content-marker">' +
       '   <img src="https://cdn.chenyingshuang.cn/journey/location.png">' +
       '</div>'
-
-    await AMap.plugin(['AMap.PlaceSearch'], () => {})
-    const placeSearch = new AMap.PlaceSearch({
-      pageSize: 1, // 单页显示结果条数
-      pageIndex: 1, // 页码
-      panel: false, // 结果列表将在此容器中进行展示。
-      autoFitView: false, // 是否自动调整地图视野使绘制的 Marker点都处于视口的可见范围
-    })
 
     for (let i = 0; i < address.length; i++) {
       let point = {
