@@ -1,6 +1,22 @@
 <template>
-  <div class="guide-wrap">
+  <div class="tag-wrap">
     <main>
+      <el-tabs
+        v-model="activeTag"
+        class="tabs"
+      >
+        <el-tab-pane
+          :label="'全部'"
+          :name="''"
+        >
+        </el-tab-pane>
+        <el-tab-pane
+          :label="value.title"
+          :name="key"
+          v-for="(value, key) in tagConfig"
+        >
+        </el-tab-pane>
+      </el-tabs>
       <ul
         v-for="(value, key) in blogList"
         :key="`archives-blog-ul-${key}`"
@@ -12,10 +28,9 @@
           v-for="(item, index) in value[1]"
           :key="`archives-blog-item-${key}-${index}`"
         >
-          <span class="date-wrap"
-            >{{ moment(new Date(item.date)).format('DD') }}
+          <span class="date-wrap">
             <span class="time-wrap">{{
-              moment(new Date(item.date)).format('hh:mm:ss')
+              moment(new Date(item.date)).format('YYYY-MM-DD hh:mm:ss')
             }}</span>
           </span>
           <span
@@ -31,40 +46,32 @@
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue'
+  import { computed, ref } from 'vue'
   import { useRouter, useData } from 'vitepress'
   import moment from 'moment'
 
   import { data } from '@docs/.vitepress/utils/loaders/blog.data.js'
+  import tagConfig from '@docs/.vitepress/configs/tags.js'
 
   const vitePressData = useData()
 
+  const activeTag = ref<string>('')
+
   const blogList = computed<any[]>(() => {
-    let list = data.sort((a, b) => {
-      return new Date(b.date).getTime() - new Date(a.date).getTime()
-    })
-
-    let map = new Map()
-
-    list.forEach((item) => {
-      let timeFrom = item.date
-        ? moment(new Date(item.date)).format('YYYY年MM月')
-        : 'Other'
-      if (!map.has(timeFrom)) {
-        map.set(timeFrom, [item])
-      } else {
-        map.set(timeFrom, [...map.get(timeFrom), item])
-      }
-    })
-
-    return [
-      ...Array.from(map).filter((item) => {
-        return item[0] != 'Other'
-      }),
-      ...Array.from(map).filter((item) => {
-        return item[0] == 'Other'
-      }),
-    ]
+    let list: any[] = []
+    if (activeTag.value == '') {
+      list = [['全部', data]]
+    } else {
+      list = [
+        [
+          tagConfig[activeTag.value].title,
+          data.filter((item) => {
+            return item.config?.tag?.includes(activeTag.value)
+          }),
+        ],
+      ]
+    }
+    return list
   })
 
   const router = useRouter()
@@ -77,12 +84,11 @@
 </script>
 
 <style scoped lang="less">
-  .guide-wrap {
+  .tag-wrap {
     main {
       width: 1200px;
       position: relative;
       margin: 0 auto;
-      backdrop-filter: blur(20px);
       ul {
         padding: 0;
         margin-bottom: 1rem;
@@ -99,7 +105,7 @@
           font-size: 1.1rem;
 
           .date-wrap {
-            width: 160px;
+            width: 200px;
             font-size: 90%;
             .time-wrap {
               color: #6c757d;
@@ -120,33 +126,6 @@
 
           &:nth-child(even) {
             background-image: var(--bg-guide-even);
-          }
-          &::before {
-            content: '';
-            display: block;
-            position: absolute;
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            border-radius: 50%;
-            width: 8px;
-            height: 8px;
-            left: 11rem;
-            margin-top: 4px;
-            background-color: #c2c6cc;
-            box-shadow: 0 0 3px 0 #c2c6cc;
-            z-index: 2;
-          }
-          &::after {
-            content: '';
-            display: block;
-            width: 4px;
-            height: 50px;
-            position: absolute;
-            left: 11rem;
-            top: -25px;
-            margin-left: 2px;
-            background-color: var(--bg-guide-line);
-            z-index: 1;
           }
           &.lead {
             align-items start &::before {
