@@ -23,7 +23,7 @@
           <i class="el-icon-loading"></i>
         </div>
       </el-image>
-      <p>“{{ item.name }}”</p>
+      <p><span>“</span>{{ item.name }}<span>”</span></p>
     </div>
   </div>
 </template>
@@ -175,6 +175,14 @@
       name: '三亚',
     },
     {
+      src: 'journey/overview/hbwh.jpg?imageMogr2/auto-orient',
+      name: '武汉',
+    },
+    {
+      src: 'journey/overview/hbyc.jpg?imageMogr2/auto-orient',
+      name: '宜昌',
+    },
+    {
       src: 'journey/overview/zs.jpg?imageMogr2/auto-orient',
       name: '舟山',
     },
@@ -209,6 +217,10 @@
     {
       src: 'journey/overview/netease.png?imageMogr2/auto-orient',
       name: '网易',
+    },
+    {
+      src: 'journey/overview/zszn.jpg?imageMogr2/auto-orient',
+      name: '整数智能',
     },
   ]
 
@@ -264,13 +276,16 @@
         width: 100%;
         position: absolute;
         top: 50%;
-        transform: translateY(-70%);
+        transform: translateY(-80%);
         text-align: center;
         color: #fff;
         font-size: 36px;
         font-family: NotoSansHans-Black;
         text-indent: 20px;
         letter-spacing: 20px;
+        span{
+          font-size: 24px;
+        }
       }
 
       &:hover {
