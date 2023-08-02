@@ -1,13 +1,16 @@
 lockfileVersion: '6.0'
 
 dependencies:
-  '@amap/amap-jsapi-loader':
-    specifier: ^1.0.1
-    version: 1.0.1
+  '@vicons/carbon':
+    specifier: ^0.12.0
+    version: 0.12.0
   '@vicons/ionicons5':
     specifier: ^0.12.0
     version: 0.12.0
   '@vicons/material':
+    specifier: ^0.12.0
+    version: 0.12.0
+  '@vicons/tabler':
     specifier: ^0.12.0
     version: 0.12.0
   '@vueuse/core':
@@ -208,10 +211,6 @@ packages:
       '@algolia/logger-common': 4.17.0
       '@algolia/requester-common': 4.17.0
     dev: true
-
-  /@amap/amap-jsapi-loader@1.0.1:
-    resolution: {integrity: sha512-nPyLKt7Ow/ThHLkSvn2etQlUzqxmTVgK7bIgwdBRTg2HK5668oN7xVxkaiRe3YZEzGzfV2XgH5Jmu2T73ljejw==}
-    dev: false
 
   /@babel/helper-string-parser@7.19.4:
     resolution: {integrity: sha512-nHtDoQcuqFmwYNYPz3Rah5ph2p8PFeFCsZk9A/48dPc/rGocJ5J3hAAZ7pb76VWX3fZKu+uEr/FhH5jLx7umrw==}
@@ -612,12 +611,20 @@ packages:
       '@types/node': 18.16.3
     dev: false
 
+  /@vicons/carbon@0.12.0:
+    resolution: {integrity: sha512-kCOgr/ZOhZzoiFLJ8pwxMa2TMxrkCUOA22qExPabus35F4+USqzcsxaPoYtqRd9ROOYiHrSqwapak/ywF0D9bg==}
+    dev: false
+
   /@vicons/ionicons5@0.12.0:
     resolution: {integrity: sha512-Iy1EUVRpX0WWxeu1VIReR1zsZLMc4fqpt223czR+Rpnrwu7pt46nbnC2ycO7ItI/uqDLJxnbcMC7FujKs9IfFA==}
     dev: false
 
   /@vicons/material@0.12.0:
     resolution: {integrity: sha512-chv1CYAl8P32P3Ycwgd5+vw/OFNc2mtkKdb1Rw4T5IJmKy6GVDsoUKV3N2l208HATn7CCQphZtuPDdsm7K2kmA==}
+    dev: false
+
+  /@vicons/tabler@0.12.0:
+    resolution: {integrity: sha512-3+wUFuxb7e8OzZ8Wryct1pzfA2vyoF4lwW98O9s27ZrfCGaJGNmqG+q8A7vQ92Mf+COCgxpK+rhNPTtTvaU6qw==}
     dev: false
 
   /@vitejs/plugin-vue@4.2.3(vite@4.3.9)(vue@3.3.4):

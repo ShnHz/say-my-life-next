@@ -32,6 +32,7 @@ import Shadow from './components/views/note/components/Shadow.vue'
 // travel
 import travelOverview from './components/views/travel/travelOverview.vue'
 import travelMap from './components/views/travel/travelMap.vue'
+import travelCalendar from './components/views/travel/travelCalendar.vue'
 import TravelPlan from './components/views/travel/components/TravelPlan.vue'
 
 export default {
@@ -48,6 +49,7 @@ export default {
     app.component('ViewSanJiaoXingXiaoGongJu', sanJiaoXingXiaoGongJu)
     app.component('ViewTravelOverview', travelOverview)
     app.component('ViewTravelMap', travelMap)
+    app.component('ViewTravelCalendar', travelCalendar)
 
     app.component('CodeDemo', CodeDemo)
 
