@@ -41,8 +41,8 @@
 
 <script setup lang="ts">
   import { computed } from 'vue'
-  import { TrainProfile } from '@vicons/carbon'
-  import { PlaneDeparture, Car } from '@vicons/tabler'
+  import { TrainProfile as Train } from '@vicons/carbon'
+  import { PlaneDeparture as Plane, Car } from '@vicons/tabler'
 
   const activities = [
     {
@@ -68,7 +68,7 @@
       size: 'large',
       timestamp: '2023-07-21 20:15 - 2023-07-22',
       type: 'primary',
-      icon: TrainProfile,
+      icon: Train,
       color: '#0bbd87',
     },
     {
@@ -78,7 +78,7 @@
       size: 'large',
       timestamp: '2023-07-21 04:56 - 2023-07-21 07:07',
       type: 'primary',
-      icon: TrainProfile,
+      icon: Train,
       color: '#0bbd87',
     },
     {
@@ -95,8 +95,31 @@
       size: 'large',
       timestamp: '2023-07-20 10:10 - 2023-07-20 14:43',
       type: 'primary',
-      icon: TrainProfile,
+      icon: Train,
       color: '#0bbd87',
+    },
+    {
+      content: '扬州',
+      scenicSpots: ['澡堂', '瘦西湖', '中国大运河博物馆', '搓脚'],
+      food: ['扬州炒饭', '大煮干丝', '扬大酸奶'],
+      size: 'large',
+      timestamp: '2023-05-02 - 2023-05-03',
+      type: 'primary',
+      icon: Car,
+      color: '#0bbd87',
+    },
+    {
+      content: '溧阳',
+      scenicSpots: ['南山竹海', '溧阳一号公路'],
+      size: 'large',
+      timestamp: '2023-05-02',
+      type: 'primary',
+      icon: Car,
+      color: '#0bbd87',
+    },
+    {
+      content: '...待补充',
+      size: 'normal',
     },
   ]
 </script>
