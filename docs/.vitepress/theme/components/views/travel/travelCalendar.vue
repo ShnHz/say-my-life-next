@@ -12,6 +12,28 @@
         :timestamp="activity.timestamp"
       >
         {{ activity.content }}
+        <p
+          class="scenic-spots-list"
+          v-if="activity.scenicSpots && activity.scenicSpots.length > 0"
+        >
+          <span
+            v-for="(item, index) in activity.scenicSpots"
+            :key="activity.timestamp + index"
+          >
+            {{ item }}</span
+          >
+        </p>
+        <p
+          class="food-list"
+          v-if="activity.food && activity.food.length > 0"
+        >
+          <span
+            v-for="(item, index) in activity.food"
+            :key="activity.timestamp + index"
+          >
+            {{ item }}</span
+          >
+        </p>
       </el-timeline-item>
     </el-timeline>
   </div>
@@ -41,14 +63,18 @@
     },
     {
       content: '武汉',
+      scenicSpots: ['黄鹤楼'],
+      food: ['牛肉粉', '藕汤'],
       size: 'large',
-      timestamp: '2023-07-21 20:15 - 2023-07-21 22:05',
+      timestamp: '2023-07-21 20:15 - 2023-07-22',
       type: 'primary',
       icon: TrainProfile,
       color: '#0bbd87',
     },
     {
       content: '宜昌',
+      scenicSpots: ['两坝一峡游船', '三峡大坝'],
+      food: ['凉虾', '奶汤肥鱼', '矮子馅饼'],
       size: 'large',
       timestamp: '2023-07-21 04:56 - 2023-07-21 07:07',
       type: 'primary',
@@ -57,6 +83,15 @@
     },
     {
       content: '武汉',
+      scenicSpots: [
+        '江汉路步行街',
+        '汉口江滩',
+        '长江轮渡',
+        '武汉长江大桥',
+        '户部巷',
+        '夜游长江游船',
+      ],
+      food: ['热干面', '豆皮', '茶颜悦色', '周黑鸭'],
       size: 'large',
       timestamp: '2023-07-20 10:10 - 2023-07-20 14:43',
       type: 'primary',
@@ -77,6 +112,9 @@
       .el-timeline-item__tail {
         top: 8px;
       }
+      .el-timeline-item__node {
+        overflow: hidden;
+      }
       .el-timeline-item__node--large {
         left: -5px;
         .el-timeline-item__icon {
@@ -86,6 +124,30 @@
       }
       li {
         list-style: none;
+        .food-list,
+        .scenic-spots-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin: 4px 0;
+          span {
+            display: flex;
+            align-items: center;
+            &:first-child {
+              &::before {
+                display: none;
+              }
+            }
+            &::before {
+              content: '';
+              display: block;
+              height: 8px;
+              width: 1px;
+              background: var(--vp-c-text-1);
+              margin-right: 10px;
+            }
+          }
+        }
       }
     }
   }
