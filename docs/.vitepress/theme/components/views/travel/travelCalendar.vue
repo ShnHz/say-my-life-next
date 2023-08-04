@@ -118,7 +118,7 @@
       color: '#0bbd87',
     },
     {
-      content: '...待补充',
+      content: '待补充...',
       size: 'normal',
     },
   ]

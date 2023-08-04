@@ -89,6 +89,9 @@
       width: 1200px;
       position: relative;
       margin: 0 auto;
+      :deep(.el-tabs){
+        width: 100%;
+      }
       ul {
         padding: 0;
         margin-bottom: 1rem;
