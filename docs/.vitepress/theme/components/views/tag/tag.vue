@@ -86,7 +86,7 @@
 <style scoped lang="less">
   .tag-wrap {
     main {
-      width: 1200px;
+      width: 100%;
       position: relative;
       margin: 0 auto;
       :deep(.el-tabs){

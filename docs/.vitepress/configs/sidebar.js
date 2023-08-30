@@ -194,4 +194,10 @@ export default {
     //   ],
     // },
   ],
+  '/views/life/': [
+    {
+      text: '动漫',
+      link: '/views/life/Anime',
+    }
+  ],
 }

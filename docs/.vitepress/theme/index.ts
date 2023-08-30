@@ -35,6 +35,9 @@ import travelMap from './components/views/travel/travelMap.vue'
 import travelCalendar from './components/views/travel/travelCalendar.vue'
 import TravelPlan from './components/views/travel/components/TravelPlan.vue'
 
+// life
+import CardAnime from './components/views/life/components/CardAnime.vue'
+
 export default {
   ...Theme,
   Layout: MyLayout,
@@ -57,6 +60,8 @@ export default {
     app.component('Shadow', Shadow)
 
     app.component('TravelPlan', TravelPlan)
+
+    app.component('LifeCardAnime', CardAnime)
 
     app.use(ElementPlus)
 
