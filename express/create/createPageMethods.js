@@ -124,7 +124,9 @@ module.exports = function (app) {
           const title = dom.window.document
             .querySelector('.article-title')
             .textContent.trim()
-          const artic = dom.window.document.querySelector('.article-content')
+          const artic =
+            dom.window.document.querySelector('.article-content') ||
+            dom.window.document.querySelector('#article-root')
 
           removeDom(artic, 'style')
           removeDom(artic, '.copy-code-btn')
