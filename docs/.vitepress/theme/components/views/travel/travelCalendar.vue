@@ -53,21 +53,21 @@
       // icon: Train,
       hollow: true,
     },
-    // {
-    //   content: '深圳',
-    //   size: 'normal',
-    //   timestamp: '2023-10',
-    //   type: 'warning',
-    //   // icon: Train,
-    //   hollow: true,
-    // },
     {
-      content: '佛山',
-      size: 'normal',
+      content: '深圳',
+      size: 'large',
       timestamp: '2023-10',
       type: 'warning',
-      // icon: Train,
-      hollow: true,
+      icon: Train,
+      // hollow: true,
+    },
+    {
+      content: '佛山',
+      size: 'large',
+      timestamp: '2023-10',
+      type: 'warning',
+      icon: Train,
+      // hollow: true,
     },
     {
       content: '潮汕地区',
@@ -81,8 +81,9 @@
         '粥底火锅（粤陈记）可配少量生腌，不然太窜',
         '鲎粿',
         '肠粉',
-        '粿条汤'
+        '粿条汤',
       ],
+      scenicSpots: ['南澳岛', '石牌坊'],
       // https://zhuanlan.zhihu.com/p/51906896
     },
     {
