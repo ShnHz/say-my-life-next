@@ -12,7 +12,7 @@
         :timestamp="activity.timestamp"
       >
         {{ activity.content }}
-        <p
+        <div
           class="scenic-spots-list"
           v-if="activity.scenicSpots && activity.scenicSpots.length > 0"
         >
@@ -22,8 +22,8 @@
           >
             {{ item }}</span
           >
-        </p>
-        <p
+        </div>
+        <div
           class="food-list"
           v-if="activity.food && activity.food.length > 0"
         >
@@ -33,7 +33,15 @@
           >
             {{ item }}</span
           >
-        </p>
+        </div>
+        <div
+          class="traffic-list"
+          v-if="activity.trafficNumber && activity.trafficNumber.length > 0"
+        >
+          <div>
+            <span>{{  }}</span>
+          </div>
+        </div>
       </el-timeline-item>
     </el-timeline>
   </div>
@@ -75,6 +83,13 @@
       timestamp: '2023-10',
       type: 'warning',
       icon: Train,
+      trafficNumber: [
+        {
+          number: 'D7165',
+          time: '10.3 20:10 - 10.3 23:16',
+          area: '广州东 - 潮汕',
+        },
+      ],
       // hollow: true,
       food: [
         '潮汕牛肉火锅（八合里）',
@@ -92,7 +107,7 @@
       timestamp: '2023-10-02',
       type: 'warning',
       icon: Plane,
-      food: ['早茶（银灯食府）', '粤菜（小荔园）'],
+      food: ['早茶（银灯食府）', '粤菜（VT101维多利广场店）'],
       // hollow: true,
     },
     {
