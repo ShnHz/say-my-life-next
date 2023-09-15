@@ -38,8 +38,9 @@
           class="traffic-list"
           v-if="activity.trafficNumber && activity.trafficNumber.length > 0"
         >
-          <div>
-            <span>{{  }}</span>
+          <div v-for="(item, index) in activity.trafficNumber">
+            <span>{{ item.number }} {{ item.area }}</span>
+            <span>{{ item.time }}</span>
           </div>
         </div>
       </el-timeline-item>
@@ -68,6 +69,13 @@
       type: 'warning',
       icon: Train,
       // hollow: true,
+      trafficNumber: [
+        {
+          number: 'G6257',
+          time: '10.7 08:52 - 10.7 09:40',
+          area: '广州南 - 深圳北',
+        },
+      ],
     },
     {
       content: '佛山',
@@ -76,6 +84,13 @@
       type: 'warning',
       icon: Train,
       // hollow: true,
+      trafficNumber: [
+        {
+          number: 'G6172 / G6004',
+          time: '10.6 09:20 - 10.6 12:00 / 10.6 06:53 - 10.6 09:50',
+          area: '汕头 - 广州南',
+        },
+      ],
     },
     {
       content: '潮汕地区',
@@ -88,6 +103,16 @@
           number: 'D7165',
           time: '10.3 20:10 - 10.3 23:16',
           area: '广州东 - 潮汕',
+        },
+        {
+          number: 'D7157',
+          time: '10.4 20:05 - 10.4 20:31',
+          area: '潮汕 - 汕头',
+        },
+        {
+          number: '租车',
+          time: '10.4 - 10.5',
+          area: '汕头 - 南澳',
         },
       ],
       // hollow: true,
@@ -109,6 +134,13 @@
       icon: Plane,
       food: ['早茶（银灯食府）', '粤菜（VT101维多利广场店）'],
       // hollow: true,
+      trafficNumber: [
+        {
+          number: 'CZ3522(波音787)',
+          time: '10.2 11:35 - 10.2 13:40',
+          area: '杭州萧山 - 广州白云',
+        },
+      ],
     },
     {
       content: '常州',
@@ -208,6 +240,8 @@
     gap: 10px;
     :deep(.el-timeline) {
       --el-timeline-node-size-large: 20px;
+      .el-timeline-item__content {
+      }
       .el-timeline-item__tail {
         top: 8px;
       }
@@ -244,6 +278,22 @@
               width: 1px;
               background: var(--vp-c-text-1);
               margin-right: 10px;
+            }
+          }
+        }
+        .traffic-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          div {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 0 7px;
+            background-color: var(--vp-c-bg-alt);
+            border-radius: 2px;
+            > span:last-child {
+              margin-top: -8px;
             }
           }
         }
