@@ -198,6 +198,10 @@ export default {
     {
       text: '动漫',
       link: '/views/life/Anime',
-    }
+    },
+    {
+      text: '码农的童年',
+      link: '/views/life/My3d',
+    },
   ],
 }
