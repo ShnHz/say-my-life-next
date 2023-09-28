@@ -33,10 +33,8 @@ import Shadow from './components/views/note/components/Shadow.vue'
 import travelOverview from './components/views/travel/travelOverview.vue'
 import travelMap from './components/views/travel/travelMap.vue'
 import travelCalendar from './components/views/travel/travelCalendar.vue'
-import TravelPlan from './components/views/travel/components/TravelPlan.vue'
 
 // life
-import my3d from './components/views/life/my3d/my3d.vue'
 import CardAnime from './components/views/life/components/CardAnime.vue'
 
 export default {
@@ -54,14 +52,13 @@ export default {
     app.component('ViewTravelOverview', travelOverview)
     app.component('ViewTravelMap', travelMap)
     app.component('ViewTravelCalendar', travelCalendar)
-    app.component('ViewMy3d', my3d)
+    // app.component('ViewMy3d', my3d)
 
     app.component('CodeDemo', CodeDemo)
 
     app.component('Color', Color)
     app.component('Shadow', Shadow)
 
-    app.component('TravelPlan', TravelPlan)
 
     app.component('LifeCardAnime', CardAnime)
 
