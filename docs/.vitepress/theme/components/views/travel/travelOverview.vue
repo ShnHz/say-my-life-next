@@ -51,6 +51,18 @@
       name: '上海',
     },
     {
+      src: 'journey/overview/gdgz.jpg?imageMogr2/auto-orient',
+      name: '广州',
+    },
+    {
+      src: 'journey/overview/gdsz.jpg?imageMogr2/auto-orient',
+      name: '深圳',
+    },
+    {
+      src: 'journey/overview/am.jpg?imageMogr2/auto-orient',
+      name: 'CN澳门',
+    },
+    {
       src: 'journey/overview/tj.jpg?imageMogr2/auto-orient',
       name: '天津',
     },
@@ -64,23 +76,23 @@
     },
     {
       src: 'journey/overview/hn.jpg?imageMogr2/auto-orient',
-      name: '河内',
+      name: 'VN河内',
     },
     {
       src: 'journey/overview/xg.jpg?imageMogr2/auto-orient',
-      name: '岘港',
+      name: 'VN岘港',
     },
     {
       src: 'journey/overview/hzm.jpg?imageMogr2/auto-orient',
-      name: '胡志明',
+      name: 'VN胡志明',
     },
     {
       src: 'journey/overview/mg.jpg?imageMogr2/auto-orient',
-      name: '曼谷',
+      name: 'TH曼谷',
     },
     {
       src: 'journey/overview/bty.jpg?imageMogr2/auto-orient',
-      name: '芭提雅',
+      name: 'TH芭提雅',
     },
     {
       src: 'journey/overview/nn.jpg?imageMogr2/auto-orient',
@@ -183,6 +195,14 @@
       name: '宜昌',
     },
     {
+      src: 'journey/overview/gdcz.jpg?imageMogr2/auto-orient',
+      name: '潮州',
+    },
+    {
+      src: 'journey/overview/gdst.jpg?imageMogr2/auto-orient',
+      name: '汕头',
+    },
+    {
       src: 'journey/overview/zs.jpg?imageMogr2/auto-orient',
       name: '舟山',
     },
@@ -281,8 +301,8 @@
         color: #fff;
         font-size: 36px;
         font-family: NotoSansHans-Black;
-        text-indent: 20px;
-        letter-spacing: 20px;
+        text-indent: 16px;
+        letter-spacing: 16px;
         span{
           font-size: 24px;
         }

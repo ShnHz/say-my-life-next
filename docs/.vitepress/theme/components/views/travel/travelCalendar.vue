@@ -51,52 +51,58 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { TrainProfile as Train } from '@vicons/carbon'
-  import { PlaneDeparture as Plane, Car } from '@vicons/tabler'
+  import { PlaneDeparture as Plane, Car,Ship } from '@vicons/tabler'
 
   const activities = [
     {
       content: '香港',
       size: 'normal',
-      timestamp: '2023-11',
-      type: 'warning',
+      timestamp: '2023-10-08 - 2023-10-09',
+      type: 'primary',
       // icon: Train,
       hollow: true,
     },
     {
-      content: '深圳',
+      content: '澳门',
       size: 'large',
-      timestamp: '2023-10',
-      type: 'warning',
-      icon: Train,
+      timestamp: '2023-10-07',
+      type: 'primary',
+      icon: Ship,
+      food:['招牌蒲国鸡饭','柠檬车露雪糕','安德鲁蛋挞','旺记咖啡奶茶'],
+      scenicSpots:['永利大皇宫','伦敦人','威尼斯人','新葡京','老普京','议事厅前地广场','玫瑰圣母堂','关前老街','大三巴','大炮台','疯堂斜巷','老永利发财树','官也街','银河综合度假城'],
       // hollow: true,
       trafficNumber: [
         {
-          number: 'G6257',
-          time: '10.7 08:52 - 10.7 09:40',
-          area: '广州南 - 深圳北',
+          number: '迅隆7',
+          time: '10.7 08:00 - 10.7 09:00',
+          area: '深圳蛇口 - 澳门凼仔',
         },
       ],
+      color: '#0bbd87',
     },
     {
-      content: '佛山',
+      content: '深圳',
       size: 'large',
-      timestamp: '2023-10',
-      type: 'warning',
+      timestamp: '2023-10-06',
+      type: 'primary',
       icon: Train,
+      food:['叉烧包','猪脚饭','粥底火锅'],
+      scenicSpots:['盐田坐车游','中英街','深圳湾公园'],
       // hollow: true,
       trafficNumber: [
         {
-          number: 'G6172 / G6004',
-          time: '10.6 09:20 - 10.6 12:00 / 10.6 06:53 - 10.6 09:50',
-          area: '汕头 - 广州南',
+          number: 'G6004',
+          time: '10.6 06:51 - 10.6 09:02',
+          area: '汕头 - 深圳北',
         },
       ],
+      color: '#0bbd87',
     },
     {
       content: '潮汕地区',
       size: 'large',
-      timestamp: '2023-10',
-      type: 'warning',
+      timestamp: '2023-10-03 - 2023-10-05',
+      type: 'primary',
       icon: Train,
       trafficNumber: [
         {
@@ -106,33 +112,29 @@
         },
         {
           number: 'D7157',
-          time: '10.4 20:05 - 10.4 20:31',
+          time: '10.5 12:21 - 10.5 12:50',
           area: '潮汕 - 汕头',
-        },
-        {
-          number: '租车',
-          time: '10.4 - 10.5',
-          area: '汕头 - 南澳',
-        },
+        }
       ],
       // hollow: true,
       food: [
-        '潮汕牛肉火锅（八合里）',
-        '粥底火锅（粤陈记）可配少量生腌，不然太窜',
-        '鲎粿',
-        '肠粉',
-        '粿条汤',
+        '潮汕牛肉火锅',
+        '生腌',
+        '杏仁茶','芝麻茶','腐乳鸡翅','猪脚圈','生腌','牛肉炒粿条','粿条汤','卤鹅','反沙','油柑汁','甘蔗汁','天地壹号','无米粿','咸水粿','笋粿','水晶球','芋泥粿','沙茶粿','红桃粿','薯粿','鼠壳粿','萝卜粿','黄豆粿','鲎粿','粽球','龟苓膏',
+        '白粥'
       ],
-      scenicSpots: ['南澳岛', '石牌坊'],
+      scenicSpots: ['潮州石牌坊','潮州广济桥','汕头小公园'],
+      color: '#0bbd87',
       // https://zhuanlan.zhihu.com/p/51906896
     },
     {
       content: '广州',
       size: 'large',
       timestamp: '2023-10-02',
-      type: 'warning',
+      type: 'primary',
       icon: Plane,
-      food: ['早茶（银灯食府）', '粤菜（VT101维多利广场店）'],
+      food: ['早茶（陶陶居）', '粤菜（小荔园）','顺德菜（大榕树下）','西士多','牛杂','奶茶','咖喱鱼蛋','烤乳鸽','煲仔饭','烧鸭','养生汤','鱼皮','肠粉','红米肠','大油条配粥','双皮奶','叉烧包','凤爪','蒸排骨','干炒牛河','黑叉烧','白切鸡'],
+      scenicSpots: ['夜游珠江', '城中村','广州塔','海心桥','广东省博物馆'],
       // hollow: true,
       trafficNumber: [
         {
@@ -141,14 +143,17 @@
           area: '杭州萧山 - 广州白云',
         },
       ],
+      color: '#0bbd87',
     },
     {
       content: '常州',
       size: 'large',
       timestamp: '2023-09-30',
-      type: 'warning',
+      type: 'primary',
+      food:'卜記家常菜(土城路店)',
       scenicSpots: ['太湖音乐节', '灵山大佛'],
       icon: Car,
+      color: '#0bbd87',
       // hollow: true,
     },
     // {
