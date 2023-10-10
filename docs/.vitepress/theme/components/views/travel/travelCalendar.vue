@@ -59,8 +59,17 @@
       size: 'normal',
       timestamp: '2023-10-08 - 2023-10-09',
       type: 'primary',
-      // icon: Train,
-      hollow: true,
+      icon: Train,
+      food:['九龙冰室','叉烧包'],
+      scenicSpots:['H1观光线','铜锣湾','星光大道','维多利亚港'],
+      trafficNumber: [
+      {
+          number: 'G5639 动感号',
+          time: '10.8 09:33 - 10.8 09:52',
+          area: '汕头 - 深圳北',
+        },
+      ]
+      // hollow: true,
     },
     {
       content: '澳门',
