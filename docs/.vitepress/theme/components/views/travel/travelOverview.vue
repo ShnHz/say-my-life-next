@@ -63,6 +63,10 @@
       name: 'CN澳门',
     },
     {
+      src: 'journey/overview/xg.heic?imageMogr2/auto-orient',
+      name: 'CN香港',
+    },
+    {
       src: 'journey/overview/tj.jpg?imageMogr2/auto-orient',
       name: '天津',
     },
