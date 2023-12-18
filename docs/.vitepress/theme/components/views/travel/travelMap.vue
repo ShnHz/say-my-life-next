@@ -1,7 +1,10 @@
 <template>
   <div class="travtel-map">
     <component :is="type == 'travelMap' ? travelMap : travelMap3D" />
-    <el-radio-group v-model="type">
+    <el-radio-group
+      class="map-type-radio"
+      v-model="type"
+    >
       <el-radio-button label="travelMap">平面地图</el-radio-button>
       <el-radio-button label="travelMap3D">3D地图</el-radio-button>
     </el-radio-group>
@@ -19,9 +22,14 @@
   .travtel-map {
     height: calc(100vh - var(--vp-nav-height));
     position: relative;
-    .el-radio-group{
+    .map-type-radio {
       position: absolute;
       top: 20px;
+      right: 20px;
+    }
+    .road-trip-line-switch {
+      position: absolute;
+      top: 60px;
       right: 20px;
     }
   }

@@ -159,6 +159,10 @@
       name: '桐庐',
     },
     {
+      src: 'journey/overview/zjhuz.jpg?imageMogr2/auto-orient',
+      name: '湖州',
+    },
+    {
       src: 'journey/overview/fjxm.jpg?imageMogr2/auto-orient',
       name: '厦门',
     },
