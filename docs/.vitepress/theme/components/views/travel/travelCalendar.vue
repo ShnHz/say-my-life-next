@@ -55,6 +55,30 @@
 
   const activities = [
     {
+      content: '新加坡',
+      // size: 'large',
+      // timestamp: '2023-10-27 - 2023-10-29',
+      // type: 'primary',
+      // icon: Train,
+      // color: '#0bbd87',
+      food: [],
+      scenicSpots: [],
+      trafficNumber: [],
+      // hollow: true,
+    },
+    {
+      content: '马来西亚',
+      // size: 'large',
+      // timestamp: '2023-10-27 - 2023-10-29',
+      // type: 'primary',
+      // icon: Train,
+      // color: '#0bbd87',
+      food: [],
+      scenicSpots: [],
+      trafficNumber: [],
+      // hollow: true,
+    },
+    {
       content: '哈尔滨',
       // size: 'large',
       // timestamp: '2023-10-27 - 2023-10-29',
