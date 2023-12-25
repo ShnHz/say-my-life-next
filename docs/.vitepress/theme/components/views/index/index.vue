@@ -56,6 +56,29 @@
           </ElCarousel>
         </div>
 
+        <div class="scroll-wrap">
+          <div
+            class="scroll"
+            style="--t: 20s"
+          >
+            <div
+              v-for="item in 2"
+              :key="`scroll-item-${item}`"
+            >
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Vue</span>
+              <span>React</span>
+              <span>Python</span>
+              <span>Photoshop</span>
+              <span>Music</span>
+              <span>Movie</span>
+              <span>Travel</span>
+            </div>
+          </div>
+        </div>
+
         <!-- blog -->
         <div>
           <ul>
@@ -356,6 +379,98 @@
     }
     50% {
       opacity: 1;
+    }
+  }
+
+  .scroll-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 16px;
+  }
+  .scroll {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #fff 20%,
+      #fff 80%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #fff 20%,
+      #fff 80%,
+      transparent
+    );
+    > div span {
+      display: inline-block;
+      margin: 10px;
+      padding: 5px 10px;
+      background-color: var(--bg-2);
+      border-radius: 5px;
+
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+
+      cursor: pointer;
+      transition: background-color 0.5s;
+      &:hover {
+        background-color: var(--el-color-primary);
+      }
+    }
+  }
+
+  .scroll > div {
+    white-space: nowrap;
+    animation: animate var(--t) linear infinite;
+    animation-delay: calc(var(--t) * -1);
+  }
+  @keyframes animate {
+    0% {
+      transform: translateX(100%);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .scroll > div:nth-child(2) {
+    animation: animate2 var(--t) linear infinite;
+    animation-delay: calc(var(--t) / -2);
+  }
+  @keyframes animate2 {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-200%);
+    }
+  }
+
+  // .scroll:hover > div {
+  //   animation-play-state: paused;
+  // }
+
+  @media screen and (max-width: 768px) {
+    .scroll {
+      width: 90vw;
+    }
+
+    .scroll > div span {
+      background-color: #4caf50;
+    }
+
+    .img-box img {
+      width: 33vw;
+      filter: grayscale(0);
     }
   }
 </style>
