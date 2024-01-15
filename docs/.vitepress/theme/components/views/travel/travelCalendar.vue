@@ -139,6 +139,18 @@
       // hollow: true,
     },
     {
+      content: '临海/仙居',
+      size: 'large',
+      timestamp: '2024-01-13 - 2024-01-14',
+      type: 'primary',
+      icon: Car,
+      color: '#0bbd87',
+      food: ['蛋清羊尾','海苔饼','荣小馆','轰炸大鱿鱼','乌饭麻糍'],
+      scenicSpots: ['紫阳街','神仙居'],
+      trafficNumber: [],
+      // hollow: true,
+    },
+    {
       content: '苏州',
       size: 'large',
       timestamp: '2023-12-30',
