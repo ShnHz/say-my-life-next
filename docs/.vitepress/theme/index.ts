@@ -24,6 +24,7 @@ import sanJiaoXingXiaoGongJu from './components/views/note/sanJiaoXingXiaoGongJu
 import ElementPlus from 'element-plus'
 // common
 import CodeDemo from '@theme/components/common/CodeDemo.vue'
+import Card3D from '@theme/components/common/Card3D.vue'
 
 // note
 import Color from './components/views/note/components/Color.vue'
@@ -55,10 +56,10 @@ export default {
     // app.component('ViewMy3d', my3d)
 
     app.component('CodeDemo', CodeDemo)
+    app.component('Card3D', Card3D)
 
     app.component('Color', Color)
     app.component('Shadow', Shadow)
-
 
     app.component('LifeCardAnime', CardAnime)
 
