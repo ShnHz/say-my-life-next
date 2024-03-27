@@ -4,7 +4,7 @@
     ref="wrap"
   >
     <div
-      class="card img-wrap"
+      class="card img-wrap animated"
       ref="img"
       :style="{
         'background-image': `url(${src})`,
@@ -20,8 +20,8 @@
         type: String,
         default:
           // 'http://localhost:5173/say-my-life-next/.vitepress/public/map/assets/1.jpg',
-          'https://assets.codepen.io/13471/pikachu-gx.webp',
-          // 'https://cdn.chenyingshuang.cn/life/gundam/%E9%AB%98%E8%BE%BE%E8%83%8C%E6%99%AF%402x.jpg'
+          // 'https://assets.codepen.io/13471/pikachu-gx.webp',
+          'https://cdn.chenyingshuang.cn/life/gundam/%E9%AB%98%E8%BE%BE%E8%83%8C%E6%99%AF%402x.jpg',
       },
     },
     data() {
@@ -84,13 +84,13 @@
     --bp: 50%, 50%;
     perspective: 2000px;
     transform: translate3d(0, 0, 0);
+    display: inline-flex;
     width: 300px;
     height: 400px;
     position: relative;
     padding: 20px;
 
     .img-wrap {
-      --per: 30%;
       width: calc(100% - 40px);
       height: calc(100% - 40px);
       overflow: hidden;
@@ -110,12 +110,19 @@
         5px 5px 5px -5px var(--color2), -7px -7px 10px -5px transparent,
         7px 7px 10px -5px transparent, 0 0 5px 0px rgba(255, 255, 255, 0),
         0 55px 35px -20px rgba(0, 0, 0, 0.5);
-      &:hover {
-        box-shadow: -20px -20px 30px -25px var(--color1),
-          20px 20px 30px -25px var(--color2), -7px -7px 10px -5px var(--color1),
-          7px 7px 10px -5px var(--color2), 0 0 13px 4px rgba(255, 255, 255, 0.3),
-          0 55px 35px -20px rgba(0, 0, 0, 0.5);
+      &.animated {
+        // transition: none;
+        // animation: holoCard 12s ease 0s 1;
+        &:before {
+          transition: none;
+          animation: holoGradient 12s ease 0s 1;
+        }
+        &:after {
+          transition: none;
+          animation: holoSparkle 12s ease 0s 1;
+        }
       }
+
       &::before,
       &::after {
         content: '';
@@ -145,6 +152,138 @@
           transparent 100%
         );
       }
+      &::after {
+        opacity: 1;
+        background-image: url('https://assets.codepen.io/13471/sparkles.gif'),
+          url(https://assets.codepen.io/13471/holo.png),
+          linear-gradient(
+            125deg,
+            #ff008450 15%,
+            #fca40040 30%,
+            #ffff0030 40%,
+            #00ff8a20 60%,
+            #00cfff40 70%,
+            #cc4cfa50 85%
+          );
+        background-position: 50% 50%;
+        background-size: 160%;
+        background-blend-mode: overlay;
+        z-index: 2;
+        filter: brightness(1) contrast(1);
+        transition: all 0.33s ease;
+        mix-blend-mode: color-dodge;
+        opacity: 0.75;
+        animation-delay: 0.25s;
+      }
+      &:hover {
+        box-shadow: -20px -20px 30px -25px var(--color1),
+          20px 20px 30px -25px var(--color2), -7px -7px 10px -5px var(--color1),
+          7px 7px 10px -5px var(--color2), 0 0 13px 4px rgba(255, 255, 255, 0.3),
+          0 55px 35px -20px rgba(0, 0, 0, 0.5);
+        &::before {
+          animation: none;
+          background-image: linear-gradient(
+            110deg,
+            transparent 25%,
+            var(--color1) 48%,
+            var(--color2) 52%,
+            transparent 75%
+          );
+          background-size: 250% 250%;
+          opacity: 0.88;
+          filter: brightness(0.66) contrast(1.33);
+          transition: none;
+        }
+        &::after {
+          filter: brightness(1) contrast(1);
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  @keyframes holoCard {
+    0%,
+    100% {
+      transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
+    }
+    5%,
+    8% {
+      transform: rotateZ(0deg) rotateX(6deg) rotateY(-20deg);
+    }
+    13%,
+    16% {
+      transform: rotateZ(0deg) rotateX(-9deg) rotateY(32deg);
+    }
+    35%,
+    38% {
+      transform: rotateZ(3deg) rotateX(12deg) rotateY(20deg);
+    }
+    55% {
+      transform: rotateZ(-3deg) rotateX(-12deg) rotateY(-27deg);
+    }
+  }
+
+  @keyframes holoSparkle {
+    0%,
+    100% {
+      opacity: 0.75;
+      background-position: 50% 50%;
+      filter: brightness(1.2) contrast(1.25);
+    }
+    5%,
+    8% {
+      opacity: 1;
+      background-position: 40% 40%;
+      filter: brightness(0.8) contrast(1.2);
+    }
+    13%,
+    16% {
+      opacity: 0.5;
+      background-position: 50% 50%;
+      filter: brightness(1.2) contrast(0.8);
+    }
+    35%,
+    38% {
+      opacity: 1;
+      background-position: 60% 60%;
+      filter: brightness(1) contrast(1);
+    }
+    55% {
+      opacity: 0.33;
+      background-position: 45% 45%;
+      filter: brightness(1.2) contrast(1.25);
+    }
+  }
+
+  @keyframes holoGradient {
+    0%,
+    100% {
+      opacity: 0.5;
+      background-position: 50% 50%;
+      filter: brightness(0.5) contrast(1);
+    }
+    5%,
+    9% {
+      background-position: 100% 100%;
+      opacity: 1;
+      filter: brightness(0.75) contrast(1.25);
+    }
+    13%,
+    17% {
+      background-position: 0% 0%;
+      opacity: 0.88;
+    }
+    35%,
+    39% {
+      background-position: 100% 100%;
+      opacity: 1;
+      filter: brightness(0.5) contrast(1);
+    }
+    55% {
+      background-position: 0% 0%;
+      opacity: 1;
+      filter: brightness(0.75) contrast(1.25);
     }
   }
 </style>
