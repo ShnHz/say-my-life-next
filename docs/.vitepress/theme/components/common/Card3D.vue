@@ -3,13 +3,21 @@
     class="card-3d-wrap"
     ref="wrap"
   >
-    <div
+    <el-image
+      class="card img-wrap animated"
+      fit="cover"
+      ref="img"
+      :src="src"
+      lazy
+    />
+
+    <!-- <div
       class="card img-wrap animated"
       ref="img"
       :style="{
         'background-image': `url(${src})`,
       }"
-    ></div>
+    ></div> -->
   </div>
 </template>
 <script>
@@ -28,7 +36,8 @@
       return {}
     },
     mounted() {
-      const element = this.$refs.img
+      const element = this.$refs.img.$el
+      console.log(element)
       const wrap = this.$refs.wrap
       const bounds = element.getBoundingClientRect()
       function transformElement(e) {
