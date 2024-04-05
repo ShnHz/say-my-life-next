@@ -16,6 +16,7 @@ import index from '@theme/components/views/index/index.vue'
 import guide from '@theme/components/views/guide/guide.vue'
 import tag from '@theme/components/views/tag/tag.vue'
 import create from '@theme/components/views/create/create.vue'
+import friend from '@theme/components/views/friend/friend.vue'
 
 import fancyBorderRadius from './components/views/note/fancyBorderRadius.vue'
 import sanJiaoXingXiaoGongJu from './components/views/note/sanJiaoXingXiaoGongJu.vue'
@@ -48,6 +49,7 @@ export default {
     app.component('ViewIndex', index)
     app.component('ViewGuide', guide)
     app.component('ViewTag', tag)
+    app.component('ViewFriend', friend)
     app.component('ViewFancyBorderRadius', fancyBorderRadius)
     app.component('ViewSanJiaoXingXiaoGongJu', sanJiaoXingXiaoGongJu)
     app.component('ViewTravelOverview', travelOverview)

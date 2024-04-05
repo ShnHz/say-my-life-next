@@ -6,5 +6,5 @@ export default [
   // { text: '面试', link: '/views/interview/Question' },
   { text: '生活', link: '/views/life/Anime' },
   { text: '旅程', link: '/views/travel/Overview' },
-  // { text: '友链', link: '/views/Friend' },
+  { text: '友链', link: '/views/Friend' },
 ]

@@ -24,6 +24,8 @@ config: {
 
 [「Vue」Vant](https://youzan.github.io/vant/?source=vuejsorg#/zh-CN/intro)
 
+[「Vue」Naive UI](https://www.naiveui.com/zh-CN/os-theme)
+
 [「Vue」Vue-Awesome-Swiper](https://github.com/surmon-china/vue-awesome-swiper)
 
 [「Vue」vue-design vue源码分析：elegant分支本地启动](https://github.com/HcySunYang/vue-design)
@@ -40,6 +42,11 @@ config: {
 
 [「Js」three.js](https://threejs.org/)
 
+[「Js」introjs](https://introjs.com/docs)
+
+[「Js」movie-web](https://movie-web.github.io/docs)
+
+[「Indexdb」Dexie.js](https://github.com/dexie/Dexie.js)
 
 ### 实用工具
 [「Json」在线JSON校验格式化工具](https://www.bejson.com/)
@@ -71,6 +78,8 @@ config: {
 [「UI」掘金 - 灵感专题](https://juejin.im/post/5d10360b6fb9a07eb94f9687)
 
 [「前端代码分享」CODEPEN](https://codepen.io/popular/pens)
+
+[「前端代码分享」UIVerse](https://uiverse.io/elements)
 
 [「免费字体」font space](https://www.fontspace.com/)
 
