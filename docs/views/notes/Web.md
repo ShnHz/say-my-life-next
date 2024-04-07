@@ -93,6 +93,8 @@ config: {
 
 [「动画集锦」NavNav+](https://navnav.co/)
 
+[「shader」shadertoy](https://www.shadertoy.com/)
+
 ### CSS3动画
 [「CSS3」Animate.css](https://daneden.github.io/animate.css/)
 
