@@ -99,6 +99,10 @@
       name: 'TH芭提雅',
     },
     {
+      src: 'journey/overview/hgjzd.jpg?imageMogr2/auto-orient',
+      name: 'KR济州岛',
+    },
+    {
       src: 'journey/overview/nn.jpg?imageMogr2/auto-orient',
       name: '南宁',
     },
@@ -185,6 +189,10 @@
     {
       src: 'journey/overview/jxjdz.jpg?imageMogr2/auto-orient',
       name: '景德镇',
+    },
+    {
+      src: 'journey/overview/jxnc.jpg?imageMogr2/auto-orient',
+      name: '南昌',
     },
     {
       src: 'journey/overview/hncs.jpg?imageMogr2/auto-orient',
