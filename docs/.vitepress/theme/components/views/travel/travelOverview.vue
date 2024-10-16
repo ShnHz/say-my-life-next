@@ -23,7 +23,7 @@
           <i class="el-icon-loading"></i>
         </div>
       </el-image>
-      <p><span>“</span>{{ item.name }}<span>”</span></p>
+      <p :class="{'len6':item.name.length === 6}"><span>“</span>{{ item.name }}<span>”</span></p>
     </div>
   </div>
 </template>
@@ -219,8 +219,28 @@
       name: '汕头',
     },
     {
-      src: 'journey/overview/zs.jpg?imageMogr2/auto-orient',
-      name: '舟山',
+      src: 'journey/overview/gzgy.jpg?imageMogr2/auto-orient',
+      name: '贵阳',
+    },
+    {
+      src: 'journey/overview/gzlb.jpg?imageMogr2/auto-orient',
+      name: '荔波',
+    },
+    {
+      src: 'journey/overview/gzzj.jpg?imageMogr2/auto-orient',
+      name: '织金',
+    },
+    {
+      src: 'journey/overview/gzas.jpg?imageMogr2/auto-orient',
+      name: '安顺',
+    },
+    {
+      src: 'journey/overview/gzhgs.jpg?imageMogr2/auto-orient',
+      name: '黄果树大瀑布',
+    },
+    {
+      src: 'journey/overview/gzqhmz.jpg?imageMogr2/auto-orient',
+      name: '千户苗寨',
     },
     {
       src: 'journey/overview/djd.jpg?imageMogr2/auto-orient',
@@ -321,6 +341,10 @@
         letter-spacing: 16px;
         span{
           font-size: 24px;
+        }
+        &.len6{
+          font-size: 28px;
+          letter-spacing: 12px;
         }
       }
 
