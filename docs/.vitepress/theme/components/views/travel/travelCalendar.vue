@@ -51,9 +51,21 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { TrainProfile as Train } from '@vicons/carbon'
-  import { PlaneDeparture as Plane, Car, Ship } from '@vicons/tabler'
+  import { PlaneDeparture as Plane, Car, Ship, Bus } from '@vicons/tabler'
 
   const activities = [
+    {
+      content: '日本',
+      // size: 'large',
+      // timestamp: '2023-10-27 - 2023-10-29',
+      // type: 'primary',
+      // icon: Train,
+      // color: '#0bbd87',
+      food: [],
+      scenicSpots: [],
+      trafficNumber: [],
+      // hollow: true,
+    },
     {
       content: '新加坡',
       // size: 'large',
@@ -115,6 +127,18 @@
       // hollow: true,
     },
     {
+      content: '景德镇',
+      size: 'large',
+      timestamp: '2024-11-07 - 2024-11-09',
+      type: 'primary',
+      icon: Bus,
+      color: '#0bbd87',
+      food: ['回家吃饭', '小黄鱼', '欧记排挡', '兄弟记'],
+      scenicSpots: ['陶溪川', '中国陶瓷博物馆'],
+      trafficNumber: [],
+      // hollow: true,
+    },
+    {
       content: '贵州省',
       size: 'large',
       timestamp: '2024-10-01 - 2024-10-08',
@@ -157,18 +181,6 @@
           area: '贵阳龙洞堡机场 - 杭州萧山国际机场',
         },
       ],
-      // hollow: true,
-    },
-    {
-      content: '贵州省',
-      // size: 'large',
-      // timestamp: '2023-10-27 - 2023-10-29',
-      // type: 'primary',
-      // icon: Train,
-      // color: '#0bbd87',
-      food: [],
-      scenicSpots: [],
-      trafficNumber: [],
       // hollow: true,
     },
     {
