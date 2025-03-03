@@ -60,8 +60,6 @@
   import friendConfig from '@docs/.vitepress/configs/friend.js'
   import horse from './components/horse.vue'
   const vitePressData = useData()
-
-  console.log(friendConfig, vitePressData)
 </script>
 
 <style scoped lang="less">
