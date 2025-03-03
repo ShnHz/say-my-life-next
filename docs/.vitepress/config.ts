@@ -28,7 +28,7 @@ export default defineConfig({
     outline: [3, 5],
 
     // 备案号
-    record: '浙ICP备00000000号-0',
+    record: '浙ICP备18029315号-2',
     recordLink: 'http://beian.miit.gov.cn/',
     // 作者
     author: '野宁新之助',
@@ -67,32 +67,6 @@ export default defineConfig({
           ),
         },
       ],
-    },
-    rollupOptions: {
-      output: {
-        manualChunks(id: any, { getModuleInfo }) {
-          const cssLangs = `\\.(css|less|sass|scss|styl|stylus|pcss|postcss)($|\\?)`
-          const cssLangRE = new RegExp(cssLangs)
-          const isCSSRequest = (request: string): boolean =>
-            cssLangRE.test(request)
-          // 分vendor包
-          if (
-            id.includes('node_modules') &&
-            !isCSSRequest(id) &&
-            staticImportedByEntry(id, getModuleInfo, cache.cache)
-          ) {
-            return 'vendor'
-          } else if (
-            // 分manifest包，解决chunk碎片问题
-            getModuleInfo(id).importers.length +
-              getModuleInfo(id).dynamicImporters.length >
-              1 &&
-            id.includes('src')
-          ) {
-            return 'manifest'
-          }
-        },
-      },
     },
   },
   markdown: {
