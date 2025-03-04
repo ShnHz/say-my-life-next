@@ -25,10 +25,6 @@ export default {
           link: '/views/notes/tools/SanJiaoXingXiaoGongJu.md',
         },
         // {
-        //   text: '小于12px的文字生成器',
-        //   link: '/views/notes/tools/XiaoYu12pxDeWenZiShengChengQi.md',
-        // },
-        // {
         //   text: '常用正则表达式工具',
         //   link: '/views/notes/tools/ChangYongZhengZeBiaoDaShiGongJu.md',
         // },
@@ -195,6 +191,75 @@ export default {
     // },
   ],
   '/views/life/': [
+    {
+      text: '游戏',
+      items: [
+        {
+          text: '奥日与黑暗森林',
+          link: '/views/life/game/奥日与黑暗森林',
+        },
+        {
+          text: '奥日与精灵意志',
+          link: '/views/life/game/奥日与精灵意志',
+        },
+        {
+          text: '动物园之星',
+          link: '/views/life/game/动物园之星',
+        },
+        {
+          text: '都市天际线',
+          link: '/views/life/game/都市天际线',
+        },
+        {
+          text: '过山车之星',
+          link: '/views/life/game/过山车之星',
+        },
+        {
+          text: '荒野大镖客2',
+          link: '/views/life/game/荒野大镖客2',
+        },
+        {
+          text: '极限竞速4：地平线',
+          link: '/views/life/game/极限竞速4：地平线',
+        },
+        {
+          text: '跑跑卡丁车',
+          link: '/views/life/game/跑跑卡丁车',
+        },
+        {
+          text: '神秘海域4',
+          link: '/views/life/game/神秘海域4',
+        },
+        {
+          text: '王者荣耀',
+          link: '/views/life/game/王者荣耀',
+        },
+        {
+          text: '英雄联盟',
+          link: '/views/life/game/英雄联盟',
+        },
+        {
+          text: 'GAT5',
+          link: '/views/life/game/GAT5',
+        },
+        {
+          text: 'NBA2KOL2',
+          link: '/views/life/game/NBA2KOL2',
+        },
+        {
+          text: 'SD敢达',
+          link: '/views/life/game/SD敢达',
+        },
+        {
+          text: 'SpiderMan',
+          link: '/views/life/game/SpiderMan',
+        },
+        {
+          text: 'SpiderManMiles',
+          link: '/views/life/game/SpiderManMiles',
+        },
+      ],
+    },
     {
       text: '动漫',
       link: '/views/life/Anime',

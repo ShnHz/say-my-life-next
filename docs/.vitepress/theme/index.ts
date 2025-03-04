@@ -26,6 +26,7 @@ import ElementPlus from 'element-plus'
 // common
 import CodeDemo from '@theme/components/common/CodeDemo.vue'
 import Card3D from '@theme/components/common/Card3D.vue'
+import ImageList from '@theme/components/common/ImageList.vue'
 
 // note
 import Color from './components/views/note/components/Color.vue'
@@ -59,6 +60,7 @@ export default {
 
     app.component('CodeDemo', CodeDemo)
     app.component('Card3D', Card3D)
+    app.component('ImageList',ImageList)
 
     app.component('Color', Color)
     app.component('Shadow', Shadow)
