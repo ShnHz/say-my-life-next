@@ -67,8 +67,8 @@ export default defineConfig({
             new URL('./theme/components/layout/VPDoc.vue', import.meta.url)
           ),
         },
-      ],
-    },
+      ]
+    }
   },
   markdown: {
     config: (md) => {
