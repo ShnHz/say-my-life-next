@@ -139,15 +139,68 @@
       // hollow: true,
     },
     {
+      content: '日本神户',
+      size: 'large',
+      timestamp: '2025-03-23',
+      type: 'primary',
+      icon: Train,
+      color: '#0bbd87',
+      food: [
+        '本格炭火焼うなぎ えん 京都三条店（鳗鱼饭）',
+        'Sumiyagura Kyoto（拉面）'
+      ],
+      scenicSpots: [
+        '鸭川',
+        '伏见稻荷大社',
+        '清水寺',
+        '三年坂二年坂'
+      ],
+      trafficNumber: [
+        {
+          number: '坂急京都线',
+          time: '2025-03-23 10:40 - 2025-03-23 12:13',
+          area: '梅田 - 京都',
+        }
+      ],
+      // hollow: true,
+    },
+    {
       content: '日本大阪',
-      // size: 'large',
-      // timestamp: '2023-10-27 - 2023-10-29',
-      // type: 'primary',
-      // icon: Train,
-      // color: '#0bbd87',
-      food: [],
-      scenicSpots: [],
-      trafficNumber: [],
+      size: 'large',
+      timestamp: '2025-03-21 - 2025-03-24',
+      type: 'primary',
+      icon: Plane,
+      color: '#0bbd87',
+      food: [
+        '乌冬面（天下茶屋地铁站）',
+        '章鱼小丸子（道顿堀）',
+        '大興寿司（寿司）',
+        '元祖炸串（炸串）',
+        '环球影城路易斯纽约披萨饼屋',
+        '环球影城奇诺比奥咖啡店',
+        'Yakiniku Sukiyaki Jun（神户和牛）',
+        '机场T2咖喱猪排饭与大阪烧'
+      ],
+      scenicSpots: [
+        '心斋桥',
+        '道顿堀',
+        '通天阁',
+        'USJ大阪环球影城',
+        '梅田商圈',
+        '天守城'
+      ],
+      trafficNumber: [
+        {
+          number: '春秋航空9C8589',
+          time: '03.21 08:05 - 03.24 11:20',
+          area: '上海浦东国际机场 - 大阪关西国际机场',
+        },
+        {
+          number: '春秋航空9C6998',
+          time: '03.24 19:30 - 03.24 21:20',
+          area: '大阪关西国际机场 - 上海浦东国际机场',
+        },
+      ],
       // hollow: true,
     },
     {
