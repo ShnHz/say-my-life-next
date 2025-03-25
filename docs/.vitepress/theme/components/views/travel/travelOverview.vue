@@ -103,6 +103,14 @@
       name: 'KR济州岛',
     },
     {
+      src: 'journey/overview/jpdb.jpg?imageMogr2/auto-orient',
+      name: 'JP大阪',
+    },
+    {
+      src: 'journey/overview/jpjd.jpg?imageMogr2/auto-orient',
+      name: 'JP京都',
+    },
+    {
       src: 'journey/overview/nn.jpg?imageMogr2/auto-orient',
       name: '南宁',
     },
