@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+
+# 只允许一个并发部署，跳过正在运行和最新队列之间的运行队列
+# 但是，不要取消正在进行的运行，因为我们希望允许这些生产部署完成
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -39,7 +46,7 @@ jobs:
 
       - name: Clean build directory
         run: rm -rf docs/.vitepress/dist
-        
+
       - name: Build
         run: npm run docs:build
 
