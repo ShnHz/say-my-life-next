@@ -7,4 +7,5 @@ export default [
   { text: '生活', link: '/views/life/Anime' },
   { text: '旅程', link: '/views/travel/Overview' },
   { text: '友链', link: '/views/Friend' },
+  { text: '工具箱', link: 'https://tools.sanghangning.cn/' },
 ]
