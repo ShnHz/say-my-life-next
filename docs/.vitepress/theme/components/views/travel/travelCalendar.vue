@@ -11,7 +11,8 @@
         :hollow="activity.hollow"
         :timestamp="activity.timestamp"
       >
-        {{ activity.content }}
+        <span v-if="!activity.plan">{{ activity.content }}</span>
+        <span></span>
         <div
           class="scenic-spots-list"
           v-if="activity.scenicSpots && activity.scenicSpots.length > 0"
@@ -54,30 +55,6 @@
   import { PlaneDeparture as Plane, Car, Ship, Bus } from '@vicons/tabler'
 
   const activities = [
-    {
-      content: '新加坡',
-      // size: 'large',
-      // timestamp: '2023-10-27 - 2023-10-29',
-      // type: 'primary',
-      // icon: Train,
-      // color: '#0bbd87',
-      food: [],
-      scenicSpots: [],
-      trafficNumber: [],
-      // hollow: true,
-    },
-    {
-      content: '马来西亚',
-      // size: 'large',
-      // timestamp: '2023-10-27 - 2023-10-29',
-      // type: 'primary',
-      // icon: Train,
-      // color: '#0bbd87',
-      food: [],
-      scenicSpots: [],
-      trafficNumber: [],
-      // hollow: true,
-    },
     {
       content: '哈尔滨',
       // size: 'large',
@@ -136,6 +113,43 @@
       food: [],
       scenicSpots: [],
       trafficNumber: [],
+      // hollow: true,
+    },
+    {
+      content: '新加坡',
+      // size: 'large',
+      // timestamp: '2023-10-27 - 2023-10-29',
+      // type: 'primary',
+      // icon: Train,
+      // color: '#0bbd87',
+      food: [],
+      scenicSpots: [],
+      trafficNumber: [],
+      // hollow: true,
+    },
+    {
+      content: '马来西亚仙本那',
+      // size: 'large',
+      // timestamp: '2023-10-27 - 2023-10-29',
+      // type: 'primary',
+      // icon: Train,
+      // color: '#0bbd87',
+      food: [],
+      scenicSpots: [],
+      trafficNumber: [],
+      // hollow: true,
+    },
+    {
+      content: '马来西亚吉隆坡',
+      // size: 'large',
+      // timestamp: '2023-10-27 - 2023-10-29',
+      // type: 'primary',
+      // icon: Train,
+      // color: '#0bbd87',
+      food: [],
+      scenicSpots: [],
+      trafficNumber: [],
+      plan:'Malaysia-KualaLumpur',
       // hollow: true,
     },
     {

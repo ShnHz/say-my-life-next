@@ -23,7 +23,9 @@
           <i class="el-icon-loading"></i>
         </div>
       </el-image>
-      <p :class="{'len6':item.name.length === 6}"><span>“</span>{{ item.name }}<span>”</span></p>
+      <p :class="{ len6: item.name.length === 6 }">
+        <span>“</span>{{ item.name }}<span>”</span>
+      </p>
     </div>
   </div>
 </template>
@@ -59,26 +61,6 @@
       name: '深圳',
     },
     {
-      src: 'journey/overview/am.jpg?imageMogr2/auto-orient',
-      name: 'CN澳门',
-    },
-    {
-      src: 'journey/overview/xg.heic?imageMogr2/auto-orient',
-      name: 'CN香港',
-    },
-    {
-      src: 'journey/overview/tj.jpg?imageMogr2/auto-orient',
-      name: '天津',
-    },
-    {
-      src: 'journey/overview/cq.jpg?imageMogr2/auto-orient',
-      name: '重庆',
-    },
-    {
-      src: 'journey/overview/cd.jpg?imageMogr2/auto-orient',
-      name: '成都',
-    },
-    {
       src: 'journey/overview/hn.jpg?imageMogr2/auto-orient',
       name: 'VN河内',
     },
@@ -109,6 +91,26 @@
     {
       src: 'journey/overview/jpjd.jpg?imageMogr2/auto-orient',
       name: 'JP京都',
+    },
+    {
+      src: 'journey/overview/am.jpg?imageMogr2/auto-orient',
+      name: 'CN澳门',
+    },
+    {
+      src: 'journey/overview/xg.heic?imageMogr2/auto-orient',
+      name: 'CN香港',
+    },
+    {
+      src: 'journey/overview/tj.jpg?imageMogr2/auto-orient',
+      name: '天津',
+    },
+    {
+      src: 'journey/overview/cq.jpg?imageMogr2/auto-orient',
+      name: '重庆',
+    },
+    {
+      src: 'journey/overview/cd.jpg?imageMogr2/auto-orient',
+      name: '成都',
     },
     {
       src: 'journey/overview/nn.jpg?imageMogr2/auto-orient',
@@ -347,10 +349,10 @@
         font-family: NotoSansHans-Black;
         text-indent: 16px;
         letter-spacing: 16px;
-        span{
+        span {
           font-size: 24px;
         }
-        &.len6{
+        &.len6 {
           font-size: 28px;
           letter-spacing: 12px;
         }
