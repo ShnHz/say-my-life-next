@@ -53,4 +53,10 @@ export default [
     icon: 'https://www.countingstars.top/upload/2023/05/%E5%A4%B4%E5%83%8F1.jpg',
     description: '给文明以岁月,给时光以生命',
   },
+  {
+    name: 'VnYzm的博客',
+    href: 'https://zimingyuan.github.io',
+    icon: 'https://zimingyuan.github.io/img/profile.jpg',
+    description: '分享技术心得和摸鱼感想',
+  },
 ]
