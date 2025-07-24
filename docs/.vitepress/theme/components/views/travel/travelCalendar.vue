@@ -143,12 +143,23 @@
     {
       content: '日本埼玉县春日部',
       size: 'large',
-      timestamp: '2025-07-27',
+      timestamp: '2025-07-28',
       type: 'primary',
       icon: Train,
       color: '#0bbd87',
       food: [],
       scenicSpots: ['蜡笔小新胜地巡礼'],
+      trafficNumber: [],
+    },
+    {
+      content: '日本富士吉田',
+      size: 'large',
+      timestamp: '2025-07-27',
+      type: 'primary',
+      icon: Train,
+      color: '#0bbd87',
+      food: [],
+      scenicSpots: [],
       trafficNumber: [],
     },
     {
@@ -181,13 +192,7 @@
       icon: Plane,
       color: '#0bbd87',
       food: [],
-      scenicSpots: [
-        '东京铁塔',
-        '浅草寺',
-        '秋叶原',
-        '涩谷sky',
-        '东京迪士尼海洋',
-      ],
+      scenicSpots: ['东京铁塔', '浅草寺', '秋叶原', '涩谷sky', '歌舞伎町'],
       trafficNumber: [
         {
           number: '春秋航空9C6131',
