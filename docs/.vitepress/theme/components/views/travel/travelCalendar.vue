@@ -104,18 +104,6 @@
       // hollow: true,
     },
     {
-      content: '日本东京',
-      // size: 'large',
-      // timestamp: '2023-10-27 - 2023-10-29',
-      // type: 'primary',
-      // icon: Train,
-      // color: '#0bbd87',
-      food: [],
-      scenicSpots: [],
-      trafficNumber: [],
-      // hollow: true,
-    },
-    {
       content: '新加坡',
       // size: 'large',
       // timestamp: '2023-10-27 - 2023-10-29',
@@ -149,8 +137,153 @@
       food: [],
       scenicSpots: [],
       trafficNumber: [],
-      plan:'Malaysia-KualaLumpur',
+      plan: 'Malaysia-KualaLumpur',
       // hollow: true,
+    },
+    {
+      content: '日本横滨',
+      size: 'large',
+      timestamp: '2025-07-28',
+      type: 'primary',
+      icon: Train,
+      color: '#0bbd87',
+      food: ['Yakiniku Watami（烧肉）'],
+      scenicSpots: ['中华街', '红砖仓库', '空中缆车', '友都八喜', '爱电王'],
+      trafficNumber: [
+        {
+          number: '[JK]根岸线',
+          time: '07.28',
+        },
+      ],
+    },
+    {
+      content: '日本镰仓',
+      size: 'large',
+      timestamp: '2025-07-28',
+      type: 'primary',
+      icon: Train,
+      color: '#0bbd87',
+      food: ['海花亭（咖喱饭）'],
+      scenicSpots: ['镰仓高校前站', '江之岛', '七里滨'],
+      trafficNumber: [
+        {
+          number: '[JD]京滨急行线',
+          time: '07.28',
+        },
+        {
+          number: '[🚠]湘南单轨列车',
+          time: '07.28',
+        },
+        {
+          number: '[小绿车]江之岛电铁列',
+          time: '07.28',
+        },
+      ],
+    },
+    {
+      content: '日本富士山河口湖',
+      size: 'large',
+      timestamp: '2025-07-27',
+      type: 'primary',
+      icon: Train,
+      color: '#0bbd87',
+      food: ['猪排饭'],
+      scenicSpots: ['河口湖', '富士急乐园（遇到了路演的女团）', '大石公园'],
+      trafficNumber: [
+        {
+          number: '富士洄游号81',
+          time: '07.27 09:02 - 07.25 11:21',
+          area: '新宿 - 河口湖',
+        },
+        {
+          number: '河口湖 RED LINE 旅游巴士',
+          time: '07.27',
+        },
+        {
+          number: '[🗻]富士急行线',
+          time: '07.27',
+        },
+        {
+          number: '[JC]中央线',
+          time: '07.27',
+        },
+        {
+          number: '[JK]京滨东北线',
+          time: '07.27',
+        },
+      ],
+    },
+    {
+      content: '日本埼玉县春日部',
+      size: 'large',
+      timestamp: '2025-07-26',
+      type: 'primary',
+      icon: Train,
+      color: '#0bbd87',
+      food: [],
+      scenicSpots: [
+        '蜡笔小新胜地巡礼',
+        '情报发信站',
+        '乡土资料馆',
+        'lala garden商场（遇到了路演的男团）',
+        '风间家',
+        '春日部市役所',
+      ],
+      trafficNumber: [
+        {
+          number: '[JJ]常磐线',
+          time: '07.26',
+        },
+        {
+          number: '[TS]东武晴空塔线',
+          time: '07.26',
+        },
+      ],
+    },
+    {
+      content: '日本东京',
+      size: 'large',
+      timestamp: '2025-07-25',
+      type: 'primary',
+      icon: Plane,
+      color: '#0bbd87',
+      food: [
+        '一兰拉面',
+        '各种711快餐',
+        '駅弁车站便当',
+        '烧鸟',
+        'TsuruTonTan UDON NOODLE Brasserie SHIBUYA（乌冬面）',
+        '神楽坂茶寮',
+      ],
+      scenicSpots: ['东京铁塔', '歌舞伎町', '涩谷sky', '浅草寺', '秋叶原'],
+      trafficNumber: [
+        {
+          number: '春秋航空9C6131',
+          time: '07.25 06:10 - 07.25 10:05',
+          area: '上海浦东国际机场 - 东京成田机场',
+        },
+        {
+          number: '春秋航空9C6998',
+          time: '07.29 01:05 - 07.29 03:10',
+          area: '东京羽田机场 - 上海浦东国际机场',
+        },
+        {
+          number: '[E]大江户线',
+          time: '07.25',
+        },
+        {
+          number: '[JY]山手线',
+          time: '07.25',
+        },
+        {
+          number: '[A]浅草线',
+          time: '07.26',
+        },
+        {
+          number: '[G]银座线',
+          time: '07.26',
+        },
+      ],
     },
     {
       content: '日本神户',
@@ -161,20 +294,15 @@
       color: '#0bbd87',
       food: [
         '本格炭火焼うなぎ えん 京都三条店（鳗鱼饭）',
-        'Sumiyagura Kyoto（拉面）'
+        'Sumiyagura Kyoto（拉面）',
       ],
-      scenicSpots: [
-        '鸭川',
-        '伏见稻荷大社',
-        '清水寺',
-        '三年坂二年坂'
-      ],
+      scenicSpots: ['鸭川', '伏见稻荷大社', '清水寺', '三年坂二年坂'],
       trafficNumber: [
         {
           number: '坂急京都线',
           time: '2025-03-23 10:40 - 2025-03-23 12:13',
           area: '梅田 - 京都',
-        }
+        },
       ],
       // hollow: true,
     },
@@ -193,7 +321,7 @@
         '环球影城路易斯纽约披萨饼屋',
         '环球影城奇诺比奥咖啡店',
         'Yakiniku Sukiyaki Jun（神户和牛）',
-        '机场T2咖喱猪排饭与大阪烧'
+        '机场T2咖喱猪排饭与大阪烧',
       ],
       scenicSpots: [
         '心斋桥',
@@ -201,7 +329,7 @@
         '通天阁',
         'USJ大阪环球影城',
         '梅田商圈',
-        '天守城'
+        '天守城',
       ],
       trafficNumber: [
         {
@@ -803,7 +931,7 @@
         left: -5px;
         .el-timeline-item__icon {
           font-size: 18px;
-          left: -4px;
+          left: -2px;
         }
       }
       li {
