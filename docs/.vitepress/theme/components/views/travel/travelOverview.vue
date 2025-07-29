@@ -85,12 +85,28 @@
       name: 'KR济州岛',
     },
     {
+      src: 'journey/overview/jpdj.jpg?imageMogr2/auto-orient',
+      name: 'JP东京',
+    },
+    {
+      src: 'journey/overview/jplc.heic?imageMogr2/auto-orient',
+      name: 'JP镰仓',
+    },
+    {
+      src: 'journey/overview/jphb.heic?imageMogr2/auto-orient',
+      name: 'JP横滨',
+    },
+    {
       src: 'journey/overview/jpdb.jpg?imageMogr2/auto-orient',
       name: 'JP大阪',
     },
     {
       src: 'journey/overview/jpjd.jpg?imageMogr2/auto-orient',
       name: 'JP京都',
+    },
+    {
+      src: 'journey/overview/jpfss.jpg?imageMogr2/auto-orient',
+      name: 'JP富士山',
     },
     {
       src: 'journey/overview/am.jpg?imageMogr2/auto-orient',
