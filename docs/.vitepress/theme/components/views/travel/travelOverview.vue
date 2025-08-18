@@ -6,8 +6,10 @@
     <div class="travtel-overview-list-wrap">
       <div
         class="img-wrap"
+        :class="{ video: item.video }"
         v-for="(item, index) in imgs"
         :key="`journey-overview-item-${index}`"
+        @click="handleClick(item)"
       >
         <el-image
           :src="item.src"
@@ -32,16 +34,31 @@
         </p>
       </div>
     </div>
+
+    <DialogVideo
+      v-model:show="dialogVideo.show"
+      :video="dialogVideo.video"
+      :poster="dialogVideo.poster"
+      @closed="
+        dialogVideo = {
+          show: false,
+          video: '',
+          poster: '',
+        }
+      "
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue'
+  import { computed, ref } from 'vue'
   import travelMap from './travelMap.vue'
+  import DialogVideo from '../../common/DialogVideo.vue'
 
   const list: {
     src: string
     name: string
+    video?: string
   }[] = [
     {
       src: 'journey/overview/hz.jpg?imageMogr2/auto-orient',
@@ -94,6 +111,7 @@
     {
       src: 'journey/overview/jpdj.jpg?imageMogr2/auto-orient',
       name: 'JP东京',
+      video: 'https://cdn.chenyingshuang.cn/journey/blog/JP_TOKYO_202507.mov',
     },
     {
       src: 'journey/overview/jplc.heic?imageMogr2/auto-orient',
@@ -321,6 +339,26 @@
       }
     })
   })
+
+  const handleClick = (item: any) => {
+    if (item.video) {
+      dialogVideo.value = {
+        show: true,
+        video: item.video,
+        poster: '',
+      }
+    }
+  }
+
+  const dialogVideo = ref<{
+    show: boolean
+    video: string
+    poster: string
+  }>({
+    show: false,
+    poster: '',
+    video: '',
+  })
 </script>
 
 <style scoped lang="less">
@@ -370,6 +408,9 @@
         img {
           transition: all 0.3s ease-out;
         }
+      }
+      &.video {
+        cursor: pointer;
       }
 
       p {
