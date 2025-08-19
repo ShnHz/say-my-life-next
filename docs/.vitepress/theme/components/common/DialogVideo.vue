@@ -112,6 +112,7 @@
     height: 460px;
     background: transparent;
     margin: 0 auto;
+    padding: 0;
     top: 50%;
     transform: translateY(-50%);
     border-radius: 32px;
