@@ -6,21 +6,40 @@
     @closed="closeModal"
     class="el-dialog-video"
   >
-    <video-player
-      :src="props.video"
-      :poster="props.poster"
-      controls
-      :loop="false"
-      :volume="0.6"
-      :autoplay="props.autoplay"
-    />
+    <ClientOnly>
+      <component
+        v-if="VideoPlayer"
+        :is="VideoPlayer"
+        :src="props.video"
+        :poster="props.poster"
+        controls
+        :loop="false"
+        :volume="0.6"
+        :autoplay="props.autoplay"
+      />
+      <div v-else class="video-loading">加载视频播放器...</div>
+    </ClientOnly>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
-  import { ref, watch, nextTick, reactive } from 'vue'
-  import { VideoPlayer } from '@videojs-player/vue'
-  import 'video.js/dist/video-js.css'
+  import { ref, watch, nextTick, reactive, onMounted, type Component } from 'vue'
+
+  const VideoPlayer = ref<Component | null>(null)
+  
+  // 动态导入视频播放器组件，避免 SSR 问题
+  onMounted(async () => {
+    try {
+      if (typeof window !== 'undefined') {
+        // 动态导入 CSS 文件
+        await import('video.js/dist/video-js.css' as any)
+        const { VideoPlayer: VPlayer } = await import('@videojs-player/vue')
+        VideoPlayer.value = VPlayer as Component
+      }
+    } catch (error) {
+      console.error('Failed to load video player:', error)
+    }
+  })
 
   const emit = defineEmits(['update:show', 'closed'])
   const isShow = ref<boolean>(false)
@@ -112,9 +131,19 @@
       height: 100%;
       width: 100%;
     }
-    .video-js {
-      width: 100%;
-      height: 100%;
-    }
-  }
-</style>
+         .video-js {
+       width: 100%;
+       height: 100%;
+     }
+     
+     .video-loading {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       height: 460px;
+       font-size: 16px;
+       color: #666;
+       background: #000;
+     }
+   }
+ </style>
