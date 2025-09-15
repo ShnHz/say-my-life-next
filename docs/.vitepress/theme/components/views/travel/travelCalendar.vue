@@ -6,7 +6,7 @@
         :key="index"
         :icon="activity.icon"
         :type="activity.type"
-        :color="activity.color"
+        :color="computedColor(activity)"
         :size="activity.size"
         :hollow="activity.hollow"
         :timestamp="activity.timestamp"
@@ -139,6 +139,56 @@
       trafficNumber: [],
       plan: 'Malaysia-KualaLumpur',
       // hollow: true,
+    },
+    {
+      content: '温州',
+      size: 'large',
+      timestamp: '2025-09-14',
+      type: 'primary',
+      icon: Car,
+      color: '#0bbd87',
+      food: ['老温州·温州菜'],
+      scenicSpots: ['五马街'],
+      trafficNumber: [],
+    },
+    {
+      content: '三亚',
+      size: 'large',
+      timestamp: '2025-09-06 - 2025-09-07',
+      type: 'primary',
+      icon: Train,
+      color: '#0bbd87',
+      food: ['岛上椰林·东方烤乳猪·海鲜餐厅', '糟粕醋火锅', '椰子饭'],
+      scenicSpots: ['亚特兰蒂斯水世界', '亚特兰蒂斯水族馆'],
+      trafficNumber: [
+        {
+          number: 'C7873',
+          time: '09.06 09:17 - 09.06 09:50',
+          area: '神州 - 亚龙湾',
+        },
+      ],
+    },
+    {
+      content: '万宁',
+      size: 'large',
+      timestamp: '2025-09-05',
+      type: 'primary',
+      icon: Plane,
+      color: '#0bbd87',
+      food: ['香草鸭', '海南粉'],
+      scenicSpots: ['神州半岛', '石梅湾', '日月湾'],
+      trafficNumber: [
+        {
+          number: '成都航空EU2264',
+          time: '09.05 12:25 - 09.05 15:20',
+          area: '杭州萧山国际机场 - 海口美兰国际机场',
+        },
+        {
+          number: 'C7861',
+          time: '09.05 16:32 - 09.05 17:36',
+          area: '美兰 - 神州',
+        },
+      ],
     },
     {
       content: '日本横滨',
@@ -909,6 +959,20 @@
       size: 'normal',
     },
   ]
+
+  const computedColor = (item) => {
+    console.error(item)
+    if (item.icon?.name === 'Car') {
+      return '#2F2F2F	'
+    } else if (item.icon?.name === 'TrainProfile') {
+      return '#F7B507'
+    } else if (item.icon?.name === 'PlaneDeparture') {
+      return '#ADD8E6'
+    } else if (item.icon?.name === 'Ship') {
+      return '#003366'
+    }
+    return ''
+  }
 </script>
 
 <style scoped lang="less">
