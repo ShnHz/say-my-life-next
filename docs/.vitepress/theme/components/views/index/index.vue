@@ -11,10 +11,14 @@
             {{ frontmatter.hero.name }}
           </div>
           <div class="desc">{{ desc }}</div>
-          <div class="avatar">
+          <div
+            class="avatar"
+            @touchstart="handleAvatarTouch"
+          >
             <img
               src="https://cdn.chenyingshuang.cn/index/labixiaoxin.png"
               alt=""
+              loading="lazy"
             />
           </div>
         </div>
@@ -43,6 +47,8 @@
             indicator-position="none"
             arrow="never"
             :interval="10000"
+            :touchable="true"
+            :pause-on-hover="false"
             @change="handleCarouseChange"
             ref="nCarousel"
           >
@@ -151,6 +157,34 @@
       }
       startEasyTyper(EasyTyper.default)
     }, 10000)
+
+    // 移动端优化
+    if (window.innerWidth <= 768) {
+      // 防止双击缩放
+      let lastTouchEnd = 0
+      document.addEventListener(
+        'touchend',
+        (event) => {
+          const now = new Date().getTime()
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault()
+          }
+          lastTouchEnd = now
+        },
+        false
+      )
+
+      // 优化滚动性能
+      document.addEventListener(
+        'touchmove',
+        (event) => {
+          if ((event as any).scale !== 1) {
+            event.preventDefault()
+          }
+        },
+        { passive: false }
+      )
+    }
   })
 
   onUnmounted(() => {
@@ -211,11 +245,33 @@
       return index < maxBlogNum.value
     })
   })
+
+  // 移动端触摸交互
+  const handleAvatarTouch = () => {
+    // 在移动端添加触摸反馈
+    if (window.innerWidth <= 768) {
+      const avatar = document.querySelector('.avatar')
+      if (avatar) {
+        avatar.classList.add('touch-active')
+        setTimeout(() => {
+          avatar.classList.remove('touch-active')
+        }, 200)
+      }
+    }
+  }
 </script>
 
 <style scoped lang="less">
   .index-wrap {
     overflow: hidden;
+    // 移动端优化
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     .first-wrap {
       height: 100vh;
       width: 100%;
@@ -277,6 +333,14 @@
           &:hover {
             border: 2px solid var(--vp-c-brand);
           }
+
+          // 移动端触摸反馈
+          &.touch-active {
+            transform: scale(0.95);
+            border-color: var(--vp-c-brand);
+            transition: all 0.1s ease;
+          }
+
           img {
             cursor: pointer;
             margin-top: 0px;
@@ -459,18 +523,222 @@
   //   animation-play-state: paused;
   // }
 
+  // 移动端适配
   @media screen and (max-width: 768px) {
-    .scroll {
-      width: 90vw;
-    }
+    .index-wrap {
+      .first-wrap {
+        height: 100vh;
 
-    .scroll > div span {
-      background-color: #4caf50;
-    }
+        .info-wrap {
+          transform: translateY(-180px);
+          padding: 0 20px;
 
-    .img-box img {
-      width: 33vw;
-      filter: grayscale(0);
+          .hello {
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: center;
+          }
+
+          .title {
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-size: 36px;
+            text-align: center;
+            letter-spacing: 2px;
+          }
+
+          .desc {
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 30px;
+          }
+
+          .avatar {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            margin-top: 40px;
+          }
+        }
+      }
+
+      .other-wrap {
+        .container {
+          padding: 0 14px;
+        }
+        .banner-wrap {
+          padding: 16px 0;
+
+          ul {
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+
+            li {
+              width: calc(50% - 4px);
+              height: 80px;
+              border-radius: 12px;
+              border-width: 2px;
+            }
+          }
+
+          :deep(.el-carousel) {
+            height: 80px;
+            margin-top: 12px;
+
+            .el-carousel__container {
+              height: 80px;
+            }
+
+            .el-carousel__item {
+              padding: 12px 8px;
+
+              .carousel-title {
+                font-size: 18px;
+                text-align: center;
+              }
+
+              .carousel-desc {
+                margin-top: 8px;
+                font-size: 14px;
+                text-align: center;
+                line-height: 1.4;
+              }
+            }
+          }
+        }
+
+        .scroll-wrap {
+          margin: 12px;
+
+          .scroll {
+            width: 95vw;
+            // 移动端滚动优化
+            -webkit-overflow-scrolling: touch;
+
+            > div span {
+              margin: 6px;
+              padding: 4px 8px;
+              font-size: 12px;
+              background-color: var(--bg-2);
+              // 移动端触摸优化
+              -webkit-tap-highlight-color: transparent;
+              touch-action: manipulation;
+            }
+          }
+        }
+
+        .more-wrap {
+          margin: 16px 0 0;
+          padding: 16px 0 24px;
+
+          p {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  // 超小屏幕适配 (iPhone SE 等)
+  @media screen and (max-width: 480px) {
+    .index-wrap {
+      .first-wrap {
+        .info-wrap {
+          transform: translateY(-150px);
+          padding: 0 16px;
+
+          .hello {
+            font-size: 16px;
+            margin-bottom: 16px;
+          }
+
+          .title {
+            font-size: 28px;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+          }
+
+          .desc {
+            font-size: 14px;
+            margin-bottom: 24px;
+          }
+
+          .avatar {
+            width: 100px;
+            height: 100px;
+            margin-top: 30px;
+          }
+        }
+      }
+
+      .other-wrap {
+        .container {
+          padding: 0 14px;
+        }
+        .banner-wrap {
+          ul {
+            li {
+              width: calc(50% - 4px);
+              height: 70px;
+            }
+          }
+
+          :deep(.el-carousel) {
+            height: 70px;
+
+            .el-carousel__item {
+              padding: 8px 6px;
+
+              .carousel-title {
+                font-size: 16px;
+              }
+
+              .carousel-desc {
+                font-size: 12px;
+                margin-top: 6px;
+              }
+            }
+          }
+        }
+
+        .scroll-wrap {
+          .scroll {
+            > div span {
+              margin: 4px;
+              padding: 3px 6px;
+              font-size: 11px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 横屏适配
+  @media screen and (max-width: 768px) and (orientation: landscape) {
+    .index-wrap {
+      .first-wrap {
+        .info-wrap {
+          transform: translateY(-120px);
+
+          .title {
+            font-size: 32px;
+            margin-bottom: 16px;
+          }
+
+          .desc {
+            font-size: 16px;
+            margin-bottom: 20px;
+          }
+
+          .avatar {
+            width: 100px;
+            height: 100px;
+            margin-top: 20px;
+          }
+        }
+      }
     }
   }
 </style>

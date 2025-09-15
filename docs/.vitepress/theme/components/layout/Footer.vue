@@ -6,7 +6,11 @@
     <div class="container">
       <div class="left-info">
         <span class="record-wrap">
-          <a :href="themeConfig.recordLink">
+          <a 
+            :href="themeConfig.recordLink"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {{ themeConfig.record }}
           </a>
         </span>
@@ -15,6 +19,7 @@
           <a
             href="https://vitepress.dev/"
             target="_blank"
+            rel="noopener noreferrer"
             >VitePress</a
           >
         </span>
@@ -65,6 +70,9 @@
     height: var(--vp-nav-height);
     border-top: 1px solid;
     border-color: var(--vp-c-gutter);
+    // 移动端优化
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
     &.has-sidebar {
       .container {
         padding-left: calc(
@@ -86,10 +94,20 @@
         gap: 14px;
         a {
           color: var(--vp-c-brand);
-        }
-        .time-wrap {
-        }
-        .power-wrap {
+          text-decoration: none;
+          transition: color 0.2s ease;
+          // 移动端触摸优化
+          -webkit-tap-highlight-color: transparent;
+          touch-action: manipulation;
+          
+          &:hover {
+            color: var(--vp-c-brand-light);
+            text-decoration: underline;
+          }
+          
+          &:active {
+            color: var(--vp-c-brand-dark);
+          }
         }
       }
       .right-info {
@@ -109,6 +127,133 @@
             font-style: normal;
             font-size: 12px;
           }
+        }
+      }
+    }
+  }
+
+  // 移动端适配
+  @media screen and (max-width: 768px) {
+    .footer-wrap {
+      height: auto;
+      min-height: var(--vp-nav-height);
+      padding: 12px 0;
+      
+      .container {
+        flex-direction: column;
+        gap: 12px;
+        padding: 0 16px;
+        height: auto;
+        font-size: 11px;
+        
+        .left-info {
+          flex-direction: column;
+          gap: 8px;
+          text-align: center;
+          order: 2;
+          
+          span {
+            display: block;
+            line-height: 1.4;
+            word-break: break-word;
+            hyphens: auto;
+          }
+        }
+        
+        .right-info {
+          margin-left: 0;
+          order: 1;
+          justify-content: center;
+          
+          span {
+            font-size: 11px;
+            
+            svg {
+              height: 12px;
+              width: 12px;
+              margin-right: 4px;
+            }
+            
+            .leancloud-visitors-count {
+              font-size: 11px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 超小屏幕适配
+  @media screen and (max-width: 480px) {
+    .footer-wrap {
+      padding: 8px 0;
+      
+      .container {
+        padding: 0 12px;
+        font-size: 10px;
+        gap: 8px;
+        
+        .left-info {
+          gap: 6px;
+          
+          span {
+            word-break: break-word;
+            hyphens: auto;
+            line-height: 1.3;
+          }
+          
+          .time-wrap {
+            font-size: 10px;
+          }
+          
+          .power-wrap {
+            font-size: 10px;
+          }
+          
+          .record-wrap {
+            font-size: 10px;
+          }
+        }
+        
+        .right-info {
+          span {
+            font-size: 10px;
+            
+            svg {
+              height: 10px;
+              width: 10px;
+              margin-right: 3px;
+            }
+            
+            .leancloud-visitors-count {
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 横屏适配
+  @media screen and (max-width: 768px) and (orientation: landscape) {
+    .footer-wrap {
+      padding: 8px 0;
+      
+      .container {
+        flex-direction: row;
+        gap: 16px;
+        
+        .left-info {
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 12px;
+          text-align: left;
+          order: 1;
+        }
+        
+        .right-info {
+          order: 2;
+          margin-left: auto;
         }
       }
     }
