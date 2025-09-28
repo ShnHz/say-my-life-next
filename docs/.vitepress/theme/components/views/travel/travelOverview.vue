@@ -30,7 +30,7 @@
           </div>
         </el-image>
         <p :class="{ len6: item.name.length === 6 }">
-          <span>“</span>{{ item.name }}<span>”</span>
+          <span>"</span>{{ item.name }}<span>"</span>
         </p>
       </div>
     </div>
@@ -51,288 +51,80 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue'
+  import { computed, ref, onMounted } from 'vue'
   import travelMap from './travelMap.vue'
   import DialogVideo from '../../common/DialogVideo.vue'
 
-  const list: {
+  // 定义数据类型
+  interface TravelItem {
     src: string
     name: string
     video?: string
-  }[] = [
-    {
-      src: 'journey/overview/hz.jpg?imageMogr2/auto-orient',
-      name: '杭州',
-    },
-    {
-      src: 'journey/overview/nb.jpg?imageMogr2/auto-orient',
-      name: '宁波',
-    },
-    {
-      src: 'journey/overview/bj.jpg?imageMogr2/auto-orient',
-      name: '北京',
-    },
-    {
-      src: 'journey/overview/sh.jpg?imageMogr2/auto-orient',
-      name: '上海',
-    },
-    {
-      src: 'journey/overview/gdgz.jpg?imageMogr2/auto-orient',
-      name: '广州',
-    },
-    {
-      src: 'journey/overview/gdsz.jpg?imageMogr2/auto-orient',
-      name: '深圳',
-    },
-    {
-      src: 'journey/overview/hn.jpg?imageMogr2/auto-orient',
-      name: 'VN河内',
-    },
-    {
-      src: 'journey/overview/xg.jpg?imageMogr2/auto-orient',
-      name: 'VN岘港',
-    },
-    {
-      src: 'journey/overview/hzm.jpg?imageMogr2/auto-orient',
-      name: 'VN胡志明',
-    },
-    {
-      src: 'journey/overview/mg.jpg?imageMogr2/auto-orient',
-      name: 'TH曼谷',
-    },
-    {
-      src: 'journey/overview/bty.jpg?imageMogr2/auto-orient',
-      name: 'TH芭提雅',
-    },
-    {
-      src: 'journey/overview/hgjzd.jpg?imageMogr2/auto-orient',
-      name: 'KR济州岛',
-    },
-    {
-      src: 'journey/overview/jpdj.jpg?imageMogr2/auto-orient',
-      name: 'JP东京',
-      video: 'https://cdn.chenyingshuang.cn/journey/blog/JP_TOKYO_202507.mov',
-    },
-    {
-      src: 'journey/overview/jplc.heic?imageMogr2/auto-orient',
-      name: 'JP镰仓',
-    },
-    {
-      src: 'journey/overview/jphb.heic?imageMogr2/auto-orient',
-      name: 'JP横滨',
-    },
-    {
-      src: 'journey/overview/jpdb.jpg?imageMogr2/auto-orient',
-      name: 'JP大阪',
-    },
-    {
-      src: 'journey/overview/jpjd.jpg?imageMogr2/auto-orient',
-      name: 'JP京都',
-    },
-    {
-      src: 'journey/overview/jpfss.jpg?imageMogr2/auto-orient',
-      name: 'JP富士山',
-    },
-    {
-      src: 'journey/overview/am.jpg?imageMogr2/auto-orient',
-      name: 'CN澳门',
-    },
-    {
-      src: 'journey/overview/xg.heic?imageMogr2/auto-orient',
-      name: 'CN香港',
-    },
-    {
-      src: 'journey/overview/tj.jpg?imageMogr2/auto-orient',
-      name: '天津',
-    },
-    {
-      src: 'journey/overview/cq.jpg?imageMogr2/auto-orient',
-      name: '重庆',
-    },
-    {
-      src: 'journey/overview/cd.jpg?imageMogr2/auto-orient',
-      name: '成都',
-    },
-    {
-      src: 'journey/overview/nn.jpg?imageMogr2/auto-orient',
-      name: '南宁',
-    },
-    {
-      src: 'journey/overview/xa.jpg?imageMogr2/auto-orient',
-      name: '西安',
-    },
-    {
-      src: 'journey/overview/nj.jpg?imageMogr2/auto-orient',
-      name: '南京',
-    },
-    {
-      src: 'journey/overview/sz.jpg?imageMogr2/auto-orient',
-      name: '苏州',
-    },
-    {
-      src: 'journey/overview/cz.jpg?imageMogr2/auto-orient',
-      name: '常州',
-    },
-    {
-      src: 'journey/overview/wx.jpg?imageMogr2/auto-orient',
-      name: '无锡',
-    },
-    {
-      src: 'journey/overview/jsly.jpg?imageMogr2/auto-orient',
-      name: '溧阳',
-    },
-    {
-      src: 'journey/overview/jsyz.jpg?imageMogr2/auto-orient',
-      name: '扬州',
-    },
-    {
-      src: 'journey/overview/zjsx.jpg?imageMogr2/auto-orient',
-      name: '绍兴',
-    },
-    {
-      src: 'journey/overview/zjtz.jpg?imageMogr2/auto-orient',
-      name: '台州',
-    },
-    {
-      src: 'journey/overview/xs.jpg?imageMogr2/auto-orient',
-      name: '象山',
-    },
-    {
-      src: 'journey/overview/qz.jpg?imageMogr2/auto-orient',
-      name: '衢州',
-    },
-    {
-      src: 'journey/overview/zjjh.jpg?imageMogr2/auto-orient',
-      name: '金华',
-    },
-    {
-      src: 'journey/overview/zjls.jpg?imageMogr2/auto-orient',
-      name: '丽水',
-    },
-    {
-      src: 'journey/overview/zjtl.jpg?imageMogr2/auto-orient',
-      name: '桐庐',
-    },
-    {
-      src: 'journey/overview/zjhuz.jpg?imageMogr2/auto-orient',
-      name: '湖州',
-    },
-    {
-      src: 'journey/overview/fjxm.jpg?imageMogr2/auto-orient',
-      name: '厦门',
-    },
-    {
-      src: 'journey/overview/fjfz.jpg?imageMogr2/auto-orient',
-      name: '福州',
-    },
-    {
-      src: 'journey/overview/fjqz.jpg?imageMogr2/auto-orient',
-      name: '泉州',
-    },
-    {
-      src: 'journey/overview/fjly.jpg?imageMogr2/auto-orient',
-      name: '龙岩',
-    },
-    {
-      src: 'journey/overview/jxgz.jpg?imageMogr2/auto-orient',
-      name: '赣州',
-    },
-    {
-      src: 'journey/overview/jxjdz.jpg?imageMogr2/auto-orient',
-      name: '景德镇',
-    },
-    {
-      src: 'journey/overview/jxnc.jpg?imageMogr2/auto-orient',
-      name: '南昌',
-    },
-    {
-      src: 'journey/overview/hncs.jpg?imageMogr2/auto-orient',
-      name: '长沙',
-    },
-    {
-      src: 'journey/overview/sy.jpg?imageMogr2/auto-orient',
-      name: '三亚',
-    },
-    {
-      src: 'journey/overview/hbwh.jpg?imageMogr2/auto-orient',
-      name: '武汉',
-    },
-    {
-      src: 'journey/overview/hbyc.jpg?imageMogr2/auto-orient',
-      name: '宜昌',
-    },
-    {
-      src: 'journey/overview/gdcz.jpg?imageMogr2/auto-orient',
-      name: '潮州',
-    },
-    {
-      src: 'journey/overview/gdst.jpg?imageMogr2/auto-orient',
-      name: '汕头',
-    },
-    {
-      src: 'journey/overview/gzgy.jpg?imageMogr2/auto-orient',
-      name: '贵阳',
-    },
-    {
-      src: 'journey/overview/gzlb.jpg?imageMogr2/auto-orient',
-      name: '荔波',
-    },
-    {
-      src: 'journey/overview/gzzj.jpg?imageMogr2/auto-orient',
-      name: '织金',
-    },
-    {
-      src: 'journey/overview/gzas.jpg?imageMogr2/auto-orient',
-      name: '安顺',
-    },
-    {
-      src: 'journey/overview/gzhgs.jpg?imageMogr2/auto-orient',
-      name: '黄果树大瀑布',
-    },
-    {
-      src: 'journey/overview/gzqhmz.jpg?imageMogr2/auto-orient',
-      name: '千户苗寨',
-    },
-    {
-      src: 'journey/overview/djd.jpg?imageMogr2/auto-orient',
-      name: '东极岛',
-    },
-    {
-      src: 'journey/overview/qdh.jpg?imageMogr2/auto-orient',
-      name: '千岛湖',
-    },
-    {
-      src: 'journey/overview/yds.jpg?imageMogr2/auto-orient',
-      name: '雁荡山',
-    },
-    {
-      src: 'journey/overview/hs.jpg?imageMogr2/auto-orient',
-      name: '华山',
-    },
-    {
-      src: 'journey/overview/dms.jpg?imageMogr2/auto-orient',
-      name: '大明山',
-    },
-    {
-      src: 'journey/overview/jxwgs.jpg?imageMogr2/auto-orient',
-      name: '武功山',
-    },
-    {
-      src: 'journey/overview/jxlhs.jpg?imageMogr2/auto-orient',
-      name: '龙虎山',
-    },
-    {
-      src: 'journey/overview/netease.png?imageMogr2/auto-orient',
-      name: '网易',
-    },
-    {
-      src: 'journey/overview/zszn.jpg?imageMogr2/auto-orient',
-      name: '整数智能',
-    },
-  ]
+  }
+
+  // 响应式数据
+  const list = ref<TravelItem[]>([])
+
+  // 从JSON文件加载数据
+  const loadTravelData = async () => {
+    // 根据环境判断数据源
+    const isDev =
+      process.env.NODE_ENV === 'development' ||
+      location.hostname === 'localhost' ||
+      location.hostname === '127.0.0.1'
+
+    if (isDev) {
+      // 开发环境：使用本地JSON文件
+      await loadFromUrl(
+        '/json/travel_overview.json',
+        '🔧 开发环境：使用本地JSON文件'
+      )
+    } else {
+      // 生产环境：优先使用云存储，失败时回退到public目录
+      try {
+        await loadFromUrl(
+          'https://cdn.chenyingshuang.cn/json/travel_overview.json',
+          '🚀 生产环境：使用云存储URL'
+        )
+      } catch (error) {
+        console.warn('云存储加载失败，回退到public目录:', error)
+        await loadFromUrl(
+          '/json/travel_overview.json',
+          '📁 回退到public目录文件'
+        )
+      }
+    }
+  }
+
+  // 从指定URL加载数据的辅助函数
+  const loadFromUrl = async (url: string, logMessage: string) => {
+    try {
+      console.log(logMessage, url)
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error(`Failed to fetch travel data from ${url}`)
+      }
+      const data = await response.json()
+      list.value = data
+    } catch (error) {
+      console.error(`Error loading travel data from ${url}:`, error)
+      // 如果所有数据源都失败，使用默认数据
+      if (url === '/json/travel_overview.json') {
+        console.warn('所有数据源都失败，使用默认数据')
+        list.value = []
+      } else {
+        throw error
+      }
+    }
+  }
+
+  // 组件挂载时加载数据
+  onMounted(() => {
+    loadTravelData()
+  })
 
   const imgs = computed(() => {
-    return list.map((item) => {
+    return list.value.map((item) => {
       return {
         ...item,
         src: `http://cdn.chenyingshuang.cn/${item.src}`,
