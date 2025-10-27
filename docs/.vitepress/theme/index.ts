@@ -39,6 +39,7 @@ import travelCalendar from './components/views/travel/travelCalendar.vue'
 
 // life
 import CardAnime from './components/views/life/components/CardAnime.vue'
+import weightLoss from './components/views/life/weight-loss.vue'
 
 export default {
   ...Theme,
@@ -60,12 +61,13 @@ export default {
 
     app.component('CodeDemo', CodeDemo)
     app.component('Card3D', Card3D)
-    app.component('ImageList',ImageList)
+    app.component('ImageList', ImageList)
 
     app.component('Color', Color)
     app.component('Shadow', Shadow)
 
     app.component('LifeCardAnime', CardAnime)
+    app.component('ViewWeightLoss', weightLoss)
 
     app.use(ElementPlus)
 
