@@ -73,6 +73,14 @@
     "name": "JP富士山"
   },
   {
+    "src": "journey/overview/singapore.jpg?imageMogr2/auto-orient",
+    "name": "SG新加坡"
+  },
+  {
+    "src": "journey/overview/mysjlp.jpg?imageMogr2/auto-orient",
+    "name": "MYS吉隆坡"
+  },
+  {
     "src": "journey/overview/am.jpg?imageMogr2/auto-orient",
     "name": "CN澳门"
   },
@@ -171,6 +179,10 @@
   {
     "src": "journey/overview/fjly.jpg?imageMogr2/auto-orient",
     "name": "龙岩"
+  },
+  {
+    "src": "journey/overview/fjpt.jpg?imageMogr2/auto-orient",
+    "name": "莆田"
   },
   {
     "src": "journey/overview/jxgz.jpg?imageMogr2/auto-orient",
