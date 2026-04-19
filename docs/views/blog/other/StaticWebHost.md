@@ -25,13 +25,13 @@ title : 国内静态页面托管
 源站域名为 ****.github.io <br>
 加速域名为 你的已备案自定义域名
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/StaticWebHost/1.png" />
+<img src="https://cdn.sanghangning.cn/blog/other/StaticWebHost/1.png" />
 
 #### DNS配置
 
 然后去配置DNS，配置完成后过段时间即可看到效果
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/StaticWebHost/2.png" />
+<img src="https://cdn.sanghangning.cn/blog/other/StaticWebHost/2.png" />
 
 #### 测试
 

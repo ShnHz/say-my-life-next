@@ -51,7 +51,7 @@ video.currentTime = n
 
 #### 演示视频
 
-<video src="https://cdn.chenyingshuang.cn/blog/js/ShiPinChouZhengJiTuXiangQuSe/spcz.mp4" controls="controls" />
+<video src="https://cdn.sanghangning.cn/blog/js/ShiPinChouZhengJiTuXiangQuSe/spcz.mp4" controls="controls" />
 
 
 ### 图像取色工具
@@ -162,4 +162,4 @@ if (type == 'IHDR' && (uint8Array[25] == 6 || uint8Array[25] == 4 || uint8Array[
 
 #### 演示视频
 
-<video src="https://cdn.chenyingshuang.cn/blog/js/ShiPinChouZhengJiTuXiangQuSe/txqs.mp4" controls="controls"/>
+<video src="https://cdn.sanghangning.cn/blog/js/ShiPinChouZhengJiTuXiangQuSe/txqs.mp4" controls="controls"/>

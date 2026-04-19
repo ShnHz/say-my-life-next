@@ -35,7 +35,7 @@ title : 5 个 GitHub 上超火的 CSS 奇技淫巧项目，找到写 CSS 的灵�
 
 目前文档一共包含 43 个 CSS 的小样式（持续更新…），所以还是很不错的学习 CSS 的项目来的。
 
-<img src="https://cdn.chenyingshuang.cn/blog/css/GithubCssProject/1.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/css/GithubCssProject/1.jpg" />
 
 比如： 打字效果
 
@@ -87,7 +87,7 @@ title : 5 个 GitHub 上超火的 CSS 奇技淫巧项目，找到写 CSS 的灵�
 
 <p>比如：<a class="default" href="https://github.com/chokcoco/iCSS/issues/75" target="_blank" rel="nofollow noopener noreferrer">巧用 CSS 实现酷炫的充电动画</a></p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/css/GithubCssProject/2.gif" />
+<img src="https://cdn.sanghangning.cn/blog/css/GithubCssProject/2.gif" />
 
 <blockquote>
 <p><a href="https://github.com/chokcoco/CSS-Inspiration" target="_blank" rel="nofollow noopener noreferrer">github.com/chokcoco/CS…</a></p>
@@ -173,9 +173,9 @@ $distance: -12px;
 ### animista
 该项目里面有各种 CSS 实现的效果，还有代码演示，方便直接复制代码，还可以复制压缩后的代码，如果你在找某个 CSS 的效果的话，可以到这里找找看。
 
-<img src="https://cdn.chenyingshuang.cn/blog/css/GithubCssProject/3.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/css/GithubCssProject/3.jpg" />
 
-<img src="https://cdn.chenyingshuang.cn/blog/css/GithubCssProject/4.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/css/GithubCssProject/4.jpg" />
 
 <blockquote>
 <p><a href="http://animista.net/" target="_blank" rel="nofollow noopener noreferrer">animista.net/</a></p>
@@ -184,7 +184,7 @@ $distance: -12px;
 ### spinkit
 汇集了实现各种加载效果的 CSS 代码片段。
 
-<img src="https://cdn.chenyingshuang.cn/blog/css/GithubCssProject/5.gif" />
+<img src="https://cdn.sanghangning.cn/blog/css/GithubCssProject/5.gif" />
 
 <p>SpinKit 仅使用（<code>transform</code> 和 <code>opacity</code>）CSS 动画来创建平滑且易于自定义的动画。</p>
 

@@ -37,7 +37,7 @@ title : 高质量前端快照方案：来自页面的「自拍」
 #### 3.2 基本原理
 前端侧对于快照的处理过程，实质上是将 DOM 节点包含的视图信息转换为图片信息的过程。这个过程可以借助 canvas 的原生 API 实现，这也是方案可行性的基础。
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/screenshot/1.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/screenshot/1.jpg" />
 
 具体来说，转换过程是将目标 DOM 节点绘制到 canvas 画布，然后 canvas 画布以图片形式导出。可简单标记为绘制阶段和导出阶段两个步骤：
 
@@ -539,7 +539,7 @@ convertToImage(container)
 
 <p></p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/screenshot/2.jpg" >
+<img src="https://cdn.sanghangning.cn/blog/js/screenshot/2.jpg" >
 
 <p></p>
 <p>最终生成快照的清晰度，源头上取决于第一步中 DOM 转换成的 canvas 的清晰度。</p>
@@ -656,7 +656,7 @@ function createBaseCanvas(scale) {
 ##### 5.2.5 锐化特定元素
 <p>受到 canvas 画布放缩的启发，我们对特定的 DOM 元素也可以采用类似的优化操作，即设置待优化元素宽高设置为 2 倍或<code  class="default">devicePixelRatio</code>倍，然后通过 css 缩放的方式控制其展示大小不变。</p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/screenshot/3.jpg">
+<img src="https://cdn.sanghangning.cn/blog/js/screenshot/3.jpg">
 
 <p>例如，对于必须用背景图<code  class="default">background</code>的元素，采用以下方式可明显提高快照的清晰度：</p>
 

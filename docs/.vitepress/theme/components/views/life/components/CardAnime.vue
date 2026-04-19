@@ -1,6 +1,6 @@
 <template>
   <div class="anime">
-    <el-image :src="'http://cdn.chenyingshuang.cn/' + src" fit="cover" lazy>
+    <el-image :src="'http://cdn.sanghangning.cn/' + src" fit="cover" lazy>
       <div class="image-slot" slot="error">
         <i class="el-icon-picture-outline"></i>
       </div>

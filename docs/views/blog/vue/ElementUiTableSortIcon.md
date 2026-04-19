@@ -42,6 +42,6 @@ this.$refs.table.columns.forEach(item => {
 <code class="default">order</code>指的是列的排序方式，为空时icon则都变为灰色<br/>
 
 现在就可以随意修改icon状态啦
-<img src="https://cdn.chenyingshuang.cn/blog/ElementUiTableSortIcon/1.png" />
+<img src="https://cdn.sanghangning.cn/blog/ElementUiTableSortIcon/1.png" />
 
 

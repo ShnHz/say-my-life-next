@@ -28,6 +28,6 @@ D支付C：175元。
 
 微信扫二维码就可以使用了哟
 
-![avatar](https://cdn.chenyingshuang.cn/blog/applets/AACalculator/1.jpg?imageView2/1/w/200)
+![avatar](https://cdn.sanghangning.cn/blog/applets/AACalculator/1.jpg?imageView2/1/w/200)
 
 可惜了，由于微信云开发需要支付包月费用，我这个小程序的流量还不足以承担每个月的流量费，所以已经在2022年10月份暂停了用户定制功能等内容。

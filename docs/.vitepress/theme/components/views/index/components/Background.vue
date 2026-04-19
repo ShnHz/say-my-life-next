@@ -12,7 +12,7 @@
     top: 0;
     left: 0;
     overflow: hidden;
-    background-image: url(https://cdn.chenyingshuang.cn/index/manbg.png);
+    background-image: url(https://cdn.sanghangning.cn/index/manbg.png);
     background-repeat: no-repeat;
     background-size: auto 115%;
     background-position: 95% center;

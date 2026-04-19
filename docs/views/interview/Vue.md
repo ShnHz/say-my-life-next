@@ -132,7 +132,7 @@ scoped 会在 DOM 结构及 css 样式上加上唯一性的标记 ->data-v-xxx<-
 
 存储的dep对象逻辑是这样的
 
-<img src="https://cdn.chenyingshuang.cn/interview/vue/1.jpg" />
+<img src="https://cdn.sanghangning.cn/interview/vue/1.jpg" />
 
 #### 15.vue mixin的原理？
 

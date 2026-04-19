@@ -29,7 +29,7 @@
         default:
           // 'http://localhost:5173/say-my-life-next/.vitepress/public/map/assets/1.jpg',
           // 'https://assets.codepen.io/13471/pikachu-gx.webp',
-          'https://cdn.chenyingshuang.cn/life/gundam/%E9%AB%98%E8%BE%BE%E8%83%8C%E6%99%AF%402x.jpg',
+          'https://cdn.sanghangning.cn/life/gundam/%E9%AB%98%E8%BE%BE%E8%83%8C%E6%99%AF%402x.jpg',
       },
     },
     data() {

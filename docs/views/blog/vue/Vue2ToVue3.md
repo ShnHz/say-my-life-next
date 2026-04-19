@@ -13,7 +13,7 @@ title: 阿里妈妈又做了新工具，帮你把 Vue2 代码改成 Vue3 的
 
 ###### 原文 [掘金](https://juejin.cn/post/6977259197566517284)
 
-<img src="https://cdn.chenyingshuang.cn/blog/Vue2ToVue3/1.jpg" class="lazy article-hero" style="" />
+<img src="https://cdn.sanghangning.cn/blog/Vue2ToVue3/1.jpg" class="lazy article-hero" style="" />
 
 <h1 data-v-235a9386="" class="article-title">
             阿里妈妈又做了新工具，帮你把 Vue2 代码改成 Vue3 的
@@ -21,8 +21,8 @@ title: 阿里妈妈又做了新工具，帮你把 Vue2 代码改成 Vue3 的
 <p>Vue3 已经出来有一段时间了，很多朋友早已熟读了文档，写了好几个 Demo，馋 Composition API 等新特性已久了。无奈，在实际工作中，大部分朋友还是不得不守着成千上万行的 Vue2 老项目过日子，做一次框架升级就像给老房子装修——念头总是充沛，决心总是匮乏。</p>
 
 <p>其实 Vue 团队已经尽可能地减少了破坏性更新，还提供了一份细致的<a href="https://link.juejin.cn?target=https%3A%2F%2Fv3.cn.vuejs.org%2Fguide%2Fmigration%2Farray-refs.html" target="_blank" rel="nofollow noopener noreferrer" title="https://v3.cn.vuejs.org/guide/migration/array-refs.html" ref="nofollow noopener noreferrer">迁移指南</a>，条数不少，但定睛一看，大部分都是体力活，有些很简单，比如异步组件要多包上一层：</p>
-<p><img src="https://cdn.chenyingshuang.cn/blog/Vue2ToVue3/2.jpg" alt="image.png" loading="lazy" class="medium-zoom-image">还有一些就改起来有点麻烦，比如自定义指令生命周期的更名，和传入参数的一些细微变化：</p>
-<p><img src="https://cdn.chenyingshuang.cn/blog/Vue2ToVue3/3.jpg" alt="image.png" loading="lazy" class="medium-zoom-image"></p>
+<p><img src="https://cdn.sanghangning.cn/blog/Vue2ToVue3/2.jpg" alt="image.png" loading="lazy" class="medium-zoom-image">还有一些就改起来有点麻烦，比如自定义指令生命周期的更名，和传入参数的一些细微变化：</p>
+<p><img src="https://cdn.sanghangning.cn/blog/Vue2ToVue3/3.jpg" alt="image.png" loading="lazy" class="medium-zoom-image"></p>
 <p>看到这种变化后，作为厌恶重复的程序员，已经开始盘算着能不能写个代码帮我们把这些规则批量给改好了，当然，写转换代码的代码要比写网页难上不少，还好我们之前已经有了一个趁手的工具： <a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fthx%2Fgogocode" target="_blank" rel="nofollow noopener noreferrer" title="https://github.com/thx/gogocode" ref="nofollow noopener noreferrer">GoGoCode</a>。</p>
 <p>我们之前的文章<a href="https://juejin.cn/post/6938601548192677918" target="_blank" title="https://juejin.cn/post/6938601548192677918">《阿里妈妈出的新工具，给批量修改项目代码减轻了痛苦》</a>介绍过它，作为一个更简单的 AST处理工具，能大大减轻转换逻辑的书写难度，简直就是为了这事儿量身打造的！</p>
 <p>于是我们梳理了<a href="https://link.juejin.cn?target=https%3A%2F%2Fv3.cn.vuejs.org%2Fguide%2Fmigration%2Farray-refs.html" target="_blank" rel="nofollow noopener noreferrer" title="https://v3.cn.vuejs.org/guide/migration/array-refs.html" ref="nofollow noopener noreferrer">迁移指南</a>里提到的，附带上 vue-router \ vuex 升级的一些 API 变化，配合 <a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fthx%2Fgogocode" target="_blank" rel="nofollow noopener noreferrer" title="https://github.com/thx/gogocode" ref="nofollow noopener noreferrer">GoGoCode</a> 书写了近 30 条转换逻辑，涵盖了 Vue2 到 Vue3 代码 break change 的大部分场景，这个程序可以帮助你一键把 Vue2 的代码转换成 Vue3 的代码。</p>
@@ -36,8 +36,8 @@ title: 阿里妈妈又做了新工具，帮你把 Vue2 代码改成 Vue3 的
 <span class="copy-code-btn">复制代码</span></code></pre>
 <p>转换操作执行完毕后新的 Vue3 代码会被写入到 src-out 目录中</p>
 <p>我们拿 Vue2 的官方示例项目 <a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fvuejs%2Fvue-hackernews-2.0" target="_blank" rel="nofollow noopener noreferrer" title="https://github.com/vuejs/vue-hackernews-2.0" ref="nofollow noopener noreferrer">vue-hackernews-2.0</a> 试了一下，发现在转换的基础上只要稍作改动再改一下构建流程就能跑起来了，一些转换的 Diff 如下：（<a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fthx%2Fgogocode%2Fcommit%2F6506a0e693aff1896da6c8863fa7e7c72d89610f%3Fbranch%3D6506a0e693aff1896da6c8863fa7e7c72d89610f%26diff%3Dsplit" target="_blank" rel="nofollow noopener noreferrer" title="https://github.com/thx/gogocode/commit/6506a0e693aff1896da6c8863fa7e7c72d89610f?branch=6506a0e693aff1896da6c8863fa7e7c72d89610f&amp;diff=split" ref="nofollow noopener noreferrer">查看完整 Diff</a>）</p>
-<p><img src="https://cdn.chenyingshuang.cn/blog/Vue2ToVue3/4.jpg" alt="image.png" loading="lazy" class="medium-zoom-image"></p>
-<p><img src="https://cdn.chenyingshuang.cn/blog/Vue2ToVue3/5.jpg" alt="image.png" loading="lazy" class="medium-zoom-image"></p>
+<p><img src="https://cdn.sanghangning.cn/blog/Vue2ToVue3/4.jpg" alt="image.png" loading="lazy" class="medium-zoom-image"></p>
+<p><img src="https://cdn.sanghangning.cn/blog/Vue2ToVue3/5.jpg" alt="image.png" loading="lazy" class="medium-zoom-image"></p>
 <p>这里只是简单地介绍，完整的方案请参考：<a href="https://link.juejin.cn?target=https%3A%2F%2Fgogocode.io%2Fzh%2Fdocs%2Fspecification%2Fvue2-to-vue3" target="_blank" rel="nofollow noopener noreferrer" title="https://gogocode.io/zh/docs/specification/vue2-to-vue3" ref="nofollow noopener noreferrer">文档</a></p>
 <h2 data-id="heading-1">实现比预想的要简单很多</h2>
 <p>为了达成转换目的，<a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fthx%2Fgogocode" target="_blank" rel="nofollow noopener noreferrer" title="https://github.com/thx/gogocode" ref="nofollow noopener noreferrer">GoGoCode</a> 新增支持了对 .vue 文件的解析，我们可以轻松地获取到解析好的 template 和 scirpt AST节点，并利用 GoGoCode 方便的 API 进行处理。</p>

@@ -91,11 +91,11 @@
     },
     async mounted() {
       const response = await fetch(
-        'https://cdn.chenyingshuang.cn/other/shiki/onig.wasm'
+        'https://cdn.sanghangning.cn/other/shiki/onig.wasm'
       )
       const buffer = await response.arrayBuffer()
       setWasm(buffer)
-      setCDN('https://cdn.chenyingshuang.cn/other/shiki/')
+      setCDN('https://cdn.sanghangning.cn/other/shiki/')
       let _this = this
       const highlighter = await getHighlighter({ theme: 'dark-plus' })
 

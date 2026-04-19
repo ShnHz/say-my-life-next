@@ -16,4 +16,4 @@ title : 逐行级别的 Vue 源码分析
 
 我这边已经把项目Fork下来用GithubPages跑起来了,访问地址是 <a href="https://shnhz.github.io/vue-design/" target="_blank">Vue技术内幕</a>
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/VueDesign/1.png" />
+<img src="https://cdn.sanghangning.cn/blog/vue/VueDesign/1.png" />

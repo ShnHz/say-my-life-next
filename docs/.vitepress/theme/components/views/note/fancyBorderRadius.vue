@@ -217,7 +217,7 @@
     .shape-wrap {
       position: relative;
       margin-bottom: 20px;
-      background-image: url('https://cdn.chenyingshuang.cn/notes/transparent_bg.png');
+      background-image: url('https://cdn.sanghangning.cn/notes/transparent_bg.png');
 
       .shape {
         width: 100%;

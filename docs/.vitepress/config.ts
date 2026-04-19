@@ -49,6 +49,7 @@ export default defineConfig({
     plugins: [],
     server: {
       host: '0.0.0.0',
+      allowedHosts: ['www.sanghangning.com', 'sanghangning.com'],
     },
     resolve: {
       alias: [

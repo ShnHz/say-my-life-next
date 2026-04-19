@@ -32,15 +32,15 @@ summary: N久之前造了一个ui库，和常用库还是有很大差距的，�
 
 ### 组件示例：
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/ShnVueUi/1.jpg" />
-<img src="https://cdn.chenyingshuang.cn/blog/vue/ShnVueUi/2.jpg" />
-<img src="https://cdn.chenyingshuang.cn/blog/vue/ShnVueUi/3.jpg" />
-<img src="https://cdn.chenyingshuang.cn/blog/vue/ShnVueUi/4.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/vue/ShnVueUi/1.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/vue/ShnVueUi/2.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/vue/ShnVueUi/3.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/vue/ShnVueUi/4.jpg" />
 
 ### 已完成的组件：
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/ShnVueUi/5.jpg" />
-<img src="https://cdn.chenyingshuang.cn/blog/vue/ShnVueUi/6.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/vue/ShnVueUi/5.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/vue/ShnVueUi/6.jpg" />
 
 ### 接下来的工作：
 

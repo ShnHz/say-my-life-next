@@ -25,7 +25,7 @@ title : 15 张精美动图全面讲解 CORS
 
 <p>假设我们正在访问 <code>https://api.mywebsite.com</code> 这个站点，点击按钮向  <code>https://api.mywebsite.com/users</code> 发送请求，获取网站上的一些用户信息：</p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/1.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/1.gif" />
 
 <blockquote>
 <p>⚠️：这里原作者有个笔误，把 <code>https://api.mywebsite.com</code> 误写为 <code>https://www.mywebsite.com</code> 了，图中也有这个错误，读者要注意一下不要被误导</p>
@@ -35,7 +35,7 @@ title : 15 张精美动图全面讲解 CORS
 
 <p>下面我们换一个网站试试。用  <code>https://www.anotherwebsite.com</code> 这个网站向 <code>https://api.website.com/users</code> 发送请求：</p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/2.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/2.gif" />
 
 <p>问题来了，我们请求同样的接口网站，但是这次浏览器给我们抛出一个 Error。</p>
 
@@ -46,7 +46,7 @@ title : 15 张精美动图全面讲解 CORS
 
 <p>比如说， <code>https://www.mywebsite.com</code> 请求  <code>https://www.mywebsite.com/page</code> 是完全没有问题的。但是当资源位于不同<strong>协议</strong>、<strong>子域</strong>或<strong>端口</strong>的站点时，这个请求就是跨域的。</p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/3.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/3.jpg" />
 
 <p>目前来看，同源策略会让三种行为受限：</p>
 <ul>
@@ -60,7 +60,7 @@ title : 15 张精美动图全面讲解 CORS
 <p>我们做个假设，如果不存在同源策略，你无意中点击了七大姑在微信上给你发的一篇养生文章链接。其实这个网页是个钓鱼网站，访问链接后就把你重定向到一个嵌入了 iframe 的攻击网站，这个 iframe 会自动加载银行网站，并通过 cookies 登录你的账户。</p>
 <p>登陆成功后，这个钓鱼网站还可以控制 iframe 的 DOM，通过一系列骚操作把你卡里的钱转走。</p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/4.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/4.gif" />
 
 <p>这是一个非常严重的安全漏洞，我们不希望自己在互联网的内容被随便访问，更不要说这种涉及到钱的网站了。</p>
 <p>同源策略可以帮助我们解决这个安全问题，这个策略确保我们只能访问同一站点的资源。</p>
@@ -73,7 +73,7 @@ title : 15 张精美动图全面讲解 CORS
 
 <p>出于安全原因，浏览器限制<strong>从脚本内发起</strong>的跨域 HTTP 请求。 例如 XHR 和 Fetch 就遵循同源策略。这意味着使用 API 的 Web 应用程序只能从加载应用程序的同一个域请求 HTTP 资源。</p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/5.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/5.gif" />
 
 <p>日常的业务开发中，我们会经常访问跨域资源，为了安全的请求跨域资源，浏览器使用一种称为 CORS 的机制。</p>
 <p>CORS 的全名是 <strong>Cross-Origin Resource Sharing</strong>，即<strong>跨域资源共享</strong>。尽管默认情况下浏览器禁止我们访问跨域资源，但是我们可以利用 CORS <strong>放宽</strong>这种限制，在保证安全性的前提下访问跨域资源。</p>
@@ -84,7 +84,7 @@ title : 15 张精美动图全面讲解 CORS
 GET https://api.website.com/users HTTP/1/1
 Origin: https://www.mywebsite.com // <- 浏览器自己加的
 ```
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/6.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/6.gif" />
 
 <p>为了使浏览器允许访问跨域资源， 服务器返回的 response 还需要加一些响应头字段，这些字段将<strong>显式表明</strong>此服务器是否允许这个跨域请求。</p>
 
@@ -96,7 +96,7 @@ Origin: https://www.mywebsite.com // <- 浏览器自己加的
 
 <p>1️⃣ 如果我们有服务器的开发权限，我们可以给 <code>https://www.mywebsite.com</code> 加上访问权限：将该域添加到 <code>Access-Control-Allow-Origin</code> 中。</p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/7.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/7.gif" />
 
 <p>这个响应头字段现在被添加到服务器发回给客户端的 response header 中。这个字段添加后，如果我们从 <code>https://www.mywebsite.com</code> 发送跨域请求，同源策略将不再限制 <code>https://api.mywebsite.com</code> 站点返回的资源。</p>
 
@@ -111,18 +111,18 @@ Server: Apache
 {user: [{...}]}
 ```
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/8.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/8.gif" />
 
 <p>2️⃣ 收到服务器返回的 response 后，浏览器中的 CORS 机制会检查 <code>Access-Control-Allow-Origin</code> 的值是否等于 request 中 <code>Origin</code> 的值。</p>
 <p>在这个例子中，request 的 <code>Origin</code> 是 <code>https://www.mywebsite.com</code>，这和 response 中 <code>Access-Control-Allow-Origin</code> 的值是一样的：</p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/9.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/9.gif" />
 
 <p>3️⃣ 浏览器校验通过，前端成功地接收到跨域资源。</p><br>
 
 <p>那么，当我们试图从一个没有在 <code>Access-Control-Allow-Origin</code> 中列出的网站跨域访问这些资源会发生什么呢？</p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/10.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/10.gif" />
 
 <p>如上图所示，从 <code>https://www.anotherwebsite.com</code> 跨域访问 <code>https://api.mywebsite.com</code> 资源，浏览器抛出一个 CORS Error，经过上面的讲解，我们可以读懂这个报错信息了：</p>
 
@@ -144,7 +144,7 @@ to the supplied origin.
 
 <p>另一个常见的响应头字段是 <code>Access-Control-Allow-Methods</code>。其指明了跨域请求所允许使用的 HTTP 方法。</p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/11.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/11.gif" />
 
 <p>在上图的案例中，只有<code>GET</code>，<code>POST</code> 或 <code>PUT</code> 方法被允许跨域访问资源。其他 HTTP 方法，例如 <code>PATCH</code> 和 <code>DELETE</code> 都会被阻止。</p>
 <blockquote>
@@ -175,7 +175,7 @@ Access-Control-Request-Method: PUT
 Access-Control-Request-Headers: Content-Type
 ```
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/12.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/12.gif" />
 
 <p>2️⃣ 服务器接收到预检请求后，会返回一个没有 body 的 HTTP 响应，这个响应标记了服务器允许的 HTTP 方法和 HTTP Header 字段：</p>
 
@@ -188,7 +188,7 @@ Access-Control-Request-Headers: Content-Type
 
 <p>3️⃣ 浏览器收到预检响应，并检查是否应允许发送实际请求。</p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/13.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/13.gif" />
 
 <blockquote>
 <p>⚠️：上图预检响应漏了 <code>Access-Control-Allow-Headers: Content-Type </code></p>
@@ -196,7 +196,7 @@ Access-Control-Request-Headers: Content-Type
 
 <p>4️⃣ 如果预检响应检测通过，浏览器会将实际请求发送到服务器，然后服务器返回我们需要的资源。</p>
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/14.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/14.gif" />
 
 <p>如果预检响应没有检验通过，CORS 会阻止跨域访问，实际的请求永远不会被发送。预检请求是一种很好的方式，可以防止我们访问或修改那些没有启用 CORS 策略的服务器上的资源。</p>
 
@@ -230,7 +230,7 @@ HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
 ```
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/CORS/15.gif" />
+<img src="https://cdn.sanghangning.cn/blog/other/CORS/15.gif" />
 
 <p>把上面的工作做好后，我们就可以在跨域请求中包含身份凭证信息了。</p>
 

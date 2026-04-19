@@ -13,14 +13,14 @@ title : 浙江台州 TaiZhou √
 
 下高铁坐公交车出发去小陈的学校附近，她推荐给我了一家饭店，结果我手机半路没电了！！我不知道该怎么走，然后就下了公交车找了一家救命奶茶店帮我充了下电。 
 
-<img src="http://cdn.chenyingshuang.cn/journey/zjtz/1.JPG?imageMogr2/auto-orient" width="300"/>
+<img src="http://cdn.sanghangning.cn/journey/zjtz/1.JPG?imageMogr2/auto-orient" width="300"/>
 
 这次去台州就是去吃点东西的，记得吃了姜汤面，小陈校门口盖饭,最让我回味的是那边的嵌糕。
 
 👇台州路桥瞎逛。
 
-<img src="http://cdn.chenyingshuang.cn/journey/zjtz/5.JPG?imageMogr2/auto-orient" width="250"/>
+<img src="http://cdn.sanghangning.cn/journey/zjtz/5.JPG?imageMogr2/auto-orient" width="250"/>
 
-<img src="http://cdn.chenyingshuang.cn/journey/zjtz/3.JPG?imageMogr2/auto-orient" width="250"/>
+<img src="http://cdn.sanghangning.cn/journey/zjtz/3.JPG?imageMogr2/auto-orient" width="250"/>
 
-<img src="http://cdn.chenyingshuang.cn/journey/zjtz/4.JPG?imageMogr2/auto-orient" width="250"/>
+<img src="http://cdn.sanghangning.cn/journey/zjtz/4.JPG?imageMogr2/auto-orient" width="250"/>

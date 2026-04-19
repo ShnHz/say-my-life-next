@@ -209,7 +209,7 @@ btn.onclick = () => {
 }
 ```
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/vueDediffSuanFa/1.gif"/>
+<img src="https://cdn.sanghangning.cn/blog/vue/vueDediffSuanFa/1.gif"/>
 
 单击按钮后成功的在元素最后增加了一个元素->D<-
 
@@ -217,7 +217,7 @@ btn.onclick = () => {
 
 我们可以验证一下到底是不是真的是**最小量更新**
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/vueDediffSuanFa/2.gif"/>
+<img src="https://cdn.sanghangning.cn/blog/vue/vueDediffSuanFa/2.gif"/>
 
 可以看到确实没有改变->A<-的内容，单纯的在列表最后加上了一个->D<-
 
@@ -234,7 +234,7 @@ let vnode2 = h('ul', [
 ])
 ```
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/vueDediffSuanFa/3.gif"/>
+<img src="https://cdn.sanghangning.cn/blog/vue/vueDediffSuanFa/3.gif"/>
 
 神奇的事情发生了，为什么会将->A<-也改变了呢？
 
@@ -271,7 +271,7 @@ let vnode2 = h('ul', [
 ])
 ```
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/vueDediffSuanFa/4.gif"/>
+<img src="https://cdn.sanghangning.cn/blog/vue/vueDediffSuanFa/4.gif"/>
 
 再来验证一下，没有问题！
 
@@ -305,7 +305,7 @@ let vnode2 = h('ol', [
 ])
 ```
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/vueDediffSuanFa/5.gif"/>
+<img src="https://cdn.sanghangning.cn/blog/vue/vueDediffSuanFa/5.gif"/>
 
 可以看到，->diff<-是会暴力删除旧节点，添加一个新的节点，不会最小量更新
 
@@ -339,7 +339,7 @@ let vnode2 = h('div', h('section', [
 ]))
 ```
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/vueDediffSuanFa/6.gif"/>
+<img src="https://cdn.sanghangning.cn/blog/vue/vueDediffSuanFa/6.gif"/>
 
 可以看到，->diff<-也是会暴力删除旧节点，添加一个新的节点，不会最小量更新
 
@@ -351,7 +351,7 @@ let vnode2 = h('div', h('section', [
 
 #### patch函数的执行流程
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/vueDediffSuanFa/7.jpg"/>
+<img src="https://cdn.sanghangning.cn/blog/vue/vueDediffSuanFa/7.jpg"/>
 
 我们一步一步按照流程来写我们的->patch<-
 
@@ -477,7 +477,7 @@ function createElm(vnode) {
 
 这边也可以看一下精细化比较的流程图，因为之前写的h函数是低配版的，所以忽略->text<-属性和->children<-属性再虚拟节点下共同存在的情况（说明下文写的精细化比较也是阉割版的）
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/vueDediffSuanFa/8.jpg"/>
+<img src="https://cdn.sanghangning.cn/blog/vue/vueDediffSuanFa/8.jpg"/>
 
 我们先来解决比较简单的情况
 

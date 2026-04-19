@@ -14,14 +14,14 @@ title : 浙江绍兴 ShaoXing √
 
 我记得我请了顿烧烤，他还没请回来哈哈哈~
 
-<img src="http://cdn.chenyingshuang.cn/journey/zjsx/1.jpg?imageMogr2/auto-orient" width="270"/>
+<img src="http://cdn.sanghangning.cn/journey/zjsx/1.jpg?imageMogr2/auto-orient" width="270"/>
 
-<img src="http://cdn.chenyingshuang.cn/journey/zjsx/2.jpg?imageMogr2/auto-orient" width="270"/>
+<img src="http://cdn.sanghangning.cn/journey/zjsx/2.jpg?imageMogr2/auto-orient" width="270"/>
 
-<img src="http://cdn.chenyingshuang.cn/journey/zjsx/3.jpg?imageMogr2/auto-orient" width="270"/> 
+<img src="http://cdn.sanghangning.cn/journey/zjsx/3.jpg?imageMogr2/auto-orient" width="270"/> 
 
-<img src="http://cdn.chenyingshuang.cn/journey/zjsx/4.jpg?imageMogr2/auto-orient" height="230"/> 
+<img src="http://cdn.sanghangning.cn/journey/zjsx/4.jpg?imageMogr2/auto-orient" height="230"/> 
 
-<img src="http://cdn.chenyingshuang.cn/journey/zjsx/5.jpg?imageMogr2/auto-orient" height="230"/>
+<img src="http://cdn.sanghangning.cn/journey/zjsx/5.jpg?imageMogr2/auto-orient" height="230"/>
 
-<img src="http://cdn.chenyingshuang.cn/journey/zjsx/7.jpg?imageMogr2/auto-orient" height="230"/>
+<img src="http://cdn.sanghangning.cn/journey/zjsx/7.jpg?imageMogr2/auto-orient" height="230"/>

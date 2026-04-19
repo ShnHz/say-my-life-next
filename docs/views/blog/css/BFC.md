@@ -70,7 +70,7 @@ title : 面试官：请说说什么是BFC？
 
 ***效果：***
 
-<img src="https://cdn.chenyingshuang.cn/blog/css/BFC/1.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/css/BFC/1.jpg" />
 
 可以看到上面效果给<code class="default">box</code>设置完<code class="default">float</code>结果脱离文档流，使<code class="default">container</code>高度没有被撑开，从而背景颜色没有颜色出来，解决此问题可以给<code class="default">container</code>触发<code class="default">BFC</code>，上面我们所说到的触发<code class="default">BFC</code>属性都可以设置。
 
@@ -109,7 +109,7 @@ title : 面试官：请说说什么是BFC？
 
 ***效果：***
 
-<img src="https://cdn.chenyingshuang.cn/blog/css/BFC/2.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/css/BFC/2.jpg" />
 
 #### 2.Margin边距重叠
 
@@ -141,7 +141,7 @@ title : 面试官：请说说什么是BFC？
 
 ***效果：***
 
-<img src="https://cdn.chenyingshuang.cn/blog/css/BFC/3.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/css/BFC/3.jpg" />
 
 可以看到上面我们为两个盒子的<code class="default">margin</code>外边距设置的是<code class="default">10px</code>，可结果显示两个盒子之间只有<code class="default">10px</code>的距离，这就导致了<code class="default">margin</code>塌陷问题，这时<code class="default">margin</code>边距的结果为最大值，而不是合，为了解决此问题可以使用<code class="default">BFC</code>规则（为元素包裹一个盒子形成一个完全独立的空间，做到里面元素不受外面布局影响），或者简单粗暴方法一个设置<code class="default">margin</code>，一个设置<code class="default">padding</code>。
 
@@ -176,7 +176,7 @@ title : 面试官：请说说什么是BFC？
 ***效果：***
 
 
-<img src="https://cdn.chenyingshuang.cn/blog/css/BFC/4.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/css/BFC/4.jpg" />
 
 #### 3.两栏布局
 
@@ -210,7 +210,7 @@ title : 面试官：请说说什么是BFC？
 
 ***效果：***
 
-<img src="https://cdn.chenyingshuang.cn/blog/css/BFC/5.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/css/BFC/5.jpg" />
 
 可以看到上面元素，第二个<code class="default">div</code>元素为<code class="default">300px</code>宽度，但是被第一个<code class="default">div</code>元素设置<code class="default">Float</code>脱离文档流给覆盖上去了，解决此方法我们可以把第二个<code class="default">div</code>元素设置为一个<code class="default">BFC</code>。
 
@@ -246,7 +246,7 @@ title : 面试官：请说说什么是BFC？
 
 ***效果：***
 
-<img src="https://cdn.chenyingshuang.cn/blog/css/BFC/6.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/css/BFC/6.jpg" />
 
 
 

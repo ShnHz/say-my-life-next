@@ -284,7 +284,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      background-image: url(https://cdn.chenyingshuang.cn/index/music/musci_bg.jpg);
+      background-image: url(https://cdn.sanghangning.cn/index/music/musci_bg.jpg);
       background-repeat: no-repeat;
       background-size: cover;
     }
@@ -397,7 +397,7 @@
         border: 12px solid #e0dfdb;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         background-size: cover;
-        background-image: url('https://cdn.chenyingshuang.cn/index/music_cd.png');
+        background-image: url('https://cdn.sanghangning.cn/index/music_cd.png');
         background-position: 50% 50%;
         -webkit-animation: rotate360 32s infinite linear;
         -webkit-transform-origin: center center;

@@ -182,7 +182,7 @@ createElement(
 ##### 表单示例
 假设我们需要开发一个下面这样的表格（element-ui的）
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/JSX/1.jpg">
+<img src="https://cdn.sanghangning.cn/blog/vue/JSX/1.jpg">
 
 ##### 用模板代码去开发
 

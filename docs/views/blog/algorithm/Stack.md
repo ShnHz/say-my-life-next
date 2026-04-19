@@ -13,7 +13,7 @@ title : 栈
 
 栈：就是一个<b>遵循后进先出 (LIFO / Last In First Out) 的原则的有序集合</b>，它的结构类似于如下。
 
-<img src="https://cdn.chenyingshuang.cn/blog/algorithm/zhan/zhan.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/algorithm/zhan/zhan.jpg" />
 
 栈的操作主要有： <code class="default">push(e)</code> (进栈)、 <code class="default">pop()</code> (出栈)、 <code class="default">isEmpty()</code> (判断是否是空栈)、 <code class="default">size()</code> (栈大小)，以及 <code class="default">clear()</code> 清空栈，具体实现也很简单。
 

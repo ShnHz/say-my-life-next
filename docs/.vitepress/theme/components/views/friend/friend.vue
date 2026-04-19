@@ -19,7 +19,7 @@
             >
           </p>
           <p>描述： 说说我的生活</p>
-          <p>头像： https://cdn.chenyingshuang.cn/index/avatar.jpg</p>
+          <p>头像： https://cdn.sanghangning.cn/index/avatar.jpg</p>
         </div>
       </div>
 

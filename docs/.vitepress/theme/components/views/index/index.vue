@@ -16,7 +16,7 @@
             @touchstart="handleAvatarTouch"
           >
             <img
-              src="https://cdn.chenyingshuang.cn/index/labixiaoxin.png"
+              src="https://cdn.sanghangning.cn/index/labixiaoxin.png"
               alt=""
               loading="lazy"
             />
@@ -207,22 +207,22 @@
     {
       title: '记得写日记',
       desc: '做一个热爱生活的人，把生活记录下来。',
-      img: 'https://cdn.chenyingshuang.cn/index/carousel1.jpg',
+      img: 'https://cdn.sanghangning.cn/index/carousel1.jpg',
     },
     {
       title: '常常去旅行',
       desc: '我认为旅行是从大自然学习的最佳方式。走遍世界，这是我最大的梦想。',
-      img: 'https://cdn.chenyingshuang.cn/index/carousel2.jpg',
+      img: 'https://cdn.sanghangning.cn/index/carousel2.jpg',
     },
     {
       title: '好好打代码',
       desc: '每天都要学习！争取Github全绿。',
-      img: 'https://cdn.chenyingshuang.cn/index/carousel3.jpg',
+      img: 'https://cdn.sanghangning.cn/index/carousel3.jpg',
     },
     {
       title: '天天学习呀',
       desc: '阶段性学习，能有成果展示出来。',
-      img: 'https://cdn.chenyingshuang.cn/index/carousel4.jpg',
+      img: 'https://cdn.sanghangning.cn/index/carousel4.jpg',
     },
   ])
   const nCarousel = ref()
