@@ -565,7 +565,7 @@
 
     .shape-wrap {
       position: relative;
-      background-image: url('https://cdn.chenyingshuang.cn/notes/transparent_bg.png');
+      background-image: url('https://cdn.sanghangning.cn/notes/transparent_bg.png');
       transition: all 0.3s;
 
       svg {

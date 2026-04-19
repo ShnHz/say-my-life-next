@@ -23,7 +23,7 @@ outline: [3, 5]
 
 使用->@keyframes<-和->animation<-，完成每个关卡的要求
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/BianWanBianXueQianDuan/1.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/other/BianWanBianXueQianDuan/1.jpg" />
 
 ### 弹性盒子
 
@@ -31,7 +31,7 @@ outline: [3, 5]
 
 利用弹性盒子布局，把每个小青蛙放到荷叶上
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/BianWanBianXueQianDuan/2.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/other/BianWanBianXueQianDuan/2.jpg" />
 
 ### 网格布局
 
@@ -39,7 +39,7 @@ outline: [3, 5]
 
 利用网格布局，让河水灌溉到每片萝卜地，注意避开讨厌的荆棘
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/BianWanBianXueQianDuan/3.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/other/BianWanBianXueQianDuan/3.jpg" />
 
 ### CSS选择器
 
@@ -47,10 +47,10 @@ outline: [3, 5]
 
 涵盖了几乎所有CSS选择器的练习，很多选择器可能你都没见过
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/BianWanBianXueQianDuan/4.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/other/BianWanBianXueQianDuan/4.jpg" />
 
 :::details 已通关
-<img src="https://cdn.chenyingshuang.cn/blog/other/BianWanBianXueQianDuan/8.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/other/BianWanBianXueQianDuan/8.jpg" />
 :::
 
 
@@ -60,7 +60,7 @@ outline: [3, 5]
 
 调用给定的函数，让机器人收集金币、到达终点，注意避开障碍
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/BianWanBianXueQianDuan/5.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/other/BianWanBianXueQianDuan/5.jpg" />
 
 ### git分支练习
 
@@ -68,7 +68,7 @@ outline: [3, 5]
 
 通过34个关卡，一步一步理解git的分支操作
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/BianWanBianXueQianDuan/6.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/other/BianWanBianXueQianDuan/6.jpg" />
 
 ### 使用 JS/TS 代码控制自己的殖民地
 
@@ -80,4 +80,4 @@ Steam售价：65元
 
 建议先上官网试玩，不要直接用steam客户端游戏，省得记录了时间，被劝退时不好退款。玩这个游戏需要阅读大量英文API以及一定编程能力
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/BianWanBianXueQianDuan/7.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/other/BianWanBianXueQianDuan/7.jpg" />

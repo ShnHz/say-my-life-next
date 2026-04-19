@@ -25,7 +25,7 @@ password: true
 + 1、vue组件（文件后缀为vue）
 + 2、小程序自定义组件（文件后缀为wxml或其他小程序平台特有后缀名称）
 
-<img src="https://cdn.chenyingshuang.cn/interview/uni-app/1.jpg" />
+<img src="https://cdn.sanghangning.cn/interview/uni-app/1.jpg" />
 
 #### 4.uni-app 全局变量
 

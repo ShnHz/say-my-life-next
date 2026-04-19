@@ -39,7 +39,7 @@ outline: [3, 5]
 
 还有一个缺点，大家写代码的时候有没有发现，即使设置了->vertical-align<-居中或者->line-height<-，但是图标还是和文字对不齐，那是因为中文、英文大小写的高度是不一致的而且英文字母里边有->y,j<-这种特殊字符，高度都是不一样的，所以图标与文字的对齐中线是->y,j<-字符，这就会导致我们在视觉上看中文汉字其实是偏上的，就会有没对齐的感觉。
 
-<img src="https://cdn.chenyingshuang.cn/blog/other/YiCiXingGaoDingicon/1.png" />
+<img src="https://cdn.sanghangning.cn/blog/other/YiCiXingGaoDingicon/1.png" />
 
 我们可以设置->vertical-align<-为->-0.15em<-来解决这个问题
 

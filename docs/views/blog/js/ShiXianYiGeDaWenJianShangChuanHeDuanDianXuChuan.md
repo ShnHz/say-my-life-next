@@ -287,7 +287,7 @@ server.on("request", async (req, res) => {
 });
 ```
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/1.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/1.jpg" />
 
 查看 multiparty 处理后的 chunk 对象，path 是存储临时文件的路径，size 是临时文件大小，在 multiparty 文档中提到可以使用 fs.rename（这里换成了 fs.remove, 因为 fs-extra 的 rename 方法在 windows 平台存在权限问题）
 
@@ -295,7 +295,7 @@ server.on("request", async (req, res) => {
 
 由于前端在发送每个切片时额外携带了唯一值 hash，所以以 hash 作为文件名，将切片从临时路径移动切片文件夹中，最后的结果如下
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/2.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/2.jpg" />
 
 ##### 合并切片
 
@@ -406,13 +406,13 @@ async mergeRequest() {
 },
 ```
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/3.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/3.jpg" />
 
 其实也可以等上一个切片合并完后再合并下个切片，这样就不需要指定位置，但传输速度会降低，所以使用了并发合并的手段
 
 接着只要保证每次合并完成后删除这个切片，等所有切片都合并完毕后最后删除切片文件夹即可
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/4.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/4.jpg" />
 
 
 #### 显示上传进度条
@@ -509,7 +509,7 @@ computed: {
 
 最终展示如下
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/5.jpg" />、
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/5.jpg" />、
 
 ### 断点续传
 
@@ -610,17 +610,17 @@ self.onmessage = e => {
 
 加上显示计算 hash 的进度条，看起来像这样
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/6.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/6.jpg" />
 
 至此前端需要将之前用文件名作为 hash 的地方改写为 worker 返回的 hash
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/7.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/7.jpg" />
 
 服务端则使用**固定前缀 + hash 作为切片文件夹名，hash + 下标作为切片名，hash + 扩展名**作为文件名
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/8.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/8.jpg" />
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/9.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/9.jpg" />
 
 #### 文件秒传
 
@@ -669,7 +669,7 @@ self.onmessage = e => {
 
 秒传其实就是给用户看的障眼法，实质上根本没有上传
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/10.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/10.jpg" />
 
 #### 暂停上传
 
@@ -714,7 +714,7 @@ self.onmessage = e => {
 
 这样在上传切片时传入 requestList 数组作为参数，request 方法就会将所有的 xhr 保存在数组中了
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/11.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/11.jpg" />
 
 每当一个切片上传成功时，将对应的 xhr 从 requestList 中删除，所以 requestList 中只保存正在上传切片的 ->xhr<-
 
@@ -727,11 +727,11 @@ handlePause() {
 }
 ```
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/12.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/12.jpg" />
 
 点击暂停按钮可以看到 xhr 都被取消了
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/13.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/13.jpg" />
 
 #### 恢复上传
 
@@ -871,7 +871,7 @@ server.listen(3000, () => console.log("listening port 3000"));
     }
 ```
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/14.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/ShiXianYiGeDaWenJianShangChuanHeDuanDianXuChuan/14.jpg" />
 
 
 这里给原来上传切片的函数新增 uploadedList 参数，即上图中服务端返回的切片名列表，通过 filter 过滤掉已上传的切片，并且由于新增了已上传的部分，所以之前合并接口的触发条件做了一些改动

@@ -63,7 +63,7 @@
       } else {
         for (let i = 1; i <= this.number; i++) {
           this.imgsArr.push(
-            `http://cdn.chenyingshuang.cn/${this.value}${this.imgName}${i}.${this.imgType}?imageMogr2/auto-orient`
+            `http://cdn.sanghangning.cn/${this.value}${this.imgName}${i}.${this.imgType}?imageMogr2/auto-orient`
           )
         }
       }

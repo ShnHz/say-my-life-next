@@ -55,7 +55,7 @@
     // 点标记显示内容，HTML要素字符串
     const markerContent =
       '<div class="custom-content-marker">' +
-      '   <img src="https://cdn.chenyingshuang.cn/journey/location.png">' +
+      '   <img src="https://cdn.sanghangning.cn/journey/location.png">' +
       '</div>'
 
     for (let i = 0; i < address.length; i++) {

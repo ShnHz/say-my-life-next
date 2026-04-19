@@ -110,7 +110,7 @@ console.log(fn.constructor.prototype == fn.__proto__) //true 它的构造函数�
 
 一张图来解释原型链
 
-<img src="https://cdn.chenyingshuang.cn/blog/js/prototype/%E5%8E%9F%E5%9E%8B%E9%93%BE.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/js/prototype/%E5%8E%9F%E5%9E%8B%E9%93%BE.jpg" />
 
 总结来看，在js中，所有对象都有一个隐式原型<code>\__proto__</code>，而且js万物都是对象。所以就会有一条由<code>\__proto__</code>组成的链条，这条链条就叫原型链。这个链条最终的值是<code>null</code>，因为<code>Object.prototype.\__proto__</code>为<code>null</code>。
 

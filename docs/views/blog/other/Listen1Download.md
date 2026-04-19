@@ -26,7 +26,7 @@ title : Listen1歌曲快速下载到本地小攻略
 + 5.在新的选项卡<code>Ctrl+S</code>即可
 
 <br>
-<img src="https://cdn.chenyingshuang.cn/blog/other/Listen1Download/1.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/other/Listen1Download/1.jpg" />
 
 ### 批量下载
 

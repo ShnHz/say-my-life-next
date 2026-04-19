@@ -73,7 +73,7 @@ div.color #id{
 
 ->VSCode<-其实就为我们提供了方便查看特殊性的功能，鼠标移动到选择器上，会出现一个悬浮框，上面就显示了所选选择器的特殊性
 
-<img src="https://cdn.chenyingshuang.cn/blog/css/CSSShuXingZhiDeJiSuanGuoCheng/1.png" />
+<img src="https://cdn.sanghangning.cn/blog/css/CSSShuXingZhiDeJiSuanGuoCheng/1.png" />
 
 #### 比较源次序
 

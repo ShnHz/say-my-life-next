@@ -83,7 +83,7 @@
       // 生产环境：优先使用云存储，失败时回退到public目录
       try {
         await loadFromUrl(
-          'https://cdn.chenyingshuang.cn/journey/json/travel_overview.json',
+          'https://cdn.sanghangning.cn/journey/json/travel_overview.json',
           '🚀 生产环境：使用云存储URL'
         )
       } catch (error) {
@@ -127,7 +127,7 @@
     return list.value.map((item) => {
       return {
         ...item,
-        src: `http://cdn.chenyingshuang.cn/${item.src}`,
+        src: `http://cdn.sanghangning.cn/${item.src}`,
       }
     })
   })

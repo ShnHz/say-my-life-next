@@ -258,6 +258,10 @@ export default {
           text: 'SpiderManMiles',
           link: '/views/life/game/SpiderManMiles',
         },
+        {
+          text: '洛克王国:世界',
+          link: '/views/life/game/洛克王国世界',
+        },
       ],
     },
     {

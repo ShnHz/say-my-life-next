@@ -158,7 +158,7 @@ observe(obj)
 
 可以看出，上面三个函数的调用关系如下：
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/VueYuanMaJieXiZhiShuJuXiangYingShiYuanLi/1.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/vue/VueYuanMaJieXiZhiShuJuXiangYingShiYuanLi/1.jpg" />
 
 三个函数相互调用从而形成了递归，与普通的递归有所不同。
 
@@ -174,7 +174,7 @@ observe(obj)
 
 在->Vue<-响应式系统中，显卡对应数据，那么例子中的买家对应什么呢？就是一个抽象的类: ->Watcher<-。大家不必纠结这个名字的含义，只需要知道它做什么事情：每个->Watcher<-实例订阅一个或者多个数据，这些数据也被称为->wacther<-的依赖(商品就是买家的依赖)；当依赖发生变化，->Watcher<-实例会接收到数据发生变化这条消息，之后会执行一个回调函数来实现某些功能，比如更新页面(买家进行一些动作)。
 
-<img src="https://cdn.chenyingshuang.cn/blog/vue/VueYuanMaJieXiZhiShuJuXiangYingShiYuanLi/2.jpg" />
+<img src="https://cdn.sanghangning.cn/blog/vue/VueYuanMaJieXiZhiShuJuXiangYingShiYuanLi/2.jpg" />
 
 因此->Watcher<-类可以如下实现
 
