@@ -3,6 +3,8 @@
     <el-image
       :key="item"
       :src="item"
+      :preview-src-list="srcList"
+      :initial-index="index"
       :style="{ height: `${imgBoxHeight}px` }"
       fit="cover"
       lazy
@@ -56,6 +58,11 @@
       return {
         imgsArr: [],
       }
+    },
+    computed: {
+      srcList() {
+        return this.imgsArr
+      },
     },
     mounted() {
       if (this.list.length > 0) {
