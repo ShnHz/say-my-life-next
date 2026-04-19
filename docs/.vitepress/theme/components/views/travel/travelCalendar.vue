@@ -211,7 +211,6 @@
           area: '吉隆坡国际机场 - 杭州萧山国际机场',
         }
       ],  
-      plan: 'Malaysia-KualaLumpur',
       // hollow: true,
     },
     {
