@@ -1,7 +1,7 @@
 <template>
   <div class="travtel-overview-wrap">
     <div class="travtel-overview-map-wrap">
-      <travelMap />
+      <travelMap :overview-items="imgs" />
     </div>
     <div class="travtel-overview-list-wrap">
       <div
@@ -159,7 +159,7 @@
       border-radius: 10px;
       margin-bottom: 10px;
       overflow: hidden;
-      height: 50vh;
+      height: 66vh;
     }
   }
   .travtel-overview-list-wrap {

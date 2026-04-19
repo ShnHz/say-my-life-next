@@ -1,31 +1,44 @@
 <template>
-  <div class="background-wrap"></div>
+  <div class="background-globe">
+    <TravelMap3d embedded />
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import TravelMap3d from '../../travel/components/travelMap3D.vue'
+</script>
 
 <style scoped lang="less">
-  .background-wrap {
-    width: 100vw;
-    height: 100vh;
+  .background-globe {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
+    z-index: 0;
     overflow: hidden;
-    background-image: url(https://cdn.sanghangning.cn/index/manbg.png);
-    background-repeat: no-repeat;
-    background-size: auto 115%;
-    background-position: 95% center;
-    &::before {
-      content: '';
-      position: absolute;
-      right: -20vh;
-      bottom: -20vh;
-      z-index: -1;
-      height: 120vh;
-      width: 120vh;
-      border-radius: 9999px;
-      background-color: var(--bg-1);
+    background: transparent;
+
+    /* 首页地球靠右，避免与左侧文案抢视觉中心 */
+    :deep(.travel-map-wrap.is-embedded .cobe-wrapper) {
+      justify-content: flex-end;
+      padding-right: 60px;
+      padding-top: 100px;
+    }
+
+    @media screen and (max-width: 768px) {
+      position: relative;
+      inset: auto;
+      flex: 1 1 auto;
+      min-height: min(42vh, 360px);
+      width: 100%;
+
+      :deep(.travel-map-wrap.is-embedded) {
+        height: 100%;
+        min-height: inherit;
+      }
+
+      :deep(.travel-map-wrap.is-embedded .cobe-wrapper) {
+        justify-content: center;
+        padding-right: 0;
+      }
     }
   }
 </style>

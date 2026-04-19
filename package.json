@@ -23,6 +23,7 @@
     "vitepress": "1.0.0-beta.2"
   },
   "dependencies": {
+    "cobe": "^2.0.1",
     "@tweenjs/tween.js": "^21.0.0",
     "@vicons/carbon": "^0.12.0",
     "@vicons/ionicons5": "^0.12.0",

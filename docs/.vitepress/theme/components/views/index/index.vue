@@ -78,6 +78,12 @@
               <span>React</span>
               <span>Python</span>
               <span>Photoshop</span>
+              <span>Git</span>
+              <span>Node</span>
+              <span>Java</span>
+              <span>Go</span>
+              <span>Docker</span>
+              <span>Mongodb</span>
               <span>Music</span>
               <span>Movie</span>
               <span>Travel</span>
@@ -278,6 +284,7 @@
       position: relative;
       .info-wrap {
         position: relative;
+        z-index: 1;
         top: 50%;
         transform: translateY(-240px);
         .hello {
@@ -527,11 +534,28 @@
   @media screen and (max-width: 768px) {
     .index-wrap {
       .first-wrap {
-        height: 100vh;
+        height: auto;
+        min-height: 100vh;
+
+        .container {
+          display: flex;
+          flex-direction: column;
+          min-height: inherit;
+
+          /* DOM 顺序为 Background → info-wrap，用 order 让文案在上、地球在下 */
+          > :first-child {
+            order: 2;
+            flex: 1 1 auto;
+            min-height: 0;
+          }
+        }
 
         .info-wrap {
-          transform: translateY(-180px);
-          padding: 0 20px;
+          order: 1;
+          flex-shrink: 0;
+          top: auto;
+          transform: none;
+          padding: calc(var(--vp-nav-height) + 24px) 20px 0;
 
           .hello {
             margin-bottom: 20px;
@@ -645,8 +669,7 @@
     .index-wrap {
       .first-wrap {
         .info-wrap {
-          transform: translateY(-150px);
-          padding: 0 16px;
+          padding: calc(var(--vp-nav-height) + 20px) 16px 0;
 
           .hello {
             font-size: 16px;
@@ -720,7 +743,7 @@
     .index-wrap {
       .first-wrap {
         .info-wrap {
-          transform: translateY(-120px);
+          transform: none;
 
           .title {
             font-size: 32px;

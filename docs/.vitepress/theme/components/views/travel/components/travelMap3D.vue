@@ -1,1004 +1,522 @@
 <template>
-  <div class="travtel-map-wrap">
-    <div
-      ref="map3DMain"
-      id="map3DMain"
-      class="map3DMain"
-    ></div>
+  <div
+    class="travel-map-wrap"
+    :class="[`mode-${mode}`, { 'is-embedded': embedded }]"
+  >
+    <el-radio-group
+      v-if="!embedded"
+      v-model="mode"
+      class="cobe-mode-radio"
+    >
+      <el-radio-button label="cobeV2">COBE v2</el-radio-button>
+      <el-radio-button label="polaroids">Polaroids</el-radio-button>
+    </el-radio-group>
+
+    <div ref="wrapperRef" class="cobe-wrapper">
+      <!--
+        必须把 canvas 包在与 canvas 同尺寸的方形 stage 里：
+        cobe v2 会在 canvas 外自动套一层 100%×100% 的 div 并把锚点 div 注入其中，
+        锚点 left/top 用的是该 div 的百分比，但 cobe 的投影坐标是基于 canvas 像素的，
+        所以这层 div 必须 = canvas 大小，否则 label 会偏离 globe（参考 cobe-main 的 .showcases-globe）。
+      -->
+      <div class="cobe-stage">
+        <canvas ref="canvasRef" class="cobe-canvas" />
+
+        <template v-if="mode === 'cobeV2'">
+          <div
+            v-for="item in cobeV2Markers"
+            :key="item.id"
+            class="cobe-label"
+            :style="markerOverlayStyle(item.id)"
+          >
+            {{ item.label }}
+          </div>
+        </template>
+
+        <template v-else>
+          <div
+            v-for="item in polaroidsWithOverviewImages"
+            :key="item.id"
+            class="cobe-polaroid"
+            :style="polaroidStyle(item.id, item.rotate)"
+          >
+            <img :src="item.image" :alt="item.caption" />
+            <span class="cobe-polaroid-caption">{{ item.caption }}</span>
+          </div>
+        </template>
+      </div>
+    </div>
   </div>
 </template>
 
-<script>
-  import { onMounted, ref } from 'vue'
-  import * as THREE from 'three'
-  import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-  import { Line2 } from 'three/examples/jsm/lines/Line2.js'
-  import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
-  import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js'
-  import TWEEN from '@tweenjs/tween.js'
-  import biaozhu from '../../../../../public/map/assets/biaozhu.png'
-  import biaozhuguangquan from '../../../../../public/map/assets/biaozhuguangquan.png'
-  import gradient from '../../../../../public/map/assets/gradient.png'
-  import earthImg from '../../../../../public/map/assets/earth.jpg'
-  import earth_aperture from '../../../../../public/map/assets/earth_aperture.png'
-  import halo from '../../../../../public/map/assets/halo.png'
-  import smallEarth from '../../../../../public/map/assets/smallEarth.png'
-  import guangzhu from '../../../../../public/map/assets/guangzhu.png'
-  import chinaData from '../../../../../public/map/data/china.json'
-  import chinaOutlineData from '../../../../../public/map/data/china-outline.json'
+<script setup lang="ts">
+  import createGlobe, { type COBEOptions, type Globe, type Marker } from 'cobe'
+  import {
+    computed,
+    onBeforeUnmount,
+    onMounted,
+    ref,
+    watch,
+    type CSSProperties,
+  } from 'vue'
   import { city } from '../../../../../public/map/js/city'
-  // 顶点着色器和片段着色器代码
-  const fragmentShader = `
-    uniform sampler2D diffuse;
-    uniform vec3 glowColor;
-    varying float intensity;
-    varying vec2 vUv;
+  import {
+    polaroidMarkers,
+    type PolaroidItem,
+  } from '../../../../../public/map/js/polaroids'
 
-    void main() {
-        vec3 glow = glowColor * intensity;
-        gl_FragColor = vec4(glow, 1.0)+ texture2D(diffuse, vUv);
-    }
-`
-  const vertexShader2 = `
-varying vec2 vUv;
-    attribute float percent;
-    uniform float u_time;
-    uniform float number;
-    uniform float speed;
-    uniform float length;
-    varying float opacity;
-    uniform float size;
-    void main()
+  type GlobeMode = 'cobeV2' | 'polaroids'
+
+  interface TravelOverviewItem {
+    name: string
+    src: string
+    video?: string
+  }
+
+  const props = withDefaults(
+    defineProps<{
+      overviewItems?: TravelOverviewItem[]
+      /** 首页背景等场景：透明底、铺满父级、隐藏模式切换 */
+      embedded?: boolean
+    }>(),
     {
-        vUv = uv;
-        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-        float l = clamp(1.0-length, 0.0, 1.0);
-        gl_PointSize = clamp(fract(percent*number + l - u_time*number*speed)-l, 0.0, 1.) * size * (1./length);
-        opacity = gl_PointSize/size;
-        gl_Position = projectionMatrix * mvPosition;
+      overviewItems: () => [],
+      embedded: false,
+    },
+  )
+
+  /** 与 travel_overview.json 一致：去掉 VN/JP/SG 等前缀，便于与 Polaroid caption 对齐 */
+  function normalizeOverviewPlaceName(name: string): string {
+    return name.replace(/^[A-Z]{2,4}(?=[\u4e00-\u9fff])/u, '').trim()
+  }
+
+  function overviewSrcForCaption(caption: string): string | undefined {
+    const cap = caption.trim()
+    const rows = props.overviewItems ?? []
+    if (!rows.length) return undefined
+
+    for (const row of rows) {
+      const simplified = normalizeOverviewPlaceName(row.name)
+      if (
+        simplified === cap ||
+        row.name === cap ||
+        simplified.includes(cap) ||
+        row.name.endsWith(cap)
+      ) {
+        return row.src
+      }
     }
-`
-  var fragmentShader2 = `
-   #ifdef GL_ES
-    precision mediump float;
-    #endif
-    varying float opacity;
-    uniform vec3 color;
-    void main(){
-        if (opacity <=0.2){
-            discard;
-        }
-        gl_FragColor = vec4(color, 1.0);
-    }
-`
-  export default {
-    name: 'map3D',
-    setup() {
-      const map3DMain = ref(null)
-      let renderer, camera, scene, stats, controls, stars, uniforms
-      const radius = 5
-      const group = new THREE.Group()
-      const groupDots = new THREE.Group()
-      const groupLines = new THREE.Group()
-      const groupHalo = new THREE.Group() //卫星环+小卫星
-      const aGroup = new THREE.Group()
-      var initFlag = false
-      var WaveMeshArr = [] //所有波动光圈集合
-      var planGeometry = new THREE.PlaneGeometry(1, 1) //默认在XOY平面上
-      var globeTextureLoader = new THREE.TextureLoader()
-      var map = new THREE.Object3D()
-      var camaPositions = [
-        { x: 5, y: -20, z: 200 }, //远处
-        { x: 0.5, y: -2, z: 20 }, //近处
-      ]
-      var API = {
-        c: 1.7,
-        p: 2.3,
-        color: 0x10105,
-      }
-      var uniforms2 = {
-        u_time: { value: 0.0 },
-      }
+    return undefined
+  }
 
-      //threejs自带的经纬度转换
-      function lglt2xyz(lng, lat) {
-        const theta = (90 + lng) * (Math.PI / 180)
-        const phi = (90 - lat) * (Math.PI / 180)
-        return new THREE.Vector3().setFromSpherical(
-          new THREE.Spherical(radius, phi, theta)
-        )
-      }
+  /** Polaroid 占位图；若概览列表里能匹配地名则改用与下方相册相同的 CDN 地址 */
+  const polaroidsWithOverviewImages = computed<PolaroidItem[]>(() =>
+    polaroidMarkers.map((p) => ({
+      ...p,
+      image: overviewSrcForCaption(p.caption) ?? p.image,
+    })),
+  )
 
-      const posArr = city.map((item) => {
-        return lglt2xyz(item[1], item[2])
-      })
+  interface CityMarker extends Marker {
+    id: string
+    label: string
+  }
 
-      onMounted(async () => {
-        var width = map3DMain.value.offsetWidth
-        var height = map3DMain.value.offsetHeight
-        initRenderer()
-        initCamera()
-        initScene()
-        initLight()
-        //初始化地球
-        initEarth()
-        //卫星特效
-        // initSatellite()
-        //地球光晕
-        initEarthSprite()
-        //初始化动态星空背景
-        initPoints()
-        //外圈中国描边高亮
-        // initGeoJson()
+  interface ModeConfig {
+    theta: number
+    dark: number
+    mapBrightness: number
+    markerColor: [number, number, number]
+    baseColor: [number, number, number]
+    markerSize: number
+    markerElevation: number
+  }
 
-        initControls()
-        initTween()
-        animate()
-        const viewElem = document.body
-        const resizeObserver = new ResizeObserver(() => {
-          setTimeout(() => {
-            handleResize()
-          }, 300)
-        })
-        resizeObserver.observe(viewElem)
+  const mode = ref<GlobeMode>('cobeV2')
+  const wrapperRef = ref<HTMLDivElement | null>(null)
+  const canvasRef = ref<HTMLCanvasElement | null>(null)
 
-        /**
-         * @desc 随机设置点
-         * @param <Group> group ...
-         * @param <number> radius ...
-         */
-        function setRandomDot(group) {
-          var texture = new THREE.TextureLoader().load(biaozhu)
-          var texture2 = new THREE.TextureLoader().load(biaozhuguangquan)
-          posArr.map((pos) => {
-            var dotMesh = createPointMesh(pos, texture)
-            var waveMesh = createWaveMesh(pos, texture2)
-            group.add(dotMesh)
-            group.add(waveMesh)
-            WaveMeshArr.push(waveMesh)
-          })
-        }
+  let globe: Globe | null = null
+  let animationId = 0
+  let resizeObserver: ResizeObserver | null = null
+  /**
+   * 初始自转相位：使中国（约东经 105° 一线）大致朝向镜头。
+   * 若加载后大陆偏左/偏右，可微调 CHINA_MERIDIAN_DEG（±5°～15°），或把前面负号改成正号。
+   */
+  const CHINA_MERIDIAN_DEG = 250
+  let phi = (-CHINA_MERIDIAN_DEG * Math.PI) / 180
 
-        /**
-         * 标注
-         */
-        function createPointMesh(pos, texture) {
-          var material = new THREE.MeshBasicMaterial({
-            map: texture,
-            transparent: true, //使用背景透明的png贴图，注意开启透明计算
-            // side: THREE.DoubleSide, //双面可见
-            depthWrite: false, //禁止写入深度缓冲区数据
-          })
-          var mesh = new THREE.Mesh(planGeometry, material)
-          var size = radius * 0.04 //矩形平面Mesh的尺寸
-          mesh.scale.set(size, size, size) //设置mesh大小
-          //设置mesh位置
-          mesh.position.set(pos.x, pos.y, pos.z)
-          // mesh在球面上的法线方向(球心和球面坐标构成的方向向量)
-          var coordVec3 = new THREE.Vector3(pos.x, pos.y, pos.z).normalize()
-          // mesh默认在XOY平面上，法线方向沿着z轴new THREE.Vector3(0, 0, 1)
-          var meshNormal = new THREE.Vector3(0, 0, 1)
-          // 四元数属性.quaternion表示mesh的角度状态
-          //.setFromUnitVectors();计算两个向量之间构成的四元数值
-          mesh.quaternion.setFromUnitVectors(meshNormal, coordVec3)
-          return mesh
-        }
+  let isDraggingGlobe = false
+  let dragLastX = 0
+  let dragLastY = 0
 
-        /**
-         * 标注的光圈
-         */
-        function createWaveMesh(pos, texture) {
-          var material = new THREE.MeshBasicMaterial({
-            color: 0x22ffcc,
-            map: texture,
-            transparent: true, //使用背景透明的png贴图，注意开启透明计算
-            opacity: 1.0,
-            // side: THREE.DoubleSide, //双面可见
-            depthWrite: false, //禁止写入深度缓冲区数据
-          })
-          var mesh = new THREE.Mesh(planGeometry, material)
-          var size = radius * 0.055 //矩形平面Mesh的尺寸
-          mesh.size = size //自顶一个属性，表示mesh静态大小
-          mesh.scale.set(size, size, size) //设置mesh大小
-          mesh._s = Math.random() * 1.0 + 1.0 //自定义属性._s表示mesh在原始大小基础上放大倍数  光圈在原来mesh.size基础上1~2倍之间变化
-          mesh.position.set(pos.x, pos.y, pos.z)
-          // mesh姿态设置
-          // mesh在球面上的法线方向(球心和球面坐标构成的方向向量)
-          var coordVec3 = new THREE.Vector3(pos.x, pos.y, pos.z).normalize()
-          // mesh默认在XOY平面上，法线方向沿着z轴new THREE.Vector3(0, 0, 1)
-          var meshNormal = new THREE.Vector3(0, 0, 1)
-          // 四元数属性.quaternion表示mesh的角度状态
-          //.setFromUnitVectors();计算两个向量之间构成的四元数值
-          mesh.quaternion.setFromUnitVectors(meshNormal, coordVec3)
-          return mesh
-        }
-
-        // 添加飞线
-        function addLines(v0, v3) {
-          // 夹角
-          var angle = (v0.angleTo(v3) * 1.8) / Math.PI / 0.1 // 0 ~ Math.PI
-          var aLen = angle * 0.4,
-            hLen = angle * angle * 12
-          var p0 = new THREE.Vector3(0, 0, 0)
-          // 法线向量
-          var direction = getVCenter(v0.clone(), v3.clone()).normalize()
-          var rayLine = new THREE.Ray(p0, direction)
-
-          // 使用新方法计算顶点坐标
-          var target1 = new THREE.Vector3()
-          target1.copy(rayLine.origin).addScaledVector(rayLine.direction, 1)
-          var vtop = new THREE.Vector3()
-          vtop
-            .copy(rayLine.origin)
-            .addScaledVector(rayLine.direction, hLen / target1.distanceTo(p0))
-
-          // 控制点坐标
-          var v1 = getLenVcetor(v0.clone(), vtop, aLen)
-          var v2 = getLenVcetor(v3.clone(), vtop, aLen)
-          // 绘制三维三次贝赛尔曲线
-          var curve = new THREE.CubicBezierCurve3(v0, v1, v2, v3)
-          var geometry = new LineGeometry()
-          var points = curve.getSpacedPoints(50)
-          var positions = []
-          var colors = []
-          var color = new THREE.Color()
-          /**
-           * HSL中使用渐变
-           * h — hue value between 0.0 and 1.0
-           * s — 饱和度 between 0.0 and 1.0
-           * l — 亮度 between 0.0 and 1.0
-           */
-          for (var j = 0; j < points.length; j++) {
-            // color.setHSL( .31666+j*0.005,0.7, 0.7); //绿色
-            color.setHSL(0.81666 + j, 0.88, 0.715 + j * 0.0025) //粉色
-            colors.push(color.r, color.g, color.b)
-            positions.push(points[j].x, points[j].y, points[j].z)
-          }
-          geometry.setPositions(positions)
-          geometry.setColors(colors)
-          var matLine = new LineMaterial({
-            linewidth: 0.0006,
-            vertexColors: true,
-            dashed: false,
-          })
-
-          return {
-            curve: curve,
-            lineMesh: new Line2(geometry, matLine),
-          }
-        }
-
-        // 计算v1,v2 的中点
-        function getVCenter(v1, v2) {
-          return new THREE.Vector3().addVectors(v1, v2).multiplyScalar(0.5)
-        }
-
-        // 计算V1，V2向量固定长度的点
-        function getLenVcetor(v1, v2, len) {
-          const v1v2Len = v1.distanceTo(v2)
-          return v1.lerp(v2, len / v1v2Len)
-        }
-
-        /**
-         * @description 初始化渲染场景
-         */
-        function initRenderer() {
-          renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-          renderer.setPixelRatio(window.devicePixelRatio)
-          renderer.setSize(width, height)
-          map3DMain.value.appendChild(renderer.domElement)
-        }
-
-        /**
-         * @description 初始化相机
-         */
-        function initCamera() {
-          camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000)
-          camera.position.set(5, -20, 200)
-          camera.lookAt(0, 3, 0)
-          window.camera = camera
-        }
-
-        /**
-         * @description 初始化场景
-         */
-        function initScene() {
-          scene = new THREE.Scene()
-          scene.background = new THREE.Color(0x020924)
-          scene.fog = new THREE.Fog(0x020924, 200, 1000)
-          window.scene = scene
-        }
-
-        /**
-         * 初始化用户交互
-         **/
-        function initControls() {
-          controls = new OrbitControls(camera, renderer.domElement)
-          // 如果使用animate方法时，将此函数删除
-          // controls.addEventListener( 'change', render );
-          // 使动画循环使用时阻尼或自转 意思是否有惯性
-          controls.enableDamping = true
-          //动态阻尼系数 就是鼠标拖拽旋转灵敏度
-          //controls.dampingFactor = 0.25;
-          //是否可以缩放
-          controls.enableZoom = true
-          //是否自动旋转
-          controls.autoRotate = true
-          controls.autoRotateSpeed = 0.1
-          //设置相机距离原点的最远距离
-          // controls.minDistance = 2;
-          //设置相机距离原点的最远距离
-          // controls.maxDistance = 1000;
-          //是否开启右键拖拽
-          controls.enablePan = true
-        }
-
-        function initTween() {
-          var tweena = cameraCon(3000)
-          tweena.start()
-        }
-
-        function updateUvTransform() {
-          uniforms.c.value = API.c
-          uniforms.p.value = API.p
-          uniforms.glowColor.value = new THREE.Color(API.color)
-          renders()
-        }
-
-        function cameraCon(time) {
-          var tween1 = new TWEEN.Tween(camaPositions[0])
-            .to(camaPositions[1], time)
-            .easing(TWEEN.Easing.Quadratic.InOut)
-          var update = () => {
-            camera.position.set(
-              camaPositions[0].x,
-              camaPositions[0].y,
-              camaPositions[0].z
-            )
-          }
-          tween1.onUpdate(update)
-          tween1.onComplete(function () {
-            initFlag = true
-            //初始化点和曲线
-            initDotAndFly()
-            //光柱效果和底部矩形
-            // initLightPillar()
-          })
-          return tween1
-        }
-
-        /**
-         * @description 初始化光
-         */
-        function initLight() {
-          const ambientLight = new THREE.AmbientLight(0xcccccc, 1.1)
-          scene.add(ambientLight)
-          var directionalLight = new THREE.DirectionalLight(0xffffff, 0.2)
-          directionalLight.position.set(1, 0.1, 0).normalize()
-          var directionalLight2 = new THREE.DirectionalLight(0xff2ffff, 0.2)
-          directionalLight2.position.set(1, 0.1, 0.1).normalize()
-          scene.add(directionalLight)
-          scene.add(directionalLight2)
-          var hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.2)
-          hemiLight.position.set(0, 1, 0)
-          scene.add(hemiLight)
-          var directionalLight = new THREE.DirectionalLight(0xffffff)
-          directionalLight.position.set(1, 500, -20)
-          directionalLight.castShadow = true
-          directionalLight.shadow.camera.top = 18
-          directionalLight.shadow.camera.bottom = -10
-          directionalLight.shadow.camera.left = -52
-          directionalLight.shadow.camera.right = 12
-          scene.add(directionalLight)
-        }
-
-        /**
-         * 初始化背景星空
-         */
-        function initPoints() {
-          var texture = new THREE.TextureLoader().load(gradient)
-          const positions = []
-          const colors = []
-          const geometry = new THREE.BufferGeometry()
-          for (var i = 0; i < 10000; i++) {
-            var vertex = new THREE.Vector3()
-            vertex.x = Math.random() * 2 - 1
-            vertex.y = Math.random() * 2 - 1
-            vertex.z = Math.random() * 2 - 1
-            positions.push(vertex.x, vertex.y, vertex.z)
-            var color = new THREE.Color()
-            color.setHSL(
-              Math.random() * 0.2 + 0.5,
-              0.55,
-              Math.random() * 0.25 + 0.55
-            )
-            colors.push(color.r, color.g, color.b)
-          }
-          geometry.setAttribute(
-            'position',
-            new THREE.Float32BufferAttribute(positions, 3)
-          )
-          geometry.setAttribute(
-            'color',
-            new THREE.Float32BufferAttribute(colors, 3)
-          )
-          var starsMaterial = new THREE.PointsMaterial({
-            map: texture,
-            size: 1,
-            transparent: true,
-            opacity: 1,
-            vertexColors: true, //true：且该几何体的colors属性有值，则该粒子会舍弃第一个属性--color，而应用该几何体的colors属性的颜色
-            blending: THREE.AdditiveBlending,
-            sizeAttenuation: true,
-          })
-          stars = new THREE.Points(geometry, starsMaterial)
-          stars.scale.set(300, 300, 300)
-          scene.add(stars)
-        }
-
-        /**
-         * 包含2个，一个地球，一个辉光球体
-         */
-        function initEarth() {
-          // 地球
-          globeTextureLoader.load(earthImg, function (texture) {
-            var globeGgeometry = new THREE.SphereGeometry(radius, 100, 100)
-            var globeMaterial = new THREE.MeshStandardMaterial({
-              map: texture,
-              side: THREE.DoubleSide,
-            })
-            var globeMesh = new THREE.Mesh(globeGgeometry, globeMaterial)
-            group.rotation.set(0.5, 2.9, 0.1)
-            group.add(globeMesh)
-            scene.add(group)
-          })
-        }
-
-        /**
-         * 创建地球光晕特效
-         */
-        function initEarthSprite() {
-          var texture = globeTextureLoader.load(earth_aperture)
-          var spriteMaterial = new THREE.SpriteMaterial({
-            map: texture,
-            transparent: true,
-            opacity: 0.5,
-            depthWrite: false,
-          })
-          var sprite = new THREE.Sprite(spriteMaterial)
-          sprite.scale.set(radius * 3, radius * 3, 1)
-          group.add(sprite)
-        }
-
-        /**
-         * 添加卫星特效
-         */
-        function initSatellite() {
-          // 光环
-          globeTextureLoader.load(halo, function (texture) {
-            var geometry = new THREE.PlaneGeometry(14, 14) //矩形平面
-            var material = new THREE.MeshLambertMaterial({
-              map: texture, //给纹理属性map赋值
-              transparent: true,
-              side: THREE.DoubleSide, //两面可见
-              depthWrite: false,
-            }) //材质对象
-            var mesh = new THREE.Mesh(geometry, material) //网格模型对象
-            groupHalo.add(mesh)
-          })
-          // 小地球
-          globeTextureLoader.load(smallEarth, function (texture) {
-            var p1 = new THREE.Vector3(-7, 0, 0) //顶点1坐标
-            var p2 = new THREE.Vector3(7, 0, 0) //顶点2坐标
-            const points = [p1, p2]
-            const geometry = new THREE.BufferGeometry().setFromPoints(points)
-            var material = new THREE.PointsMaterial({
-              map: texture, //给纹理属性map赋值
-              transparent: true,
-              side: THREE.DoubleSide, //两面可见
-              size: 1, //点对象像素尺寸
-              depthWrite: false,
-            }) //材质对象
-            var earthPoints = new THREE.Points(geometry, material) //点模型对象
-            groupHalo.add(earthPoints) //点对象添加到场景中
-          })
-          groupHalo.rotation.set(1.9, 0.5, 1)
-          scene.add(groupHalo)
-        }
-
-        /**
-         * 光柱特效
-         */
-        function createLightPillar(pos) {
-          var height = radius * 0.1 //光柱高度，和地球半径相关，这样调节地球半径，光柱尺寸跟着变化
-          var geometry = new THREE.PlaneGeometry(radius * 0.05, height) //默认在XOY平面上
-          geometry.rotateX(Math.PI / 2) //光柱高度方向旋转到z轴上
-          geometry.translate(0, 0, height / 2) //平移使光柱底部与XOY平面重合
-          var textureLoader = new THREE.TextureLoader() // TextureLoader创建一个纹理加载器对象
-          var material = new THREE.MeshBasicMaterial({
-            map: textureLoader.load(guangzhu),
-            color: 0x44ffaa, //光柱颜色，光柱map贴图是白色，可以通过color调节颜色
-            transparent: true, //使用背景透明的png贴图，注意开启透明计算
-            side: THREE.DoubleSide, //双面可见
-            depthWrite: false, //是否对深度缓冲区有任何的影响
-          })
-          var mesh = new THREE.Mesh(geometry, material)
-          var group = new THREE.Group()
-          // 两个光柱交叉叠加
-          group.add(mesh, mesh.clone().rotateZ(Math.PI / 2)) //几何体绕x轴旋转了，所以mesh旋转轴变为z
-          group.position.set(pos.x, pos.y, pos.z) //设置mesh位置
-          var coordVec3 = new THREE.Vector3(pos.x, pos.y, pos.z).normalize()
-          var meshNormal = new THREE.Vector3(0, 0, 1)
-          // 四元数属性.quaternion表示mesh的角度状态
-          //.setFromUnitVectors();计算两个向量之间构成的四元数值
-          group.quaternion.setFromUnitVectors(meshNormal, coordVec3)
-          return group
-        }
-
-        /**
-         * 光柱底部的矩形平面特效
-         */
-        function createLightWaveMesh(pos, texture) {
-          var geometry = new THREE.PlaneGeometry(1, 1) //默认在XOY平面上
-          var material = new THREE.MeshBasicMaterial({
-            color: 0x22ffcc,
-            map: texture,
-            transparent: true, //使用背景透明的png贴图，注意开启透明计算
-            // side: THREE.DoubleSide, //双面可见
-            depthWrite: false, //禁止写入深度缓冲区数据
-          })
-          var mesh = new THREE.Mesh(geometry, material)
-          var size = radius * 0.05 //矩形平面Mesh的尺寸
-          mesh.scale.set(size, size, size) //设置mesh大小
-          return mesh
-        }
-
-        /**
-         * 光柱效果
-         */
-        function initLightPillar() {
-          var texture = new THREE.TextureLoader().load(biaozhu)
-          var datas = [
-            {
-              lng: 86.39895905468748,
-              lat: 45.15923349468924, //合肥
-            },
-            {
-              lng: 106.54041,
-              lat: 29.40268, //重庆
-            },
-          ]
-          datas.forEach(function (obj) {
-            var pos = lglt2xyz(obj.lng, obj.lat)
-            var LightPillar = createLightPillar(pos)
-            groupDots.add(LightPillar)
-            var waveMesh = createLightWaveMesh(pos, texture)
-            LightPillar.add(waveMesh)
-          })
-        }
-
-        /**
-         * @description 初始化点和曲线
-         */
-        function initDotAndFly() {
-          // 创建标注点
-          setRandomDot(groupDots)
-          //随机点加载group上面
-          group.add(groupDots)
-          // 曲线
-          var animateDots = []
-          groupDots.children.forEach((elem) => {
-            if (groupDots.children[0].position.x == elem.position.x) {
-              return true
-            }
-            var line = addLines(groupDots.children[0].position, elem.position)
-            groupLines.add(line.lineMesh)
-            animateDots.push(line.curve.getPoints(100)) //这个是里面球
-          })
-          group.add(groupLines)
-          // 添加动画
-          // for (let i = 0; i < animateDots.length; i++) {
-          //   const aGeo = new THREE.SphereGeometry(0.03, 0.03, 0.03)
-          //   const aMater = new THREE.MeshPhongMaterial({ color: '#F8D764' })
-          //   const aMesh = new THREE.Mesh(aGeo, aMater)
-          //   aGroup.add(aMesh)
-          // }
-          var vIndex = 0
-
-          function animateLine() {
-            aGroup.children.forEach((elem, index) => {
-              const v = animateDots[index][vIndex]
-              elem.position.set(v.x, v.y, v.z)
-            })
-            vIndex++
-            if (vIndex > 100) {
-              vIndex = 0
-            }
-            setTimeout(animateLine, 20)
-          }
-
-          group.add(aGroup)
-          animateLine()
-        }
-
-        /**
-         * 中国描边高亮
-         */
-        function initGeoJson() {
-          initMap(chinaData)
-          outLineMap(chinaOutlineData)
-        }
-
-        function outLineMap(json) {
-          json.features.forEach((elem) => {
-            // 新建一个省份容器：用来存放省份对应的模型和轮廓线
-            const province = new THREE.Object3D()
-            const coordinates = elem.geometry.coordinates
-            coordinates.forEach((multiPolygon) => {
-              multiPolygon.forEach((polygon) => {
-                // 这里的坐标要做2次使用：1次用来构建模型，1次用来构建轮廓线
-                if (polygon.length > 200) {
-                  var v3ps = []
-                  for (let i = 0; i < polygon.length; i++) {
-                    var pos = lglt2xyz(polygon[i][0], polygon[i][1])
-                    v3ps.push(pos)
-                  }
-                  var curve = new THREE.CatmullRomCurve3(
-                    v3ps,
-                    false /*是否闭合*/
-                  )
-                  var color = new THREE.Vector3(
-                    0.5999758518718452,
-                    0.7798940272761521,
-                    0.6181903838257632
-                  )
-                  var flyLine = initFlyLine(
-                    curve,
-                    {
-                      speed: 0.4,
-                      // color: randomVec3Color(),
-                      color: color,
-                      number: 3, //同时跑动的流光数量
-                      length: 0.2, //流光线条长度
-                      size: 3, //粗细
-                    },
-                    5000
-                  )
-                  province.add(flyLine)
-                }
-              })
-            })
-            map.add(province)
-          })
-          group.add(map)
-        }
-
-        function initMap(chinaJson) {
-          // 遍历省份构建模型
-          chinaJson.features.forEach((elem) => {
-            // 新建一个省份容器：用来存放省份对应的模型和轮廓线
-            const province = new THREE.Object3D()
-            const coordinates = elem.geometry.coordinates
-            coordinates.forEach((multiPolygon) => {
-              multiPolygon.forEach((polygon) => {
-                const lineMaterial = new THREE.LineBasicMaterial({
-                  color: 0xf19553,
-                }) //0x3BFA9E
-                const positions = []
-                const linGeometry = new THREE.BufferGeometry()
-                for (let i = 0; i < polygon.length; i++) {
-                  var pos = lglt2xyz(polygon[i][0], polygon[i][1])
-                  positions.push(pos.x, pos.y, pos.z)
-                }
-                linGeometry.setAttribute(
-                  'position',
-                  new THREE.Float32BufferAttribute(positions, 3)
-                )
-                const line = new THREE.Line(linGeometry, lineMaterial)
-                province.add(line)
-              })
-            })
-            map.add(province)
-          })
-          group.add(map)
-        }
-
-        /**
-         * @param curve {THREE.Curve} 路径,
-         * @param matSetting {Object} 材质配置项
-         * @param pointsNumber {Number} 点的个数 越多越细致
-         * */
-        function initFlyLine(curve, matSetting, pointsNumber) {
-          var points = curve.getPoints(pointsNumber)
-          var geometry = new THREE.BufferGeometry().setFromPoints(points)
-          const length = points.length
-          var percents = new Float32Array(length)
-          for (let i = 0; i < points.length; i += 1) {
-            percents[i] = i / length
-          }
-          geometry.setAttribute(
-            'percent',
-            new THREE.BufferAttribute(percents, 1)
-          )
-          const lineMaterial = initLineMaterial(matSetting)
-          var flyLine = new THREE.Points(geometry, lineMaterial)
-          return flyLine
-        }
-
-        function initLineMaterial(setting) {
-          const number = setting ? Number(setting.number) || 1.0 : 1.0
-          const speed = setting ? Number(setting.speed) || 1.0 : 1.0
-          const length = setting ? Number(setting.length) || 0.5 : 0.5
-          const size = setting ? Number(setting.size) || 3.0 : 3.0
-          const color = setting
-            ? setting.color || new THREE.Vector3(0, 1, 1)
-            : new THREE.Vector3(0, 1, 1)
-          const singleUniforms = {
-            u_time: uniforms2.u_time,
-            number: { type: 'f', value: number },
-            speed: { type: 'f', value: speed },
-            length: { type: 'f', value: length },
-            size: { type: 'f', value: size },
-            color: { type: 'v3', value: color },
-          }
-          const lineMaterial = new THREE.ShaderMaterial({
-            uniforms: singleUniforms,
-            vertexShader: vertexShader2,
-            fragmentShader: fragmentShader2,
-            transparent: true,
-            //blending:THREE.AdditiveBlending,
-          })
-          return lineMaterial
-        }
-
-        /**
-         * @description 渲染
-         */
-        function renders() {
-          renderer.clear()
-          renderer.render(scene, camera)
-        }
-
-        /**
-         * 更新
-         **/
-        function animate() {
-          window.requestAnimationFrame(() => {
-            if (controls) controls.update()
-            if (stats) stats.update()
-            if (TWEEN) TWEEN.update()
-            if (initFlag) {
-              //光环
-              groupHalo.rotation.z = groupHalo.rotation.z + 0.01
-              group.rotation.y = group.rotation.y + 0.001
-              // 所有波动光圈都有自己的透明度和大小状态
-              // 一个波动光圈透明度变化过程是：0~1~0反复循环
-              if (WaveMeshArr.length) {
-                WaveMeshArr.forEach(function (mesh) {
-                  mesh._s += 0.007
-                  mesh.scale.set(
-                    mesh.size * mesh._s,
-                    mesh.size * mesh._s,
-                    mesh.size * mesh._s
-                  )
-                  if (mesh._s <= 1.5) {
-                    //mesh._s=1，透明度=0 mesh._s=1.5，透明度=1
-                    mesh.material.opacity = (mesh._s - 1) * 2
-                  } else if (mesh._s > 1.5 && mesh._s <= 2) {
-                    //mesh._s=1.5，透明度=1 mesh._s=2，透明度=0
-                    mesh.material.opacity = 1 - (mesh._s - 1.5) * 2
-                  } else {
-                    mesh._s = 1.0
-                  }
-                })
-              }
-            }
-            if (stars) {
-              stars.rotation.y += 0.0001
-            }
-            uniforms2.u_time.value += 0.007
-            renders()
-            animate()
-          })
-        }
-      })
+  const modeConfigs: Record<GlobeMode, ModeConfig> = {
+    cobeV2: {
+      theta: 0.2,
+      dark: 0,
+      mapBrightness: 10,
       /**
-       * 窗口变动
-       **/
-      const handleResize = () => {
-        const width = map3DMain.value.offsetWidth
-        const height = map3DMain.value.offsetHeight
-        camera.aspect = width / height
-        camera.updateProjectionMatrix()
-        if (renderer) {
-          renderer.setSize(width, height)
-        }
-      }
-
-      return {
-        map3DMain,
-        handleResize,
-      }
+       * 这里的圆点是 cobe 用 WebGL 画的 marker 本体（非 DOM），就是 label 下方那个「贴在地球上的小点」。
+       * 颜色和大小若过浅过小，会和白色地球完全融合 → 视觉上等于没有圆点。
+       * 这里对齐 cobe-main showcaseConfigs.default 的取值。
+       */
+      markerColor: [0.3, 0.45, 0.85],
+      baseColor: [1, 1, 1],
+      markerSize: 0.015,
+      markerElevation: 0.01,
+    },
+    polaroids: {
+      theta: 0.2,
+      dark: 0,
+      mapBrightness: 9,
+      markerColor: [0.3, 0.45, 0.85],
+      baseColor: [1, 1, 1],
+      markerSize: 0.012,
+      markerElevation: 0,
     },
   }
+
+  /** 竖直视角，由拖拽与模式默认共同决定 */
+  let interactiveTheta = modeConfigs.cobeV2.theta
+
+  const cobeV2Markers = computed<CityMarker[]>(() =>
+    city.map((item, index) => ({
+      id: `city-${index}`,
+      label: item[0],
+      location: [item[2], item[1]], // city.ts is [name, lng, lat], cobe needs [lat, lng]
+      size: modeConfigs.cobeV2.markerSize,
+    }))
+  )
+
+  const currentMarkers = computed<Marker[]>(() => {
+    if (mode.value === 'cobeV2') {
+      return cobeV2Markers.value
+    }
+    return polaroidsWithOverviewImages.value.map((item) => ({
+      id: item.id,
+      location: item.location,
+      size: modeConfigs.polaroids.markerSize,
+    }))
+  })
+
+  function markerOverlayStyle(id: string): CSSProperties {
+    return {
+      positionAnchor: `--cobe-${id}`,
+      opacity: `var(--cobe-visible-${id}, 0)`,
+      filter: `blur(calc((1 - var(--cobe-visible-${id}, 0)) * 8px))`,
+    }
+  }
+
+  function polaroidStyle(id: string, rotate: number): CSSProperties {
+    return {
+      ...markerOverlayStyle(id),
+      '--polaroid-rotate': `${rotate}deg`,
+    } as CSSProperties
+  }
+
+  function getGlobeOptions(width: number): COBEOptions {
+    const config = modeConfigs[mode.value]
+    return {
+      width,
+      height: width,
+      phi,
+      theta: interactiveTheta,
+      mapSamples: 16000,
+      mapBrightness: config.mapBrightness,
+      baseColor: config.baseColor,
+      markerColor: config.markerColor,
+      glowColor: [0.94, 0.93, 0.91],
+      markers: currentMarkers.value,
+      markerElevation: config.markerElevation,
+      diffuse: 1.5,
+      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+      dark: config.dark,
+      opacity: 0.7,
+    }
+  }
+
+  function stopAnimation() {
+    if (animationId) {
+      cancelAnimationFrame(animationId)
+      animationId = 0
+    }
+  }
+
+  function destroyGlobe() {
+    stopAnimation()
+    if (globe) {
+      globe.destroy()
+      globe = null
+    }
+  }
+
+  function startAnimation() {
+    if (!globe) return
+    const tick = () => {
+      if (!isDraggingGlobe) {
+        phi += 0.001
+      }
+      globe?.update({
+        phi,
+        theta: interactiveTheta,
+        markers: currentMarkers.value,
+      })
+      animationId = requestAnimationFrame(tick)
+    }
+    tick()
+  }
+
+  const THETA_MIN = 0.05
+  const THETA_MAX = 1.35
+
+  function clampTheta(v: number) {
+    return Math.min(THETA_MAX, Math.max(THETA_MIN, v))
+  }
+
+  function onGlobePointerDown(e: PointerEvent) {
+    if (e.button !== 0 || !canvasRef.value) return
+    isDraggingGlobe = true
+    dragLastX = e.clientX
+    dragLastY = e.clientY
+    canvasRef.value.style.cursor = 'grabbing'
+    try {
+      canvasRef.value.setPointerCapture(e.pointerId)
+    } catch {
+      /* ignore */
+    }
+  }
+
+  function onGlobePointerMove(e: PointerEvent) {
+    if (!isDraggingGlobe) return
+    const dx = e.clientX - dragLastX
+    const dy = e.clientY - dragLastY
+    dragLastX = e.clientX
+    dragLastY = e.clientY
+    phi -= dx * 0.005
+    interactiveTheta = clampTheta(interactiveTheta + dy * 0.005)
+  }
+
+  function endGlobeDrag(e?: PointerEvent) {
+    if (!isDraggingGlobe) return
+    isDraggingGlobe = false
+    if (canvasRef.value) {
+      canvasRef.value.style.cursor = 'grab'
+    }
+    if (e && canvasRef.value && canvasRef.value.hasPointerCapture(e.pointerId)) {
+      try {
+        canvasRef.value.releasePointerCapture(e.pointerId)
+      } catch {
+        /* ignore */
+      }
+    }
+  }
+
+  function toggleFullscreen() {
+    const el = wrapperRef.value
+    if (!el) return
+    if (document.fullscreenElement) {
+      void document.exitFullscreen()
+    } else {
+      void el.requestFullscreen()
+    }
+  }
+
+  function onGlobeDoubleClick() {
+    toggleFullscreen()
+  }
+
+  function createOrRecreateGlobe() {
+    const canvas = canvasRef.value
+    if (!canvas) return
+
+    const width = canvas.offsetWidth
+    if (!width) return
+
+    destroyGlobe()
+    globe = createGlobe(canvas, getGlobeOptions(width))
+    startAnimation()
+  }
+
+  onMounted(() => {
+    const canvas = canvasRef.value
+    if (canvas) {
+      canvas.style.cursor = 'grab'
+      canvas.addEventListener('pointerdown', onGlobePointerDown)
+      canvas.addEventListener('pointermove', onGlobePointerMove)
+      canvas.addEventListener('pointerup', endGlobeDrag)
+      canvas.addEventListener('pointercancel', endGlobeDrag)
+      canvas.addEventListener('dblclick', onGlobeDoubleClick)
+    }
+
+    createOrRecreateGlobe()
+    if (wrapperRef.value) {
+      resizeObserver = new ResizeObserver(() => {
+        createOrRecreateGlobe()
+      })
+      resizeObserver.observe(wrapperRef.value)
+    }
+  })
+
+  watch(mode, () => {
+    interactiveTheta = modeConfigs[mode.value].theta
+    createOrRecreateGlobe()
+  })
+
+  onBeforeUnmount(() => {
+    const canvas = canvasRef.value
+    if (canvas) {
+      canvas.removeEventListener('pointerdown', onGlobePointerDown)
+      canvas.removeEventListener('pointermove', onGlobePointerMove)
+      canvas.removeEventListener('pointerup', endGlobeDrag)
+      canvas.removeEventListener('pointercancel', endGlobeDrag)
+      canvas.removeEventListener('dblclick', onGlobeDoubleClick)
+    }
+    resizeObserver?.disconnect()
+    resizeObserver = null
+    destroyGlobe()
+  })
 </script>
 
 <style lang="less">
-  .travtel-map-wrap {
-    height: calc(100vh - var(--vp-nav-height));
-    #map3DMain {
-      height: 100%;
-    }
-  }
-
-  .tagInfo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-    flex-direction: column;
-    align-content: flex-start;
-    pointer-events: initial;
+  .travel-map-wrap {
     position: relative;
-    z-index: 0;
+    height: calc(100vh - var(--vp-nav-height));
+    background: #f7f8fb;
+  }
 
-    .tagInfoIcon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: nowrap;
-      flex-direction: row;
-      align-content: flex-start;
-      position: relative;
-      z-index: 1;
+  .travel-map-wrap.is-embedded {
+    height: 100%;
+    min-height: 0;
+    background: transparent;
+  }
 
-      img {
-        width: 40px;
-        height: 43px;
-        margin-bottom: -10px;
-      }
-    }
+  .cobe-mode-radio {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+  }
 
-    .tagInfoName {
-      font-size: 20px;
-      font-family: PangMenZhengDao;
-      font-weight: 400;
-      color: #ffffff;
-      text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.53);
+  .cobe-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #f7f8fb;
+  }
+
+  .travel-map-wrap.is-embedded .cobe-wrapper {
+    background: transparent;
+  }
+
+  /*
+   * stage 必须严格等于 canvas 的渲染尺寸：
+   * cobe 在 stage 内部插入 <div style="width:100%;height:100%"> 包住 canvas，并把 anchor div
+   * 也注入这层。锚点 left/top 用的是该 div 的百分比，而 cobe 投影坐标是 canvas 像素归一化的，
+   * 只有当 stage = canvas 时锚点才会落在 globe 上正确的位置。
+   */
+  .cobe-stage {
+    position: relative;
+    width: min(100%, calc(100vh - var(--vp-nav-height)));
+    aspect-ratio: 1 / 1;
+  }
+
+  .cobe-wrapper:fullscreen {
+    background: #f7f8fb;
+  }
+
+  .travel-map-wrap.is-embedded .cobe-wrapper:fullscreen {
+    background: transparent;
+  }
+
+  .cobe-wrapper:fullscreen .cobe-stage {
+    width: min(100vw, 100vh);
+  }
+
+  .cobe-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+
+  /*
+   * 对齐 cobe-main website/app/globals.css `.showcase-default-label`
+   * （官网用 0.6rem + translate，不用大号 12px；长中文地名需 max-width 否则会撑满屏）
+   */
+  .cobe-label {
+    box-sizing: border-box;
+    display: inline-block;
+    width: fit-content;
+    max-width: 140px;
+    position: absolute;
+    bottom: anchor(top);
+    left: anchor(center);
+    translate: -50% 0;
+    margin-bottom: 6px;
+    padding: 2px 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: lab(36 55.64 -107.68);
+    color: #fff;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      'Liberation Mono', 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.8s, filter 0.8s;
+  }
+
+  .cobe-label::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate3d(-50%, -1px, 0);
+    border: 4px solid transparent;
+    border-top-color: lab(36 55.64 -107.68);
+  }
+
+  /* 不支持 CSS Anchor Positioning 时隐藏，避免标签堆叠成全屏异常排版（见 cobe globals @supports） */
+  @supports not (anchor-name: --test) {
+    .cobe-label,
+    .cobe-polaroid {
+      display: none !important;
     }
   }
 
-  //地图弹窗样式
-  .popWin {
+  .cobe-polaroid {
     position: absolute;
-    display: flex;
-    z-index: 100;
-    left: 0px;
-    top: 0px;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    align-content: flex-start;
-    pointer-events: initial;
+    bottom: anchor(top);
+    left: anchor(center);
+    transform: translate(-50%, -12px) rotate(var(--polaroid-rotate, 0deg));
+    width: 94px;
+    padding: 6px 6px 20px;
+    border-radius: 2px;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
     pointer-events: none;
+    transition: opacity 0.3s, filter 0.3s;
 
-    .line {
-      margin-top: 20px;
-      width: 100px;
-      height: 160px;
+    img {
+      width: 82px;
+      height: 82px;
+      object-fit: cover;
+      display: block;
     }
+  }
 
-    .popWins {
-      min-width: 197px;
-      pointer-events: initial;
-
-      p {
-        font-size: 12px;
-        font-weight: 400;
-        padding-right: 30px;
-        color: #bbcde6;
-        line-height: 28px;
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-wrap: nowrap;
-        flex-direction: row;
-        align-content: flex-start;
-
-        span {
-          width: 5px;
-          height: 5px;
-          background: #24dcf7;
-          border-radius: 50%;
-          margin-left: 35px;
-          margin-right: 10px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-wrap: nowrap;
-          flex-direction: row;
-          align-content: flex-start;
-        }
-      }
-    }
-
-    .titleInfos {
-      background: url('./assets/titlebg.png') no-repeat;
-      background-size: 100% 100%;
-      width: 243px;
-      height: 40px;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: nowrap;
-      flex-direction: row;
-      align-content: flex-start;
-      background-size: 100% 100%;
-
-      p {
-        font-size: 14px;
-        font-weight: 400;
-        color: #ffffff;
-        margin-left: 15px;
-      }
-
-      img {
-        width: 20px;
-        height: 20px;
-        margin-right: 5px;
-        cursor: pointer;
-      }
-    }
-
-    .cityName {
-      font-family: 'PangMenZhengDao';
-      font-size: 18px;
-      margin-left: 20px;
-    }
-
-    .popWins2 {
-      background: url('./assets/popbg.png') no-repeat;
-      width: 243px;
-      height: 154px;
-      background-size: 100% 100%;
-      padding-top: 10px;
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-      flex-wrap: nowrap;
-      flex-direction: column;
-      align-content: flex-start;
-
-      .quezhen {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-wrap: nowrap;
-        flex-direction: row;
-        align-content: flex-start;
-        font-size: 14px;
-        color: #fff;
-        margin-left: 20px;
-        line-height: 40px;
-
-        .numcardItem1 {
-          margin-top: 8px;
-        }
-
-        .real-time-num {
-          height: 40px;
-          color: #c8b639;
-          width: auto !important;
-          font-size: 18px !important;
-          font-family: DIN-Bold !important;
-          font-weight: bold !important;
-        }
-      }
-    }
+  .cobe-polaroid-caption {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    text-align: center;
+    color: #111827;
+    line-height: 1.2;
   }
 </style>

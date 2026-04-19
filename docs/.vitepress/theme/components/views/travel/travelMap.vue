@@ -1,6 +1,7 @@
 <template>
   <div class="travtel-map">
-    <component :is="type == 'travelMap' ? travelMap : travelMap3D" />
+    <TravelMap2d v-if="type === 'travelMap'" />
+    <TravelMap3d v-else :overview-items="overviewItems" />
     <el-radio-group
       class="map-type-radio"
       v-model="type"
@@ -13,8 +14,17 @@
 
 <script setup lang="ts">
   import { ref } from 'vue'
-  import travelMap from './components/travelMap.vue'
-  import travelMap3D from './components/travelMap3D.vue'
+  import TravelMap2d from './components/travelMap.vue'
+  import TravelMap3d from './components/travelMap3D.vue'
+
+  interface TravelOverviewItem {
+    name: string
+    src: string
+    video?: string
+  }
+
+  defineProps<{ overviewItems?: TravelOverviewItem[] }>()
+
   const type = ref('travelMap')
 </script>
 
