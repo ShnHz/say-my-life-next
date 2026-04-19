@@ -5,7 +5,7 @@
       :src="item"
       :preview-src-list="srcList"
       :initial-index="index"
-      :style="{ height: `${imgBoxHeight}px` }"
+      :style="imageStyle"
       fit="cover"
       lazy
       v-for="(item, index) in imgsArr"
@@ -43,6 +43,10 @@
         type: Number,
         default: 180,
       },
+      mobileImgBoxHeight: {
+        type: Number,
+        default: 240,
+      },
       number: {
         type: Number,
         default: 0,
@@ -57,14 +61,21 @@
     data() {
       return {
         imgsArr: [],
+        isMobile: false,
       }
     },
     computed: {
       srcList() {
         return this.imgsArr
       },
+      imageStyle() {
+        const height = this.isMobile ? this.mobileImgBoxHeight : this.imgBoxHeight
+        return { height: `${height}px` }
+      },
     },
     mounted() {
+      this.updateViewport()
+      window.addEventListener('resize', this.updateViewport)
       if (this.list.length > 0) {
         this.imgsArr = this.list
       } else {
@@ -75,7 +86,13 @@
         }
       }
     },
+    beforeUnmount() {
+      window.removeEventListener('resize', this.updateViewport)
+    },
     methods: {
+      updateViewport() {
+        this.isMobile = window.innerWidth <= 900
+      },
       getSrcList(index) {
         return this.imgsArr.slice(index).concat(this.imgsArr.slice(0, index))
       },

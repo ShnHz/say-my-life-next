@@ -5,8 +5,8 @@
       class="map-type-radio"
       v-model="type"
     >
-      <el-radio-button label="travelMap">平面地图</el-radio-button>
-      <el-radio-button label="travelMap3D">3D地图</el-radio-button>
+      <el-radio-button label="travelMap">2D</el-radio-button>
+      <el-radio-button label="travelMap3D">3D</el-radio-button>
     </el-radio-group>
   </div>
 </template>
