@@ -3,6 +3,7 @@ export default {
   vue: { title: 'Vue' },
   css: { title: 'Css' },
   js: { title: 'Js' },
+  ai: { title: 'AI' },
   applets: { title: '小程序', type: 'danger' },
   vuepress: { title: 'VuePress', type: 'danger' },
   music: { title: 'Music', type: 'warning', icon: 'MusicNoteFilled' },
