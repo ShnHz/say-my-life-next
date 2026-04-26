@@ -7,7 +7,7 @@ config: {
     top: false,
     dir: true,
     dirTag: ["h3","h4","h5"],
-    tag: ["后端", "Claude", "Java"],
+    tag: ["info","ai"],
     valine: true,
     valineId: 
 }
