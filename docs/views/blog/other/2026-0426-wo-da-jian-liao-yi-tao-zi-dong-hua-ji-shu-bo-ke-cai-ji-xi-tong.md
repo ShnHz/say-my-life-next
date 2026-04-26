@@ -7,15 +7,13 @@ config: {
     top: false,
     dir: true,
     dirTag: ["h3","h4","h5"],
-    tag: ["自动化", "Python", "博客", "工具"],
+    tag: ["tool", "git"],
     valine: true,
     valineId: 
 }
 password: false
 outline: [3,5]
 ---
-
-###### 原文 [掘金](https://juejin.cn)
 
 作为一个热爱技术但时间有限的开发者，我一直想找到一种高效的方式来积累和分享优质的技术文章。经过一段时间的折腾，我终于搭建了一套完整的自动化博客采集系统。这篇文章记录了整个实现过程和踩过的坑。
 
