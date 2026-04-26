@@ -21,11 +21,11 @@ outline: [3,5]
 
 短短一个月时间，这个项目目前就已经在 Github 收获了450+Star，吸引了多位社区爱好者共同参与完善！
 
-![](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/3a0d843b28034a7fa454db2fe6f17803~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=xc5e64pWpsMMkWbavwa5%2BZX%2Bkxg%3D)
+![](http://cdn.sanghangning.cn/blog/hermes/20260426-230057-96f2c47f.awebp)
 
 发布之后，得益于大家的共同贡献，我们顺利完成了下面这些事情：
 
-![](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/b7030274d4b14478a4f78912e129e3fd~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=v1FuRKxdUqDtDw8j%2B2qbmIBU2wI%3D)
+![](http://cdn.sanghangning.cn/blog/hermes/20260426-230057-79ce84de.awebp)
 
 截止目前，我已经累计处理11个 issue 和6个 pr（完成率100%）。
 
@@ -35,7 +35,7 @@ outline: [3,5]
 
 这是一个基于 Spring Boot 4.0 + Java 21 + Spring AI 2.0 的 AI 智能面试辅助平台。系统提供三大核心功能：
 
-![效果展示](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/73cbb01452b64fef8b1bb832c6dd927d~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=sInuxAsqLqrMgIoIvjlsvP5Rgas%3D)
+![效果展示](http://cdn.sanghangning.cn/blog/hermes/20260426-230058-9e6946d5.awebp)
 
 项目地址：
 
@@ -45,7 +45,7 @@ outline: [3,5]
 
 如何将《SpringAI 智能面试平台+RAG知识库》实战项目写进简历？我一共提供了五大方向版本任选，精准匹配岗位需求：
 
-![《SpringAI 智能面试平台+RAG知识库》简历写法](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/57177795d95c4ded9365773191222435~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=Jnn7LSEZVw9FY0V3Mg7jwXCUoas%3D)
+![《SpringAI 智能面试平台+RAG知识库》简历写法](http://cdn.sanghangning.cn/blog/hermes/20260426-230058-2cc7c17a.awebp)
 
 每一条描述都紧扣项目真实逻辑，严格遵守项目介绍规范。不仅教你怎么写，更教你怎么补，例如针对本项目未涉及的“用户认证与鉴权”给出补充建议，教你如何基于 SpringSecurity/Sa-Token 包装主流的认证授权方案。
 
@@ -57,17 +57,17 @@ outline: [3,5]
 
 例如，RAG 面试题总结这篇，耗时一周终于完成了第一版，一共3.4 万字，包含35 道高频 RAG 面试题，光校对都进行了三次。而且，这还只是第一版，后续还会继续完善优化！
 
-![RAG 面试题](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/9c5daa99c3ea460a89af430b72500e08~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=76zEcCAuElQBhgHGW6YVB7IOqy0%3D)
+![RAG 面试题](http://cdn.sanghangning.cn/blog/hermes/20260426-230058-4870d677.awebp)
 
 这篇是对应的 RAG 知识库详细开发思路的介绍。
 
-![RAG 知识库详细开发思路](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/a6912cff67ba49b992197cf1c74efc6e~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=Tw7M%2BLB6aO76B7TqUlTwOoife1A%3D)
+![RAG 知识库详细开发思路](http://cdn.sanghangning.cn/blog/hermes/20260426-230059-732e7303.awebp)
 
 不仅教你“如何写出代码”，更教你“为什么这么设计”以及“在企业真实场景中如何应对复杂挑战”。
 
 刚刚发布一天就收到了好评：
 
-![项目收到的好评](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/56790b20011a4f5983d1e0a6232b08a2~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=cghIl8MyqhflleNi%2FyCDs6I1Lmk%3D)
+![项目收到的好评](http://cdn.sanghangning.cn/blog/hermes/20260426-230059-d76e7568.awebp)
 
 ## 配套教程内容安排
 
@@ -99,7 +99,7 @@ outline: [3,5]
 
 系统采用前后端分离架构，整体分为三层：前端展示层、后端服务层、数据存储层。
 
-![系统架构](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/d6bb9a26f3ec4b3b8717af3c0ca0fc26~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=3tPUyrAU98C0BaYt1w6V5KHnR%2Fo%3D)
+![系统架构](http://cdn.sanghangning.cn/blog/hermes/20260426-230100-6525a751.awebp)
 
 后端层：
 
@@ -225,37 +225,37 @@ SpringBoot 官方现在用的就是 Gradle，加上国内现在都是 Maven 更�
 
 简历库：
 
-![](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/b8913d62737e45d38c4debd53e54cd58~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=AVC46QDNznPrZzKbASuFGr5ZFOU%3D)
+![](http://cdn.sanghangning.cn/blog/hermes/20260426-230101-5a9acdf9.awebp)
 
 简历上传分析：
 
-![](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/23375c516825453ba9e6cb20b6b76135~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=iHq9RXTRoLBcSwII1TP9YTjh2ps%3D)
+![](http://cdn.sanghangning.cn/blog/hermes/20260426-230101-8ad2f1eb.awebp)
 
 简历分析详情：
 
-![](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/7ad63c510a454b37bd6a5b7616dc21ea~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=zinD141sXwh%2FX3ycQxjpTwTD6A8%3D)
+![](http://cdn.sanghangning.cn/blog/hermes/20260426-230102-5eafaf85.awebp)
 
 面试记录：
 
-![](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/80f94cd5656d4669a36c1e15ab26b169~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=Ia2jTH01jVE3P3UHC1ajAIokhdk%3D)
+![](http://cdn.sanghangning.cn/blog/hermes/20260426-230103-cd7b98e1.awebp)
 
 面试详情：
 
-![](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/b87a4e2c3c904f388caa6a408d2c4e8f~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=XPDKrOtRTHDVfXEX1G9G1WZsP%2Fk%3D)
+![](http://cdn.sanghangning.cn/blog/hermes/20260426-230103-d14a25e8.awebp)
 
 模拟面试：
 
-![](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/5e0cda819f3a450aa6a2e2fd279649ff~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=velH3oYX%2FBwSJFt%2FGWPpM4Vq74M%3D)
+![](http://cdn.sanghangning.cn/blog/hermes/20260426-230104-68fea5c9.awebp)
 
 ### 知识库
 
 知识库管理：
 
-![](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/edb4352fe9214eea873d1ca834e9302c~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=ZI6ndMijyEM6lkAyrc%2BoQ%2FqzEHo%3D)
+![](http://cdn.sanghangning.cn/blog/hermes/20260426-230104-c8b1e0a7.awebp)
 
 问答助手：
 
-![](PLACEHOLDER_IMAGE:https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/e17ec6c4bb85455dbc0cde7270a31f9f~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgSmF2YUd1aWRl:q75.awebp?rk3s=f64ab15b&x-expires=1777260646&x-signature=LTHlcZ0tG5pfv5F0dx0yzv6iaH4%3D)
+![](http://cdn.sanghangning.cn/blog/hermes/20260426-230105-c1ab5f2c.awebp)
 
 ## 学习本项目你将获得什么？
 
