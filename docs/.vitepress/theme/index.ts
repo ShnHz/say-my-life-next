@@ -1,51 +1,83 @@
-// https://vitepress.dev/guide/custom-theme\
+// https://vitepress.dev/guide/custom-theme
 
-import { h } from 'vue'
+import { defineAsyncComponent } from 'vue'
 import Theme from 'vitepress/theme'
-import Mixins from '../utils/mixins/mixins'
+import {
+  focus as vFocus,
+  enterFloat as vEnterFloat,
+  enterNumber as vEnterNumber,
+} from '../utils/mixins/directives/directives.js'
 import MyLayout from './components/layout/Layout.vue'
 
 import '../styles/style.less'
 import '../styles/article.less'
-import 'element-plus/dist/index.css'
 
 import '../plugins/axios.js'
 
-// ------------------------------views
-import index from '@theme/components/views/index/index.vue'
-import guide from '@theme/components/views/guide/guide.vue'
-import tag from '@theme/components/views/tag/tag.vue'
-import create from '@theme/components/views/create/create.vue'
-import friend from '@theme/components/views/friend/friend.vue'
+const index = defineAsyncComponent(
+  () => import('./components/views/index/index.vue')
+)
+const guide = defineAsyncComponent(
+  () => import('./components/views/guide/guide.vue')
+)
+const tag = defineAsyncComponent(() => import('./components/views/tag/tag.vue'))
+const create = defineAsyncComponent(
+  () => import('./components/views/create/create.vue')
+)
+const friend = defineAsyncComponent(
+  () => import('./components/views/friend/friend.vue')
+)
 
-import fancyBorderRadius from './components/views/note/fancyBorderRadius.vue'
-import sanJiaoXingXiaoGongJu from './components/views/note/sanJiaoXingXiaoGongJu.vue'
+const fancyBorderRadius = defineAsyncComponent(
+  () => import('./components/views/note/fancyBorderRadius.vue')
+)
+const sanJiaoXingXiaoGongJu = defineAsyncComponent(
+  () => import('./components/views/note/sanJiaoXingXiaoGongJu.vue')
+)
 
-// ------------------------------components
-import ElementPlus from 'element-plus'
-// common
-import CodeDemo from '@theme/components/common/CodeDemo.vue'
-import Card3D from '@theme/components/common/Card3D.vue'
-import ImageList from '@theme/components/common/ImageList.vue'
+const CodeDemo = defineAsyncComponent(
+  () => import('./components/common/CodeDemo.vue')
+)
+const Card3D = defineAsyncComponent(
+  () => import('./components/common/Card3D.vue')
+)
+const ImageList = defineAsyncComponent(
+  () => import('./components/common/ImageList.vue')
+)
 
-// note
-import Color from './components/views/note/components/Color.vue'
-import Shadow from './components/views/note/components/Shadow.vue'
+const Color = defineAsyncComponent(
+  () => import('./components/views/note/components/Color.vue')
+)
+const Shadow = defineAsyncComponent(
+  () => import('./components/views/note/components/Shadow.vue')
+)
 
-// travel
-import travelOverview from './components/views/travel/travelOverview.vue'
-import travelMap from './components/views/travel/travelMap.vue'
-import travelCalendar from './components/views/travel/travelCalendar.vue'
+const travelOverview = defineAsyncComponent(
+  () => import('./components/views/travel/travelOverview.vue')
+)
+const travelMap = defineAsyncComponent(
+  () => import('./components/views/travel/travelMap.vue')
+)
+const travelCalendar = defineAsyncComponent(
+  () => import('./components/views/travel/travelCalendar.vue')
+)
 
-// life
-import CardAnime from './components/views/life/components/CardAnime.vue'
-import weightLoss from './components/views/life/weight-loss.vue'
+const CardAnime = defineAsyncComponent(
+  () => import('./components/views/life/components/CardAnime.vue')
+)
+const weightLoss = defineAsyncComponent(
+  () => import('./components/views/life/weight-loss.vue')
+)
 
 export default {
   ...Theme,
   Layout: MyLayout,
-  enhanceApp({ app, router, siteData }) {
-    if (process.env.NODE_ENV === 'development') {
+  enhanceApp({ app }) {
+    app.directive('focus', vFocus)
+    app.directive('enterFloat', vEnterFloat)
+    app.directive('enterNumber', vEnterNumber)
+
+    if (import.meta.env.DEV) {
       app.component('ViewCreate', create)
     }
     app.component('ViewIndex', index)
@@ -57,7 +89,6 @@ export default {
     app.component('ViewTravelOverview', travelOverview)
     app.component('ViewTravelMap', travelMap)
     app.component('ViewTravelCalendar', travelCalendar)
-    // app.component('ViewMy3d', my3d)
 
     app.component('CodeDemo', CodeDemo)
     app.component('Card3D', Card3D)
@@ -68,9 +99,5 @@ export default {
 
     app.component('LifeCardAnime', CardAnime)
     app.component('ViewWeightLoss', weightLoss)
-
-    app.use(ElementPlus)
-
-    app.mixin(Mixins)
   },
 }

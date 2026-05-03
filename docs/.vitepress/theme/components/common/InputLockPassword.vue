@@ -1,6 +1,6 @@
 <template>
   <div
-    v-clickoutside="clickoutside"
+    ref="rootEl"
     :class="{ show: show, unlock: !lock }"
     class="lock-password-input-wrap"
   >
@@ -19,8 +19,8 @@
     ></i>
     <div
       :class="{ hide: !lock }"
-      @click="inputFocus"
       class="code-input-main"
+      @click="inputFocus"
     >
       <div class="code-input-main-item">{{ code[0] ? '*' : '' }}</div>
       <div class="code-input-main-item">{{ code[1] ? '*' : '' }}</div>
@@ -28,18 +28,81 @@
       <div class="code-input-main-item">{{ code[3] ? '*' : '' }}</div>
     </div>
     <input
-      maxlength="4"
-      ref="input"
-      type="tel"
+      ref="inputRef"
       v-model="code"
+      maxlength="4"
+      type="tel"
     />
   </div>
 </template>
-<script>
+
+<script setup lang="ts">
   import md5 from 'js-md5'
-  import { defineComponent } from 'vue'
-  import { useData } from 'vitepress'
+  import { ref, watch } from 'vue'
+  import { onClickOutside } from '@vueuse/core'
+
+  const props = defineProps<{
+    /** MD5 hex string of the 4-digit pin */
+    passwordHash: string
+  }>()
+
+  const emit = defineEmits<{
+    unlock: []
+  }>()
+
+  const rootEl = ref<HTMLElement | null>(null)
+  const inputRef = ref<HTMLInputElement | null>(null)
+
+  const show = ref(false)
+  const lock = ref(true)
+  const error = ref(false)
+  const shake = ref(false)
+  const code = ref('')
+
+  onClickOutside(rootEl, () => {
+    if (lock.value) {
+      show.value = false
+    }
+  })
+
+  function showLockPasswordInput() {
+    show.value = true
+    setTimeout(() => inputRef.value?.focus(), 0)
+  }
+
+  function inputFocus() {
+    inputRef.value?.focus()
+  }
+
+  watch(code, (val) => {
+    if (val.length > 4) {
+      code.value = val.slice(0, 4)
+      return
+    }
+    if (val.length === 4 && props.passwordHash) {
+      const hash = md5(val)
+      if (hash === props.passwordHash) {
+        lock.value = false
+        error.value = false
+        emit('unlock')
+        show.value = false
+        code.value = ''
+      } else {
+        error.value = true
+        shake.value = true
+        code.value = ''
+        setTimeout(() => {
+          shake.value = false
+        }, 500)
+      }
+    }
+  })
+
+  defineExpose({
+    showLockPasswordInput,
+  })
 </script>
+
 <style lang="less" scoped>
   .lock-password-input-wrap:focus-within {
     box-shadow: 0 0px 16px 4px var(--vp-c-brand-lightest);

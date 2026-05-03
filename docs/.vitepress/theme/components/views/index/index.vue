@@ -128,7 +128,7 @@
   const route = useRoute()
   const frontmatter: any = route.data.frontmatter
   const desc = ref<string>('')
-  let easyTyper: any = {
+  const easyTyper = ref({
     output: '',
     isEnd: false,
     speed: 120,
@@ -137,15 +137,16 @@
     type: 'normal',
     backSpeed: 150,
     sentencePause: false,
-  }
-  let timer
+  })
+  let timer: ReturnType<typeof setInterval> | null = null
+  let typerInstance: { close?: () => void } | null = null
 
   onMounted(async () => {
-    const EasyTyper = await import('easy-typer-js')
+    const EasyTyper = (await import('easy-typer-js')).default
 
-    startEasyTyper(EasyTyper.default)
+    startEasyTyper(EasyTyper)
     timer = setInterval(() => {
-      easyTyper = {
+      easyTyper.value = {
         output: '',
         isEnd: false,
         speed: 120,
@@ -155,7 +156,7 @@
         backSpeed: 150,
         sentencePause: false,
       }
-      startEasyTyper(EasyTyper.default)
+      startEasyTyper(EasyTyper)
     }, 10000)
 
     // 移动端优化
@@ -188,17 +189,20 @@
   })
 
   onUnmounted(() => {
-    clearInterval(timer)
+    if (timer) clearInterval(timer)
     timer = null
+    typerInstance?.close?.()
+    typerInstance = null
   })
 
   const startEasyTyper = (EasyTyper) => {
-    new EasyTyper(
-      easyTyper,
+    typerInstance?.close?.()
+    typerInstance = new EasyTyper(
+      easyTyper.value,
       frontmatter.hero.text,
       () => {},
       () => {
-        desc.value = easyTyper.output
+        desc.value = easyTyper.value.output
       }
     )
   }

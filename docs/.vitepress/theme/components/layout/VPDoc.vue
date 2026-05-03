@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useRoute } from 'vitepress'
-  import { computed } from 'vue'
+  import { computed, ref, watch } from 'vue'
   import { useData } from 'vitepress'
 
   import { useSidebar } from 'vitepress/dist/client/theme-default/composables/sidebar'
@@ -30,7 +30,16 @@
     return false
   })
 
+  /** Cleared on route change — user must re-enter per page */
+  const pageUnlocked = ref(false)
+
   const route = useRoute()
+  watch(
+    () => route.path,
+    () => {
+      pageUnlocked.value = false
+    }
+  )
   const { hasSidebar, hasAside, leftAside } = useSidebar()
 
   const pageName = computed(() =>
@@ -53,14 +62,17 @@
   >
     <slot name="doc-top" />
     <div
+      v-if="password && !pageUnlocked"
       class="container"
-      v-if="password"
     >
-      <Lock />
+      <Lock
+        :password-hash="String(password)"
+        @unlock="pageUnlocked = true"
+      />
     </div>
     <div
-      class="container"
       v-else
+      class="container"
     >
       <div
         v-if="hasAside"

@@ -37,7 +37,6 @@
     },
     mounted() {
       const element = this.$refs.img.$el
-      console.log(element)
       const wrap = this.$refs.wrap
       const bounds = element.getBoundingClientRect()
       function transformElement(e) {

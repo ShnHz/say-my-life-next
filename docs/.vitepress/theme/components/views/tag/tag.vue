@@ -30,7 +30,7 @@
         >
           <span class="date-wrap">
             <span class="time-wrap">{{
-              moment(new Date(item.date)).format('YYYY-MM-DD hh:mm:ss')
+              dayjs(item.date).format('YYYY-MM-DD HH:mm:ss')
             }}</span>
           </span>
           <span
@@ -48,7 +48,7 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue'
   import { useRouter, useData } from 'vitepress'
-  import moment from 'moment'
+  import dayjs from 'dayjs'
 
   import { data } from '@docs/.vitepress/utils/loaders/blog.data.js'
   import tagConfig from '@docs/.vitepress/configs/tags.js'

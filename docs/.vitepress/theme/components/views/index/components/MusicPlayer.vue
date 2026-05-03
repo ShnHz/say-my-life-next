@@ -112,6 +112,7 @@
   let canvas: HTMLCanvasElement | null
   let audio: HTMLAudioElement | null
   let ctx, dataArray, analyser
+  let rafId: number | null = null
   const maxFrequency = ref<number>(128)
   const active = ref()
   let activeIndex: number = 0
@@ -162,19 +163,22 @@
   }
 
   const draw = () => {
-    requestAnimationFrame(draw)
-    if (active.value?.status === 'playing') {
-      const { width, height } = canvas!
+    rafId = requestAnimationFrame(() => {
+      rafId = null
+      if (active.value?.status !== 'playing' || !ctx || !analyser || !canvas) {
+        return
+      }
+      const { width, height } = canvas
 
-      let gradient = ctx.createLinearGradient(0, 0, 0, height)
+      const gradient = ctx.createLinearGradient(0, 0, 0, height)
       gradient.addColorStop(0, '#ff4446')
       gradient.addColorStop(1, 'rgb(103, 175, 187)')
 
       analyser.fftSize = 256
-      var data = new Uint8Array(analyser.frequencyBinCount)
+      const data = new Uint8Array(analyser.frequencyBinCount)
       analyser.getByteFrequencyData(data)
-      var el = ctx.canvas
-      var count = data.length
+      const el = ctx.canvas
+      const count = data.length
       maxFrequency.value = Math.max(...data)
       ctx.save()
       ctx.fillStyle = 'rgba(255, 255, 255, 0)'
@@ -182,17 +186,25 @@
       ctx.fillRect(0, 0, el.width, el.height)
       ctx.transform(1, 0, 0, -1, 0, el.height)
       ctx.fillStyle = gradient
-      var w = el.width / count
-      var x = 0,
-        h = 0,
-        v = 0
-      for (var i = 0; i < data.length; i++) {
+      const w = el.width / count
+      let x = 0
+      let h = 0
+      let v = 0
+      for (let i = 0; i < data.length; i++) {
         v = data[i] / 0xff
         h = v * el.height
         ctx.fillRect(x + 1, 0, w - 2, h)
         x += w
       }
       ctx.restore()
+      draw()
+    })
+  }
+
+  const stopSpectrum = () => {
+    if (rafId != null) {
+      cancelAnimationFrame(rafId)
+      rafId = null
     }
   }
 
@@ -228,6 +240,7 @@
     if (audioInfo.value.canPlay) {
       audio?.pause()
       active.value.status = 'paused'
+      stopSpectrum()
     }
   }, 1000)
 

@@ -55,8 +55,6 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue'
   import { useRouter, useData } from 'vitepress'
-  import moment from 'moment'
-
   import friendConfig from '@docs/.vitepress/configs/friend.js'
   import horse from './components/horse.vue'
   const vitePressData = useData()

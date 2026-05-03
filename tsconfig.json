@@ -11,16 +11,19 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
     "lib": ["ESNext", "DOM"],
-    "types": [],
+    "types": ["node"],
     "baseUrl": "./",
     "paths": {
-      "@docs/*": ["docs/*"]
+      "@docs/*": ["docs/*"],
+      "@theme/*": ["docs/.vitepress/theme/*"],
+      "@/*": ["./*"]
     }
   },
   "include": [
     "docs/.vitepress/**/*.ts",
     "docs/.vitepress/**/*.d.ts",
     "docs/.vitepress/**/*.vue",
+    "docs/.vitepress/**/*.js",
     "types/**/*.d.ts"
   ],
   "exclude": ["dist", "node_modules"]
