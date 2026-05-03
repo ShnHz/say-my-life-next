@@ -1,17 +1,18 @@
 <template>
   <div class="lock-wrap">
     <div
-      @click="showLockPasswordInput"
       class="lock-content-wrap"
+      @click="showLockPasswordInput"
     >
       <i class="gnas-i gnas-i-lock"></i>
       <p>该内容已被锁定，单击唤起输入密码面板</p>
       <p class="annotation">Ctrl + Enter 快捷键</p>
     </div>
     <ClientOnly>
-      <component
-        is="InputLockPassword"
-        ref="inputLockPassword"
+      <InputLockPassword
+        ref="inputLockPasswordRef"
+        :password-hash="passwordHash"
+        @unlock="$emit('unlock')"
       />
     </ClientOnly>
   </div>
@@ -21,11 +22,20 @@
   import { ref } from 'vue'
   import InputLockPassword from '../common/InputLockPassword.vue'
 
-  const inputLockPassword = ref(null)
+  defineProps<{
+    passwordHash: string
+  }>()
+
+  defineEmits<{
+    unlock: []
+  }>()
+
+  const inputLockPasswordRef = ref<InstanceType<
+    typeof InputLockPassword
+  > | null>(null)
+
   const showLockPasswordInput = () => {
-    if (inputLockPassword.value) {
-      inputLockPassword.value.showLockPasswordInput()
-    }
+    inputLockPasswordRef.value?.showLockPasswordInput()
   }
 </script>
 

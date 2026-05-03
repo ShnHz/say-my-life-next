@@ -1,7 +1,11 @@
 import path from 'path'
 import { fileURLToPath, URL } from 'node:url'
 
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { defineConfig } from 'vitepress'
+import codeDefaultPlugin from './plugins/extends-markdown/markdown-it-code-default.js'
 import nav from './configs/nav'
 import sidebar from './configs/sidebar'
 import socialLinks from './configs/socialLinks'
@@ -20,6 +24,7 @@ export default defineConfig({
     search: {
       provider: 'local',
     },
+    // @ts-expect-error DefaultTheme.Config 类型与运行时字段略有差异
     lastUpdated: true,
     docFooter: {
       prev: 'Previous page',
@@ -47,10 +52,20 @@ export default defineConfig({
     password: '81dc9bdb52d04dc20036dbd8313ed055',
   },
   vite: {
-    plugins: [],
+    plugins: [
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+    ],
     server: {
       host: '0.0.0.0',
       allowedHosts: ['www.sanghangning.com', 'sanghangning.com'],
+    },
+    ssr: {
+      noExternal: ['element-plus'],
     },
     resolve: {
       alias: [
@@ -73,8 +88,7 @@ export default defineConfig({
   },
   markdown: {
     config: (md) => {
-      // use more markdown-it plugins!
-      md.use(require('./plugins/extends-markdown/markdown-it-code-default'))
+      md.use(codeDefaultPlugin)
     },
   },
 })

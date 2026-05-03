@@ -6,9 +6,6 @@ const multiparty = require("multiparty");
 const {
     mkdir,
 } = require('../../utils/utils_createFile.js');
-const {
-    has
-} = require("core-js/core/dict");
 
 // 大文件存储目录
 const UPLOAD_DIR = path.resolve(__dirname, ".", "file");

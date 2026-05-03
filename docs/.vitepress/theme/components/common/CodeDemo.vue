@@ -1,35 +1,38 @@
 <template>
   <div class="shn-el-demo-block">
     <h3
-      class="demo-block-title"
       v-if="title != ''"
+      class="demo-block-title"
     >
       {{ title }}
     </h3>
     <p
-      class="demo-block-introduction"
       v-if="introduction != ''"
+      class="demo-block-introduction"
     >
       {{ introduction }}
     </p>
     <div
+      class="demo-block"
       @mouseout="arrowAnimation ? (hover_animation = false) : null"
       @mouseover="arrowAnimation ? (hover_animation = true) : null"
-      class="demo-block"
     >
       <div class="source">
         <slot name="demo" />
       </div>
       <div
-        :style="{ height: code_height + 'px' }"
-        class="code"
-        v-html="output"
         ref="codeView"
-      ></div>
+        class="code"
+        :style="{ height: code_height + 'px' }"
+      >
+        <div class="code-inner vp-doc">
+          <slot name="code" />
+        </div>
+      </div>
       <div
-        @click="showCode()"
         class="demo-block-control"
         :class="{ 'is-loading': loading }"
+        @click="showCode()"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -57,8 +60,6 @@
   </div>
 </template>
 <script>
-  import { setCDN, setWasm, getHighlighter } from 'shiki'
-
   export default {
     name: 'code-demo',
     props: {
@@ -82,38 +83,25 @@
     data() {
       return {
         loading: true,
-        highlighter: null,
         hover_animation: false,
         code_height: 0,
-        output: '',
         height: 0,
       }
     },
-    async mounted() {
-      const response = await fetch(
-        'https://cdn.sanghangning.cn/other/shiki/onig.wasm'
-      )
-      const buffer = await response.arrayBuffer()
-      setWasm(buffer)
-      setCDN('https://cdn.sanghangning.cn/other/shiki/')
-      let _this = this
-      const highlighter = await getHighlighter({ theme: 'dark-plus' })
-
-      const code = this.$slots.code().map((item) => {
-        return highlighter.codeToHtml(item.children, {
-          lang: item.props['data-type'] || 'js',
-        })
-      })
-
-      this.output = code.join(``)
-
+    mounted() {
       this.$nextTick(() => {
-        const dom = _this.$refs.codeView.querySelectorAll('.shiki')
-        for (let i = 0; i < dom.length; i++) {
-          _this.height += dom[i].clientHeight
+        const root = this.$refs.codeView
+        if (!root) {
+          this.loading = false
+          return
         }
-        _this.height += 32 + (dom.length - 1) * 16
-        _this.loading = false
+        const blocks = root.querySelectorAll('code')
+        let h = 0
+        for (let i = 0; i < blocks.length; i++) {
+          h += blocks[i].offsetHeight || 0
+        }
+        this.height = h + 32 + Math.max(0, blocks.length - 1) * 16
+        this.loading = false
       })
     },
     methods: {
@@ -158,8 +146,17 @@
         background: #1e1e1e;
         transition: height 0.2s;
         overflow: hidden;
-        :deep(.shiki) {
-          padding: 0 24px;
+        .code-inner {
+          padding: 0 24px 16px;
+          color: #d4d4d4;
+          font-size: 13px;
+          line-height: 1.6;
+          :deep(code) {
+            display: block;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-family: var(--vp-font-family-mono);
+          }
         }
       }
       .demo-block-control {

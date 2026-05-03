@@ -100,7 +100,7 @@
   import md5 from 'js-md5'
 
   import { ref, onMounted, computed, inject } from 'vue'
-  import moment from 'moment'
+  import dayjs from 'dayjs'
 
   import { data } from '@docs/.vitepress/utils/loaders/blog.data.js'
   import tagConfig from '@docs/.vitepress/configs/tags.js'
@@ -115,7 +115,7 @@
     articLink: '',
     title: '文章标题',
     summary: '',
-    date: moment(new Date()).format('YYYY/MM/DD HH:mm:ss'),
+    date: dayjs().format('YYYY/MM/DD HH:mm:ss'),
     valine: true,
     valineId: '',
     link: [],
@@ -239,7 +239,7 @@
       articLink: '',
       title: '文章标题',
       summary: '',
-      date: moment(new Date()).format('YYYY/MM/DD hh:mm:ss'),
+      date: dayjs().format('YYYY/MM/DD HH:mm:ss'),
       valine: true,
       valineId: '',
       link: [],

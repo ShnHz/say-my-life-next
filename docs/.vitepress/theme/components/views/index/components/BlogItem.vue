@@ -7,7 +7,7 @@
       {{ data.title }}
     </div>
     <p class="article-date">
-      {{ proxy?.mixin_getDate(data.date, 'yyyy.MM.dd') }}
+      {{ formatArticleDate(data.date, 'yyyy.MM.dd') }}
     </p>
 
     <p
@@ -60,7 +60,7 @@
     MovieCreationFilled,
   } from '@vicons/material'
   import ShnTag from '../../../common/Tag.vue'
-  import useCurrentInstance from '../../../../../utils/hooks/useCurrentInstance'
+  import { formatArticleDate } from '../../../../composables/useFormattedDate'
 
   const vitePressData = useData()
 
@@ -68,9 +68,6 @@
   router.onAfterRouteChanged = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }
-
-  const currentInstanc: any = useCurrentInstance()
-  const proxy = currentInstanc.proxy
 
   const props = defineProps<{
     data: {

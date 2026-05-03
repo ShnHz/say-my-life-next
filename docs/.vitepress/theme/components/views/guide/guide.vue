@@ -13,9 +13,9 @@
           :key="`archives-blog-item-${key}-${index}`"
         >
           <span class="date-wrap"
-            >{{ moment(new Date(item.date)).format('DD') }}
+            >{{ dayjs(item.date).format('DD') }}
             <span class="time-wrap">{{
-              moment(new Date(item.date)).format('hh:mm:ss')
+              dayjs(item.date).format('HH:mm:ss')
             }}</span>
           </span>
           <span
@@ -33,7 +33,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { useRouter, useData } from 'vitepress'
-  import moment from 'moment'
+  import dayjs from 'dayjs'
 
   import { data } from '@docs/.vitepress/utils/loaders/blog.data.js'
 
@@ -48,7 +48,7 @@
 
     list.forEach((item) => {
       let timeFrom = item.date
-        ? moment(new Date(item.date)).format('YYYY年MM月')
+        ? dayjs(item.date).format('YYYY年MM月')
         : 'Other'
       if (!map.has(timeFrom)) {
         map.set(timeFrom, [item])

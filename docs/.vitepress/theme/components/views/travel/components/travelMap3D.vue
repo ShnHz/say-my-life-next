@@ -59,11 +59,11 @@
     watch,
     type CSSProperties,
   } from 'vue'
-  import { city } from '../../../../../public/map/js/city'
+  import { city } from '../../../../../../public/map/js/city'
   import {
     polaroidMarkers,
     type PolaroidItem,
-  } from '../../../../../public/map/js/polaroids'
+  } from '../../../../../../public/map/js/polaroids'
 
   type GlobeMode = 'cobeV2' | 'polaroids'
 

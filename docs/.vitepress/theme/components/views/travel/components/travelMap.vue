@@ -6,8 +6,8 @@
 
 <script setup lang="ts">
   import { computed, onMounted } from 'vue'
-  import { cityPolygon } from '../../../../../public/map/js/cityPolygon'
-  import { city } from '../../../../../public/map/js/city'
+  import { cityPolygon } from '../../../../../../public/map/js/cityPolygon'
+  import { city } from '../../../../../../public/map/js/city'
 
   let map: any = null
 
