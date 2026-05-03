@@ -1,8 +1,17 @@
 <template>
   <div class="index-wrap">
-    <div class="first-wrap">
+    <div
+      ref="firstWrapRef"
+      class="first-wrap"
+      :class="{ 'is-parallax': canParallax }"
+      :style="firstWrapParallaxStyle"
+      @mousemove="onFirstParallaxMove"
+      @mouseleave="onFirstParallaxLeave"
+    >
       <div class="container">
-        <Background />
+        <div class="first-parallax-bg">
+          <Background />
+        </div>
         <div class="info-wrap">
           <div class="hello">
             {{ frontmatter.hero.hello }}
@@ -119,7 +128,7 @@
 <script setup lang="ts">
   import { data } from '@docs/.vitepress/utils/loaders/blog.data.js'
 
-  import { computed, onMounted, onUnmounted, ref } from 'vue'
+  import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 
   import Background from './components/Background.vue'
   import BlogItem from './components/BlogItem.vue'
@@ -147,6 +156,76 @@
   let timer: ReturnType<typeof setInterval> | null = null
   let typerInstance: { close?: () => void } | null = null
 
+  // 首屏鼠标 3D 视差（桌面端；尊重 prefers-reduced-motion）
+  const firstWrapRef = ref<HTMLElement | null>(null)
+  const parallaxX = ref(0)
+  const parallaxY = ref(0)
+  let targetParallaxX = 0
+  let targetParallaxY = 0
+  let parallaxRaf = 0
+  const prefersReducedMotion = ref(false)
+  const isDesktopViewport = ref(false)
+
+  const canParallax = computed(
+    () => isDesktopViewport.value && !prefersReducedMotion.value
+  )
+
+  const firstWrapParallaxStyle = computed(() => ({
+    '--px': parallaxX.value,
+    '--py': parallaxY.value,
+  }))
+
+  const syncViewport = () => {
+    if (typeof window === 'undefined') return
+    isDesktopViewport.value = window.innerWidth > 768
+  }
+
+  function scheduleParallaxFrame() {
+    if (parallaxRaf) return
+    parallaxRaf = requestAnimationFrame(() => {
+      parallaxRaf = 0
+      const k = 0.12
+      parallaxX.value += (targetParallaxX - parallaxX.value) * k
+      parallaxY.value += (targetParallaxY - parallaxY.value) * k
+      if (
+        Math.abs(targetParallaxX - parallaxX.value) > 0.001 ||
+        Math.abs(targetParallaxY - parallaxY.value) > 0.001
+      ) {
+        scheduleParallaxFrame()
+      } else {
+        parallaxX.value = targetParallaxX
+        parallaxY.value = targetParallaxY
+      }
+    })
+  }
+
+  function onFirstParallaxMove(e: MouseEvent) {
+    if (!canParallax.value) return
+    const el = firstWrapRef.value
+    if (!el) return
+    const r = el.getBoundingClientRect()
+    const w = r.width || 1
+    const h = r.height || 1
+    targetParallaxX = ((e.clientX - r.left) / w - 0.5) * 2
+    targetParallaxY = ((e.clientY - r.top) / h - 0.5) * 2
+    scheduleParallaxFrame()
+  }
+
+  function onFirstParallaxLeave() {
+    targetParallaxX = 0
+    targetParallaxY = 0
+    scheduleParallaxFrame()
+  }
+
+  watch(canParallax, (ok) => {
+    if (!ok) {
+      targetParallaxX = 0
+      targetParallaxY = 0
+      parallaxX.value = 0
+      parallaxY.value = 0
+    }
+  })
+
   onMounted(async () => {
     const EasyTyper = (await import('easy-typer-js')).default
 
@@ -164,6 +243,12 @@
       }
       startEasyTyper(EasyTyper)
     }, 10000)
+
+    prefersReducedMotion.value = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+    syncViewport()
+    window.addEventListener('resize', syncViewport)
 
     // 移动端优化
     if (window.innerWidth <= 768) {
@@ -199,6 +284,11 @@
     timer = null
     typerInstance?.close?.()
     typerInstance = null
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', syncViewport)
+    }
+    if (parallaxRaf) cancelAnimationFrame(parallaxRaf)
+    parallaxRaf = 0
   })
 
   const startEasyTyper = (EasyTyper) => {
@@ -286,16 +376,51 @@
       height: 100vh;
       width: 100%;
       position: relative;
+      perspective: 1280px;
+      perspective-origin: 50% 42%;
+      /* --px / --py：鼠标相对首屏中心归一化偏移，约 -1 ~ 1 */
+      --px: 0;
+      --py: 0;
+
+      .first-parallax-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        transform-style: preserve-3d;
+        transform: rotateX(calc(var(--py) * -4.55deg))
+          rotateY(calc(var(--px) * 5.46deg)) translateZ(-36.4px);
+        transform-origin: 50% 50%;
+      }
+
       .info-wrap {
         position: relative;
         z-index: 1;
         /* 全宽块会盖住右侧地球，空白区域需穿透事件以便旋转地球 */
         pointer-events: none;
         top: 50%;
-        transform: translateY(-240px);
+        transform-style: preserve-3d;
+        transform: translateY(-240px)
+          rotateX(calc(var(--py) * -7.8deg)) rotateY(calc(var(--px) * 9.1deg));
+        transform-origin: 50% 50%;
+
         > * {
           pointer-events: auto;
         }
+
+        > .hello {
+          transform: translateZ(15.6px);
+        }
+        > .title {
+          transform: translateZ(36.4px);
+        }
+        > .desc {
+          transform: translateZ(57.2px);
+        }
+        /* 头像层 Z 更深，倾斜时相对文字的位移更明显 */
+        > .avatar {
+          transform: translateZ(153.4px);
+        }
+
         .hello {
           margin-bottom: 36px;
           font-size: 26px;
@@ -352,7 +477,7 @@
 
           // 移动端触摸反馈
           &.touch-active {
-            transform: scale(0.95);
+            transform: translateZ(153.4px) scale(0.95);
             border-color: var(--vp-c-brand);
             transition: all 0.1s ease;
           }
@@ -369,6 +494,13 @@
               transition-timing-function: cubic-bezier(0.34, 0, 0.84, 1);
             }
           }
+        }
+      }
+
+      &.is-parallax {
+        .first-parallax-bg,
+        .info-wrap {
+          will-change: transform;
         }
       }
     }
