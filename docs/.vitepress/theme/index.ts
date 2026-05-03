@@ -68,6 +68,9 @@ const CardAnime = defineAsyncComponent(
 const weightLoss = defineAsyncComponent(
   () => import('./components/views/life/weight-loss.vue')
 )
+const aiGallery = defineAsyncComponent(
+  () => import('./components/views/life/aiGallery.vue')
+)
 
 export default {
   ...Theme,
@@ -99,5 +102,6 @@ export default {
 
     app.component('LifeCardAnime', CardAnime)
     app.component('ViewWeightLoss', weightLoss)
+    app.component('ViewAiGallery', aiGallery)
   },
 }

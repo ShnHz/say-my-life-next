@@ -5,7 +5,8 @@ docs/.vitepress/dist
 docs/.vitepress/.temp
 
 
-# local env files
+# local env files（含七牛 AK/SK，勿提交）
+.env
 .env.local
 .env.*.local
 

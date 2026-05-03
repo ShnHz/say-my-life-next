@@ -272,5 +272,9 @@ export default {
       text: '高达',
       link: '/views/life/Gundam',
     },
+    {
+      text: 'AI 作图画廊',
+      link: '/views/life/AiArt',
+    },
   ],
 }
