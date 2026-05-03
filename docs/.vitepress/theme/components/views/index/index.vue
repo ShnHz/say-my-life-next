@@ -382,14 +382,11 @@
       --px: 0;
       --py: 0;
 
+      /* 地球不参与视差，仅作静态底层 */
       .first-parallax-bg {
         position: absolute;
         inset: 0;
         z-index: 0;
-        transform-style: preserve-3d;
-        transform: rotateX(calc(var(--py) * -4.55deg))
-          rotateY(calc(var(--px) * 5.46deg)) translateZ(-36.4px);
-        transform-origin: 50% 50%;
       }
 
       .info-wrap {
@@ -498,7 +495,6 @@
       }
 
       &.is-parallax {
-        .first-parallax-bg,
         .info-wrap {
           will-change: transform;
         }
