@@ -289,8 +289,13 @@
       .info-wrap {
         position: relative;
         z-index: 1;
+        /* 全宽块会盖住右侧地球，空白区域需穿透事件以便旋转地球 */
+        pointer-events: none;
         top: 50%;
         transform: translateY(-240px);
+        > * {
+          pointer-events: auto;
+        }
         .hello {
           margin-bottom: 36px;
           font-size: 26px;
