@@ -239,8 +239,8 @@ export default {
           link: '/views/life/game/英雄联盟',
         },
         {
-          text: 'GAT5',
-          link: '/views/life/game/GAT5',
+          text: 'GTA5',
+          link: '/views/life/game/GTA5',
         },
         {
           text: 'NBA2KOL2',

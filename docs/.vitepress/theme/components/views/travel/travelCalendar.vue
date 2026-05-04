@@ -44,6 +44,16 @@
             <span>{{ item.time }}</span>
           </div>
         </div>
+
+        <div class="poster-wrap" v-if="activity.poster">
+          <el-image
+            :src="activity.poster"
+            :preview-src-list="getPosterPreviewList(activity)"
+            style="width: 200px; border-radius: 8px"
+            preview-teleported
+            lazy
+          />
+        </div>
       </el-timeline-item>
     </el-timeline>
   </div>
@@ -52,6 +62,12 @@
 <script setup lang="ts">
   // @ts-nocheck — 行程数据条目字段不一致，运行时安全
   import { travelCalendarActivities as activities } from './travelCalendarData'
+
+  const getPosterPreviewList = (item) => {
+    if (item.posters?.length) return item.posters
+    if (item.poster) return [item.poster]
+    return []
+  }
 
   const getActivityIconColor = (item) => {
     if (item.icon?.name === 'Car') {
@@ -131,6 +147,9 @@
               margin-top: -8px;
             }
           }
+        }
+        .poster-wrap{
+          margin-top: 10px;
         }
       }
     }

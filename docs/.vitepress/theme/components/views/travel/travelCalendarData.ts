@@ -104,6 +104,7 @@ export const travelCalendarActivities = [
     timestamp: '2026-02-21 - 2026-02-23',
     type: 'primary',
     icon: Train,
+    poster: 'https://cdn.sanghangning.cn/ai-images/cnpt.png',
     color: '#0bbd87',
     food: [
       '吃席',
@@ -135,6 +136,7 @@ export const travelCalendarActivities = [
     type: 'primary',
     icon: Plane,
     color: '#0bbd87',
+    poster: 'https://cdn.sanghangning.cn/ai-images/myjlp.png',
     food: [
       '海脚人',
       '榴莲：老树猫山王、黑刺、红肉、小甜甜',
@@ -167,6 +169,7 @@ export const travelCalendarActivities = [
     type: 'primary',
     icon: Plane,
     color: '#0bbd87',
+    poster: 'https://cdn.sanghangning.cn/ai-images/singapore.png',
     food: [
       '亚坤',
       '松发肉骨茶',
@@ -205,6 +208,7 @@ export const travelCalendarActivities = [
       timestamp: '2025-09-20 - 2025-09-21',
       type: 'primary',
       icon: Train,
+      poster: 'https://cdn.sanghangning.cn/ai-images/cnbj2.png',
       food: [
         '南门涮肉(天坛总店)',
         '卤煮',
@@ -243,6 +247,7 @@ export const travelCalendarActivities = [
       type: 'primary',
       icon: Train,
       color: '#0bbd87',
+      poster: 'https://cdn.sanghangning.cn/ai-images/cnsy.png',
       food: ['岛上椰林·东方烤乳猪·海鲜餐厅', '糟粕醋火锅', '椰子饭'],
       scenicSpots: ['亚特兰蒂斯水世界', '亚特兰蒂斯水族馆'],
       trafficNumber: [
@@ -265,6 +270,7 @@ export const travelCalendarActivities = [
       type: 'primary',
       icon: Plane,
       color: '#0bbd87',
+      poster: 'https://cdn.sanghangning.cn/ai-images/cnwn.png',
       food: ['香草鸭', '海南粉'],
       scenicSpots: ['神州半岛', '石梅湾', '日月湾'],
       trafficNumber: [
@@ -287,6 +293,7 @@ export const travelCalendarActivities = [
       type: 'primary',
       icon: Train,
       color: '#0bbd87',
+      poster: 'https://cdn.sanghangning.cn/ai-images/jphb.png',
       food: ['Yakiniku Watami（烧肉）'],
       scenicSpots: ['中华街', '红砖仓库', '空中缆车', '友都八喜', '爱电王'],
       trafficNumber: [
@@ -303,6 +310,7 @@ export const travelCalendarActivities = [
       type: 'primary',
       icon: Train,
       color: '#0bbd87',
+      poster: 'https://cdn.sanghangning.cn/ai-images/jplc.png',
       food: ['海花亭（咖喱饭）'],
       scenicSpots: ['镰仓高校前站', '江之岛', '七里滨'],
       trafficNumber: [
@@ -327,6 +335,7 @@ export const travelCalendarActivities = [
       type: 'primary',
       icon: Train,
       color: '#0bbd87',
+      poster: 'https://cdn.sanghangning.cn/ai-images/jpfss.png',
       food: ['猪排饭'],
       scenicSpots: ['河口湖', '富士急乐园（遇到了路演的女团）', '大石公园'],
       trafficNumber: [
@@ -360,6 +369,7 @@ export const travelCalendarActivities = [
       type: 'primary',
       icon: Train,
       color: '#0bbd87',
+      poster: 'https://cdn.sanghangning.cn/ai-images/jpcrb.png',
       food: [],
       scenicSpots: [
         '蜡笔小新胜地巡礼',
@@ -387,6 +397,7 @@ export const travelCalendarActivities = [
       type: 'primary',
       icon: Plane,
       color: '#0bbd87',
+      poster: 'https://cdn.sanghangning.cn/ai-images/jpdj.png',
       food: [
         '一兰拉面',
         '各种711快餐',
@@ -426,12 +437,13 @@ export const travelCalendarActivities = [
       ],
     },
     {
-      content: '日本神户',
+      content: '日本京都',
       size: 'large',
       timestamp: '2025-03-23',
       type: 'primary',
       icon: Train,
       color: '#0bbd87',
+      poster: 'https://cdn.sanghangning.cn/ai-images/jpjd.png',
       food: [
         '本格炭火焼うなぎ えん 京都三条店（鳗鱼饭）',
         'Sumiyagura Kyoto（拉面）',
@@ -453,6 +465,7 @@ export const travelCalendarActivities = [
       type: 'primary',
       icon: Plane,
       color: '#0bbd87',
+      poster: 'https://cdn.sanghangning.cn/ai-images/jpdb.png',
       food: [
         '乌冬面（天下茶屋地铁站）',
         '章鱼小丸子（道顿堀）',
@@ -492,6 +505,7 @@ export const travelCalendarActivities = [
       type: 'primary',
       icon: Train,
       color: '#0bbd87',
+      poster: 'https://cdn.sanghangning.cn/ai-images/hk2.png',
       food: [
         '好盛冰室',
         '一乐烧鹅',
@@ -529,6 +543,7 @@ export const travelCalendarActivities = [
       timestamp: '2025-02-02',
       type: 'primary',
       icon: Ship,
+      poster: 'https://cdn.sanghangning.cn/ai-images/cnam2.png',
       food: ['牛杂', '咖喱鱼蛋', '兰香阁', '盈晖海鲜酒家', '安德鲁蛋挞'],
       scenicSpots: [
         '永利大皇宫',
@@ -597,6 +612,7 @@ export const travelCalendarActivities = [
       size: 'large',
       timestamp: '2024-10-01 - 2024-10-08',
       type: 'primary',
+      poster: 'https://cdn.sanghangning.cn/ai-images/cngz.png',
       icon: Plane,
       color: '#0bbd87',
       food: [
@@ -644,6 +660,7 @@ export const travelCalendarActivities = [
       type: 'primary',
       icon: Plane,
       color: '#0bbd87',
+      poster: 'https://cdn.sanghangning.cn/ai-images/krjzd.png',
       food: [
         '一品豆腐锅',
         '烤带鱼',
@@ -683,6 +700,7 @@ export const travelCalendarActivities = [
       size: 'large',
       timestamp: '2024-03-23 - 2024-03-24',
       type: 'primary',
+      poster: 'https://cdn.sanghangning.cn/ai-images/cnnc.png',
       icon: Train,
       color: '#0bbd87',
       food: [
@@ -802,6 +820,7 @@ export const travelCalendarActivities = [
       type: 'primary',
       icon: Train,
       color: '#0bbd87',
+      poster: 'https://cdn.sanghangning.cn/ai-images/hk1.png',
       food: ['九龙冰室', '叉烧包'],
       scenicSpots: ['H1观光线', '铜锣湾', '星光大道', '维多利亚港'],
       trafficNumber: [
@@ -819,6 +838,7 @@ export const travelCalendarActivities = [
       timestamp: '2023-10-07',
       type: 'primary',
       icon: Ship,
+      poster: 'https://cdn.sanghangning.cn/ai-images/cnam.png',
       food: ['招牌蒲国鸡饭', '柠檬车露雪糕', '安德鲁蛋挞', '旺记咖啡奶茶'],
       scenicSpots: [
         '永利大皇宫',

@@ -88,7 +88,7 @@ const context = canvas.getContext('webgpu') as GPUCanvasContext;
 
 
 ```JS
-  const adapter = await navigator.gpu.requestAdapter(); // 物理设备
+  const adapter = await navior.gpu.requestAdapter(); // 物理设备
   const device = await adapter.requestDevice(); // 逻辑设备
   const context = canvas.getContext('webgpu') as GPUCanvasContext;
 
@@ -138,7 +138,7 @@ import triangleVertWGSL from '../../shaders/triangle.vert.wgsl';
 import redFragWGSL from '../../shaders/red.frag.wgsl';
 
 const init: SampleInit = async ({ canvas, pageState }) =&gt; {
-  const adapter = await navigator.gpu.requestAdapter();
+  const adapter = await navior.gpu.requestAdapter();
   const device = await adapter.requestDevice();
 
   if (!pageState.active) return;
