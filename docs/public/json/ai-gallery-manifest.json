@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-03T18:52:54.286Z",
+  "generatedAt": "2026-05-04T03:59:12.648Z",
   "bucket": "say-my-life",
   "prefix": "ai-images/",
   "publicBaseUrl": "https://cdn.sanghangning.cn",
-  "itemCount": 15,
+  "itemCount": 26,
   "items": [
     {
       "key": "ai-images/40b3f7bd-e3bc-4e4b-aac6-c1bca1815275.png",
@@ -30,6 +30,10 @@
       "src": "https://cdn.sanghangning.cn/ai-images/9ddc4251-e972-4b5b-9502-fa15f91e6daf.png"
     },
     {
+      "key": "ai-images/bmw_capsule.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/bmw_capsule.png"
+    },
+    {
       "key": "ai-images/car.png",
       "src": "https://cdn.sanghangning.cn/ai-images/car.png"
     },
@@ -50,12 +54,44 @@
       "src": "https://cdn.sanghangning.cn/ai-images/hshwk.png"
     },
     {
+      "key": "ai-images/Irving.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/Irving.png"
+    },
+    {
       "key": "ai-images/jjdjr.png",
       "src": "https://cdn.sanghangning.cn/ai-images/jjdjr.png"
     },
     {
+      "key": "ai-images/jpcrb.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/jpcrb.png"
+    },
+    {
+      "key": "ai-images/jpdj.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/jpdj.png"
+    },
+    {
+      "key": "ai-images/jpfss.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/jpfss.png"
+    },
+    {
       "key": "ai-images/kn.png",
       "src": "https://cdn.sanghangning.cn/ai-images/kn.png"
+    },
+    {
+      "key": "ai-images/leiyi.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/leiyi.png"
+    },
+    {
+      "key": "ai-images/myjlp.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/myjlp.png"
+    },
+    {
+      "key": "ai-images/q_lbxx.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/q_lbxx.png"
+    },
+    {
+      "key": "ai-images/rex.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/rex.png"
     },
     {
       "key": "ai-images/shn_2.png",
@@ -64,6 +100,14 @@
     {
       "key": "ai-images/shn_q.png",
       "src": "https://cdn.sanghangning.cn/ai-images/shn_q.png"
+    },
+    {
+      "key": "ai-images/shn.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/shn.png"
+    },
+    {
+      "key": "ai-images/singapore.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/singapore.png"
     }
   ]
 }
