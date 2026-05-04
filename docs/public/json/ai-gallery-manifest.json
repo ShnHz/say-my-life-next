@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-04T06:59:29.485Z",
+  "generatedAt": "2026-05-04T07:43:15.129Z",
   "bucket": "say-my-life",
   "prefix": "ai-images/",
   "publicBaseUrl": "https://cdn.sanghangning.cn",
-  "itemCount": 41,
+  "itemCount": 46,
   "items": [
     {
       "key": "ai-images/40b3f7bd-e3bc-4e4b-aac6-c1bca1815275.png",
@@ -168,6 +168,26 @@
     {
       "key": "ai-images/singapore.png",
       "src": "https://cdn.sanghangning.cn/ai-images/singapore.png"
+    },
+    {
+      "key": "ai-images/thbty.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/thbty.png"
+    },
+    {
+      "key": "ai-images/thmg.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/thmg.png"
+    },
+    {
+      "key": "ai-images/vnhn.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/vnhn.png"
+    },
+    {
+      "key": "ai-images/vnhzm.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/vnhzm.png"
+    },
+    {
+      "key": "ai-images/vnxg.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/vnxg.png"
     }
   ]
 }
