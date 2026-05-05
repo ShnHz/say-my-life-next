@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-05T08:53:24.323Z",
+  "generatedAt": "2026-05-05T12:55:31.828Z",
   "bucket": "say-my-life",
   "prefix": "ai-images/",
   "publicBaseUrl": "https://cdn.sanghangning.cn",
-  "itemCount": 55,
+  "itemCount": 56,
   "items": [
     {
       "key": "ai-images/40b3f7bd-e3bc-4e4b-aac6-c1bca1815275.png",
@@ -192,6 +192,10 @@
     {
       "key": "ai-images/shn_comic_con.png",
       "src": "https://cdn.sanghangning.cn/ai-images/shn_comic_con.png"
+    },
+    {
+      "key": "ai-images/shn_game.png",
+      "src": "https://cdn.sanghangning.cn/ai-images/shn_game.png"
     },
     {
       "key": "ai-images/shn_q.png",
