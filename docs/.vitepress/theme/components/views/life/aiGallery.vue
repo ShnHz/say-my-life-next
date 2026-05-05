@@ -53,7 +53,7 @@
           </template>
         </el-image>
         <figcaption
-          v-if="item.title || item.tool || item.note"
+          v-if="item.title || item.tool || item.note || item.prompt"
           class="ai-gallery__cap"
         >
           <span
@@ -71,6 +71,36 @@
             class="ai-gallery__cap-note"
             >{{ item.note }}</span
           >
+          <el-popover
+            v-if="item.prompt"
+            :width="320"
+            trigger="click"
+            placement="top"
+            popper-class="ai-gallery__pop"
+          >
+            <template #reference>
+              <button
+                type="button"
+                class="ai-gallery__prompt-btn"
+                aria-label="查看提示词"
+              >
+                提示词
+              </button>
+            </template>
+            <div class="ai-gallery__pop-body">
+              <div class="ai-gallery__pop-head">
+                <span class="ai-gallery__pop-title">提示词</span>
+                <button
+                  type="button"
+                  class="ai-gallery__pop-copy"
+                  @click="copyPrompt(item.prompt)"
+                >
+                  复制
+                </button>
+              </div>
+              <pre class="ai-gallery__pop-text">{{ item.prompt }}</pre>
+            </div>
+          </el-popover>
         </figcaption>
       </figure>
       </div>
@@ -95,9 +125,11 @@
 
 <script setup lang="ts">
   import { computed, onMounted, ref } from 'vue'
+  import { ElMessage } from 'element-plus'
   import {
     aiGalleryFallbackItems,
     aiGalleryIntro,
+    aiGalleryPromptOverrides,
     type AiGalleryItem,
   } from './aiGalleryData'
 
@@ -123,14 +155,48 @@
       const r = row as Record<string, unknown>
       const src = typeof r.src === 'string' ? r.src.trim() : ''
       if (!src) continue
+      const key = typeof r.key === 'string' ? r.key : undefined
+      const override = key ? aiGalleryPromptOverrides[key] : undefined
       out.push({
+        key,
         src,
-        title: typeof r.title === 'string' ? r.title : undefined,
-        tool: typeof r.tool === 'string' ? r.tool : undefined,
-        note: typeof r.note === 'string' ? r.note : undefined,
+        title:
+          (typeof r.title === 'string' ? r.title : undefined) ??
+          override?.title,
+        tool:
+          (typeof r.tool === 'string' ? r.tool : undefined) ?? override?.tool,
+        note:
+          (typeof r.note === 'string' ? r.note : undefined) ?? override?.note,
+        prompt:
+          (typeof r.prompt === 'string' ? r.prompt : undefined) ??
+          override?.prompt,
       })
     }
     return out
+  }
+
+  async function copyPrompt(text?: string) {
+    if (!text) return
+    try {
+      if (
+        typeof navigator !== 'undefined' &&
+        navigator.clipboard?.writeText
+      ) {
+        await navigator.clipboard.writeText(text)
+      } else {
+        const ta = document.createElement('textarea')
+        ta.value = text
+        ta.style.position = 'fixed'
+        ta.style.left = '-9999px'
+        document.body.appendChild(ta)
+        ta.select()
+        document.execCommand('copy')
+        document.body.removeChild(ta)
+      }
+      ElMessage.success('提示词已复制')
+    } catch {
+      ElMessage.error('复制失败，请手动选择文本复制')
+    }
   }
 
   async function loadGallery() {
@@ -279,6 +345,39 @@
     font-size: 0.72rem;
   }
 
+  .ai-gallery__prompt-btn {
+    align-self: flex-start;
+    margin-top: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--vp-c-divider);
+    background: var(--vp-c-bg);
+    color: var(--vp-c-text-2);
+    font-size: 0.72rem;
+    line-height: 1.4;
+    cursor: pointer;
+    transition:
+      border-color 0.18s ease,
+      color 0.18s ease,
+      background 0.18s ease;
+  }
+
+  .ai-gallery__prompt-btn:hover {
+    color: var(--vp-c-brand-1);
+    border-color: var(--vp-c-brand-1);
+    background: var(--vp-c-bg-soft);
+  }
+
+  .ai-gallery__prompt-btn-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--vp-c-brand-1);
+  }
+
   .ai-gallery__slot {
     display: flex;
     align-items: center;
@@ -337,5 +436,73 @@
       border-radius: 4px;
       background: var(--vp-c-bg-mute);
     }
+  }
+</style>
+
+<style lang="less">
+  .el-popover.ai-gallery__pop {
+    padding: 0 !important;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .ai-gallery__pop-body {
+    display: flex;
+    flex-direction: column;
+    max-height: 320px;
+  }
+
+  .ai-gallery__pop-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--vp-c-divider);
+    background: var(--vp-c-bg-soft);
+  }
+
+  .ai-gallery__pop-title {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--vp-c-text-1);
+  }
+
+  .ai-gallery__pop-copy {
+    appearance: none;
+    border: 1px solid var(--vp-c-brand-1);
+    background: transparent;
+    color: var(--vp-c-brand-1);
+    font-size: 0.72rem;
+    line-height: 1.4;
+    padding: 2px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition:
+      background 0.18s ease,
+      color 0.18s ease;
+  }
+
+  .ai-gallery__pop-copy:hover {
+    background: var(--vp-c-brand-1);
+    color: #fff;
+  }
+
+  .ai-gallery__pop-text {
+    margin: 0;
+    padding: 10px 12px 12px;
+    overflow: auto;
+    max-height: 260px;
+    font-family:
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Consolas,
+      monospace;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: var(--vp-c-text-1);
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: transparent;
   }
 </style>
