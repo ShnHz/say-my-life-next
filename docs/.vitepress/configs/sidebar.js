@@ -172,10 +172,6 @@ export default {
       link: '/views/travel/Overview',
     },
     {
-      text: '地图',
-      link: '/views/travel/Map',
-    },
-    {
       text: '日历',
       link: '/views/travel/Calendar',
     },
