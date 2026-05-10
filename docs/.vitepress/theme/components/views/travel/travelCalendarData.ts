@@ -39,18 +39,6 @@ export const travelCalendarActivities = [
     // hollow: true,
   },
   {
-    content: '郑州',
-    // size: 'large',
-    // timestamp: '2023-10-27 - 2023-10-29',
-    // type: 'primary',
-    // icon: Train,
-    // color: '#0bbd87',
-    food: [],
-    scenicSpots: [],
-    trafficNumber: [],
-    // hollow: true,
-  },
-  {
     content: '马来西亚仙本那',
     // size: 'large',
     // timestamp: '2023-10-27 - 2023-10-29',
@@ -97,6 +85,33 @@ export const travelCalendarActivities = [
     scenicSpots: [],
     trafficNumber: [],
     // hollow: true,
+  },
+  {
+    content: '河南郑州',
+    size: 'large',
+    timestamp: '2026-05-09 - 2026-05-10',
+    type: 'primary',
+    icon: Train,
+    poster: 'https://cdn.sanghangning.cn/ai-images/cnhnzz.png',
+    food: [
+      '烩面',
+      '逍遥镇胡辣汤',
+      '牛肉水煎包',
+      '黄河大鲤鱼'
+    ],
+    scenicSpots: ['郑州奥体中心：汪苏泷演唱会','河南省博物院','蜜雪冰城总部'],
+    trafficNumber: [
+      {
+        number: 'GJ8781',
+        time: '05.09 07:45 - 05.09 09:40',
+        area: '杭州萧山国际机场 - 郑州新郑国际机场',
+      },
+      {
+        number: 'G1959',
+        time: '05.10 13:15 - 05.10 17:48',
+        area: '郑州东 - 杭州东',
+      },
+    ],
   },
   {
     content: '莆田',
