@@ -87,6 +87,25 @@ export const travelCalendarActivities = [
     // hollow: true,
   },
   {
+    content: '山东济南',
+    size: 'large',
+    timestamp: '2026-06-27 - 2026-06-28',
+    type: 'primary',
+    icon: Train,
+    poster: 'https://cdn.sanghangning.cn/ai-images/cnsdjn.png',
+    food: [
+      '闫府私房菜',
+      '九转大肠',
+      '把子肉',
+      '肥蛤',
+      '向民炒鸡',
+      '小山羊功夫串'
+    ],
+    scenicSpots: ['大明湖','趵突泉','黑虎泉','泰山'],
+    trafficNumber: [
+    ],
+  },
+  {
     content: '河南郑州',
     size: 'large',
     timestamp: '2026-05-09 - 2026-05-10',
