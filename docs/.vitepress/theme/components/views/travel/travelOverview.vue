@@ -1,7 +1,7 @@
 <template>
   <div class="travtel-overview-wrap">
     <div class="travtel-overview-map-wrap">
-      <travelMap :overview-items="imgs" />
+      <travelMap />
     </div>
     <div class="travtel-overview-list-wrap">
       <div
@@ -51,88 +51,19 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, onMounted } from 'vue'
+  import { computed, ref } from 'vue'
   import travelMap from './travelMap.vue'
   import DialogVideo from '../../common/DialogVideo.vue'
+  import { overviewItems } from '../../../../../public/map/js/travelPlaces'
 
-  // 定义数据类型
-  interface TravelItem {
-    src: string
-    name: string
-    video?: string
-  }
+  const imgs = computed(() =>
+    overviewItems.map((item) => ({
+      ...item,
+      src: `http://cdn.sanghangning.cn/${item.src}`,
+    }))
+  )
 
-  // 响应式数据
-  const list = ref<TravelItem[]>([])
-
-  // 从JSON文件加载数据
-  const loadTravelData = async () => {
-    // 根据环境判断数据源
-    const isDev =
-      process.env.NODE_ENV === 'development' ||
-      location.hostname === 'localhost' ||
-      location.hostname === '127.0.0.1'
-
-    if (isDev) {
-      // 开发环境：使用本地JSON文件
-      await loadFromUrl(
-        '/json/travel_overview.json',
-        '🔧 开发环境：使用本地JSON文件'
-      )
-    } else {
-      // 生产环境：优先使用云存储，失败时回退到public目录
-      try {
-        await loadFromUrl(
-          'https://cdn.sanghangning.cn/journey/json/travel_overview.json',
-          '🚀 生产环境：使用云存储URL'
-        )
-      } catch (error) {
-        console.warn('云存储加载失败，回退到public目录:', error)
-        await loadFromUrl(
-          '/json/travel_overview.json',
-          '📁 回退到public目录文件'
-        )
-      }
-    }
-  }
-
-  // 从指定URL加载数据的辅助函数
-  const loadFromUrl = async (url: string, logMessage: string) => {
-    try {
-      console.log(logMessage, url)
-      const response = await fetch(url)
-      if (!response.ok) {
-        throw new Error(`Failed to fetch travel data from ${url}`)
-      }
-      const data = await response.json()
-      list.value = data
-    } catch (error) {
-      console.error(`Error loading travel data from ${url}:`, error)
-      // 如果所有数据源都失败，使用默认数据
-      if (url === '/json/travel_overview.json') {
-        console.warn('所有数据源都失败，使用默认数据')
-        list.value = []
-      } else {
-        throw error
-      }
-    }
-  }
-
-  // 组件挂载时加载数据
-  onMounted(() => {
-    loadTravelData()
-  })
-
-  const imgs = computed(() => {
-    return list.value.map((item) => {
-      return {
-        ...item,
-        src: `http://cdn.sanghangning.cn/${item.src}`,
-      }
-    })
-  })
-
-  const handleClick = (item: any) => {
+  const handleClick = (item: { video?: string }) => {
     if (item.video) {
       dialogVideo.value = {
         show: true,

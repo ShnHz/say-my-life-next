@@ -5,9 +5,11 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted } from 'vue'
-  import { cityPolygon } from '../../../../../../public/map/js/cityPolygon'
-  import { city } from '../../../../../../public/map/js/city'
+  import { onMounted } from 'vue'
+  import {
+    cities as city,
+    cityPolygons as cityPolygon,
+  } from '../../../../../../public/map/js/travelPlaces'
 
   let map: any = null
 
@@ -75,19 +77,39 @@
     }
   }
 
-  const polygonInit = async (AMap) => {
-    const cityPolygons = cityPolygon.map((item) => {
-      const polygonGroup = item.polygon.split('|')
-      const polygon = polygonGroup.map((item) =>
-        item
+  const parsePolygon = (raw: string) => {
+    let text = raw.trim()
+    if (
+      (text.startsWith('"') && text.endsWith('"')) ||
+      (text.startsWith("'") && text.endsWith("'"))
+    ) {
+      text = text.slice(1, -1).trim()
+    }
+    return text
+      .split('|')
+      .filter(Boolean)
+      .map((ring) =>
+        ring
           .split(';')
-          .map((_item) => _item.split(',').map((__item) => parseFloat(__item)))
+          .filter(Boolean)
+          .map((point) => point.split(',').map((n) => parseFloat(n)))
       )
-      return {
-        ...item,
-        polygon: polygon,
-      }
-    })
+  }
+
+  const polygonInit = async (AMap) => {
+    const cityPolygons = await Promise.all(
+      cityPolygon.map(async (item) => {
+        const res = await fetch(
+          `/map/js/polygons/${encodeURIComponent(item.name)}.txt`
+        )
+        if (!res.ok) {
+          console.warn(`城市边界加载失败: ${item.name}`, res.status)
+          return { ...item, polygon: [] as number[][][] }
+        }
+        const raw = await res.text()
+        return { ...item, polygon: parsePolygon(raw) }
+      })
+    )
 
     for (let i = 0, len = cityPolygons.length; i < len; i++) {
       for (let j = 0, _len = cityPolygons[i].polygon.length; j < _len; j++) {

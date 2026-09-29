@@ -1,0 +1,253 @@
+- generic [ref=e3]:
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#VPContent"
+  - banner:
+    - generic:
+      - generic:
+        - link "野宁新之助" [ref=e6] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e7]:
+          - button "Search" [ref=e10] [cursor=pointer]:
+            - generic [ref=e11]:
+              - img "search icon" [ref=e12]
+              - generic [ref=e14]: Search
+            - generic [ref=e15]:
+              - generic [ref=e16]: ⌘
+              - generic [ref=e17]: K
+          - navigation "Main Navigation" [ref=e18]:
+            - link "首页" [ref=e20] [cursor=pointer]:
+              - /url: /
+            - link "归档" [ref=e21] [cursor=pointer]:
+              - /url: /views/Guide.html
+            - link "标签" [ref=e22] [cursor=pointer]:
+              - /url: /views/Tag.html
+            - link "笔记" [ref=e23] [cursor=pointer]:
+              - /url: /views/notes/Web.html
+            - link "生活" [ref=e24] [cursor=pointer]:
+              - /url: /views/life/Anime.html
+            - link "旅程" [ref=e25] [cursor=pointer]:
+              - /url: /views/travel/Overview.html
+            - link "友链" [ref=e26] [cursor=pointer]:
+              - /url: /views/Friend.html
+            - link "工具箱" [ref=e27] [cursor=pointer]:
+              - /url: https://tools.sanghangning.cn/
+          - button "extra navigation" [ref=e32] [cursor=pointer]
+  - generic [ref=e54]:
+    - generic [ref=e56]:
+      - generic [ref=e60]:
+        - generic [ref=e61]:
+          - button "华东 · 47" [ref=e380] [cursor=pointer]
+          - button "北京" [ref=e381] [cursor=pointer]
+          - button "天津" [ref=e382] [cursor=pointer]
+          - button "华南 · 10" [ref=e383] [cursor=pointer]
+          - button "西南 · 7" [ref=e384] [cursor=pointer]
+          - button "西安" [ref=e385] [cursor=pointer]
+          - button "华山" [ref=e386] [cursor=pointer]
+          - button "大连" [ref=e387] [cursor=pointer]
+          - button "河内" [ref=e388] [cursor=pointer]
+          - button "岘港" [ref=e389] [cursor=pointer]
+          - button "胡志明" [ref=e390] [cursor=pointer]
+          - button "曼谷" [ref=e391] [cursor=pointer]
+          - button "济州岛" [ref=e392] [cursor=pointer]
+          - button "日本 · 7" [ref=e393] [cursor=pointer]
+          - button "新加坡" [ref=e394] [cursor=pointer]
+          - button "吉隆坡" [ref=e395] [cursor=pointer]
+        - group "地球缩放" [ref=e64]:
+          - button "缩小地球" [disabled] [ref=e65]: −
+          - status "当前缩放" [ref=e66]: 1.0×
+          - button "放大地球" [ref=e67] [cursor=pointer]: +
+          - button "重置" [active] [ref=e68] [cursor=pointer]
+      - generic:
+        - generic [ref=e69]: 👋 Hello,My name is shn.
+        - generic [ref=e70]: 说说我的生活
+        - generic [ref=e71]: "| Think t"
+    - generic [ref=e76]:
+      - generic [ref=e82]:
+        - generic [ref=e83]: 周杰伦 - 彩虹
+        - generic "播放" [ref=e84]
+        - generic "上一首" [ref=e87] [cursor=pointer]
+        - generic "下一首" [ref=e90] [cursor=pointer]
+      - slider "滑块介于 0 至 100" [ref=e95] [cursor=pointer]
+    - generic [ref=e98]:
+      - generic [ref=e99]:
+        - list [ref=e100]:
+          - listitem [ref=e101] [cursor=pointer]
+          - listitem [ref=e102] [cursor=pointer]
+          - listitem [ref=e103] [cursor=pointer]
+          - listitem [ref=e104] [cursor=pointer]
+        - generic [ref=e106]:
+          - generic [ref=e107]:
+            - generic [ref=e108]: 记得写日记
+            - generic [ref=e109]: 做一个热爱生活的人，把生活记录下来。
+          - generic [ref=e110]:
+            - generic [ref=e111]: 常常去旅行
+            - generic [ref=e112]: 我认为旅行是从大自然学习的最佳方式。走遍世界，这是我最大的梦想。
+          - generic [ref=e113]:
+            - generic [ref=e114]: 好好打代码
+            - generic [ref=e115]: 每天都要学习！争取Github全绿。
+          - generic [ref=e116]:
+            - generic [ref=e117]: 天天学习呀
+            - generic [ref=e118]: 阶段性学习，能有成果展示出来。
+      - generic [ref=e120]:
+        - generic [ref=e121]:
+          - generic [ref=e122] [cursor=pointer]: HTML
+          - generic [ref=e123] [cursor=pointer]: CSS
+          - generic [ref=e124] [cursor=pointer]: JavaScript
+          - generic [ref=e125] [cursor=pointer]: Vue
+          - generic [ref=e126] [cursor=pointer]: React
+          - generic [ref=e127] [cursor=pointer]: Python
+          - generic [ref=e128] [cursor=pointer]: Photoshop
+          - generic [ref=e129] [cursor=pointer]: Git
+          - generic [ref=e130] [cursor=pointer]: Node
+          - generic [ref=e131] [cursor=pointer]: Java
+          - generic [ref=e132] [cursor=pointer]: Go
+          - generic [ref=e133] [cursor=pointer]: Docker
+          - generic [ref=e134] [cursor=pointer]: Mongodb
+          - generic [ref=e135] [cursor=pointer]: Music
+          - generic [ref=e136] [cursor=pointer]: Movie
+          - generic [ref=e137] [cursor=pointer]: Travel
+        - generic [ref=e138]:
+          - generic [ref=e139] [cursor=pointer]: HTML
+          - generic [ref=e140] [cursor=pointer]: CSS
+          - generic [ref=e141] [cursor=pointer]: JavaScript
+          - generic [ref=e142] [cursor=pointer]: Vue
+          - generic [ref=e143] [cursor=pointer]: React
+          - generic [ref=e144] [cursor=pointer]: Python
+          - generic [ref=e145] [cursor=pointer]: Photoshop
+          - generic [ref=e146] [cursor=pointer]: Git
+          - generic [ref=e147] [cursor=pointer]: Node
+          - generic [ref=e148] [cursor=pointer]: Java
+          - generic [ref=e149] [cursor=pointer]: Go
+          - generic [ref=e150] [cursor=pointer]: Docker
+          - generic [ref=e151] [cursor=pointer]: Mongodb
+          - generic [ref=e152] [cursor=pointer]: Music
+          - generic [ref=e153] [cursor=pointer]: Movie
+          - generic [ref=e154] [cursor=pointer]: Travel
+      - generic [ref=e155]:
+        - list [ref=e156]:
+          - listitem [ref=e157] [cursor=pointer]:
+            - generic [ref=e158]: 关于我的博客
+            - paragraph [ref=e159]: 2023.05.22
+            - paragraph [ref=e160]:
+              - generic [ref=e161]: 置顶
+          - listitem [ref=e166] [cursor=pointer]:
+            - generic [ref=e167]: 公告：很高兴好多人回复，最近又忙又懒，更新很慢，见谅见谅~
+            - paragraph [ref=e168]: 2020.11.11
+            - paragraph [ref=e169]:
+              - generic [ref=e170]: 置顶
+          - listitem [ref=e175] [cursor=pointer]:
+            - generic [ref=e176]: 程序员最常用的10个AI提示词
+            - paragraph [ref=e177]: 2026.06.03
+            - paragraph [ref=e178]: 前言 2026年，AI编程已经像Git一样成为标配。 但很多人发现：同一个需求，别人问AI几分钟搞定，自己问AI却要反复改好几轮。 区别不在模型，而在提示词。 好的提示词不是“请写代码”，而是带约束、
+            - paragraph [ref=e179]:
+              - generic [ref=e184]: AI
+          - listitem [ref=e186] [cursor=pointer]:
+            - generic [ref=e187]: 别再裸用 Claude Code 了！32 个亲测Skills + 8 个 MCP，开发效率直接拉满！
+            - paragraph [ref=e188]: 2026.05.29
+            - paragraph [ref=e189]: 别再裸用 Claude Code 了！32 个亲测技能 + 8 个 MCP 服务器，开发效率直接拉满！ 先晒一下我装完的效果（见下图），所有技能均实测可用。
+            - paragraph [ref=e190]:
+              - generic [ref=e195]: AI
+              - generic [ref=e197]: 工具
+          - listitem [ref=e201] [cursor=pointer]:
+            - generic [ref=e202]: 现在面试 AI 相关问题，不把底层原理扒得明明白白，真的分分钟被问麻😭 | 沸点周刊 4.16
+            - paragraph [ref=e203]: 2026.05.07
+            - paragraph [ref=e204]: 五一假期越来越近啦，你是早早做好攻略的出行卷王，还是在疯狂抄作业的佛系选手，亦或是打算安心宅家躺平？快来分享你的假期安排，出游路线、宅家日常、避坑心得都欢迎～
+            - paragraph [ref=e205]:
+              - generic [ref=e210]: AI
+          - listitem [ref=e212] [cursor=pointer]:
+            - generic [ref=e213]: AI全自动实现Flutter蓝牙自动连接
+            - paragraph [ref=e214]: 2026.05.03
+            - paragraph [ref=e215]: 一篇由AI代码实现，连文章也是AI写的文章。除了设计思想是我的，其它的都是AI实现的。AI时代，更注重的是什么，值钱的是什么，可能是问题的解决能力吧。一个好的方案设计吧
+            - paragraph [ref=e216]:
+              - generic [ref=e221]: AI
+          - listitem [ref=e223] [cursor=pointer]:
+            - generic [ref=e224]: 我为什么最终还是回归了Cursor
+            - paragraph [ref=e225]: 2026.04.30
+            - paragraph [ref=e226]: 近日各式各样的AI Coding工具层出不穷，在重度使用Cursor、Augment、Trae、Kiro、Claud Code后，我最终还是回归到了Cursor配合Claud Code的使用习惯
+            - paragraph [ref=e227]:
+              - generic [ref=e232]: AI
+          - listitem [ref=e234] [cursor=pointer]:
+            - generic [ref=e235]: AI来了，同事们的效率为什么差这么多？
+            - paragraph [ref=e236]: 2026.04.30
+            - paragraph [ref=e237]: 最近在团队里，我观察到一个很有意思的现象：同样是使用AI辅助开发，不同同事的使用效果却差别明显。有人效率明显提升，有人却几乎没什么变化，甚至偶尔还会多花一些时间。
+            - paragraph [ref=e238]:
+              - generic [ref=e243]: AI
+              - generic [ref=e245]: 工具
+          - listitem [ref=e249] [cursor=pointer]:
+            - generic [ref=e250]: 拒绝 AI 焦虑！一个普通程序员的真实 AI 工作流（附成本账单）
+            - paragraph [ref=e251]: 2026.04.27
+            - paragraph [ref=e252]: 今天不谈宏大叙事，也不贩卖焦虑。只晒真实的账单和工作流，看看 AI 到底是为了提效，还是让我们更累？
+            - paragraph [ref=e253]:
+              - generic [ref=e258]: AI
+          - listitem [ref=e260] [cursor=pointer]:
+            - generic [ref=e261]: 我搭建了一套自动化技术博客采集系统
+            - paragraph [ref=e262]: 2026.04.26
+            - paragraph [ref=e263]: 分享我如何从零搭建一套自动化技术博客采集系统，实现每日自动采集、智能筛选、微信推送、一键发布到个人博客的完整工作流。
+            - paragraph [ref=e264]:
+              - generic [ref=e265]: 工具
+              - generic [ref=e269]: Git
+          - listitem [ref=e271] [cursor=pointer]:
+            - generic [ref=e272]: 面试官问我：“AI 写代码比你快 100 倍，你的价值在哪？”
+            - paragraph [ref=e273]: 2026.04.26
+            - paragraph [ref=e274]: 面试官是一个看着很资深的技术总监。他喝了口水，突然抛出了一个非常尖锐的问题： “你平时用 AI 写代码吗？现在 AI 敲代码的速度比你快 100 倍，错误率还比你低。在这种背景下，你觉得程序员的核心价
+            - paragraph [ref=e275]
+          - listitem [ref=e280] [cursor=pointer]:
+            - generic [ref=e281]: 推荐一个基于 Spring Boot 4.0 + Java 21 + Spring AI 2.0 的大模型项目！
+            - paragraph [ref=e282]: 2026.04.26
+            - paragraph [ref=e283]: 大家好，我是 Guide。今年元旦假期，我写了一个大模型项目并完全开源了出来。 短短一个月时间，这个项目目前就已经在 Github 收获了 450+ Star，吸引了多位社区爱好者共同参与完善！ 发布
+            - paragraph [ref=e284]
+          - listitem [ref=e289] [cursor=pointer]:
+            - generic [ref=e290]: 别再裸用 Claude Code 了！32 个亲测Skills + 8 个 MCP，开发效率直接拉满！
+            - paragraph [ref=e291]: 2026.04.26
+            - paragraph [ref=e292]: 别再裸用 Claude Code 了！32 个亲测技能 + 8 个 MCP 服务器，开发效率直接拉满！ 先晒一下我装完的效果（见下图），所有技能均实测可用。
+            - paragraph [ref=e293]:
+              - generic [ref=e298]: AI
+          - listitem [ref=e300] [cursor=pointer]:
+            - generic [ref=e301]: "抛弃 `!important` 吧，一个更友好的技巧让你的 CSS 优先级变大"
+            - paragraph [ref=e302]: 2025.03.04
+            - paragraph [ref=e303]:
+              - generic [ref=e308]: Css
+          - listitem [ref=e310] [cursor=pointer]:
+            - generic [ref=e311]: 前端编程之道7-3：高级前端必须要懂的SOLID原则
+            - paragraph [ref=e312]: 2024.08.01
+            - paragraph [ref=e313]:
+              - generic [ref=e314]: Js
+          - listitem [ref=e316] [cursor=pointer]:
+            - generic [ref=e317]: 一行代码让你的控制台终端骚起来
+            - paragraph [ref=e318]: 2024.04.11
+            - paragraph [ref=e319]:
+              - generic [ref=e324]: Js
+              - generic [ref=e326]: 工具
+          - listitem [ref=e330] [cursor=pointer]:
+            - generic [ref=e331]: Web3D项目性能优化总结
+            - paragraph [ref=e332]: 2024.04.05
+            - paragraph [ref=e333]:
+              - generic [ref=e338]: Js
+          - listitem [ref=e340] [cursor=pointer]:
+            - generic [ref=e341]: 写html页面没意思，来挑战chrome插件开发
+            - paragraph [ref=e342]: 2024.03.29
+            - paragraph [ref=e343]:
+              - generic [ref=e348]: Js
+              - generic [ref=e350]: 工具
+              - generic [ref=e354]: Css
+          - listitem [ref=e356] [cursor=pointer]:
+            - generic [ref=e357]: 不要再滥用可选链运算符(?.)啦！
+            - paragraph [ref=e358]: 2024.02.23
+            - paragraph [ref=e359]:
+              - generic [ref=e364]: Js
+          - listitem [ref=e366] [cursor=pointer]:
+            - generic [ref=e367]: 谈谈外网刷屏的量子纠缠效果
+            - paragraph [ref=e368]: 2023.11.28
+            - paragraph [ref=e369]:
+              - generic [ref=e374]: Js
+        - paragraph [ref=e377] [cursor=pointer]: 查看更多
+  - generic [ref=e39]:
+    - generic [ref=e40]:
+      - link "浙ICP备18029315号-2" [ref=e42] [cursor=pointer]:
+        - /url: http://beian.miit.gov.cn/
+      - generic [ref=e43]:
+        - text: power by
+        - link "VitePress" [ref=e44] [cursor=pointer]:
+          - /url: https://vitepress.dev/
+      - generic [ref=e45]: ©2019 - 2026 By 野宁新之助
+    - generic [ref=e46]: "10338"

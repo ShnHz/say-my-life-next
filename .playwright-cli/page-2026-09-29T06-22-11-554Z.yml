@@ -1,0 +1,55 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#VPContent"
+    - banner:
+      - generic:
+        - generic:
+          - link "野宁新之助" [ref=e6] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e7]:
+            - button "Search" [ref=e10] [cursor=pointer]:
+              - generic [ref=e11]:
+                - img "search icon" [ref=e12]
+                - generic [ref=e14]: Search
+              - generic [ref=e15]:
+                - generic [ref=e16]: ⌘
+                - generic [ref=e17]: K
+            - navigation "Main Navigation" [ref=e18]:
+              - link "首页" [ref=e20] [cursor=pointer]:
+                - /url: /
+              - link "归档" [ref=e21] [cursor=pointer]:
+                - /url: /views/Guide.html
+              - link "标签" [ref=e22] [cursor=pointer]:
+                - /url: /views/Tag.html
+              - link "笔记" [ref=e23] [cursor=pointer]:
+                - /url: /views/notes/Web.html
+              - link "生活" [ref=e24] [cursor=pointer]:
+                - /url: /views/life/Anime.html
+              - link "旅程" [ref=e25] [cursor=pointer]:
+                - /url: /views/travel/Overview.html
+              - link "友链" [ref=e26] [cursor=pointer]:
+                - /url: /views/Friend.html
+              - link "工具箱" [ref=e27] [cursor=pointer]:
+                - /url: https://tools.sanghangning.cn/
+            - button "extra navigation" [ref=e32] [cursor=pointer]
+    - generic [ref=e39]:
+      - generic [ref=e40]:
+        - link "浙ICP备18029315号-2" [ref=e42] [cursor=pointer]:
+          - /url: http://beian.miit.gov.cn/
+        - generic [ref=e43]:
+          - text: power by
+          - link "VitePress" [ref=e44] [cursor=pointer]:
+            - /url: https://vitepress.dev/
+        - generic [ref=e45]: ©2019 - 2026 By 野宁新之助
+      - generic [ref=e46]: "0"
+  - generic [ref=e53]:
+    - generic [ref=e54]: Cannot read properties of null (reading 'invalidateTypeCache')
+    - generic [ref=e55]: at handleHotUpdate (file:///Users/molar/Documents/project/shn/say-my-life-next/node_modules/@vitejs/plugin-vue/dist/index.mjs:2768:34) at handleHMRUpdate (file:///Users/molar/Documents/project/shn/say-my-life-next/node_modules/vite/dist/node/chunks/dep-827b23df.js:41308:39) at async onHMRUpdate (file:///Users/molar/Documents/project/shn/say-my-life-next/node_modules/vite/dist/node/chunks/dep-827b23df.js:65508:17) at async FSWatcher.<anonymous> (file:///Users/molar/Documents/project/shn/say-my-life-next/node_modules/vite/dist/node/chunks/dep-827b23df.js:65527:9
+    - generic [ref=e56]:
+      - text: Click outside, press Esc key, or fix the code to dismiss. You can also disable this overlay by setting
+      - code [ref=e57]: server.hmr.overlay
+      - text: to
+      - code [ref=e58]: "false"
+      - text: in
+      - code [ref=e59]: vite.config.js.

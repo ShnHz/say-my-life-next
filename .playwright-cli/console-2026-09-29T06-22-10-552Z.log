@@ -1,0 +1,43 @@
+[    1522ms] [WARNING] WebGL: INVALID_OPERATION: drawArrays: no buffer is bound to enabled attribute @ http://127.0.0.1:5174/.vitepress/cache/deps/cobe.js?v=abe30cbc:144
+[    1689ms] [ERROR] Access to audio at 'https://cdn.sanghangning.cn/index/music/%E5%91%A8%E6%9D%B0%E4%BC%A6_%E5%BD%A9%E8%99%B9.mp3' from origin 'http://127.0.0.1:5174' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:5174/:0
+[    1689ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://cdn.sanghangning.cn/index/music/%E5%91%A8%E6%9D%B0%E4%BC%A6_%E5%BD%A9%E8%99%B9.mp3:0
+[    1869ms] [WARNING] WebGL: INVALID_OPERATION: drawArrays: no buffer is bound to enabled attribute @ http://127.0.0.1:5174/.vitepress/cache/deps/cobe.js?v=abe30cbc:144
+[    1913ms] [ERROR] Access to audio at 'https://cdn.sanghangning.cn/index/music/%E5%91%A8%E6%9D%B0%E4%BC%A6_%E5%BD%A9%E8%99%B9.mp3' from origin 'http://127.0.0.1:5174' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:5174/:0
+[    1913ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://cdn.sanghangning.cn/index/music/%E5%91%A8%E6%9D%B0%E4%BC%A6_%E5%BD%A9%E8%99%B9.mp3:0
+[   44564ms] [WARNING] WebGL: INVALID_OPERATION: drawArrays: no buffer is bound to enabled attribute @ http://127.0.0.1:5174/.vitepress/cache/deps/cobe.js?v=abe30cbc:144
+[   44591ms] [ERROR] Access to audio at 'https://cdn.sanghangning.cn/index/music/%E5%91%A8%E6%9D%B0%E4%BC%A6_%E5%BD%A9%E8%99%B9.mp3' from origin 'http://127.0.0.1:5174' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:5174/:0
+[   44591ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://cdn.sanghangning.cn/index/music/%E5%91%A8%E6%9D%B0%E4%BC%A6_%E5%BD%A9%E8%99%B9.mp3:0
+[   45211ms] [WARNING] ElementPlusError: [el-radio] [API] label act as value is about to be deprecated in version 3.0.0, please use value instead.
+For more detail, please visit: https://element-plus.org/en-US/component/radio.html
+
+    at debugWarn (http://127.0.0.1:5174/.vitepress/cache/deps/element-plus_es.js?v=abe30cbc:10165:37)
+    at watch.immediate (http://127.0.0.1:5174/.vitepress/cache/deps/element-plus_es.js?v=abe30cbc:10210:7)
+    at callWithErrorHandling (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:2370:19)
+    at callWithAsyncErrorHandling (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:2377:17)
+    at baseWatchOptions.call (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:3066:47)
+    at job (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:2097:18)
+    at watch (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:2133:7)
+    at doWatch (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:3094:23)
+    at watch2 (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:3026:10)
+    at useDeprecated (http://127.0.0.1:5174/.vitepress/cache/deps/element-plus_es.js?v=abe30cbc:10208:3) @ http://127.0.0.1:5174/.vitepress/cache/deps/element-plus_es.js?v=abe30cbc:10165
+[   45211ms] [WARNING] ElementPlusError: [el-radio] [API] label act as value is about to be deprecated in version 3.0.0, please use value instead.
+For more detail, please visit: https://element-plus.org/en-US/component/radio.html
+
+    at debugWarn (http://127.0.0.1:5174/.vitepress/cache/deps/element-plus_es.js?v=abe30cbc:10165:37)
+    at watch.immediate (http://127.0.0.1:5174/.vitepress/cache/deps/element-plus_es.js?v=abe30cbc:10210:7)
+    at callWithErrorHandling (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:2370:19)
+    at callWithAsyncErrorHandling (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:2377:17)
+    at baseWatchOptions.call (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:3066:47)
+    at job (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:2097:18)
+    at watch (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:2133:7)
+    at doWatch (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:3094:23)
+    at watch2 (http://127.0.0.1:5174/.vitepress/cache/deps/chunk-IYQZDDJV.js?v=abe30cbc:3026:10)
+    at useDeprecated (http://127.0.0.1:5174/.vitepress/cache/deps/element-plus_es.js?v=abe30cbc:10208:3) @ http://127.0.0.1:5174/.vitepress/cache/deps/element-plus_es.js?v=abe30cbc:10165
+[   45280ms] [WARNING] WebGL: INVALID_OPERATION: drawArrays: no buffer is bound to enabled attribute @ http://127.0.0.1:5174/.vitepress/cache/deps/cobe.js?v=abe30cbc:144
+[   45347ms] [LOG] map loader loaded @ http://127.0.0.1:5174/.vitepress/theme/components/views/travel/components/travelMap.vue:18
+[   45614ms] [LOG] Error: Map container div not exist
+    at new S (https://webapi.amap.com/maps?callback=___onAPILoaded&v=2.0&key=f18a896571b2702b0ef2c949da4ed7da&plugin=:1:857934)
+    at http://127.0.0.1:5174/.vitepress/theme/components/views/travel/components/travelMap.vue:36:15 @ http://127.0.0.1:5174/.vitepress/theme/components/views/travel/components/travelMap.vue:44
+[  142467ms] [LOG] [vite] server connection lost. polling for restart... @ http://127.0.0.1:5174/@vite/client:287
+[  142468ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:5174/:0
+[  143469ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:5174/:0

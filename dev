@@ -1,0 +1,55 @@
+> vitepress dev docs
+
+
+The language 'arduino' is not loaded, falling back to 'txt' for syntax highlighting.
+
+The language 'arduino' is not loaded, falling back to 'txt' for syntax highlighting. (x2)
+
+The language 'arduino' is not loaded, falling back to 'txt' for syntax highlighting. (x3)
+
+The language 'package.json' is not loaded, falling back to 'txt' for syntax highlighting.
+
+  vitepress v1.0.0-beta.2
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.63.109:5173/
+  ➜  Network: http://198.18.0.1:5173/
+  ➜  press h to show help
+11:48:44 [vitepress] ✨ new dependencies optimized: element-plus/es/components/carousel/style/css, element-plus/es/components/carousel-item/style/css, @vicons/material, easy-typer-js, element-plus/es/components/slider/style/css, @vic
+11:48:44 [vitepress] ✨ new dependencies optimized: element-plus/es/components/carousel/style/css, element-plus/es/components/carousel-item/style/css, @val, easy-typer-js, element-plus/es/components/slider/style/css, @vicons/ionicons5, element-plus/es/components/radio-group/style/css, element-plus/es/components/radio-button/style/css, cobe, element-plus/es/components/tooltip/style/css, element-plus/es/components/tag/style/css
+11:48:44 [vitepress] ✨ optimized dependencies changed. reloading
+files in the public directory are served at the root path.
+Instead of /public/map/js/city.ts, use /map/js/city.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/city.ts, use /map/js/city.ts. (x2)
+files in the public directory are served at the root path.
+Instead of /public/map/js/polaroids.ts, use /map/js/polaroids.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/polaroids.ts, use /map/js/polaroids.ts. (x2)
+files in the public directory are served at the root path.
+Instead of /public/map/js/city.ts, use /map/js/city.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/polaroids.ts, use /map/js/polaroids.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/city.ts, use /map/js/city.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/polaroids.ts, use /map/js/polaroids.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/city.ts, use /map/js/city.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/polaroids.ts, use /map/js/polaroids.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/city.ts, use /map/js/city.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/polaroids.ts, use /map/js/polaroids.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/city.ts, use /map/js/city.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/polaroids.ts, use /map/js/polaroids.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/city.ts, use /map/js/city.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/polaroids.ts, use /map/js/polaroids.ts.
+files in the public directory are served at the root path.
+Instead of /public/map/js/city.ts, use /map/js/city.ts.
+files in the public directory are served at the root path.

@@ -2,7 +2,7 @@
   <div class="travtel-calendar-wrap">
     <el-timeline>
       <el-timeline-item
-        v-for="(activity, index) in activities"
+        v-for="(activity, index) in timelineActivities"
         :key="index"
         :icon="activity.icon"
         :type="activity.type"
@@ -12,14 +12,13 @@
         :timestamp="activity.timestamp"
       >
         <span v-if="!activity.plan">{{ activity.content }}</span>
-        <span></span>
         <div
           class="scenic-spots-list"
           v-if="activity.scenicSpots && activity.scenicSpots.length > 0"
         >
           <span
-            v-for="(item, index) in activity.scenicSpots"
-            :key="activity.timestamp + index"
+            v-for="(item, spotIndex) in activity.scenicSpots"
+            :key="(activity.timestamp ?? '') + spotIndex"
           >
             {{ item }}</span
           >
@@ -29,8 +28,8 @@
           v-if="activity.food && activity.food.length > 0"
         >
           <span
-            v-for="(item, index) in activity.food"
-            :key="activity.timestamp + index"
+            v-for="(item, foodIndex) in activity.food"
+            :key="(activity.timestamp ?? '') + foodIndex"
           >
             {{ item }}</span
           >
@@ -39,19 +38,30 @@
           class="traffic-list"
           v-if="activity.trafficNumber && activity.trafficNumber.length > 0"
         >
-          <div v-for="(item, index) in activity.trafficNumber">
+          <div
+            v-for="(item, trafficIndex) in activity.trafficNumber"
+            :key="activity.timestamp + '-traffic-' + trafficIndex"
+          >
             <span>{{ item.number }} {{ item.area }}</span>
             <span>{{ item.time }}</span>
           </div>
         </div>
 
-        <div class="poster-wrap" v-if="activity.poster">
+        <div
+          class="poster-wrap"
+          v-if="getPosterList(activity).length"
+          :style="posterWrapStyle(activity)"
+        >
           <el-image
-            :src="activity.poster"
-            :preview-src-list="getPosterPreviewList(activity)"
-            style="width: 200px; border-radius: 8px"
+            v-for="(src, posterIndex) in getPosterList(activity)"
+            :key="activity.timestamp + '-poster-' + posterIndex"
+            :src="src"
+            :initial-index="posterIndex"
+            :preview-src-list="getPosterList(activity)"
+            fit="cover"
             preview-teleported
             lazy
+            @load="(e) => onPosterLoad(activity, posterIndex, e)"
           />
         </div>
       </el-timeline-item>
@@ -60,16 +70,81 @@
 </template>
 
 <script setup lang="ts">
-  // @ts-nocheck — 行程数据条目字段不一致，运行时安全
-  import { travelCalendarActivities as activities } from './travelCalendarData'
+  import { computed, reactive, type Component, type CSSProperties } from 'vue'
+  import { TrainProfile as Train } from '@vicons/carbon'
+  import { PlaneDeparture as Plane, Car, Ship, Bus } from '@vicons/tabler'
+  import {
+    travelCalendarActivities,
+    type TrafficIcon,
+    type TravelTrip,
+  } from '../../../../../public/map/js/travelPlaces'
 
-  const getPosterPreviewList = (item) => {
-    if (item.posters?.length) return item.posters
-    if (item.poster) return [item.poster]
+  const iconMap: Record<TrafficIcon, Component> = {
+    train: Train,
+    plane: Plane,
+    car: Car,
+    ship: Ship,
+    bus: Bus,
+  }
+
+  type CalendarActivity = Omit<TravelTrip, 'icon'> & {
+    content?: string
+    posters?: string[]
+    icon?: Component
+  }
+
+  const timelineActivities = computed(() =>
+    travelCalendarActivities.map((activity) => ({
+      ...activity,
+      icon: activity.icon ? iconMap[activity.icon] : undefined,
+    }))
+  )
+
+  /** poster 支持 string | string[] */
+  const getPosterList = (item: Pick<TravelTrip, 'poster'> & { posters?: string[] }) => {
+    if (Array.isArray(item.poster) && item.poster.length) {
+      return item.poster.filter(Boolean)
+    }
+    if (typeof item.poster === 'string' && item.poster) {
+      return [item.poster]
+    }
+    if (item.posters?.length) return item.posters.filter(Boolean)
     return []
   }
 
-  const getActivityIconColor = (item) => {
+  const posterRatioByKey = reactive<Record<string, string>>({})
+
+  const posterKey = (activity: CalendarActivity) =>
+    `${activity.content ?? ''}|${activity.timestamp ?? ''}|${getPosterList(activity)[0] ?? ''}`
+
+  const posterWrapStyle = (activity: CalendarActivity): CSSProperties => {
+    const ratio = posterRatioByKey[posterKey(activity)]
+    return ratio ? { '--poster-ratio': ratio } : {}
+  }
+
+  const onPosterLoad = (
+    activity: CalendarActivity,
+    posterIndex: number,
+    e: Event
+  ) => {
+    if (posterIndex !== 0) return
+    const key = posterKey(activity)
+    if (posterRatioByKey[key]) return
+    const target = e.target as HTMLImageElement | HTMLElement | null
+    const el =
+      target && 'naturalWidth' in target && target.naturalWidth
+        ? (target as HTMLImageElement)
+        : target?.querySelector?.('img') ?? null
+    const w = el?.naturalWidth
+    const h = el?.naturalHeight
+    if (w && h) {
+      posterRatioByKey[key] = `${w} / ${h}`
+    }
+  }
+
+  const getActivityIconColor = (item: {
+    icon?: Component & { name?: string }
+  }) => {
     if (item.icon?.name === 'Car') {
       return '#2F2F2F	'
     } else if (item.icon?.name === 'TrainProfile') {
@@ -148,8 +223,20 @@
             }
           }
         }
-        .poster-wrap{
+        .poster-wrap {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
           margin-top: 10px;
+
+          .el-image {
+            width: min(200px, 100%);
+            aspect-ratio: var(--poster-ratio, auto);
+            height: auto;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+          }
         }
       }
     }

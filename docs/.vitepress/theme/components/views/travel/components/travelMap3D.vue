@@ -1,17 +1,8 @@
 <template>
   <div
     class="travel-map-wrap"
-    :class="[`mode-${mode}`, { 'is-embedded': embedded }]"
+    :class="{ 'is-embedded': embedded }"
   >
-    <el-radio-group
-      v-if="!embedded"
-      v-model="mode"
-      class="cobe-mode-radio"
-    >
-      <el-radio-button label="cobeV2">COBE v2</el-radio-button>
-      <el-radio-button label="polaroids">Polaroids</el-radio-button>
-    </el-radio-group>
-
     <div ref="wrapperRef" class="cobe-wrapper">
       <!--
         必须把 canvas 包在与 canvas 同尺寸的方形 stage 里：
@@ -19,120 +10,58 @@
         锚点 left/top 用的是该 div 的百分比，但 cobe 的投影坐标是基于 canvas 像素的，
         所以这层 div 必须 = canvas 大小，否则 label 会偏离 globe（参考 cobe-main 的 .showcases-globe）。
       -->
-      <div class="cobe-stage">
-        <canvas ref="canvasRef" class="cobe-canvas" />
+      <div ref="stageRef" class="cobe-stage">
+        <canvas
+          ref="canvasRef"
+          class="cobe-canvas"
+          :tabindex="embedded ? undefined : 0"
+          :aria-label="embedded ? '旅行地球' : '旅行地球：滚轮缩放，拖拽旋转，键盘加减号缩放'"
+          @keydown="onGlobeKeydown"
+        />
 
-        <template v-if="mode === 'cobeV2'">
-          <div
-            v-for="item in cobeV2Markers"
-            :key="item.id"
-            class="cobe-label"
-            :style="markerOverlayStyle(item.id)"
-          >
-            {{ item.label }}
-          </div>
-        </template>
-
-        <template v-else>
-          <div
-            v-for="item in polaroidsWithOverviewImages"
-            :key="item.id"
-            class="cobe-polaroid"
-            :style="polaroidStyle(item.id, item.rotate)"
-          >
-            <img :src="item.image" :alt="item.caption" />
-            <span class="cobe-polaroid-caption">{{ item.caption }}</span>
-          </div>
-        </template>
+        <span
+          v-for="item in cobeV2Markers"
+          :key="item.id"
+          class="cobe-label"
+          :class="{ 'is-cluster': item.children.length }"
+          :style="markerOverlayStyle(item.id)"
+        >
+          {{ markerText(item) }}
+        </span>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import createGlobe, { type COBEOptions, type Globe, type Marker } from 'cobe'
+  import createGlobe, { type COBEOptions, type Globe } from 'cobe'
   import {
     computed,
     onBeforeUnmount,
     onMounted,
+    shallowRef,
     ref,
-    watch,
     type CSSProperties,
   } from 'vue'
-  import { city } from '../../../../../../public/map/js/city'
-  import {
-    polaroidMarkers,
-    type PolaroidItem,
-  } from '../../../../../../public/map/js/polaroids'
-
-  type GlobeMode = 'cobeV2' | 'polaroids'
-
-  interface TravelOverviewItem {
-    name: string
-    src: string
-    video?: string
-  }
+  import { travelPlaces } from '../../../../../../public/map/js/travelPlaces'
+  import { buildLodTree, selectLodMarkers, markerText, layoutLabels, type LodMarker } from './globeLod'
 
   const props = withDefaults(
     defineProps<{
-      overviewItems?: TravelOverviewItem[]
-      /** 首页背景等场景：透明底、铺满父级、隐藏模式切换 */
+      /** 首页背景：透明底、铺满父级，仅自转、不接收操作 */
       embedded?: boolean
     }>(),
     {
-      overviewItems: () => [],
       embedded: false,
     },
   )
 
-  /** 与 travel_overview.json 一致：去掉 VN/JP/SG 等前缀，便于与 Polaroid caption 对齐 */
-  function normalizeOverviewPlaceName(name: string): string {
-    return name.replace(/^[A-Z]{2,4}(?=[\u4e00-\u9fff])/u, '').trim()
-  }
-
-  function overviewSrcForCaption(caption: string): string | undefined {
-    const cap = caption.trim()
-    const rows = props.overviewItems ?? []
-    if (!rows.length) return undefined
-
-    for (const row of rows) {
-      const simplified = normalizeOverviewPlaceName(row.name)
-      if (
-        simplified === cap ||
-        row.name === cap ||
-        simplified.includes(cap) ||
-        row.name.endsWith(cap)
-      ) {
-        return row.src
-      }
-    }
-    return undefined
-  }
-
-  /** Polaroid 占位图；若概览列表里能匹配地名则改用与下方相册相同的 CDN 地址 */
-  const polaroidsWithOverviewImages = computed<PolaroidItem[]>(() =>
-    polaroidMarkers.map((p) => ({
-      ...p,
-      image: overviewSrcForCaption(p.caption) ?? p.image,
-    })),
-  )
-
-  interface CityMarker extends Marker {
-    id: string
-    label: string
-  }
-
-  interface ModeConfig {
-    theta: number
-    dark: number
-    mapBrightness: number
-    markerColor: [number, number, number]
-    baseColor: [number, number, number]
-    markerSize: number
-    markerElevation: number
-  }
-
-  const mode = ref<GlobeMode>('cobeV2')
+  const stageRef = ref<HTMLDivElement | null>(null)
+  const zoom = ref(1)
+  const stageWidth = ref(600)
+  const MAX_ZOOM = 12
+  const tree = buildLodTree(travelPlaces)
+  const labelLayout = shallowRef<ReturnType<typeof layoutLabels>>({})
   const wrapperRef = ref<HTMLDivElement | null>(null)
   const canvasRef = ref<HTMLCanvasElement | null>(null)
 
@@ -150,87 +79,61 @@
   let dragLastX = 0
   let dragLastY = 0
 
-  const modeConfigs: Record<GlobeMode, ModeConfig> = {
-    cobeV2: {
-      theta: 0.2,
-      dark: 0,
-      mapBrightness: 10,
-      /**
-       * 这里的圆点是 cobe 用 WebGL 画的 marker 本体（非 DOM），就是 label 下方那个「贴在地球上的小点」。
-       * 颜色和大小若过浅过小，会和白色地球完全融合 → 视觉上等于没有圆点。
-       * 这里对齐 cobe-main showcaseConfigs.default 的取值。
-       */
-      markerColor: [0.3, 0.45, 0.85],
-      baseColor: [1, 1, 1],
-      markerSize: 0.015,
-      markerElevation: 0.01,
-    },
-    polaroids: {
-      theta: 0.2,
-      dark: 0,
-      mapBrightness: 9,
-      markerColor: [0.3, 0.45, 0.85],
-      baseColor: [1, 1, 1],
-      markerSize: 0.012,
-      markerElevation: 0,
-    },
-  }
+  const markerElevation = 0.01
+  const defaultTheta = 0.2
 
-  /** 竖直视角，由拖拽与模式默认共同决定 */
-  let interactiveTheta = modeConfigs.cobeV2.theta
+  /** 竖直视角，由拖拽与默认值共同决定 */
+  let interactiveTheta = defaultTheta
 
-  const cobeV2Markers = computed<CityMarker[]>(() =>
-    city.map((item, index) => ({
-      id: `city-${index}`,
-      label: item[0],
-      location: [item[2], item[1]], // city.ts is [name, lng, lat], cobe needs [lat, lng]
-      size: modeConfigs.cobeV2.markerSize,
-    }))
+  const cobeV2Markers = computed(() =>
+    selectLodMarkers(tree, stageWidth.value, zoom.value).map(marker => ({
+      ...marker, size: marker.size / zoom.value,
+    })),
   )
 
-  const currentMarkers = computed<Marker[]>(() => {
-    if (mode.value === 'cobeV2') {
-      return cobeV2Markers.value
-    }
-    return polaroidsWithOverviewImages.value.map((item) => ({
-      id: item.id,
-      location: item.location,
-      size: modeConfigs.polaroids.markerSize,
-    }))
-  })
-
   function markerOverlayStyle(id: string): CSSProperties {
+    const layout = labelLayout.value[id]
     return {
       positionAnchor: `--cobe-${id}`,
-      opacity: `var(--cobe-visible-${id}, 0)`,
-      filter: `blur(calc((1 - var(--cobe-visible-${id}, 0)) * 8px))`,
+      visibility: layout?.visible ? 'visible' : 'hidden',
+      translate: `-50% ${layout?.offset ?? 0}px`,
     }
   }
 
-  function polaroidStyle(id: string, rotate: number): CSSProperties {
-    return {
-      ...markerOverlayStyle(id),
-      '--polaroid-rotate': `${rotate}deg`,
-    } as CSSProperties
+  function setZoom(value: number) {
+    zoom.value = Math.min(MAX_ZOOM, Math.max(1, value))
+  }
+
+  function onGlobeWheel(event: WheelEvent) {
+    if (props.embedded) return
+    event.preventDefault()
+    const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? stageWidth.value : 1)
+    setZoom(zoom.value * Math.exp(-Math.max(-100, Math.min(100, delta)) * 0.005))
+  }
+
+  function onGlobeKeydown(event: KeyboardEvent) {
+    if (props.embedded || !['+', '=', '-'].includes(event.key)) return
+    event.preventDefault()
+    setZoom(zoom.value * (event.key === '-' ? 1 / 1.5 : 1.5))
   }
 
   function getGlobeOptions(width: number): COBEOptions {
-    const config = modeConfigs[mode.value]
     return {
       width,
       height: width,
       phi,
       theta: interactiveTheta,
+      scale: zoom.value,
       mapSamples: 16000,
-      mapBrightness: config.mapBrightness,
-      baseColor: config.baseColor,
-      markerColor: config.markerColor,
+      mapBrightness: 10,
+      baseColor: [1, 1, 1],
+      markerColor: [0.3, 0.45, 0.85],
       glowColor: [0.94, 0.93, 0.91],
-      markers: currentMarkers.value,
-      markerElevation: config.markerElevation,
+      markers: cobeV2Markers.value,
+      markerElevation,
       diffuse: 1.5,
       devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
-      dark: config.dark,
+      dark: 0,
       opacity: 0.7,
     }
   }
@@ -248,33 +151,46 @@
       globe.destroy()
       globe = null
     }
+    // COBE destroy 不移除它生成的 wrapper，避免每次 resize 再嵌套一层。
+    const canvas = canvasRef.value
+    if (canvas?.parentElement && canvas.parentElement !== stageRef.value) {
+      canvas.parentElement.replaceWith(canvas)
+    }
   }
 
   function startAnimation() {
     if (!globe) return
-    const tick = () => {
-      if (!isDraggingGlobe) {
-        phi += 0.001
+    let previousMarkers: LodMarker[] | undefined
+    let lastLayout = 0
+    const tick = (time = 0) => {
+      // 首页和 Overview 始终自转，hover、拖拽和缩放都不暂停。
+      phi += 0.001
+      const markers = cobeV2Markers.value
+      if (time - lastLayout > 80 || previousMarkers !== markers) {
+        labelLayout.value = layoutLabels(markers, stageWidth.value, phi, interactiveTheta, zoom.value)
+        lastLayout = time
       }
       globe?.update({
         phi,
         theta: interactiveTheta,
-        markers: currentMarkers.value,
+        scale: zoom.value,
+        ...(previousMarkers !== markers ? { markers } : {}),
       })
+      previousMarkers = markers
       animationId = requestAnimationFrame(tick)
     }
     tick()
   }
 
-  const THETA_MIN = 0.05
-  const THETA_MAX = 1.35
+  const THETA_MIN = -1.5
+  const THETA_MAX = 1.5
 
   function clampTheta(v: number) {
     return Math.min(THETA_MAX, Math.max(THETA_MIN, v))
   }
 
   function onGlobePointerDown(e: PointerEvent) {
-    if (e.button !== 0 || !canvasRef.value) return
+    if (props.embedded || e.button !== 0 || !canvasRef.value) return
     isDraggingGlobe = true
     dragLastX = e.clientX
     dragLastY = e.clientY
@@ -292,8 +208,8 @@
     const dy = e.clientY - dragLastY
     dragLastX = e.clientX
     dragLastY = e.clientY
-    phi -= dx * 0.005
-    interactiveTheta = clampTheta(interactiveTheta + dy * 0.005)
+    phi += dx * 0.005 / zoom.value
+    interactiveTheta = clampTheta(interactiveTheta + dy * 0.005 / zoom.value)
   }
 
   function endGlobeDrag(e?: PointerEvent) {
@@ -322,7 +238,7 @@
   }
 
   function onGlobeDoubleClick() {
-    toggleFullscreen()
+    if (!props.embedded) toggleFullscreen()
   }
 
   function createOrRecreateGlobe() {
@@ -332,6 +248,7 @@
     const width = canvas.offsetWidth
     if (!width) return
 
+    stageWidth.value = width
     destroyGlobe()
     globe = createGlobe(canvas, getGlobeOptions(width))
     startAnimation()
@@ -339,27 +256,23 @@
 
   onMounted(() => {
     const canvas = canvasRef.value
-    if (canvas) {
+    if (canvas && !props.embedded) {
       canvas.style.cursor = 'grab'
       canvas.addEventListener('pointerdown', onGlobePointerDown)
       canvas.addEventListener('pointermove', onGlobePointerMove)
       canvas.addEventListener('pointerup', endGlobeDrag)
       canvas.addEventListener('pointercancel', endGlobeDrag)
       canvas.addEventListener('dblclick', onGlobeDoubleClick)
+      stageRef.value?.addEventListener('wheel', onGlobeWheel, { passive: false })
     }
 
     createOrRecreateGlobe()
-    if (wrapperRef.value) {
+    if (stageRef.value) {
       resizeObserver = new ResizeObserver(() => {
         createOrRecreateGlobe()
       })
-      resizeObserver.observe(wrapperRef.value)
+      resizeObserver.observe(stageRef.value)
     }
-  })
-
-  watch(mode, () => {
-    interactiveTheta = modeConfigs[mode.value].theta
-    createOrRecreateGlobe()
   })
 
   onBeforeUnmount(() => {
@@ -370,6 +283,7 @@
       canvas.removeEventListener('pointerup', endGlobeDrag)
       canvas.removeEventListener('pointercancel', endGlobeDrag)
       canvas.removeEventListener('dblclick', onGlobeDoubleClick)
+      stageRef.value?.removeEventListener('wheel', onGlobeWheel)
     }
     resizeObserver?.disconnect()
     resizeObserver = null
@@ -388,16 +302,11 @@
     height: 100%;
     min-height: 0;
     background: transparent;
-  }
-
-  .cobe-mode-radio {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 2;
+    pointer-events: none;
   }
 
   .cobe-wrapper {
+    z-index: 2;
     position: relative;
     width: 100%;
     height: 100%;
@@ -441,6 +350,11 @@
     width: 100%;
     height: 100%;
     touch-action: none;
+    &:focus-visible { outline: 2px solid #4263ad; outline-offset: -2px; }
+  }
+
+  .is-embedded .cobe-canvas {
+    touch-action: auto;
   }
 
   /*
@@ -457,7 +371,9 @@
     left: anchor(center);
     translate: -50% 0;
     margin-bottom: 6px;
-    padding: 2px 5px;
+    padding: 4px 7px;
+    border: 0;
+    border-radius: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     background: lab(36 55.64 -107.68);
@@ -469,7 +385,9 @@
     line-height: 1.2;
     white-space: nowrap;
     pointer-events: none;
-    transition: opacity 0.8s, filter 0.8s;
+    transition: translate 0.15s;
+
+    &.is-cluster { background: #344c81; font-weight: 600; }
   }
 
   .cobe-label::after {
@@ -484,39 +402,8 @@
 
   /* 不支持 CSS Anchor Positioning 时隐藏，避免标签堆叠成全屏异常排版（见 cobe globals @supports） */
   @supports not (anchor-name: --test) {
-    .cobe-label,
-    .cobe-polaroid {
+    .cobe-label {
       display: none !important;
     }
-  }
-
-  .cobe-polaroid {
-    position: absolute;
-    bottom: anchor(top);
-    left: anchor(center);
-    transform: translate(-50%, -12px) rotate(var(--polaroid-rotate, 0deg));
-    width: 94px;
-    padding: 6px 6px 20px;
-    border-radius: 2px;
-    background: #ffffff;
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
-    pointer-events: none;
-    transition: opacity 0.3s, filter 0.3s;
-
-    img {
-      width: 82px;
-      height: 82px;
-      object-fit: cover;
-      display: block;
-    }
-  }
-
-  .cobe-polaroid-caption {
-    display: block;
-    margin-top: 6px;
-    font-size: 12px;
-    text-align: center;
-    color: #111827;
-    line-height: 1.2;
   }
 </style>
