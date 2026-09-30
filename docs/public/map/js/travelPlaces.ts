@@ -7,6 +7,30 @@ export interface TravelTraffic {
   area?: string
 }
 
+/** 三维模型默认视角与缩放锁定；缺字段用 TravelModelViewer 内置默认值。 */
+export interface TravelModelView {
+  /** 相机位置 [x, y, z] */
+  camera?: [number, number, number]
+  /** 注视点 [x, y, z] */
+  target?: [number, number, number]
+  /** 适配基准距离（再按画幅宽高比修正） */
+  fitDistance?: number
+  /** 最近距离 = fit * minDistanceScale */
+  minDistanceScale?: number
+  /** 最远距离 = fit * maxDistanceScale */
+  maxDistanceScale?: number
+  /** 俯仰角下限（弧度，自 +Y 向下） */
+  minPolarAngle?: number
+  /** 俯仰角上限（弧度） */
+  maxPolarAngle?: number
+}
+
+export interface TravelModel {
+  src: string
+  label: string
+  view?: TravelModelView
+}
+
 export interface TravelTrip {
   content?: string
   size?: string
@@ -17,6 +41,7 @@ export interface TravelTrip {
   hollow?: boolean
   plan?: boolean
   poster?: string | string[]
+  model?: TravelModel
   food?: string[]
   scenicSpots?: string[]
   trafficNumber?: TravelTraffic[]
@@ -1532,6 +1557,21 @@ export const travelPlaces: TravelPlace[] = [
         type: "primary",
         icon: "plane",
         poster: "https://cdn.sanghangning.cn/ai-images/cnsdwh.png",
+        model: {
+          src: "/models/blueways/blueways.glb",
+          label: "布鲁威斯号",
+          // 调参：日历页 URL 加 ?debug=1，拖动后点「复制 view 配置」贴回此处
+          view: {
+            camera: [220.437, 101.363, 221.581],
+            target: [18.604, -6.193, 6.828],
+            fitDistance: 318,
+            // 竖图画幅下该相机距离约 0.60×fit；低于旧默认 0.78 时会被夹走
+            minDistanceScale: 0.6,
+            maxDistanceScale: 1.35,
+            minPolarAngle: 0.349,
+            maxPolarAngle: 1.361,
+          },
+        },
         food: ["巧克力渔家:海肠捞饭、海胆水饺、蒸海鲜", "鲅鱼水饺", "海菜包子", "园宝炸酱面", "Mumou·0l0|^冰奶", "吴草鸡爪"],
         scenicSpots: ["布鲁维斯号", "那香海", "孤独公约", "海源公园", "火炬八街"],
         trafficNumber: [

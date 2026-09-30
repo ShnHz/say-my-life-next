@@ -49,7 +49,7 @@
 
         <div
           class="poster-wrap"
-          v-if="getPosterList(activity).length"
+          v-if="getPosterList(activity).length || activity.model"
           :style="posterWrapStyle(activity)"
         >
           <el-image
@@ -63,6 +63,11 @@
             lazy
             @load="(e) => onPosterLoad(activity, posterIndex, e)"
           />
+          <TravelModelViewer
+            v-if="activity.model"
+            :key="`${activity.model.src}:${JSON.stringify(activity.model.view ?? null)}`"
+            :model="activity.model"
+          />
         </div>
       </el-timeline-item>
     </el-timeline>
@@ -70,7 +75,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, reactive, type Component, type CSSProperties } from 'vue'
+  import { computed, defineAsyncComponent, reactive, type Component, type CSSProperties } from 'vue'
   import { TrainProfile as Train } from '@vicons/carbon'
   import { PlaneDeparture as Plane, Car, Ship, Bus } from '@vicons/tabler'
   import {
@@ -78,6 +83,8 @@
     type TrafficIcon,
     type TravelTrip,
   } from '../../../../../public/map/js/travelPlaces'
+
+  const TravelModelViewer = defineAsyncComponent(() => import('./TravelModelViewer.vue'))
 
   const iconMap: Record<TrafficIcon, Component> = {
     train: Train,
@@ -119,7 +126,9 @@
 
   const posterWrapStyle = (activity: CalendarActivity): CSSProperties => {
     const ratio = posterRatioByKey[posterKey(activity)]
-    return ratio ? { '--poster-ratio': ratio } : {}
+    return ratio || activity.model
+      ? { '--poster-ratio': ratio || '2 / 3' }
+      : {}
   }
 
   const onPosterLoad = (
