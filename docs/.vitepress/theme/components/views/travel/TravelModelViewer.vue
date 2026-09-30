@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+  import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
   import { withBase } from 'vitepress'
   import * as THREE from 'three'
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
@@ -244,8 +244,13 @@
     }
   }
 
+  /** 全屏切换后等 Vue 落 class / 浏览器落 :fullscreen，再强制 resize */
+  let onFullscreenLayout: (() => void) | undefined
   const syncFullscreen = () => {
     fullscreen.value = document.fullscreenElement === stage.value || fallbackFullscreen.value
+    void nextTick(() => {
+      requestAnimationFrame(() => onFullscreenLayout?.())
+    })
   }
   const closeFallback = () => {
     if (!fallbackFullscreen.value) return
@@ -328,6 +333,7 @@
       fill.position.set(80, 80, -80)
       scene.add(fill)
       const composer = new EffectComposer(renderer)
+      composer.setPixelRatio(renderer.getPixelRatio())
       const ao = new SSAOPass(scene, camera, 1, 1, 32)
       ao.kernelRadius = 3
       ao.minDistance = 0.0002
@@ -337,14 +343,34 @@
       composer.addPass(new OutputPass())
       let ready = false
       let poseReady = false
-      const render = () => { if (ready && !disposed) composer.render() }
+      const syncAoCamera = () => {
+        ao.ssaoMaterial.uniforms.cameraNear.value = camera!.near
+        ao.ssaoMaterial.uniforms.cameraFar.value = camera!.far
+        ao.ssaoMaterial.uniforms.cameraProjectionMatrix.value.copy(camera!.projectionMatrix)
+        ao.ssaoMaterial.uniforms.cameraInverseProjectionMatrix.value.copy(camera!.projectionMatrixInverse)
+      }
+      const render = () => {
+        if (!ready || disposed) return
+        syncAoCamera()
+        composer.render()
+      }
+      const placeAtDistance = (distance: number) => {
+        const offset = camera!.position.clone().sub(orbitTarget)
+        if (offset.lengthSq() < 1e-8) {
+          // 零向量无法 setLength；用当前球坐标/默认后方回退
+          offset.set(0, 0, 1)
+        }
+        offset.setLength(distance)
+        camera!.position.copy(orbitTarget).add(offset)
+      }
       const resize = () => {
         if (!viewport.value || !camera || !controls) return
         const { clientWidth: width, clientHeight: height } = viewport.value
         if (!width || !height) return
         camera.aspect = width / height
         camera.updateProjectionMatrix()
-        renderer.setSize(width, height)
+        renderer.setSize(width, height, false)
+        composer.setPixelRatio(renderer.getPixelRatio())
         composer.setSize(width, height)
         const nextFit = view.value.fitDistance * Math.max(1, 1.1 / camera.aspect)
         if (!poseReady) {
@@ -352,24 +378,23 @@
           fitDistance = nextFit
           applyConfiguredPose()
           poseReady = true
+        } else if (Math.abs(nextFit - fitDistance) > 1) {
+          // 竖图缩略图 ↔ 全屏横屏等：fit 基准变了就不能按比例拉近，否则相机会扎进模型、SSAO 花屏
+          fitDistance = nextFit
+          applyConfiguredPose()
         } else {
-          // 之后只在画幅变化时保持相对缩放比
+          // 同基准下的纯尺寸变化：保持相对缩放比
           const distance = camera.position.distanceTo(orbitTarget)
-          const zoom = distance / fitDistance
+          const zoom = fitDistance > 0 ? distance / fitDistance : 1
           fitDistance = nextFit
           const nextDistance = nextFit * zoom
-          // 暂时放开，写入新距离后再套限位，避免非 debug 被夹
           controls.minDistance = 0
           controls.maxDistance = Infinity
-          camera.position.copy(orbitTarget).add(
-            camera.position.clone().sub(orbitTarget).setLength(nextDistance)
-          )
+          placeAtDistance(nextDistance)
           controls.target.copy(orbitTarget)
           controls.update()
           applyLimits(debug.value, true)
-          camera.position.copy(orbitTarget).add(
-            camera.position.clone().sub(orbitTarget).setLength(nextDistance)
-          )
+          placeAtDistance(nextDistance)
           controls.target.copy(orbitTarget)
           camera.lookAt(orbitTarget)
           lockOrbitTarget()
@@ -377,6 +402,7 @@
         }
         render()
       }
+      onFullscreenLayout = resize
       const onControlsChange = () => {
         lockOrbitTarget()
         syncLive()
@@ -388,6 +414,7 @@
       resize()
       const releaseRenderer = cleanup
       cleanup = () => {
+        onFullscreenLayout = undefined
         resizeObserver.disconnect()
         controls?.removeEventListener('change', onControlsChange)
         controls?.dispose()
