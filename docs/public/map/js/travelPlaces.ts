@@ -665,11 +665,24 @@ export const travelPlaces: TravelPlace[] = [
       {
         content: "马来西亚吉隆坡",
         size: "large",
-        timestamp: "0206-02-14 - 2026-02-16",
+        timestamp: "2026-02-14 - 2026-02-16",
         type: "primary",
         icon: "plane",
         color: "#0bbd87",
         poster: "https://cdn.sanghangning.cn/ai-images/myjlp.png",
+        model: {
+          src: "/models/petronas/petronas.glb",
+          label: "吉隆坡双子塔",
+          view: {
+            camera: [144.826, -58.957, 174.209],
+            target: [0, 0, 0],
+            fitDistance: 318,
+            minDistanceScale: 0.25,
+            maxDistanceScale: 1.35,
+            minPolarAngle: 0.05,
+            maxPolarAngle: 1.57,
+          }
+        },
         food: ["海脚人", "榴莲：老树猫山王、黑刺、红肉、小甜甜", "肥肥蟹", ""],
         scenicSpots: ["中央艺术坊", "独立广场", "双子塔"],
         trafficNumber: [
