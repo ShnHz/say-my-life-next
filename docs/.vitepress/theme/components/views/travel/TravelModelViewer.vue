@@ -15,7 +15,7 @@
     <p v-if="status" class="model-status" role="status">{{ status }}</p>
   </div>
   <Teleport to="body">
-    <aside v-if="debug" class="model-debug" @dblclick.stop @pointerdown.stop>
+    <aside v-if="debug && inView" class="model-debug" @dblclick.stop @pointerdown.stop>
       <header>
         <strong>model debug · {{ model.label }}</strong>
         <button type="button" @click="copyViewConfig">{{ copied ? '已复制' : '复制 view' }}</button>
@@ -79,6 +79,7 @@
   const fullscreen = ref(false)
   const fallbackFullscreen = ref(false)
   const debug = ref(false)
+  const inView = ref(false)
   const copied = ref(false)
   const live = reactive({
     camera: [...DEFAULT_VIEW.camera] as Vec3,
@@ -358,18 +359,15 @@
           const zoom = distance / fitDistance
           fitDistance = nextFit
           const nextDistance = nextFit * zoom
+          const direction = camera.position.clone().sub(orbitTarget).normalize()
           // 暂时放开，写入新距离后再套限位，避免非 debug 被夹
           controls.minDistance = 0
           controls.maxDistance = Infinity
-          camera.position.copy(orbitTarget).add(
-            camera.position.clone().sub(orbitTarget).setLength(nextDistance)
-          )
+          camera.position.copy(orbitTarget).addScaledVector(direction, nextDistance)
           controls.target.copy(orbitTarget)
           controls.update()
           applyLimits(debug.value, true)
-          camera.position.copy(orbitTarget).add(
-            camera.position.clone().sub(orbitTarget).setLength(nextDistance)
-          )
+          camera.position.copy(orbitTarget).addScaledVector(direction, nextDistance)
           controls.target.copy(orbitTarget)
           camera.lookAt(orbitTarget)
           lockOrbitTarget()
@@ -437,12 +435,15 @@
     debug.value = new URLSearchParams(location.search).get('debug') === '1'
     document.addEventListener('fullscreenchange', syncFullscreen)
     document.addEventListener('keydown', onEscape)
+    let sceneStarted = false
     observer = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        observer?.disconnect()
+      inView.value = entries.some((entry) => entry.isIntersecting)
+      if (inView.value && !sceneStarted) {
+        sceneStarted = true
+        if (!debug.value) observer?.disconnect()
         void loadScene()
       }
-    }, { rootMargin: '200px' })
+    }, { rootMargin: debug.value ? '0px' : '200px' })
     if (stage.value) observer.observe(stage.value)
   })
   // 配置热更新时重新套用视角（不依赖 remount）

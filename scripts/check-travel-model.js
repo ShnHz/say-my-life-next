@@ -5,7 +5,7 @@
 async (page) => {
   const check = (condition, message) => { if (!condition) throw new Error(message) }
   const url = new URL('/views/travel/Calendar.html', page.url()).href
-  const model = page.locator('.travel-model')
+  const model = page.getByLabel('布鲁威斯号三维场景；方向键旋转，加减键缩放，双击全屏', { exact: true })
   const ready = async () => {
     await model.scrollIntoViewIfNeeded()
     await page.waitForFunction(() => {
@@ -32,7 +32,7 @@ async (page) => {
   }))
   await page.goto(url)
   await ready()
-  check(await model.count() === 1, 'Only Weihai should have a model')
+  check(await page.locator('.travel-model').count() === 2, 'Weihai and Kuala Lumpur should have models')
   const desktop = await dimensions()
   check(desktop.card[1] === 250, 'Model should follow the poster aspect ratio, not a fixed 2:3')
   check(JSON.stringify(desktop.image) === JSON.stringify(desktop.card), 'Poster/model dimensions differ')
@@ -75,22 +75,26 @@ async (page) => {
 
   await page.reload()
   await ready()
+  const beforeFullscreen = await view()
   await model.dblclick()
   await page.waitForFunction(() => document.fullscreenElement === document.querySelector('.travel-model'))
   await page.waitForFunction(() => {
     const el = document.querySelector('.travel-model')
     return el.clientWidth === innerWidth && el.clientHeight === innerHeight
   })
+  check((await view()).distance > 100, 'Fullscreen must preserve a nonzero camera offset')
   await model.dblclick()
   await page.waitForFunction(() => !document.fullscreenElement)
   await page.waitForFunction(() => document.querySelector('.travel-model').clientWidth === 200)
+
+  check(Math.abs((await view()).distance - beforeFullscreen.distance) < 0.01, 'Fullscreen round trip must restore zoom')
 
   await page.setViewportSize({ width: 390, height: 844 })
   await ready()
   const mobile = await dimensions()
   check(JSON.stringify(mobile.image) === JSON.stringify(mobile.card), 'Mobile dimensions differ')
   await model.evaluate(el => { el.requestFullscreen = undefined })
-  await model.getByRole('button', { name: '进入全屏' }).click()
+  await model.dblclick()
   await page.waitForFunction(() => document.querySelector('.fullscreen-fallback')?.clientWidth === innerWidth)
   check(await page.evaluate(() => document.body.style.overflow === 'hidden'), 'Fallback must lock page scroll')
   await page.keyboard.press('Escape')
@@ -106,5 +110,15 @@ async (page) => {
   await page.setViewportSize({ width: 1280, height: 720 })
   await page.reload()
   await ready()
+  const towers = page.getByLabel('吉隆坡双子塔三维场景；方向键旋转，加减键缩放，双击全屏', { exact: true })
+  await towers.scrollIntoViewIfNeeded()
+  await towers.locator('.model-status').waitFor({ state: 'detached' })
+  check(await towers.locator('canvas').count() === 1, 'Petronas GLB should render')
+  check((await towers.locator('xpath=ancestor::li').innerText()).includes('2026-02-14 - 2026-02-16'), 'Petronas must belong to the Kuala Lumpur trip')
+  await towers.dblclick()
+  await page.waitForFunction(() => document.fullscreenElement?.getAttribute('aria-label')?.startsWith('吉隆坡'))
+  check(await towers.evaluate(el => el.__vueParentComponent.setupState.controls.getDistance()) > 100, 'Tower fullscreen camera must not collapse to its target')
+  await page.keyboard.press('Escape')
+  await page.waitForFunction(() => !document.fullscreenElement)
   return { result: 'PASS: size, rotate, zoom, no pan, polar/distance limits, fullscreen, mobile fallback, load failure', desktop, mobile, limits }
 }
